@@ -18,6 +18,11 @@ h1 {
     margin: 0;
 }
 
+h1#Text:hover {
+    color: black;
+    transition: 0.6s;
+}
+
 h2 {
     text-align: center;
 }
@@ -28,6 +33,11 @@ p {
     line-height: 20px;
     letter-spacing: 0.5px;
     margin: 20px 0 30px;
+}
+
+P:hover {
+    color: black;
+    transition: 0.6s;
 }
 
 span {
@@ -41,10 +51,11 @@ a {
     margin: 15px 0;
 }
 
+
 button {
     border-radius: 20px;
-    border: 1px solid #FF4B2B;
-    background-color: #FF4B2B;
+    border: 1px solid lightgray;
+    background-color: lightgray;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -52,6 +63,15 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.7;
+    transition: 0.6s;
+    color: black;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 10px 1px black;
 }
 
 button:active {
@@ -67,6 +87,21 @@ button.ghost {
     border-color: #FFFFFF;
 }
 
+button.ghost:hover {
+    border: 1px solid #000;
+    color: black;
+}
+button#signUp:hover{
+    border: 1px solid #000;
+    color: black;
+    box-shadow: 0px 0px 10px 1px black;
+}
+button#signIn:hover{
+    border: 1px solid #000;
+    color: black;
+    box-shadow: 0px 0px 10px 1px black;
+}
+
 form {
     background-color: #FFFFFF;
     display: flex;
@@ -79,8 +114,9 @@ form {
 }
 
 input {
-    background-color: #eee;
+    background-color: lightgray;
     border: none;
+    border-radius: 5px;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
@@ -91,11 +127,13 @@ input {
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
         0 10px 10px rgba(0, 0, 0, 0.22);
-    position: relative;
+    position: absolute;
+    left: 32%;
+    top: 19%;
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 600px;
 }
 
 .form-container {
@@ -160,9 +198,8 @@ input {
 }
 
 .overlay {
-    background: #FF416C;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background: -webkit-linear-gradient(to right, lightgray, lightgray);
+    background: linear-gradient(to right, lightgray, lightgray);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -216,7 +253,6 @@ input {
 }
 
 .social-container a {
-    border: 1px solid #DDDDDD;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -225,28 +261,21 @@ input {
     height: 40px;
     width: 40px;
 }
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
+.social-container a:hover {
+    box-shadow: 0px 0px 10px 5px lightgray;
 }
 
-footer p {
-    margin: 10px 0;
+a#KakaoTalk {
+    background: url('/src/main/resources/staic/assets/img/kakaoTalk.png') no-repeat;
+    background-size: 100%;
 }
 
-footer i {
-    color: red;
+a#Google {
+    background: url('/src/main/resources/staic/assets/img/Google.png') no-repeat;
+    background-size: 100%;
 }
 
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
+a#Naver {
+    background: url('/src/main/resources/staic/assets/img/Naver.png') no-repeat;
+    background-size: 100%;
 }
