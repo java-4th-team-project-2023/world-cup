@@ -5,12 +5,13 @@
     margin: 0;
     padding: 0;
     font-weight: bold;
-    text-align: center;
     line-height: 3em;
 }
 
 body {
-    background: lightgray;
+    background: linear-gradient(140deg, rgb(255, 255, 255), rgb(0, 0, 0));
+    width: 100%;
+    height: 100vh;
 }
 
 h1 {
@@ -91,12 +92,14 @@ button.ghost:hover {
     border: 1px solid #000;
     color: black;
 }
-button#signUp:hover{
+
+button#signUp:hover {
     border: 1px solid #000;
     color: black;
     box-shadow: 0px 0px 10px 1px black;
 }
-button#signIn:hover{
+
+button#signIn:hover {
     border: 1px solid #000;
     color: black;
     box-shadow: 0px 0px 10px 1px black;
@@ -123,15 +126,16 @@ input {
 }
 
 .container {
+    border: 4px solid white;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-        0 10px 10px rgba(0, 0, 0, 0.22);
+        0 20px 20px rgba(0, 0, 0, 0.22);
     position: absolute;
     left: 32%;
     top: 19%;
     overflow: hidden;
-    width: 768px;
+    width: 40%;
     max-width: 100%;
     min-height: 600px;
 }
@@ -260,9 +264,12 @@ input {
     margin: 0 5px;
     height: 40px;
     width: 40px;
+    overflow: hidden;
 }
+
 .social-container a:hover {
     box-shadow: 0px 0px 10px 5px lightgray;
+    transition: 0.3s;
 }
 
 a#KakaoTalk {
