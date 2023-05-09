@@ -23,12 +23,12 @@ CREATE TABLE worldcup_entity_tbl (
 @AllArgsConstructor
 @Builder
 public class Player {
-    private int entityId; // PK
+    private int playerId; // PK
     private int gameId; // FK
     private int fightCount;
     private int selectedWinCount;
     private int joinGameCount;
     private int finalWinCount;
-    private String entityImgPath;
-    private String entityName;
+    private String playerImgPath;
+    private String playerName;
 }
