@@ -22,11 +22,13 @@ public interface PlayerMapper {
     // 선수 수정
     boolean modifyPlayer(PlayerModifyRequestDTO dto);
 
-    // 전체 선수 목록 조회
-    List<Player> findAll();
+    // 특정 게임의 선수 목록 조회
+    List<Player> findAll(int gameId);
 
     // 특정 선수 조회
     Player findOne(int playerId);
 
+    // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
+    List<Player> findN(int gameId, int number);
 
 }
