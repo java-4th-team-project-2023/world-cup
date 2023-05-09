@@ -10,9 +10,13 @@
     <typeAliases>
         <!--  entity 클래스 별칭 설정      -->
 
+        <typeAlias alias="account" type="com.pickpick.entity.Account" />
+
     </typeAliases>
     <mappers>
         <!-- Mapper XML files -->
+
+        <mapper resource="mappers/AccountMapper.xml" />
 
     </mappers>
 </configuration>
