@@ -11,12 +11,11 @@
         <!--  entity 클래스 별칭 설정      -->
 
         <typeAlias alias="account" type="com.pickpick.entity.Account" />
-
+        <typeAlias alias="reply" type="com.pickpick.entity.Reply" />
     </typeAliases>
     <mappers>
         <!-- Mapper XML files -->
-
         <mapper resource="mappers/AccountMapper.xml" />
-
+        <mapper resource="mappers/ReplyMapper.xml" />
     </mappers>
 </configuration>
