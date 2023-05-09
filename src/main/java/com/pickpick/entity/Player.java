@@ -22,7 +22,7 @@ CREATE TABLE worldcup_entity_tbl (
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WorldCup {
+public class Player {
     private int entityId; // PK
     private int gameId; // FK
     private int fightCount;
