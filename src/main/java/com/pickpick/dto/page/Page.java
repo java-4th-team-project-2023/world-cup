@@ -1,14 +1,10 @@
 package com.pickpick.dto.page;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Setter
-@Getter
+@Setter @Getter
 @AllArgsConstructor
-@ToString
+@ToString @Builder
 public class Page {
 
     private int pageNo;
