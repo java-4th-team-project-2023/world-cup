@@ -21,14 +21,6 @@ public class PlayerService {
         return playerMapper.registerPlayer(dto.toEntity());
     }
 
-    // 선수 게임 참가
-    public boolean playerGameJoin(int playerId) {
-        Player player = playerMapper.findOne(playerId);
-        player.joinGame();
-
-        return updatePlayer(player);
-    }
-
     private boolean updatePlayer(Player player) {
         return playerMapper.updatePlayer(Player.builder()
                 .playerId(player.getPlayerId())
@@ -106,6 +98,14 @@ public class PlayerService {
 
     // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
     public List<Player> findN(int gameId, int number) {
-        return playerMapper.findN(gameId, number);
+
+        List<Player> playerList = playerMapper.findN(gameId, number);
+
+        playerList.forEach(player -> {
+                player.joinGame();
+                updatePlayer(player);
+        });
+
+        return playerList;
     }
 }
