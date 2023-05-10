@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pickpick.repository.PlayerMapper">
+
+    <insert id="registerPlayer">
+        INSERT INTO player_tbl (game_id, player_img_path, player_name)
+        VALUES (#{gameId}, #{playerImgPath}, #{playerName})
+    </insert>
+
+    <update id="updatePlayer">
+        UPDATE player_tbl
+        SET fight_count=#{fightCount},
+            selected_win_count=#{selectedWinCount},
+            join_game_count=#{joinGameCount},
+            final_win_count=#{finalWinCount}
+        WHERE
+            player_id=#{playerId}
+    </update>
+
+    <delete id="deletePlayer">
+        DELETE FROM player_tbl
+        WHERE player_id=#{playerId}
+    </delete>
+
+    <update id="modifyPlayer">
+        UPDATE player_tbl
+        SET player_name=#{playerName},
+            player_img_path=#{playerImgPath}
+        WHERE player_id=#{playerId}
+    </update>
+
+    <select id="findAll" resultType="player">
+        SELECT *
+        FROM player_tbl
+        WHERE game_id=#{gameId}
+    </select>
+
+    <select id="findOne" resultType="player">
+        SELECT *
+        FROM player_tbl
+        WHERE player_id=#{playerId}
+    </select>
+
+    <select id="findN" resultType="player">
+        SELECT *
+        FROM player_tbl
+        WHERE game_id=#{game_id}
+        ORDER BY RAND()
+        LIMIT 1, #{number}
+    </select>
+</mapper>

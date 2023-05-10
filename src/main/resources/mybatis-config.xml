@@ -11,12 +11,14 @@
         <!--  entity 클래스 별칭 설정      -->
 
         <typeAlias alias="account" type="com.pickpick.entity.Account" />
+        <typeAlias alias="player" type="com.pickpick.entity.Player" />
 
     </typeAliases>
     <mappers>
         <!-- Mapper XML files -->
 
         <mapper resource="mappers/AccountMapper.xml" />
+        <mapper resource="mappers/PlayerMapper.xml" />
 
     </mappers>
 </configuration>
