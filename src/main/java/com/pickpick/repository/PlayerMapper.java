@@ -1,7 +1,6 @@
 package com.pickpick.repository;
 
 import com.pickpick.dto.player.PlayerModifyRequestDTO;
-import com.pickpick.dto.player.PlayerSelectRequestDTO;
 import com.pickpick.entity.Player;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +13,7 @@ public interface PlayerMapper {
     boolean registerPlayer(Player player);
 
     // 선수 카운트 횟수 업데이트
-    boolean updatePlayer(PlayerSelectRequestDTO dto);
+    boolean updatePlayer(Player player);
 
     // 선수 삭제
     boolean deletePlayer(int playerId);
