@@ -13,7 +13,7 @@
 
     <update id="modify">
         UPDATE reply_tbl
-        SET text = #{text}
+        SET text = #{text}, writer = #{writer}
         WHERE game_id = #{gameId}
     </update>
 
