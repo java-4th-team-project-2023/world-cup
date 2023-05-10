@@ -45,6 +45,8 @@ public class PlayerController {
 
         log.info("/api/v1/players/{}/num/{} GET! playerList: {}", gameId, number, playerList);
 
+        if (playerList.size() < number) return ResponseEntity.ok().build();
+
         return ResponseEntity.ok().body(playerList);
     }
 
@@ -139,7 +141,9 @@ public class PlayerController {
 
         List<Player> playerList = playerService.findAll(gameId, page);
 
-        return null;
+        if (playerList == null) return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok().body(playerList);
     }
 
 }
