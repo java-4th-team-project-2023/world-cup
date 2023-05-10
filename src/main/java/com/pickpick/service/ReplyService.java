@@ -22,7 +22,7 @@ public class ReplyService {
 
     private final ReplyMapper replyMapper;
 
-
+    // 댓글 조회기능
     public ReplyListResponseDTO getList(int gameId, Page page) {
 
         List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId, page)
@@ -38,6 +38,7 @@ public class ReplyService {
                 .build();
     }
 
+    // 댓글 저장 기능
     public ReplyListResponseDTO save(ReplySaveRequestDTO dto) throws SQLException {
         Reply reply = dto.toEntity();
         boolean flag = replyMapper.save(reply);

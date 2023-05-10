@@ -56,4 +56,14 @@ public class ReplyController {
             return ResponseEntity.badRequest().body("등록에 실패했습니다");
         }
     }
+
+    // 댓글 수정 기능
+    @PutMapping
+    public ResponseEntity<?> modifyReply(
+
+    ){
+
+        return null;
+    }
+
 }
