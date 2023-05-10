@@ -2,6 +2,7 @@ package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
 import com.pickpick.dto.reply.ReplyListResponseDTO;
+import com.pickpick.dto.reply.ReplyModifyRequestDTO;
 import com.pickpick.dto.reply.ReplySaveRequestDTO;
 import com.pickpick.entity.Reply;
 import com.pickpick.service.ReplyService;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -49,8 +51,8 @@ public class ReplyController {
         }
 
         try {
-            replyService.save(dto);
-            return ResponseEntity.ok().body("등록 성공!");
+            ReplyListResponseDTO responseDTO = replyService.save(dto);
+            return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("등록에 실패했습니다");
@@ -60,10 +62,19 @@ public class ReplyController {
     // 댓글 수정 기능
     @PutMapping
     public ResponseEntity<?> modifyReply(
-
-    ){
-
-        return null;
+            @Validated @RequestBody ReplyModifyRequestDTO dto
+            ,BindingResult result
+            ){
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("입력값을 제대로 입력해주세요!");
+        }
+        try {
+            ReplyListResponseDTO responseDTO = replyService.modify(dto);
+            return ResponseEntity.ok().body(responseDTO);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("수정 실패");
+        }
     }
 
 }

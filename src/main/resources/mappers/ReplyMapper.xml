@@ -14,7 +14,7 @@
     <update id="modify">
         UPDATE reply_tbl
         SET text = #{text}, writer = #{writer}
-        WHERE game_id = #{gameId}
+        WHERE reply_no = #{replyNo}
     </update>
 
     <delete id="deleteOne">

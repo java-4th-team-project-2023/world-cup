@@ -4,6 +4,7 @@ import com.pickpick.dto.page.Page;
 import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.reply.ReplyDetailResponseDTO;
 import com.pickpick.dto.reply.ReplyListResponseDTO;
+import com.pickpick.dto.reply.ReplyModifyRequestDTO;
 import com.pickpick.dto.reply.ReplySaveRequestDTO;
 import com.pickpick.entity.Reply;
 import com.pickpick.repository.ReplyMapper;
@@ -43,9 +44,22 @@ public class ReplyService {
         Reply reply = dto.toEntity();
         boolean flag = replyMapper.save(reply);
         if (!flag) {
-            log.warn("replu registered fail!");
+            log.warn("replu save fail!");
             throw new SQLException("댓글 저장 실패");
         }
         return getList(dto.getGameId(),new Page(1,20));
+    }
+
+    public ReplyListResponseDTO modify(ReplyModifyRequestDTO dto) throws SQLException{
+
+        Reply reply = dto.toEntity();
+        boolean flag = replyMapper.modify(reply);
+        if (!flag){
+            log.warn("reply modify fail!");
+            throw new SQLException("댓글 수정 실패");
+        }
+
+        return getList(dto.getGameId(),new Page(1,20));
+
     }
 }
