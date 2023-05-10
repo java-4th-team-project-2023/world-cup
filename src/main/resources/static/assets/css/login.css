@@ -273,7 +273,7 @@ input {
 }
 
 a#KakaoTalk {
-    background: url('/static/assets/img/kakaoTalk.png') no-repeat;
+    background: url('/img/kakaoTalk.png') no-repeat;
     background-size: 100%;
 }
 

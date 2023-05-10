@@ -8,6 +8,10 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <script src="/assets/js/burgerbtn.js" defer></script>
+
+
 </head>
 
 <body>
@@ -16,22 +20,39 @@
         <div class="header">
             <div class="header-container">
                 <h1 class="logo">
-                    <a href="#"><i class="far fa-hand-rock"></i></a>
+                    <a href="#" id="Logo"><i class="far fa-hand-rock"></i></a>
                 </h1>
 
                 <!--상단 BAR-MENU-->
                 <nav class="gnb">
-                    <ul>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">월드컵 만들기</a></li>
-
+                    <ul class="header-menu-box">
+                        <li class="header-menu-list"><a href="#">HOME</a></li>
+                        <li class="header-menu-list"><a href="#">월드컵 만들기</a></li>
                         <!-- <c:if test="${}">  -->
-                        <li><a href="#">내가 만든 월드컵</a></li>
+                        <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
+                        <div class="login-box"><a href="#" id="Login">LOGIN</a></div>
                         <!-- </c:if> -->
-                       
                     </ul>
-                </nav>
+                    <input type="checkbox" id="icon">
+                    <label for="icon">
+                        <!--label은 인라인 스타일-->
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                    <nav class="inr-menu">
+                        <ul class="inr-menu-list-box">
+                            <li class="inr-menu-list"><a href="#">menu1</a></li>
+                            <li class="inr-menu-list"><a href="#">menu2</a></li>
+                            <li class="inr-menu-list"><a href="#">menu3</a></li>
+                            <li class="inr-menu-list"><a href="#">menu4</a></li>
+                            <li class="inr-menu-list"><a href="#">menu5</a></li>
+                        </ul>
+                    </nav>
             </div>
+        </div>
+        <div class="scrollbtn-box">
+            <a href="#" class="scrollbtn">▲</a>
         </div>
     </header>
 
