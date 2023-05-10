@@ -34,26 +34,24 @@ class PlayerMapperTest {
     @Transactional
     @Rollback
     void updatePlayerTest() {
-        playerMapper.findOne(2)
-                .joinGame()
-                .winFight()
-                .winFinal()
-                ;
+        Player one = playerMapper.findOne(2);
+        one.joinGame();
+        one.winFight();
+        one.winFinal();
+        one.increaseFightCount();
 
-        assertEquals(1, playerMapper.findOne(2).getJoinGameCount());
-        assertEquals(2, playerMapper.findOne(2).getFightCount());
-        assertEquals(2, playerMapper.findOne(2).getSelectedWinCount());
-        assertEquals(1, playerMapper.findOne(2).getFinalWinCount());
+        assertEquals(1, one.getJoinGameCount());
+        assertEquals(3, one.getFightCount());
+        assertEquals(2, one.getSelectedWinCount());
+        assertEquals(1, one.getFinalWinCount());
     }
 
     @Test
-    @DisplayName("playerId가 2 인 선수를 삭제하면 잘 삭제되어야 한다.")
-    @Transactional
-    @Rollback
+    @DisplayName("playerId가 3 인 선수를 삭제하면 잘 삭제되어야 한다.")
     void deletePlayerTest() {
-        playerMapper.deletePlayer(2);
+        playerMapper.deletePlayer(3);
 
-        assertNull(playerMapper.findOne(2));
+        assertNull(playerMapper.findOne(3));
     }
 
     @Test
@@ -76,4 +74,6 @@ class PlayerMapperTest {
     void findAllTest() {
         assertEquals(1, playerMapper.findAll(1).size());
     }
+
+
 }

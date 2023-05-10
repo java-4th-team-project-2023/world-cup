@@ -273,16 +273,16 @@ input {
 }
 
 a#KakaoTalk {
-    background: url('/static/assets/img/kakaoTalk.png') no-repeat;
+    background: url('../img/kakaoTalk.png') no-repeat;
     background-size: 100%;
 }
 
 a#Google {
-    background: url('/static/assets/img/Google.png') no-repeat;
+    background: url('/assets/img/Google.png') no-repeat;
     background-size: 100%;
 }
 
 a#Naver {
-    background: url('/static/assets/img/Naver.png') no-repeat;
+    background: url('/assets/img/Naver.png') no-repeat;
     background-size: 100%;
 }
