@@ -1,10 +1,14 @@
 package com.pickpick.service;
 
+import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.entity.Player;
 import com.pickpick.repository.PlayerMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service @Slf4j
 @RequiredArgsConstructor
@@ -17,5 +21,91 @@ public class PlayerService {
         return playerMapper.registerPlayer(dto.toEntity());
     }
 
-    // 
+    // 선수 게임 참가
+    public boolean playerGameJoin(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+        player.joinGame();
+
+        return updatePlayer(player);
+    }
+
+    private boolean updatePlayer(Player player) {
+        return playerMapper.updatePlayer(Player.builder()
+                .playerId(player.getPlayerId())
+                .fightCount(player.getFightCount())
+                .selectedWinCount(player.getSelectedWinCount())
+                .joinGameCount(player.getJoinGameCount())
+                .finalWinCount(player.getFinalWinCount())
+                .build());
+    }
+
+    // 선수 매치 승
+    public boolean playerMatchWin(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+
+        player.winFight();
+
+        return updatePlayer(player);
+    }
+
+    // 선수 매치 패
+    public boolean playerMatchLose(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+
+        player.increaseFightCount();
+
+        return updatePlayer(player);
+    }
+
+    // 선수 우승
+    public boolean playerWin(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+
+        player.winFinal();
+
+        return updatePlayer(player);
+    }
+
+    // 승자 매치 리셋
+    public boolean winnerMatchReset(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+
+        player.decreaseSelectedCount();
+
+        return updatePlayer(player);
+    }
+
+    // 패자 매치 리셋
+    public boolean loserMatchReset(int playerId) {
+        Player player = playerMapper.findOne(playerId);
+
+        player.decreaseFightCount();
+
+        return updatePlayer(player);
+    }
+
+    // 선수 삭제
+    public boolean deletePlayer(int playerId) {
+        return playerMapper.deletePlayer(playerId);
+    }
+
+    // 선수 수정
+    public boolean updatePlayer(PlayerModifyRequestDTO dto) {
+        return playerMapper.modifyPlayer(dto);
+    }
+
+    // 특정 게임의 선수 목록 조회
+    public List<Player> findAll(int gameId) {
+        return playerMapper.findAll(gameId);
+    }
+
+    // 특정 선수 조회
+    public Player findOne(int playerId) {
+        return playerMapper.findOne(playerId);
+    }
+
+    // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
+    public List<Player> findN(int gameId, int number) {
+        return playerMapper.findN(gameId, number);
+    }
 }

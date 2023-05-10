@@ -75,5 +75,23 @@ class PlayerMapperTest {
         assertEquals(1, playerMapper.findAll(1).size());
     }
 
+    @Test
+    @DisplayName("playerId가 2인 선수의 fight_count를 1, selected_win_count를 1 증가시켜야 한다")
+    void increaseCountTest() {
+        Player one = playerMapper.findOne(2);
+        one.winFight();
 
+        assertEquals(1, one.getFightCount());
+        assertEquals(1, one.getSelectedWinCount());
+    }
+
+    @Test
+    @DisplayName("playerId가 2인 선수의 fight_count를 1, selected_win_count를 1 감소시켜야 한다")
+    void decreaseCountTest() {
+        Player one = playerMapper.findOne(2);
+        one.decreaseSelectedCount();
+
+        assertEquals(0, one.getFightCount());
+        assertEquals(0, one.getSelectedWinCount());
+    }
 }
