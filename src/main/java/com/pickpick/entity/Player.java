@@ -31,4 +31,24 @@ public class Player {
     private int finalWinCount;
     private String playerImgPath;
     private String playerName;
+
+    public Player increaseFightCount() {
+        fightCount++;
+        return this;
+    }
+
+    public Player joinGame() {
+        joinGameCount++;
+        return this;
+    }
+
+    public Player winFight() {
+        selectedWinCount++;
+        return increaseFightCount();
+    }
+
+    public Player winFinal() {
+        finalWinCount++;
+        return winFight();
+    }
 }
