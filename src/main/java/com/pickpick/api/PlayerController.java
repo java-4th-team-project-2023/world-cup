@@ -1,11 +1,16 @@
 package com.pickpick.api;
 
+import com.pickpick.dto.page.Page;
+import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import com.pickpick.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +24,17 @@ public class PlayerController {
 
     // 선수 등록
     @PostMapping
-    public ResponseEntity<?> registerPlayer(PlayerRegisterRequestDTO dto) {
+    public ResponseEntity<?> registerPlayer(@Validated @RequestBody PlayerRegisterRequestDTO dto
+    , BindingResult result) {
+
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.toString());
+        }
+
         boolean flag = playerService.registerPlayer(dto);
+
         log.info("/api/v1/players POST! dto: {}", dto);
+
         return ResponseEntity.ok().body(flag);
     }
 
@@ -32,13 +45,105 @@ public class PlayerController {
 
         log.info("/api/v1/players/{}/num/{} GET! playerList: {}", gameId, number, playerList);
 
+        if (playerList.size() < number) return ResponseEntity.ok().build();
+
         return ResponseEntity.ok().body(playerList);
     }
 
-    // 선수 매치 승
+    // 선수 매치
+    @PatchMapping("/{playerId}/result/{isWin}")
+    public ResponseEntity<?> match(@PathVariable int playerId, @PathVariable boolean isWin) {
+
+        boolean flag;
+
+        if (isWin) {
+
+            flag = playerService.playerWin(playerId);
+
+        } else {
+
+            flag = playerService.playerMatchLose(playerId);
+
+        }
+
+        log.info("/api/v1/players/{}/result/{} PATCH!", playerId, isWin);
+
+        if (!flag) return ResponseEntity.status(500).build();
+
+        return ResponseEntity.ok().build();
+
+    }
+
+    // 선수 우승
     @PatchMapping("/{playerId}")
-    public ResponseEntity<?> matchWin(@PathVariable int playerId) {
-        return null;
+    public ResponseEntity<?> win(@PathVariable int playerId) {
+
+        boolean flag = playerService.playerWin(playerId);
+
+        log.info("/api/v1/players/{} PATCH! result : {}", playerId, flag);
+
+        if (!flag) return ResponseEntity.status(500).build();
+
+        return ResponseEntity.ok().build();
+
+    }
+
+    // 이전 경기 리셋
+    @PatchMapping("/{winnerId}/{loserId}")
+    public ResponseEntity<?> resetMatch(@PathVariable int winnerId, @PathVariable int loserId) {
+
+        boolean flag1 = playerService.winnerMatchReset(winnerId);
+        boolean flag2 = playerService.loserMatchReset(loserId);
+
+        log.info("/api/v1/players/{}/{} PATCH ", winnerId, loserId);
+
+        if (!flag1 || !flag2) return ResponseEntity.status(500).build();
+
+        return ResponseEntity.ok().build();
+    }
+
+    // 선수 삭제
+    @DeleteMapping("/{playerId}")
+    public ResponseEntity<?> deletePlayer(@PathVariable int playerId) {
+
+        boolean flag = playerService.deletePlayer(playerId);
+
+        log.info("/api/v1/players/{} DELETE", playerId);
+
+        if (!flag) return ResponseEntity.status(500).build();
+
+        return ResponseEntity.ok().build();
+
+    }
+
+    // 선수 수정
+    @PutMapping
+    public ResponseEntity<?> modifyPlayer(@Validated @RequestBody PlayerModifyRequestDTO dto
+    , BindingResult result) {
+
+        if (result.hasErrors()) return ResponseEntity.badRequest().body(result.toString());
+
+        boolean flag = playerService.updatePlayer(dto);
+
+        log.info("/api/v1/players : PUT!");
+
+        if (!flag) return ResponseEntity.status(500).build();
+
+        return ResponseEntity.ok().build();
+    }
+
+    // 특정 게임의 선수 목록 조회
+    @GetMapping("/{gameId}")
+    public ResponseEntity<?> findAll(@PathVariable int gameId,
+                                     @RequestBody Search page) {
+
+        log.info("/api/v1/players/{} : GET! ", gameId);
+
+        List<Player> playerList = playerService.findAll(gameId, page);
+
+        if (playerList == null) return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok().body(playerList);
     }
 
 }
