@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pickpick.repository.ReplyMapper">
+
+    <insert id="save">
+        INSERT INTO reply_tbl
+            (text, writer, game_id)
+        VALUES
+            (#{text}, #{writer}, #{gameId})
+    </insert>
+
+    <update id="modify">
+        UPDATE reply_tbl
+        SET text = #{text}
+        WHERE game_id = #{gameId}
+    </update>
+
+    <delete id="deleteOne">
+        DELETE FROM reply_tbl
+        WHERE reply_no = #{replyNo}
+    </delete>
+
+    <select id="findAll" resultType="reply">
+        SELECT
+        reply_no, game_id, writer, text, date
+        FROM reply_tbl
+        WHERE game_id = #{gId}
+        ORDER BY reply_no
+        LIMIT #{page.getPageStart}, #{page.amount}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM reply_tbl
+        WHERE game_id = #{gameId}
+    </select>
+
+
+</mapper>
