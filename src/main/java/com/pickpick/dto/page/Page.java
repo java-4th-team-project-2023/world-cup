@@ -20,7 +20,7 @@ public class Page {
     }
 
     public void setPageNo(int pageNo) {
-        if (pageNo < 1 || pageNo > Integer.MAX_VALUE) {
+        if (pageNo < 1 || pageNo == Integer.MAX_VALUE) {
             this.pageNo = 1;
             return;
         }
@@ -28,8 +28,8 @@ public class Page {
     }
 
     public void setAmount(int amount) {
-        if (amount < 20 || amount > 25) {
-            this.amount = 20;
+        if (amount < 10 || amount > 30) {
+            this.amount = 10;
             return;
         }
         this.amount = amount;

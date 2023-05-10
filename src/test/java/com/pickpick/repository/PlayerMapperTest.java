@@ -72,7 +72,7 @@ class PlayerMapperTest {
     @Test
     @DisplayName("game 1의 findAll의 반환 리스트의 길이가 1이어야 한다.")
     void findAllTest() {
-        assertEquals(1, playerMapper.findAll(1).size());
+        assertEquals(1, playerMapper.findAll(1, null).size());
     }
 
     @Test

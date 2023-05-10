@@ -2,6 +2,7 @@ package com.pickpick.service;
 
 import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import com.pickpick.repository.PlayerMapper;
 import lombok.RequiredArgsConstructor;
@@ -87,8 +88,8 @@ public class PlayerService {
     }
 
     // 특정 게임의 선수 목록 조회
-    public List<Player> findAll(int gameId) {
-        return playerMapper.findAll(gameId);
+    public List<Player> findAll(int gameId, Search page) {
+        return playerMapper.findAll(gameId, page);
     }
 
     // 특정 선수 조회

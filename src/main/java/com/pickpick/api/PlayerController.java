@@ -26,12 +26,19 @@ public class PlayerController {
     }
 
     // 게임 생성 후 '강' 수에 맞는 선수 목록 리턴
-    @GetMapping("/{gameId}/{number}")
+    @GetMapping("/{gameId}/num/{number}")
     public ResponseEntity<?> getGameplayPlayers(@PathVariable int gameId, @PathVariable int number) {
         List<Player> playerList = playerService.findN(gameId, number);
 
-        return null;
+        log.info("/api/v1/players/{}/num/{} GET! playerList: {}", gameId, number, playerList);
+
+        return ResponseEntity.ok().body(playerList);
     }
 
+    // 선수 매치 승
+    @PatchMapping("/{playerId}")
+    public ResponseEntity<?> matchWin(@PathVariable int playerId) {
+        return null;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.pickpick.repository;
 
 import com.pickpick.dto.player.PlayerModifyRequestDTO;
+import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,7 +23,7 @@ public interface PlayerMapper {
     boolean modifyPlayer(PlayerModifyRequestDTO dto);
 
     // 특정 게임의 선수 목록 조회
-    List<Player> findAll(int gameId);
+    List<Player> findAll(int gameId, Search page);
 
     // 특정 선수 조회
     Player findOne(int playerId);
