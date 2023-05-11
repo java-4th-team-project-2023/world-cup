@@ -1,8 +1,6 @@
 package com.pickpick.service;
 
-import com.pickpick.dto.player.PlayerListResponseDTO;
-import com.pickpick.dto.player.PlayerModifyRequestDTO;
-import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.dto.player.*;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import com.pickpick.repository.PlayerMapper;
@@ -11,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service @Slf4j
 @RequiredArgsConstructor
@@ -92,16 +91,17 @@ public class PlayerService {
     public List<PlayerListResponseDTO> findAll(int gameId, Search page) {
         return playerMapper.findAll(gameId, page)
                 .stream()
-                .map();
+                .map(PlayerListResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
     // 특정 선수 조회
-    public Player findOne(int playerId) {
-        return playerMapper.findOne(playerId);
+    public PlayerOneResponseDTO findOne(int playerId) {
+        return new PlayerOneResponseDTO(playerMapper.findOne(playerId));
     }
 
     // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
-    public List<Player> findN(int gameId, int number) {
+    public List<PlayerGameResponseDTO> findN(int gameId, int number) {
 
         List<Player> playerList = playerMapper.findN(gameId, number);
 
@@ -110,6 +110,8 @@ public class PlayerService {
                 updatePlayer(player);
         });
 
-        return playerList;
+        return playerList.stream()
+                .map(PlayerGameResponseDTO::new)
+                .collect(Collectors.toList());
     }
 }
