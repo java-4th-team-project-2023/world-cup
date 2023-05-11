@@ -1,6 +1,8 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
+import com.pickpick.dto.player.PlayerGameResponseDTO;
+import com.pickpick.dto.player.PlayerListResponseDTO;
 import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
@@ -41,7 +43,7 @@ public class PlayerController {
     // 게임 생성 후 '강' 수에 맞는 선수 목록 리턴
     @GetMapping("/{gameId}/num/{number}")
     public ResponseEntity<?> getGameplayPlayers(@PathVariable int gameId, @PathVariable int number) {
-        List<Player> playerList = playerService.findN(gameId, number);
+        List<PlayerGameResponseDTO> playerList = playerService.findN(gameId, number);
 
         log.info("/api/v1/players/{}/num/{} GET! playerList: {}", gameId, number, playerList);
 
@@ -139,7 +141,7 @@ public class PlayerController {
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 
-        List<Player> playerList = playerService.findAll(gameId, page);
+        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
 
         if (playerList == null) return ResponseEntity.badRequest().build();
 

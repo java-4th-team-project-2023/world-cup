@@ -54,4 +54,5 @@
         ORDER BY RAND()
         LIMIT 1, #{number}
     </select>
+
 </mapper>

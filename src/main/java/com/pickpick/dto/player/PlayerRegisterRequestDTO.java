@@ -3,6 +3,7 @@ package com.pickpick.dto.player;
 import com.pickpick.entity.Player;
 import lombok.*;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
