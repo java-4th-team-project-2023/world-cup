@@ -34,26 +34,24 @@ class PlayerMapperTest {
     @Transactional
     @Rollback
     void updatePlayerTest() {
-        playerMapper.findOne(2)
-                .joinGame()
-                .winFight()
-                .winFinal()
-                ;
+        Player one = playerMapper.findOne(2);
+        one.joinGame();
+        one.winFight();
+        one.winFinal();
+        one.increaseFightCount();
 
-        assertEquals(1, playerMapper.findOne(2).getJoinGameCount());
-        assertEquals(2, playerMapper.findOne(2).getFightCount());
-        assertEquals(2, playerMapper.findOne(2).getSelectedWinCount());
-        assertEquals(1, playerMapper.findOne(2).getFinalWinCount());
+        assertEquals(1, one.getJoinGameCount());
+        assertEquals(3, one.getFightCount());
+        assertEquals(2, one.getSelectedWinCount());
+        assertEquals(1, one.getFinalWinCount());
     }
 
     @Test
-    @DisplayName("playerId가 2 인 선수를 삭제하면 잘 삭제되어야 한다.")
-    @Transactional
-    @Rollback
+    @DisplayName("playerId가 3 인 선수를 삭제하면 잘 삭제되어야 한다.")
     void deletePlayerTest() {
-        playerMapper.deletePlayer(2);
+        playerMapper.deletePlayer(3);
 
-        assertNull(playerMapper.findOne(2));
+        assertNull(playerMapper.findOne(3));
     }
 
     @Test
@@ -74,6 +72,26 @@ class PlayerMapperTest {
     @Test
     @DisplayName("game 1의 findAll의 반환 리스트의 길이가 1이어야 한다.")
     void findAllTest() {
-        assertEquals(1, playerMapper.findAll(1).size());
+        assertEquals(1, playerMapper.findAll(1, null).size());
+    }
+
+    @Test
+    @DisplayName("playerId가 2인 선수의 fight_count를 1, selected_win_count를 1 증가시켜야 한다")
+    void increaseCountTest() {
+        Player one = playerMapper.findOne(2);
+        one.winFight();
+
+        assertEquals(1, one.getFightCount());
+        assertEquals(1, one.getSelectedWinCount());
+    }
+
+    @Test
+    @DisplayName("playerId가 2인 선수의 fight_count를 1, selected_win_count를 1 감소시켜야 한다")
+    void decreaseCountTest() {
+        Player one = playerMapper.findOne(2);
+        one.decreaseSelectedCount();
+
+        assertEquals(0, one.getFightCount());
+        assertEquals(0, one.getSelectedWinCount());
     }
 }

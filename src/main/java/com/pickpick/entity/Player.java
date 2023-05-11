@@ -32,23 +32,39 @@ public class Player {
     private String playerImgPath;
     private String playerName;
 
-    public Player increaseFightCount() {
+    public boolean increaseFightCount() {
         fightCount++;
-        return this;
+        return true;
     }
 
-    public Player joinGame() {
+    public boolean joinGame() {
         joinGameCount++;
-        return this;
+        return true;
     }
 
-    public Player winFight() {
+    public boolean winFight() {
         selectedWinCount++;
-        return increaseFightCount();
+        increaseFightCount();
+        return true;
     }
 
-    public Player winFinal() {
+    public boolean winFinal() {
         finalWinCount++;
         return winFight();
     }
+
+    public boolean decreaseFightCount() {
+        if (fightCount == 0) return false;
+        fightCount--;
+        return true;
+    }
+
+    public boolean decreaseSelectedCount() {
+        if (!decreaseFightCount()) return false;
+
+        if (selectedWinCount == 0) return false;
+        selectedWinCount--;
+        return true;
+    }
+
 }

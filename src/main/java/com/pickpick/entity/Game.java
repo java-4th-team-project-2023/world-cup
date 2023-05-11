@@ -20,8 +20,10 @@ CREATE TABLE game_tbl (
 @AllArgsConstructor
 @Builder
 public class Game {
+
     private int gameId; // PK
-    private String gameName; // FK
+    private String gameName;
     private int playCount;
-    private String accountId;
+    private String accountId; // FK
+
 }
