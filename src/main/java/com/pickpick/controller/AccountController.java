@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static com.pickpick.service.LoginResult.SUCCESS;
 
@@ -34,11 +35,12 @@ public class AccountController {
         return "account/sign-up";
     }
 
+    // 회원가입 처리 요청
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto){
         log.info("/account/sign-up POST ! - {}",dto);
         boolean flag = accountService.join(dto);
-        return ""; // 리스트로 보낼지 어디로 보낼지 상의
+        return "redirect:/account/list"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
 //     아이디, 이메일 중복검사
@@ -80,6 +82,18 @@ public class AccountController {
         // 로그인 실패시
         return "redirect:/account/sign-in";
 
+    }
+
+    // 로그아웃 요청 처리
+    @GetMapping("/sign-out")
+    public String signOut(HttpSession session){
+        // 세션에서 login정보를 제거
+        session.removeAttribute("login");
+
+        // 세션을 아예 초기화 (세션만료 시간)
+        session.invalidate();
+
+        return "redirect:/";
     }
 
 }
