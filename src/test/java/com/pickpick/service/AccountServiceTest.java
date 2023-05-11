@@ -46,11 +46,13 @@ class AccountServiceTest {
     @DisplayName("로그인인증이 제대로 되어야한다")
     void authTest(){
         LoginRequestDTO dto = new LoginRequestDTO();
-        dto.setAccountId("aaa");
-        dto.setPassword("1234");
-//        encoder.matches(dto.setPassword(),"1234");
+        dto.setAccountId("oslob99");
+        dto.setPassword("1");
+        boolean b = encoder.matches("1",dto.getAccountId());
 
-
+        LoginResult result = accountService.authenticate(dto);
+        System.out.println("result = " + result);
+        System.out.println("b = " + b);
 
     }
 
