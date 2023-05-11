@@ -17,7 +17,7 @@ class AccountMapperTest {
     AccountMapper accountMapper;
 
     @Test
-    @DisplayName("댓글이 정상적으로 저장되어야한다")
+    @DisplayName("회원이 정상적으로 저장되어야한다")
     @Transactional
     void signTest(){
         // given
@@ -29,5 +29,16 @@ class AccountMapperTest {
         boolean flag = accountMapper.signUp(account);
 
         assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("aaa계정을 찾아서 계정의 정보를 가져와야한다")
+    void findAccountTest(){
+        String accountId = "aaa";
+
+        Account account = accountMapper.findAccount(accountId);
+
+        System.out.println("account = " + account.toString());
+
     }
 }

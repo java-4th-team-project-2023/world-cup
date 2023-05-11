@@ -12,7 +12,7 @@
     </insert>
 
     <select id="findAccount" resultType="account">
-        SELECT account_id, email
+        SELECT account_id, email, password, auth
         FROM account_tbl
         WHERE account_id = #{accountId}
     </select>
@@ -20,7 +20,7 @@
     <select id="isDuplicate" resultType="int">
         SELECT COUNT(*)
         FROM account_tbl
-        <if test="type == 'account'">
+        <if test="type == 'accountId'">
             WHERE account_id = #{keyword}
         </if>
         <if test="type == 'email'">
