@@ -16,6 +16,8 @@
 
         <typeAlias alias="player" type="com.pickpick.entity.Player" />
 
+        <typeAlias alias="game" type="com.pickpick.entity.Game" />
+
     </typeAliases>
     <mappers>
         <!-- Mapper XML files -->
@@ -24,6 +26,8 @@
         <mapper resource="mappers/ReplyMapper.xml" />
 
         <mapper resource="mappers/PlayerMapper.xml" />
+
+        <mapper resource="mappers/GameMapper.xml" />
 
     </mappers>
 </configuration>
