@@ -1,4 +1,4 @@
-package com.pickpick.dto.reply;
+package com.pickpick.dto.reply.request;
 
 import com.pickpick.entity.Reply;
 import lombok.*;

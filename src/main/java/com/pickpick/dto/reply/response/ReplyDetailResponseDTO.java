@@ -1,4 +1,4 @@
-package com.pickpick.dto.reply;
+package com.pickpick.dto.reply.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pickpick.entity.Reply;

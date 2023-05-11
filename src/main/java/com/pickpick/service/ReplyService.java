@@ -2,10 +2,10 @@ package com.pickpick.service;
 
 import com.pickpick.dto.page.Page;
 import com.pickpick.dto.page.PageMaker;
-import com.pickpick.dto.reply.ReplyDetailResponseDTO;
-import com.pickpick.dto.reply.ReplyListResponseDTO;
-import com.pickpick.dto.reply.ReplyModifyRequestDTO;
-import com.pickpick.dto.reply.ReplySaveRequestDTO;
+import com.pickpick.dto.reply.response.ReplyDetailResponseDTO;
+import com.pickpick.dto.reply.response.ReplyListResponseDTO;
+import com.pickpick.dto.reply.request.ReplyModifyRequestDTO;
+import com.pickpick.dto.reply.request.ReplySaveRequestDTO;
 import com.pickpick.entity.Reply;
 import com.pickpick.repository.ReplyMapper;
 import lombok.RequiredArgsConstructor;

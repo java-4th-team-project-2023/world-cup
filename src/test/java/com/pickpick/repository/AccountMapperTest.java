@@ -17,7 +17,7 @@ class AccountMapperTest {
     AccountMapper accountMapper;
 
     @Test
-    @DisplayName("댓글이 정상적으로 저장되어야한다")
+    @DisplayName("회원이 정상적으로 저장되어야한다")
     @Transactional
     void signTest(){
         // given

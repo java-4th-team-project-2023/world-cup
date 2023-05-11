@@ -1,7 +1,6 @@
-package com.pickpick.dto.reply;
+package com.pickpick.dto.reply.response;
 
 import com.pickpick.dto.page.PageMaker;
-import com.pickpick.entity.Reply;
 import lombok.*;
 
 import java.util.List;
