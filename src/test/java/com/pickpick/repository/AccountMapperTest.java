@@ -30,4 +30,15 @@ class AccountMapperTest {
 
         assertTrue(flag);
     }
+
+    @Test
+    @DisplayName("aaa계정을 찾아서 계정의 정보를 가져와야한다")
+    void findAccountTest(){
+        String accountId = "aaa";
+
+        Account account = accountMapper.findAccount(accountId);
+
+        System.out.println("account = " + account.toString());
+
+    }
 }

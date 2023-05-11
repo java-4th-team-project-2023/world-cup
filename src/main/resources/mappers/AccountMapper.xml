@@ -12,7 +12,7 @@
     </insert>
 
     <select id="findAccount" resultType="account">
-        SELECT account_id, email
+        SELECT account_id, email, password, auth
         FROM account_tbl
         WHERE account_id = #{accountId}
     </select>
