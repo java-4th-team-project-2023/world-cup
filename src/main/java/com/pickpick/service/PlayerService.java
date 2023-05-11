@@ -1,5 +1,6 @@
 package com.pickpick.service;
 
+import com.pickpick.dto.player.PlayerListResponseDTO;
 import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
@@ -88,8 +89,10 @@ public class PlayerService {
     }
 
     // 특정 게임의 선수 목록 조회
-    public List<Player> findAll(int gameId, Search page) {
-        return playerMapper.findAll(gameId, page);
+    public List<PlayerListResponseDTO> findAll(int gameId, Search page) {
+        return playerMapper.findAll(gameId, page)
+                .stream()
+                .map();
     }
 
     // 특정 선수 조회
