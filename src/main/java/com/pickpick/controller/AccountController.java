@@ -28,12 +28,12 @@ public class AccountController {
     private final AccountService accountService;
 
     // 회원가입 요청
-    @GetMapping("/sign-up")
-    public String signUp(){
-        log.info("/account/sign-up GET - forwarding to jsp");
-
-        return "account/sign-up";
-    }
+//    @GetMapping("/sign-up")
+//    public String signUp(){
+//        log.info("/account/sign-up GET - forwarding to jsp");
+//
+//        return "account/sign-up";
+//    }
 
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
@@ -54,11 +54,11 @@ public class AccountController {
     }
 
     // 로그인 양식 요청
-    @GetMapping("/sign-in")
-    public String signIn(){
-        log.info("/account/sign-in GET - forwarding to jsp");
-        return "account/sign-in";
-    }
+//    @GetMapping("/sign-in")
+//    public String signIn(){
+//        log.info("/account/sign-in GET - forwarding to jsp");
+//        return "account/sign-in";
+//    }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDTO dto
