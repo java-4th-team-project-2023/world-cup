@@ -1,0 +1,380 @@
+@import url('/assets/css/header.css');
+
+* {
+    box-sizing: border-box;
+}
+
+.rank-reply-wrapper {
+    width: 100%;
+    height: 100%;
+    padding-top: 4.95%;
+}
+
+.rank-reply-wrapper .rank-reply-box {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    position: relative;
+}
+
+.rank-reply-wrapper .rank-reply-box .rank-box {
+    border-bottom: 1px solid #000;
+    width: 50%;
+    height: 100%;
+    padding-top: 5%;
+    position: relative;
+}
+
+.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box {
+    border-bottom: 2px solid #000;
+    border-left: 2px solid #000;
+    width: 50%;
+    height: 6%;
+    padding-left: 1%;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    z-index: 1;
+}
+
+.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box::after {
+    content: '개씩 보기';
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box .select-view-number {
+    width: 6%;
+    background: lightgray;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+}
+
+.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box .select-view-number .select-number {
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.rank-box .select-search-box .search-box {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 6%;
+}
+
+.rank-box .select-search-box .search-box .search-text {
+    border: none;
+    border-radius: 10px;
+    width: 0%;
+    height: 65%;
+    font-size: 20px;
+    padding-left: 3%;
+    position: absolute;
+    right: 6%;
+    top: 12%;
+}
+
+.search-btn {
+    background: lightgray;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s;
+
+    position: absolute;
+    right: 4%;
+    bottom: 15%;
+}
+
+.search-btn:hover {
+    background: white;
+    box-shadow: 0px 0px 3px 1px black;
+    transition: 0.3s;
+}
+
+.search-btn img#Search {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 60%;
+    height: 60%;
+
+    position: absolute;
+    top: 17%;
+    left: 20%;
+}
+
+
+.reply-box {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.rpheader {
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    background: lightgray;
+    width: 50%;
+    height: 6%;
+    position: fixed;
+    z-index: 1;
+}
+
+.rpheader .rpheader-list-box {
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.rpheader .rpheader-list-box a {
+    box-shadow: 2px 2px 2px 1px black;
+    border-radius: 5px;
+    width: 15%;
+    height: 90%;
+    margin-right: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 1.4em;
+    color: black;
+    transition: 0.1s;
+}
+
+.rpheader .rpheader-list-box a:first-child {
+    background: lightgray;
+}
+
+.rpheader .rpheader-list-box a:nth-child(2) {
+    background: lightgray;
+}
+
+.rpheader .rpheader-list-box a:last-child {
+    background: lightgray;
+}
+
+.rpheader .rpheader-list-box a:hover {
+    border: 1px solid black;
+    color: black;
+    opacity: 0.7;
+    transition: 0.1s;
+}
+
+.rpboard-box {
+    border-left: 1px solid #000;
+    width: 100%;
+    height: 100%;
+    padding-top: 5.5%;
+    position: relative;
+}
+
+.rpboard-box .rpboard-list-box {
+    /* background: yellow; */
+    width: 100%;
+    height: 90%;
+}
+
+.rpboard-box .rpboard-list-box .rpboard-list {
+    border: 1px solid #000;
+    background: skyblue;
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.rplist-header {
+    border-bottom: 4px solid #000;
+    width: 95%;
+    height: 5%;
+    padding-left: 2%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.rplist-header .rpcount {
+    border-right: 2px solid #000;
+    margin-right: 20px;
+    width: 20%;
+    height: 50%;
+    text-align: center;
+    line-height: 1.5em;
+    font-weight: bold;
+}
+
+.rplist-header .rpcount p {
+    width: 100%;
+    height: 100%;
+    font-size: 29px;
+}
+
+.rplist-header .rpsorting {
+    width: 15%;
+    height: 80%;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1.5em;
+    font-size: 29px;
+    position: relative;
+}
+.rplist-header .rpsorting:hover {
+    color: red;
+    transition: 0.2s;
+}
+
+.rplist-header .rpsorting::before {
+    content: "";
+    display: inline-block;
+    background-image: url("../img/kakaoTalk.png");
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.rpsorting-wrapper {
+    border: 1px solid #000;
+    width: 15%;
+    height: 5%;
+    position: absolute;
+    top: 8%;
+    left: 25%;
+}
+
+.rpsorting-wrapper .rpsorting-list-box {
+    border: 1px solid #000;
+    width: 100%;
+    height: 62px;
+    text-align: center;
+}
+.rpsorting-wrapper .rpsorting-list-box .rpsorting-list {
+    border: 1px solid #000;
+    height: 50%;
+    font-weight: bold;
+}
+
+.rpsorting-wrapper .rpsorting-list-box .rpsorting-list p {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.rpsorting-wrapper .rpsorting-list-box .rpsorting-list p:hover {
+    border-left: 3px solid #000;
+    background: white;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rpboard-reply-replybtn-box .rpboard-reply {
+    width: 85%;
+    height: 100%;
+    margin: auto 0;
+}
+
+.rpboard-reply-replybtn-box .rpboard-reply input#Reply {
+    border: 1px solid #000;
+    background: white;
+    width: 100%;
+    height: 100%;
+    padding-left: 1%;
+    font-size: 30px;
+}
+
+.rpboard-reply-replybtn-box {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.rpboard-reply-replybtn-box .replybtn {
+    background: lightgray;
+    width: 15%;
+    height: 100%;
+    cursor: pointer;
+    font-size: 30px;
+    display: inline-block;
+    position: relative;
+}
+
+.rpboard-reply-replybtn-box .replybtn p {
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    line-height: 4em;
+}
+
+.rpboard-reply-replybtn-box .replybtn p:hover {
+    background: #bbb;
+    transition: 0.2s;
+}
+
+.rpboard-reply-replybtn-box .replybtn p:active {
+    transform: scale(0.95);
+    transition: 0.2s;
+}

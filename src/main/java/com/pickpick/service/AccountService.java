@@ -69,6 +69,7 @@ public class AccountService {
     // 로그인 성공 후 세션에 로그인한 회원의 정보들을 저장
     public void maintainLoginState(HttpSession session, String accountId) {
 
+        // 로그인 한 회원정보
         Account account = getAccount(accountId);
 
         LoginUserResponseDTO responseDTO = LoginUserResponseDTO.builder()

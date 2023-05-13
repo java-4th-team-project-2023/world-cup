@@ -28,19 +28,19 @@ public class AccountController {
     private final AccountService accountService;
 
     // 회원가입 요청
-    @GetMapping("/sign-up")
-    public String signUp(){
-        log.info("/account/sign-up GET - forwarding to jsp");
-
-        return "account/sign-up";
-    }
+//    @GetMapping("/sign-up")
+//    public String signUp(){
+//        log.info("/account/sign-up GET - forwarding to jsp");
+//
+//        return "account/sign-up";
+//    }
 
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto){
         log.info("/account/sign-up POST ! - {}",dto);
         boolean flag = accountService.join(dto);
-        return "redirect:/account/list"; // 리스트로 보낼지 어디로 보낼지 상의
+        return "redirect:/"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
 //     아이디, 이메일 중복검사
@@ -54,18 +54,18 @@ public class AccountController {
     }
 
     // 로그인 양식 요청
-    @GetMapping("/sign-in")
-    public String signIn(){
-        log.info("/account/sign-in GET - forwarding to jsp");
-        return "account/sign-in";
-    }
+//    @GetMapping("/sign-in")
+//    public String signIn(){
+//        log.info("/account/sign-in GET - forwarding to jsp");
+//        return "account/sign-in";
+//    }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDTO dto
                          // 리다이렉션시 2번째 응답에 데이터를 보내기 위함
             , RedirectAttributes attributes
             , HttpServletRequest request){
-        log.info("/account/sign-up POST ! - {}",dto);
+        log.info("/account/sign-in POST ! - {}",dto);
 
         LoginResult result = accountService.authenticate(dto);
 
@@ -74,8 +74,7 @@ public class AccountController {
 
             // 세션에 로그인 정보 저장
             accountService.maintainLoginState(request.getSession(),dto.getAccountId());
-
-            return "redirect:/";
+            return "redirect:/games/reply";
         }
         // 1회용으로 쓰고 버릴 데이터
         attributes.addFlashAttribute("msg",result);
