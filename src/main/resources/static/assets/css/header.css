@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Single+Day&family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Single+Day&family=Sniglet&display=swap');
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+    font-family: 'Dongle', sans-serif;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
+}
+
+body {
+    width: 100%;
+    height: 1500px;
+}
+
+header {
+    border-bottom: 4px solid #000;
+    background: linear-gradient(180deg, lightgray, white, lightgray);
+    /* background: lightgray; */
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    z-index: 9999;
+}
+
+.header {
+    width: 100%;
+    height: 100%;
+}
+
+.header-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 100;
+}
+
+h1.logo {
+    width: 6%;
+    height: 100%;
+    padding: 0;
+}
+
+h1.logo a#Logo:hover {
+    opacity: 0.9;
+    color: white;
+    transition: 0.3s;
+}
+
+h1.logo a i {
+    width: 100%;
+    text-align: center;
+    line-height: 2.5em;
+}
+
+.gnb {
+    width: 100%;
+    position: relative;
+}
+
+.gnb ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.gnb ul li.header-menu-list {
+    border-right: 2px solid #000;
+    width: 15%;
+    height: 50%;
+    margin: auto 0;
+    padding-top: 10px;
+    font-size: 30px;
+    line-height: 1em;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.gnb ul li.header-menu-list:hover {
+    border-top: 5px solid #000;
+    border-bottom: 5px solid #000;
+    height: 100%;
+    transition: 0.2s;
+    line-height: 2em;
+    background: white;
+    opacity: 0.6;
+}
+
+.gnb ul li.header-menu-list a {
+    width: 100%;
+    color: black;
+}
+
+.gnb ul .login-box {
+    width: 5%;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 6%;
+    font-size: 20px;
+}
+
+.gnb ul .login-box:hover {
+    border-bottom: 8px solid #000;
+    transition: 0.1s;   
+}
+
+.gnb ul .login-box a {
+    width: 100%;
+    height: 100%;
+    color: black;
+    position: absolute;
+    font-size: 35px;
+    line-height: 2.5em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gnb ul .login-box a#Login {
+    width: 100%;
+}
+
+input#icon {
+    display: none;
+}
+
+input#icon+label {
+    position: absolute;
+    right: 1.5%;
+    top: 25%;
+    display: block;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+}
+
+input#icon+label>span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 5px;
+    border-radius: 30px;
+    background: black;
+    transition: all 0.35s;
+    z-index: 2;
+}
+
+input#icon+label>span:nth-child(1) {
+    top: 0px;
+}
+
+input#icon+label>span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input#icon+label>span:nth-child(3) {
+    bottom: 0px;
+}
+
+
+input#icon:checked+label>span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+input#icon:checked+label>span:nth-child(2) {
+    opacity: 0;
+}
+
+input#icon:checked+label>span:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+#icon+label+.inr-menu {
+    border-left: 4px solid black;
+    position: fixed;
+    width: 400px;
+    height: 100%;
+    background: lightgray;
+    top: 0px;
+    box-sizing: border-box;
+    right: -450px;
+    z-index: 1;
+    transition: all 0.35s;
+}
+
+#icon:checked+label+.inr-menu {
+    right: 0px;
+}
+
+.inr-menu .inr-menu-list-box {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    text-align: center;
+    line-height: 2em;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.inr-menu .inr-menu-list-box li.inr-menu-list {
+    width: 100%;
+    height: 8%;
+    margin-bottom: 1.5px;
+}
+
+.inr-menu .inr-menu-list-box li.inr-menu-list a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+.inr-menu .inr-menu-list-box li.inr-menu-list a:hover {
+    border-top: 1px solid white;
+    background: lightgray;
+    /* border-radius: 20px; */
+    border-radius: 50%;
+    box-shadow: 0px 3px 1px 1px black;
+    transition: 0.1s;
+    opacity: 0.7;
+}
+
+#go-top {
+    border: 1px solid #000;
+    display: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    outline: 0;
+    border: 0;
+    background: white;
+    cursor: pointer;
+    z-index: 9999;
+    color: black;
+}
+
+#go-top:hover {
+    opacity: 0.7;
+    transition: 0.2s;
+}
