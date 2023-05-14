@@ -6,10 +6,9 @@ import lombok.Setter;
 
 @Setter @Getter
 @NoArgsConstructor
-public class PlayingGameUpdateRequestDTO {
+public class MatchUpdateRequestDTO {
 
     private int playingGameId;
-    private int winner;
     private int loser;
 
 }
