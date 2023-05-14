@@ -5,16 +5,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Setter @Getter
 @NoArgsConstructor
 public class PlayingGameSaveRequestDTO {
 
-    private int gameId;
-    private int totalRound;
+    @NotNull
+    private Integer gameId;
+    @NotNull
+    private Integer totalRound;
+    @NotBlank
     private String accountId;
-    private int currentRound;
+    @NotNull
+    private Integer currentRound;
+    @NotNull
     private List<PlayingGamePlayers> players;
 
 }

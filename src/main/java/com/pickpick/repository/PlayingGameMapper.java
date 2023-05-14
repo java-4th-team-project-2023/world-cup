@@ -1,5 +1,6 @@
 package com.pickpick.repository;
 
+import com.pickpick.dto.page.Page;
 import com.pickpick.entity.PlayingGame;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,14 +9,14 @@ import java.util.List;
 @Mapper
 public interface PlayingGameMapper {
 
-    boolean save(PlayingGame playingGame);
+    void save(PlayingGame playingGame);
 
-    List<PlayingGame> findByAccountId(int accountId);
+    List<PlayingGame> findByAccountId(int accountId, Page page);
 
     PlayingGame findOne(int playingGameId);
 
-    boolean delete(int playingGameId);
+    void delete(int playingGameId);
 
-    boolean update(PlayingGame playingGame);
+    void update(PlayingGame playingGame);
 
 }

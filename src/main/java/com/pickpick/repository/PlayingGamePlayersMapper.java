@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface PlayingGamePlayersMapper {
 
-    boolean save(PlayingGamePlayers playingGamePlayers);
+    void save(PlayingGamePlayers playingGamePlayers);
 
     boolean delete(PlayingGamePlayers playingGamePlayers);
 
