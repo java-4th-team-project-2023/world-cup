@@ -7,4 +7,21 @@
 | 5/8 | 주제 회의 및 ERD 작성     |    |
 | 5/9 | ERD 수정 및 Entity 생성 | 백  |
 
+### Member
 
+---
+
+| 개발자 | 담당          |
+|-----|-------------|
+| 원석빈 | PM & Front  |
+| 이채원 | Front       | 
+| 이진호 | Front & Back|
+| 조경훈 | Back        |
+
+### DataBase Diagram
+
+![erd.png](diagram%2Ferd.png)
+
+### Flow Chart
+
+![flow-chart.png](diagram%2Fflow-chart.png)

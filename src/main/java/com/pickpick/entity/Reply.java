@@ -11,6 +11,7 @@ CREATE TABLE reply_tbl (
     writer VARCHAR(50) NOT NULL,
     text VARCHAR(1000) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    like_count int(9) default 0,
     CONSTRAINT pk_reply_no PRIMARY KEY (reply_no),
     CONSTRAINT fk_game_id_reply FOREIGN KEY (game_id) REFERENCES game_tbl(game_id)
                        ON DELETE CASCADE
