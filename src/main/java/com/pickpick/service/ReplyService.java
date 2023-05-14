@@ -8,10 +8,12 @@ import com.pickpick.dto.reply.request.ReplyModifyRequestDTO;
 import com.pickpick.dto.reply.request.ReplySaveRequestDTO;
 import com.pickpick.entity.Reply;
 import com.pickpick.repository.ReplyMapper;
+import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,11 +42,13 @@ public class ReplyService {
     }
 
     // 댓글 저장 기능
-    public ReplyListResponseDTO save(ReplySaveRequestDTO dto) throws SQLException {
+    public ReplyListResponseDTO save(ReplySaveRequestDTO dto, HttpSession session) throws SQLException {
         Reply reply = dto.toEntity();
+        // 비회원들은 if문으로 걸러내서 저장하기(null)
+        reply.setAccountId(LoginUtil.getCurrentLoginMemberAccount(session));
         boolean flag = replyMapper.save(reply);
         if (!flag) {
-            log.warn("replu save fail!");
+            log.warn("reply save fail!");
             throw new SQLException("댓글 저장 실패");
         }
         return getList(dto.getGameId(),new Page(1,20));

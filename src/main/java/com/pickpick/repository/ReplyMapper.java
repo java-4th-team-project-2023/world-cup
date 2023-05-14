@@ -19,6 +19,9 @@ public interface ReplyMapper {
     // 댓글 삭제
     boolean deleteOne(int replyNo);
 
+    // 댓글 개별 조회
+    Reply findOne(int replyNo);
+
     // 댓글 목록 조회
     List<Reply> findAll(
             @Param("gId") int gameId,
@@ -27,4 +30,7 @@ public interface ReplyMapper {
 
     // 총 댓글 수 조회
     int count(int gameId);
+
+    // 좋아요 횟수
+    int likeUpCounting(int replyNo);
 }

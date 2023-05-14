@@ -6,9 +6,9 @@
 
     <insert id="save">
         INSERT INTO reply_tbl
-            (text, writer, game_id)
+            (text, writer, game_id, account_id)
         VALUES
-            (#{text}, #{writer}, #{gameId})
+            (#{text}, #{writer}, #{gameId}, #{accountId})
     </insert>
 
     <update id="modify">
@@ -22,9 +22,16 @@
         WHERE reply_no = #{replyNo}
     </delete>
 
+    <select id="findOne" resultType="reply">
+        SELECT
+        reply_no, text, writer, date, like_count, account_id, game_id
+        FROM tbl_reply
+        WHERE reply_no = #{replyNo}
+    </select>
+
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, game_id, writer, text, date
+        reply_no, text, writer, date, like_count, account_id, game_id
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
@@ -36,6 +43,12 @@
         FROM reply_tbl
         WHERE game_id = #{gameId}
     </select>
+
+    <update id="likeUpCounting">
+        UPDATE reply_tbl
+        SET like_count = like_count + 1
+        WHERE reply_no = #{replyNo}
+    </update>
 
 
 </mapper>

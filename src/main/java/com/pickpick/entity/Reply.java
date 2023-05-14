@@ -12,6 +12,7 @@ CREATE TABLE reply_tbl (
     text VARCHAR(1000) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     like_count int(9) default 0,
+    account_id VARCHAR(50),
     CONSTRAINT pk_reply_no PRIMARY KEY (reply_no),
     CONSTRAINT fk_game_id_reply FOREIGN KEY (game_id) REFERENCES game_tbl(game_id)
                        ON DELETE CASCADE
@@ -27,6 +28,8 @@ public class Reply {
     private int gameId; // fk
     private String writer;
     private String text;
+    private int likeCount;
     private LocalDateTime date;
+    private String accountId; // fk
 
 }
