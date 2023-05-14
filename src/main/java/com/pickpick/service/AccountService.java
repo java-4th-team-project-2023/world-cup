@@ -5,6 +5,7 @@ import com.pickpick.dto.account.request.SignUpRequestDTO;
 import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.entity.Account;
 import com.pickpick.repository.AccountMapper;
+import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
 import static com.pickpick.service.LoginResult.*;
+import static com.pickpick.util.LoginUtil.LOGIN_KEY;
 
 @Service
 @Slf4j
@@ -77,7 +79,7 @@ public class AccountService {
                 .email(account.getEmail())
                 .build();
 
-        session.setAttribute("login",responseDTO);
+        session.setAttribute(LOGIN_KEY,responseDTO);
         session.setMaxInactiveInterval(60 * 60); // 1시간동안 세션유지
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 @RestController
@@ -42,6 +43,7 @@ public class ReplyController {
     @PostMapping
     public ResponseEntity<?> saveReply(
             @Validated @RequestBody ReplySaveRequestDTO dto
+            , HttpSession session
             , BindingResult result
             ){
         if (result.hasErrors()) {
@@ -49,7 +51,7 @@ public class ReplyController {
         }
 
         try {
-            ReplyListResponseDTO responseDTO = replyService.save(dto);
+            ReplyListResponseDTO responseDTO = replyService.save(dto,session);
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,21 +60,27 @@ public class ReplyController {
     }
 
     // 댓글 수정 기능
-    @PutMapping
-    public ResponseEntity<?> modifyReply(
-            @Validated @RequestBody ReplyModifyRequestDTO dto
-            ,BindingResult result
-            ){
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body("입력값을 제대로 입력해주세요!");
-        }
-        try {
-            ReplyListResponseDTO responseDTO = replyService.modify(dto);
-            return ResponseEntity.ok().body(responseDTO);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("수정 실패");
-        }
-    }
+//    @PutMapping
+//    public ResponseEntity<?> modifyReply(
+//            @Validated @RequestBody ReplyModifyRequestDTO dto
+//            ,BindingResult result
+//            ){
+//        if (result.hasErrors()) {
+//            return ResponseEntity.badRequest().body("입력값을 제대로 입력해주세요!");
+//        }
+//        try {
+//            ReplyListResponseDTO responseDTO = replyService.modify(dto);
+//            return ResponseEntity.ok().body(responseDTO);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body("수정 실패");
+//        }
+//    }
 
+    // 댓글 좋아요 기능
+    @PutMapping
+    public ResponseEntity<?> likeUpCount(){
+
+        return ResponseEntity.ok().body("");
+    }
 }

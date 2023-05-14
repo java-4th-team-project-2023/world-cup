@@ -40,7 +40,7 @@ public class AccountController {
     public String signUp(SignUpRequestDTO dto){
         log.info("/account/sign-up POST ! - {}",dto);
         boolean flag = accountService.join(dto);
-        return "redirect:/"; // 리스트로 보낼지 어디로 보낼지 상의
+        return "redirect:/account/login"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
 //     아이디, 이메일 중복검사
