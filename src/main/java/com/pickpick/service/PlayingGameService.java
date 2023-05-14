@@ -1,5 +1,6 @@
 package com.pickpick.service;
 
+import com.pickpick.dto.page.Page;
 import com.pickpick.dto.playingGame.PlayingGameAndPlayersResponseDTO;
 import com.pickpick.dto.playingGame.PlayingGameListResponseDTO;
 import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
@@ -34,21 +35,13 @@ public class PlayingGameService {
 
     public void updateEndOfMatch(MatchUpdateRequestDTO dto) {
 
-        // 진사람 삭제
-        playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
-                        .playingGameId(dto.getPlayingGameId())
-                        .playerId(dto.getLoser())
-                .build());
-
-    }
-
-    public void resetMatch(MatchUpdateRequestDTO dto) {
-
-        // 진사람 복구
-        playingGamePlayersMapper.save(PlayingGamePlayers.builder()
-                        .playingGameId(dto.getPlayingGameId())
-                        .playerId(dto.getLoser())
-                .build());
+        for (Integer loser : dto.getLosers()) {
+            // 진사람 삭제
+            playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
+                    .playingGameId(dto.getPlayingGameId())
+                    .playerId(loser)
+                    .build());
+        }
 
     }
 
@@ -59,16 +52,6 @@ public class PlayingGameService {
                         .playingGameId(playingGameId)
                         .currentRound(playingGameMapper.findOne(playingGameId)
                                 .getCurrentRound() >> 1)
-                .build());
-
-    }
-
-    public void resetEndOfRound(int playingGameId) {
-
-        // 라운드 리셋
-        playingGameMapper.update(PlayingGame.builder()
-                        .playingGameId(playingGameId)
-                        .currentRound(playingGameMapper.findOne(playingGameId).getCurrentRound() * 2)
                 .build());
 
     }
@@ -94,11 +77,12 @@ public class PlayingGameService {
 
     }
 
-    public List<PlayingGameListResponseDTO> findAll(int accountId) {
+    public List<PlayingGameListResponseDTO> findAll(int accountId, Page page) {
 
-        return playingGameMapper.findByAccountId(accountId).stream()
+        return playingGameMapper.findByAccountId(accountId, page).stream()
                 .map(PlayingGameListResponseDTO::new)
                 .collect(Collectors.toList());
 
     }
+
 }
