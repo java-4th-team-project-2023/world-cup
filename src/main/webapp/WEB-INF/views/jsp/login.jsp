@@ -1,4 +1,4 @@
-!<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/resources/static/assets/css/login.css">
-    <script src="/resources/static/assets/js/login.js" defer></script>
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <script src="/assets/js/login.js" defer></script>
 
 </head>
 
