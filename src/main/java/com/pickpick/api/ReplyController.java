@@ -24,7 +24,7 @@ public class ReplyController {
     private final ReplyService replyService;
 
     // 댓글 20개씩 조회
-    @GetMapping("/{gameId}/page/pageNo")
+    @GetMapping("/{gameId}/page/{pageNo}")
     public ResponseEntity<?> replyList(
             @PathVariable int gameId,
             @PathVariable int pageNo
@@ -36,6 +36,7 @@ public class ReplyController {
         page.setAmount(20);
 
         ReplyListResponseDTO replyList = replyService.getList(gameId, page);
+        log.info("replyList : {}", replyList);
         return ResponseEntity.ok().body(replyList);
     }
 

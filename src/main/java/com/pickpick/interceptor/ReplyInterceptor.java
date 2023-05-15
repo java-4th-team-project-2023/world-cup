@@ -35,7 +35,7 @@ public class ReplyInterceptor
 
         if (!LoginUtil.isLogin(session)) {
             log.info("this request( {} ) denied!!", request.getRequestURI());
-            response.sendRedirect("/members/sign-in");
+            response.sendRedirect("/account/sign-in");
             return false;
         }
 
@@ -49,26 +49,24 @@ public class ReplyInterceptor
                -> 글번호를 DB에 조회해서 계정명을 얻어낸다.
          */
         // 삭제요청인지 확인
-        String uri = request.getRequestURI();
-        if (uri.contains("delete")) {
-
-            // 쿼리 파라미터 읽기
-            int bno = Integer.parseInt(request.getParameter("bno"));
-
-            // 게시물 정보 읽기
-            Reply reply = replyMapper.findOne(bno);
-
-            String targetAccount = reply.getAccountId();
-
-            if (LoginUtil.isAdmin(session)) return true;
-
-            if (!LoginUtil.isMine(session, targetAccount)) {
-                response.sendRedirect("/access-deny");
-                return false;
-            }
-        }
-
-
+//        String uri = request.getRequestURI();
+//        if (uri.contains("delete")) {
+//
+//            // 쿼리 파라미터 읽기
+//            int bno = Integer.parseInt(request.getParameter("bno"));
+//
+//            // 게시물 정보 읽기
+//            Reply reply = replyMapper.findOne(bno);
+//
+//            String targetAccount = reply.getAccountId();
+//
+//            if (LoginUtil.isAdmin(session)) return true;
+//
+//            if (!LoginUtil.isMine(session, targetAccount)) {
+//                response.sendRedirect("/access-deny");
+//                return false;
+//            }
+//        }
 
         log.info("board interceptor pass!!");
         return true;

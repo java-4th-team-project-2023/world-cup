@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="/assets/css/reply.css">
     <script src="/assets/js/burgerbtn.js" defer></script>
     <script src="/assets/js/topbtn.js" defer></script>
-    <script src="/assets/js/bottombtn.js" defer></script>
+    <!-- <script src="/assets/js/bottombtn.js" defer></script> -->
     <script src="/assets/js/search.js" defer></script>
-    <script src="/assets/js/localdate.js" defer></script>
+    <!-- <script src="/assets/js/localdate.js" defer></script> -->
 </head>
 <body>
 
@@ -173,21 +173,6 @@
                                 <!-- 댓글 main -->
                                 <div class="rpboard-viewmain">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     <!-- 반복 -->
                                     <!-- 댓글 박스 시작 -->
                                     <div class="rpboard-rpbox">
@@ -211,99 +196,6 @@
                                         <div class="reply-to-comment">댓글 n개</div>
                                     </div> <!-- end rpboard-rpbox -->
                                     <!-- 댓글 박스 종료 -->
-
-
-                                    <!-- 반복 -->
-                                    <!-- 댓글 박스 시작 -->
-                                    <div class="rpboard-rpbox">
-                                        <!-- 사용자 닉네임 + 작성일자 box -->
-                                        <div class="rpboard-nickname-local-date-box">
-                                            <!-- 사용자 닉네임 -->
-                                            <div class="rpboard-nickname">조경훈</div>
-                                        </div> <!-- end rpboard-nickname-local-date-box -->
-                                        <!-- 사용자 댓글 -->
-                                        <div class="rpboard-replies-box">
-                                            <div class="rpboard-replies">나는야 핵인싸 개간지</div>
-                                        </div>
-                                        <!-- 댓글 좋아요 + 댓글 신고 box -->
-                                        <div class="rpboard-like-report-box">
-                                            <!-- 댓글 좋아요 -->
-                                            <div class="like" id="Like">좋아요</div>
-                                            <!-- 댓글 신고 -->
-                                            <div class="report" id="Report">신고</div>
-                                        </div> <!-- end rpboard-like-report-box -->
-                                        <!-- 대댓글 -->
-                                        <div class="reply-to-comment">댓글 n개</div>
-                                    </div> <!-- end rpboard-rpbox -->
-                                    <!-- 댓글 박스 종료 -->
-
-                                    <!-- 반복 -->
-                                    <!-- 댓글 박스 시작 -->
-                                    <div class="rpboard-rpbox">
-                                        <!-- 사용자 닉네임 + 작성일자 box -->
-                                        <div class="rpboard-nickname-local-date-box">
-                                            <!-- 사용자 닉네임 -->
-                                            <div class="rpboard-nickname">조경훈</div>
-                                        </div> <!-- end rpboard-nickname-local-date-box -->
-                                        <!-- 사용자 댓글 -->
-                                        <div class="rpboard-replies-box">
-                                            <div class="rpboard-replies">나는야 핵인싸 개간지</div>
-                                        </div>
-                                        <!-- 댓글 좋아요 + 댓글 신고 box -->
-                                        <div class="rpboard-like-report-box">
-                                            <!-- 댓글 좋아요 -->
-                                            <div class="like" id="Like">좋아요</div>
-                                            <!-- 댓글 신고 -->
-                                            <div class="report" id="Report">신고</div>
-                                        </div> <!-- end rpboard-like-report-box -->
-                                        <!-- 대댓글 -->
-                                        <div class="reply-to-comment">댓글 n개</div>
-                                    </div> <!-- end rpboard-rpbox -->
-                                    <!-- 댓글 박스 종료 -->
-                                    <!-- 댓글 더보기 버튼 -->
-                                    <div class="rpboard-more-view-btn">
-                                        <p>더 보기</p>
-                                    </div>
-                                    
-                                    <!-- 반복 -->
-                                    <!-- 댓글 박스 시작 -->
-                                    <div class="rpboard-rpbox">
-                                        <!-- 사용자 닉네임 + 작성일자 box -->
-                                        <div class="rpboard-nickname-local-date-box">
-                                            <!-- 사용자 닉네임 -->
-                                            <div class="rpboard-nickname">조경훈</div>
-                                        </div> <!-- end rpboard-nickname-local-date-box -->
-                                        <!-- 사용자 댓글 -->
-                                        <div class="rpboard-replies-box">
-                                            <div class="rpboard-replies">나는야 핵인싸 개간지</div>
-                                        </div>
-                                        <!-- 댓글 좋아요 + 댓글 신고 box -->
-                                        <div class="rpboard-like-report-box">
-                                            <!-- 댓글 좋아요 -->
-                                            <div class="like" id="Like">좋아요</div>
-                                            <!-- 댓글 신고 -->
-                                            <div class="report" id="Report">신고</div>
-                                        </div> <!-- end rpboard-like-report-box -->
-                                        <!-- 대댓글 -->
-                                        <div class="reply-to-comment">댓글 n개</div>
-                                    </div> <!-- end rpboard-rpbox -->
-                                    <!-- 댓글 박스 종료 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                     
                                     <!-- 댓글 더보기 버튼 -->
@@ -352,6 +244,34 @@
             
     </section>
     <!-- reply container 끝 -->
+
+    <script>
+        // 해당 게임 아이디 (진호형꺼에서 받아오기)
+        const gameId = '${game.gameId}';
+
+         // 댓글 요청 URI
+         const URL = '/api/replies';
+
+
+        // 댓글 목록 불러오기 함수 
+        function getReplyList(pageNo=1) {
+
+    fetch(`\${URL}/3/page/\${pageNo}`) // ${gameId}
+        .then(res => res.json())
+        .then(responseResult => {
+        console.log(responseResult);
+        const 
+        // renderReplyList(responseResult);
+    });
+}
+    //========= 메인 실행부 =========//
+    (function() {
+
+// 첫 댓글 페이지 불러오기
+getReplyList();
+    })();
+
+    </script>
 
 </body>
 </html>

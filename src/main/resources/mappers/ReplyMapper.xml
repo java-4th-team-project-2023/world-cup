@@ -29,7 +29,7 @@
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
-        LIMIT #{page.getPageStart}, #{page.amount}
+<!--        LIMIT #{page.getPageStart}, #{page.amount}-->
     </select>
 
     <select id="count" resultType="int">
