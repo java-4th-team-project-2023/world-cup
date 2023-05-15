@@ -50,7 +50,7 @@
                     <ul class="header-menu-box">
                         <li class="header-menu-list"><a href="#">HOME</a></li>
                         <li class="header-menu-list"><a href="#">월드컵 만들기</a></li>
-                        <!-- <c:if test="${}">  -->
+                        <!-- <c:if test="${asdf}">  -->
                         <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
                         <div class="login-box"><a href="#" id="Login">LOGIN</a></div>
                         <!-- </c:if> -->
@@ -71,6 +71,7 @@
                             <li class="inr-menu-list"><a href="#">menu5</a></li>
                         </ul>
                     </nav>
+                </nav>
             </div>
         </div>
     </header>
