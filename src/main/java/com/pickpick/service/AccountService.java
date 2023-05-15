@@ -5,7 +5,6 @@ import com.pickpick.dto.account.request.SignUpRequestDTO;
 import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.entity.Account;
 import com.pickpick.repository.AccountMapper;
-import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,7 +45,7 @@ public class AccountService {
     }
 
     // 회원 정보를 가져오는 기능
-    public Account getAccount(String accountId){
+    public Account findAccount(String accountId){
         return accountMapper.findAccount(accountId);
     }
 
@@ -72,11 +71,12 @@ public class AccountService {
     public void maintainLoginState(HttpSession session, String accountId) {
 
         // 로그인 한 회원정보
-        Account account = getAccount(accountId);
+        Account account = findAccount(accountId);
 
         LoginUserResponseDTO responseDTO = LoginUserResponseDTO.builder()
                 .accountId(account.getAccountId())
                 .email(account.getEmail())
+                .auth(account.getAuth().toString())
                 .build();
 
         session.setAttribute(LOGIN_KEY,responseDTO);
