@@ -20,6 +20,7 @@ public class ReplySaveRequestDTO {
     @NotNull
     private String text;
     private int gameId;
+    private String accountId;
 
     public Reply toEntity(){
         return Reply.builder()

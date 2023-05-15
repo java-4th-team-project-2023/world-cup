@@ -59,28 +59,33 @@ public class ReplyController {
         }
     }
 
-    // 댓글 수정 기능
-//    @PutMapping
-//    public ResponseEntity<?> modifyReply(
-//            @Validated @RequestBody ReplyModifyRequestDTO dto
-//            ,BindingResult result
-//            ){
-//        if (result.hasErrors()) {
-//            return ResponseEntity.badRequest().body("입력값을 제대로 입력해주세요!");
-//        }
-//        try {
-//            ReplyListResponseDTO responseDTO = replyService.modify(dto);
-//            return ResponseEntity.ok().body(responseDTO);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.badRequest().body("수정 실패");
-//        }
-//    }
-
     // 댓글 좋아요 기능
-    @PutMapping
-    public ResponseEntity<?> likeUpCount(){
+    @PostMapping("/like")
+    public ResponseEntity<?> likeReply(
+            @RequestParam("replyNo") int replyNo
+            , HttpSession session) {
+        // 댓글 좋아요 로직 수행
+        replyService.likeReply(replyNo, session);
+        return ResponseEntity.ok().build();
+    }
 
-        return ResponseEntity.ok().body("");
+    // 댓글 삭제 요청 처리
+    @DeleteMapping("/{replyNo}")
+    public ResponseEntity<?> delete(@PathVariable int replyNo) {
+
+        log.info("/api/replies/{} DELETE!", replyNo);
+
+        try {
+            ReplyListResponseDTO responseDTO
+                    = replyService.delete(replyNo);
+            return ResponseEntity
+                    .ok()
+                    .body(responseDTO);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError()
+                    .body(e.getMessage());
+        }
+
     }
 }
