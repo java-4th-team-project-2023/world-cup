@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pickpick.repository.PlayingGameMapper">
+
+    <insert id="save">
+        insert into playing_game_tbl (game_id, round_num, account_id, current_round)
+        values (#{gameId}, #{totalRound}, #{currentRoung}, #{accountId})
+    </insert>
+
+    <select id="findByAccountId" resultType="playingGame">
+        select *
+        from playing_game_tbl
+        where account_id=#{accountId}
+        limit #{pageStart}, #{amount}
+    </select>
+
+    <select id="findOne" resultType="playingGame">
+        select *
+        from playing_game_tbl
+        where playing_game_id=#{playingGameId}
+    </select>
+
+    <delete id="delete">
+        delete from playing_game_tbl
+        where playing_game_id=#{playingGameId}
+    </delete>
+
+    <update id="update">
+        update playing_game_tbl
+        set current_round=#{currentRound}
+        where playing_game_id=#{playingGameId}
+    </update>
+</mapper>

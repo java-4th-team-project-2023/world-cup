@@ -10,8 +10,8 @@ public interface PlayingGamePlayersMapper {
 
     void save(PlayingGamePlayers playingGamePlayers);
 
-    boolean delete(PlayingGamePlayers playingGamePlayers);
+    void delete(PlayingGamePlayers playingGamePlayers);
 
-    List<PlayingGamePlayers> findAllByGameId(int gameId);
+    List<PlayingGamePlayers> findAllByGameId(int playingGameId);
 
 }
