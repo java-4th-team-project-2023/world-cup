@@ -24,8 +24,8 @@ public class Page {
     }
 
     public void setAmount(int amount) {
-        if (amount < 10 || amount > 30) {
-            this.amount = 10;
+        if (amount < 9 || amount > 30) {
+            this.amount = 9;
             return;
         }
         this.amount = amount;
