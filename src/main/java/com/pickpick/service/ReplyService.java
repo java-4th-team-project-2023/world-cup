@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.pickpick.util.LoginUtil.*;
+import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,10 +34,10 @@ public class ReplyService {
 
         List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId, page)
                 .stream()
-                .map(reply -> new ReplyDetailResponseDTO(reply))
-                .collect(Collectors.toList());
+                .map(ReplyDetailResponseDTO::new)
+                .collect(toList());
         int count = replyMapper.count(gameId);
-
+        log.info("!!!! count :{}",count);
         return ReplyListResponseDTO.builder()
                 .count(count)
                 .pageMaker(new PageMaker(page,count))
