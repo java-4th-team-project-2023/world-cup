@@ -28,7 +28,7 @@
     </div>
 
     <div class="card-list">
-        <a href="https://example.com" class="card">
+        <a href="/rank/ranking" class="card">
             <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
             <h3>Card 1</h3>
         </a>
