@@ -4,7 +4,8 @@ import com.pickpick.dto.page.Page;
 import lombok.*;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
-@Setter @Getter @ToString
+@Setter @Getter @ToString(callSuper = true)
+@AllArgsConstructor
 public class Search extends Page {
 
     // 검색 키워드

@@ -29,6 +29,8 @@ public class PlayerController {
     public ResponseEntity<?> registerPlayer(@Validated @RequestBody PlayerRegisterRequestDTO dto
     , BindingResult result) {
 
+        log.info("/api/v1/players");
+
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.toString());
         }
@@ -135,16 +137,14 @@ public class PlayerController {
     }
 
     // 특정 게임의 선수 목록 조회
-    @GetMapping("/{gameId}/pageNo/{pageNo}/amount/{amount}/keyword/{keyword}")
+    @GetMapping("/{gameId}/pageNo/{pageNo}/amount/{amount}")
     public ResponseEntity<?> findAll(@PathVariable int gameId,
                                      @PathVariable int pageNo,
-                                     @PathVariable int amount,
-                                     @PathVariable String keyword) {
+                                     @PathVariable int amount) {
 
         Search page = new Search();
         page.setAmount(amount);
         page.setPageNo(pageNo);
-        page.setKeyword(keyword);
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 

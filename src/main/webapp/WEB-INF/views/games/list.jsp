@@ -38,6 +38,10 @@
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
+                <div class="button-wrapper">
+                    <button class="game-modify-btn">수정하기</button>
+                    <button class="game-ranking-btn">랭킹보기</button>
+                </div>
             </a>
 
         </c:forEach>

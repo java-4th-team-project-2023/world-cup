@@ -78,8 +78,8 @@
 
             $player.innerHTML = `
                             <div></div>
-                            <div name="playerImgPath"><img src='${p.PlayerImgPath}'></div>
-                            <div name="playerName"><input id="modify-name" type="text" value='${p.playerName}'></div>
+                            <div name="playerImgPath"><img src='\${p.playerImgPath}'></div>
+                            <div name="playerName"><input id="modify-name" type="text" value='\${p.playerName}'></div>
                             <div name="playerImgPath"><input id="modify-file" type="file"></div>
                             <div name="delete"><button id="delbtn" type="button">삭제하기</button></div>
                             <div name=""></div>

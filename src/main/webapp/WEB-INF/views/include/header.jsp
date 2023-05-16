@@ -6,7 +6,7 @@
     <div class="header">
         <div class="header-container">
             <h1 class="logo">
-                <a href="#" id="Logo"><i class="far fa-hand-rock"></i></a>
+                <a href="/" id="Logo"><i class="far fa-hand-rock"></i></a>
             </h1>
 
             <!--상단 BAR-MENU-->
@@ -14,10 +14,15 @@
                 <ul class="header-menu-box">
                     <li class="header-menu-list"><a href="/">HOME</a></li>
                     <li class="header-menu-list"><a href="/games/make">월드컵 만들기</a></li>
-                    <!-- <c:if test="${asdf}">  -->
-                    <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
-                    <!-- </c:if> -->
-                    <li class="login-box"><a href="#" id="Login">LOGIN</a></li>
+                    <!-- 로그인 검증 -->
+                    <c:if test="${login ne null}">
+                        <li class="header-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
+                        <li class="header-menu-list"><a href="/games/playing-world-cup">내가 하던 월드컵</a></li>
+                    </c:if>
+
+                    <c:if test="${login eq null}">
+                        <li class="login-box"><a href="/account/sign-in" id="Login">LOGIN</a></li>
+                    </c:if>
                 </ul>
                 <input type="checkbox" id="icon">
                 <label for="icon" class="transition">
@@ -32,7 +37,7 @@
                         <li class="inr-menu-list"><a href="#">menu2</a></li>
                         <li class="inr-menu-list"><a href="#">menu3</a></li>
                         <li class="inr-menu-list"><a href="#">menu4</a></li>
-                        <li class="inr-menu-list"><a href="#">menu5</a></li>
+                        <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
                     </ul>
                 </nav>
             </nav>
