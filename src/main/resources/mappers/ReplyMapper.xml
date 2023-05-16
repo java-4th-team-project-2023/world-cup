@@ -11,12 +11,6 @@
             (#{text}, #{writer}, #{gameId}, #{accountId})
     </insert>
 
-    <update id="modify">
-        UPDATE reply_tbl
-        SET text = #{text}, writer = #{writer}
-        WHERE reply_no = #{replyNo}
-    </update>
-
     <delete id="deleteOne">
         DELETE FROM reply_tbl
         WHERE reply_no = #{replyNo}
@@ -35,7 +29,7 @@
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
-        LIMIT #{page.getPageStart}, #{page.amount}
+<!--        LIMIT #{page.getPageStart}, #{page.amount}-->
     </select>
 
     <select id="count" resultType="int">
@@ -44,7 +38,19 @@
         WHERE game_id = #{gameId}
     </select>
 
-    <update id="likeUpCounting">
+    <select id="findLikeOne" resultType="int">
+        SELECT count(*)
+        FROM reply_like_tbl
+        WHERE reply_no = #{replyNo} and account_id = #{accountId}
+    </select>
+
+    <insert id="addLikeUser">
+        INSERT INTO reply_like_tbl
+        (reply_no, account_id)
+        VALUES (#{replyNo}, #{accountId})
+    </insert>
+
+    <update id="likeUpCounting">기
         UPDATE reply_tbl
         SET like_count = like_count + 1
         WHERE reply_no = #{replyNo}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import static com.pickpick.service.LoginResult.*;
 import static com.pickpick.util.LoginUtil.LOGIN_KEY;
+import static com.pickpick.util.LoginUtil.isLogin;
 
 @Service
 @Slf4j
@@ -26,7 +27,7 @@ public class AccountService {
 
 
     // 회원가입 기능
-    public boolean join(SignUpRequestDTO dto) {
+    public boolean join(SignUpRequestDTO dto, HttpSession session) {
 
         Account account = Account.builder()
                 .accountId(dto.getAccountId())
@@ -34,7 +35,10 @@ public class AccountService {
                 .email(dto.getEmail())
                 .build();
 
-        return accountMapper.signUp(account);
+        boolean flag = accountMapper.signUp(account);
+
+        maintainLoginState(session,account.getAccountId());
+        return flag;
     }
 
     // 아이디, 이메일 중복검사
@@ -46,7 +50,7 @@ public class AccountService {
     }
 
     // 회원 정보를 가져오는 기능
-    public Account getAccount(String accountId){
+    public Account findAccount(String accountId){
         return accountMapper.findAccount(accountId);
     }
 
@@ -68,18 +72,24 @@ public class AccountService {
         return SUCCESS;
     }
 
-    // 로그인 성공 후 세션에 로그인한 회원의 정보들을 저장
+    // 로그인, 회원가입 성공 후 세션에 로그인한 회원의 정보들을 저장
     public void maintainLoginState(HttpSession session, String accountId) {
 
         // 로그인 한 회원정보
-        Account account = getAccount(accountId);
+        Account account = findAccount(accountId);
 
         LoginUserResponseDTO responseDTO = LoginUserResponseDTO.builder()
                 .accountId(account.getAccountId())
                 .email(account.getEmail())
+                .auth(account.getAuth().toString())
                 .build();
 
         session.setAttribute(LOGIN_KEY,responseDTO);
         session.setMaxInactiveInterval(60 * 60); // 1시간동안 세션유지
+        // 로그인 한 회원의 정보 session 담긴지 확인하는 주석
+//        System.out.println("!!!!!!!!!!!!!"+ session.getAttribute(LOGIN_KEY) );
+//        log.info("!!!!!!!!!!!!!"+ session.getAttribute(LOGIN_KEY) );
+//        boolean flag = isLogin(session);
+//        System.out.println("!!!!!!!!!!!!!!!!!flag = " + flag);
     }
 }

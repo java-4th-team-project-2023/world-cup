@@ -12,11 +12,15 @@ import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.pickpick.util.LoginUtil.*;
+import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +34,10 @@ public class ReplyService {
 
         List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId, page)
                 .stream()
-                .map(reply -> new ReplyDetailResponseDTO(reply))
-                .collect(Collectors.toList());
+                .map(ReplyDetailResponseDTO::new)
+                .collect(toList());
         int count = replyMapper.count(gameId);
-
+        log.info("!!!! count :{}",count);
         return ReplyListResponseDTO.builder()
                 .count(count)
                 .pageMaker(new PageMaker(page,count))
@@ -43,9 +47,12 @@ public class ReplyService {
 
     // 댓글 저장 기능
     public ReplyListResponseDTO save(ReplySaveRequestDTO dto, HttpSession session) throws SQLException {
+
         Reply reply = dto.toEntity();
-        // 비회원들은 if문으로 걸러내서 저장하기(null)
-        reply.setAccountId(LoginUtil.getCurrentLoginMemberAccount(session));
+        if (session.getId().equals(LOGIN_KEY)){
+            reply.setAccountId(getCurrentLoginMemberAccount(session));
+        }
+
         boolean flag = replyMapper.save(reply);
         if (!flag) {
             log.warn("reply save fail!");
@@ -65,5 +72,31 @@ public class ReplyService {
 
         return getList(dto.getGameId(),new Page(1,20));
 
+    }
+
+    // 댓글 삭제 서비스
+    @Transactional // 트랜잭션 처리
+    public ReplyListResponseDTO delete(final int replyNo)
+            throws Exception {
+
+        int gameId = replyMapper.findOne(replyNo).getGameId();
+        replyMapper.deleteOne(replyNo);
+
+        return getList(
+                gameId
+                , new Page(1, 10)
+        );
+    }
+
+    // 댓글 좋아요 기능
+    public boolean likeReply(int replyNo,HttpSession session) {
+        if(isLogin(session))return false;
+        String loginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        int likeOne = replyMapper.findLikeOne(replyNo, loginMemberAccount);
+        if (likeOne == 1) return false;
+        replyMapper.addLikeUser(replyNo,loginMemberAccount);
+        replyMapper.likeUpCounting(replyNo);
+        return true;
     }
 }

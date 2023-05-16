@@ -37,9 +37,9 @@ public class AccountController {
 
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
-    public String signUp(SignUpRequestDTO dto){
+    public String signUp(SignUpRequestDTO dto, HttpSession session){
         log.info("/account/sign-up POST ! - {}",dto);
-        boolean flag = accountService.join(dto);
+        boolean flag = accountService.join(dto, session);
         return "redirect:/"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
