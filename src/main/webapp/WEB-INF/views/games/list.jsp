@@ -28,65 +28,69 @@
     </div>
 
     <div class="card-list">
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 1</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 2</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 3</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 4</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 5</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 6</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 7</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 8</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 9</h3>
-        </a>
+
+        <c:forEach items="${gameList}" var="g">
+
+            <a href="https://example.com" class="card" data-game-id="${g.gameId}">
+                <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+                <h3>${g.gameName}</h3>
+            </a>
+
+        </c:forEach>
     </div>
 
-    <div class="page-select">
-        <button class="page-link first">First</button>
-        <button class="page-link prev">Prev</button>
-        <button class="page-link" data-page="1">1</button>
-        <button class="page-link" data-page="2">2</button>
-        <button class="page-link" data-page="3">3</button>
-        <button class="page-link" data-page="4">4</button>
-        <button class="page-link" data-page="5">5</button>
-        <button class="page-link next">Next</button>
-        <button class="page-link last">Last</button>
-    </div>
+
+    <ul class="page-select">
+
+
+        <li class="page-item"><a class="page-link"
+                                 href="/games/list?pageNo=${1}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+        </li>
+
+
+        <c:if test="${maker.prev}">
+            <li class="page-item"><a class="page-link"
+                                     href="/games/list?pageNo=${maker.begin - 1}&type=${s.type}&keyword=${s.keyword}">prev</a>
+            </li>
+        </c:if>
+
+        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}" step="1">
+            <li data-page-num="${i}" class="page-item">
+                <a class="page-link" href="/games/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+            </li>
+        </c:forEach>
+
+        <c:if test="${maker.next}">
+            <li class="page-item"><a class="page-link"
+                                     href="/games/list?pageNo=${maker.end + 1}&type=${s.type}&keyword=${s.keyword}">next</a>
+            </li>
+        </c:if>
+
+        <li class="page-item"><a class="page-link"
+                                 href="/games/list?pageNo=${maker.finalPage}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+        </li>
+
+    </ul>
+
 
     <div class="search-container">
         <form class="search-form">
             <label>
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search..." name="keyword">
             </label>
             <button type="submit">Search</button>
         </form>
     </div>
 </div>
+
+<script>
+
+    // main function
+    (() => {
+
+    })();
+
+</script>
 
 </body>
 </html>

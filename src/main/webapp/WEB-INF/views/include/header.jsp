@@ -20,7 +20,7 @@
                     <li class="login-box"><a href="#" id="Login">LOGIN</a></li>
                 </ul>
                 <input type="checkbox" id="icon">
-                <label for="icon">
+                <label for="icon" class="transition">
                     <!--label은 인라인 스타일-->
                     <span></span>
                     <span></span>
