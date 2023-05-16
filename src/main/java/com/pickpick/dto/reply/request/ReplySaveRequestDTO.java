@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 public class ReplySaveRequestDTO {
 
     @NotNull
-    @Min(2) @Max(8)
     private String writer;
     @NotNull
     private String text;

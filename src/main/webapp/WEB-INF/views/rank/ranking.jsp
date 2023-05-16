@@ -212,7 +212,7 @@
                     <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
                     <div class="rpboard-input-btn-box">
                         <div class="rpboard-input-box"><input type="text" name="text" class="input-box" placeholder="댓글을 입력해주세요..."></input></div>
-                        <div class="rpboard-rpBtn-box"><button class="rpBtn" type="submit"><p>등 록<p></button></div>
+                        <div class="rpboard-rpBtn-box"><button class="rpBtn" type="button"><p>등 록<p></button></div>
                     </div>
                 </section>
 
@@ -305,15 +305,15 @@
 // 댓글 등록 처리 이벤트 함수
 function makeReplyRegisterClickEvent() {
 
-const $regBtn = document.getElementById('replyAddBtn');
+const $regBtn = document.querySelector('.rpBtn');
 
 $regBtn.onclick = e => {
 
-    const $rt = document.getElementById('newReplyText');
-    const $rw = document.getElementById('newReplyWriter');
+    const $rt = document.querySelector('.input-box');
+    const $rw = document.querySelector('.user-nickname');
 
-    // console.log($rt.value);
-    // console.log($rw.value);
+    console.log($rt.value);
+    console.log($rw.value);
 
 
     // 클라이언트 입력값 검증
@@ -335,8 +335,8 @@ $regBtn.onclick = e => {
     // # 서버로 보낼 데이터
     const payload = {
         text: $rt.value,
-        author: $rw.value,
-        bno: bno
+        writer: $rw.value,
+        gameId: 2
     };
 
     // # GET방식을 제외하고 필요한 객체
@@ -358,8 +358,8 @@ $regBtn.onclick = e => {
                 $rw.value = '';
 
                 // 마지막페이지 번호
-                const lastPageNo = document.querySelector('.pagination').dataset.fp;
-                getReplyList(lastPageNo);
+                // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                getReplyList();
             } else {
                 alert('댓글 등록에 실패함!');
             }
