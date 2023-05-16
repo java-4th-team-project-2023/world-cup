@@ -22,10 +22,11 @@
 
 /* 결과창 묶음 box */
 .rank-reply-wrapper .rank-reply-box .rank-box {
+    background: #D6E6F2;
     border-bottom: 2px solid #000;
     width: 50%;
     height: 100%;
-    padding-top: 5%;
+    padding-top: 3.22%;
     position: relative;
 }
 
@@ -42,6 +43,7 @@
     top: 10%;
     left: 0;
     z-index: 1;
+    display: none;
 }
 
 /* 결과창 header::after */
@@ -128,6 +130,42 @@
 /* 결과창 종료 -------------------------------------------------------------------------- */
 
 
+
+/* 우승 이미지 시작 -------------------------------------------------------------------------- */
+.winner-img-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.winner-img-name {
+    border-bottom: 4px solid #fff200;
+    width: 100%;
+    height: 10%;
+    background: #303481;
+    color: #fff200;
+    text-align: center;
+    font-size: 65px;
+}
+.winner-img {
+    background: url('/assets/img/cat.jpg') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    top: 10%;
+    left: 0;
+}
+
+.winner-img:hover {
+    transform: scale(0.98);
+    transition: 0.5s;
+    opacity: 0.9;
+}
+
+/* 우승 이미지 종료 -------------------------------------------------------------------------- */
+
+
+
 /* 댓글게시판 시작 ----------------------------------------------------------------------- */
 /* 댓글게시판 box */
 .reply-box {
@@ -141,9 +179,9 @@
     border-left: 2px solid #000;
     border-bottom: 2px solid #000;
     background: #D6E6F2;
-    width: 50%;
-    height: 6%;
     position: fixed;
+    width: 50%;
+    height: 6.3%;
     z-index: 1;
 }
 
@@ -179,18 +217,25 @@
 /* 댓글게시판 header 리스트 첫번째 버튼 (다시하기) */
 .rpheader .rpheader-list-box a:first-child {
     background: #D6E6F2;
+    line-height: 1.6em;
 }
 
 /* 댓글게시판 header 리스트 두번째 버튼 (목 록) */
 .rpheader .rpheader-list-box a:nth-child(2) {
     background: #D6E6F2;
-    line-height: 1.2em;
+    line-height: 1.4em;
+}
+
+/* 댓글게시판 header 리스트 세번째 버튼 (랭 킹) */
+.rpheader .rpheader-list-box a:nth-child(3) {
+    background: #D6E6F2;
+    line-height: 1.5em;
 }
 
 /* 댓글게시판 header 리스트 세번째 버튼 (공 유) */
-.rpheader .rpheader-list-box a:nth-child(3) {
+.rpheader .rpheader-list-box a:nth-child(4) {
     background: #D6E6F2;
-    line-height: 1.2em;
+    line-height: 1.4em;
 }
 
 /* 댓글게시판 header 리스트 버튼 호버 */
@@ -242,10 +287,10 @@
 .rplist-header .rpcount {
     border-right: 2px solid #000;
     margin-right: 20px;
+    margin-top: 9px;
     width: 20%;
-    height: 50%;
+    height: 60%;
     text-align: center;
-    line-height: 2em;
     font-weight: bold;
 }
 
@@ -254,15 +299,17 @@
     width: 100%;
     height: 100%;
     font-size: 29px;
+    line-height: 1em;
 }
 
 /* 댓글 정렬 기준 */
 .rplist-header .rpsorting {
-    width: 15%;
+    width: 19%;
     height: 100%;
+    margin-top: 9px;
     font-weight: bold;
     cursor: pointer;
-    line-height: 2em;
+    line-height: 1.8em;
     font-size: 29px;
     position: relative;
     display: inline-block;
@@ -283,7 +330,6 @@
     transition: 0.2s;
 }
 
-/* 댓글 정렬 기준 클릭 시 드롭 다운 메뉴 */
 .rplist-header .rpsorting:active {
     transition: 0.1s;
     transform: scale(0.95);
@@ -298,14 +344,14 @@
     width: 25px;
     height: 25px;
     vertical-align: middle;
-    margin-right: 10px;
+    margin: 0 15px;
 }
 
 /* 댓글 정렬 기준 드롭 다운 메뉴 */
 .rpsorting-wrapper {
     border: 1px solid #000;
     background: #D6E6F2;
-    width: 15%;
+    width: 21%;
     height: 61px;
     position: absolute;
     top: 100%;
@@ -368,7 +414,7 @@
     cursor: pointer;
     position: absolute;
     right: 0.5%;
-    top: 23%;
+    top: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -564,8 +610,8 @@
     height: 5%;
     position: absolute;
     right: 2%;
-    bottom: 8%;
-    z-index: 1;
+    bottom: 14%;
+    z-index: 10;
 }
 
 /* 댓글 더보기 버튼 */
@@ -588,6 +634,7 @@
     background: #303481;
     color: #fff200;
     transition: 0.1s;
+    opacity: 0.9;
 }
 
 
@@ -598,116 +645,118 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 댓글 입력창 box */
-.rpboard-reply-replybtn-box .rpboard-reply {
-    width: 85%;
-    height: 100%;
-    margin: auto 0;
-}
-
-/* 댓글 입력창 */
-.rpboard-reply-replybtn-box .rpboard-reply input#Reply {
-    border: 1px solid #000;
-    background: white;
+.rpboard-user-nickname-reply-replyBtn-box {
+    border: 4px solid #303481;
     width: 100%;
-    height: 100%;
-    padding-left: 1%;
-    font-size: 30px;
-}
-
-/* 댓글 입력 버튼 box */
-.rpboard-reply-replybtn-box {
-    border: 1px solid #000;
-    width: 94.8%;
-    height: 10%;
-    display: flex;
+    height: 15%;
     position: absolute;
     bottom: 0;
-    left: 2.7%;
+    right: 0;
+    z-index: 1;
 }
 
-/* 댓글 입력 버튼 */
-.rpboard-reply-replybtn-box .replybtn {
-    background: #D6E6F2;
-    width: 15%;
+.user-nickname {
+    /* border-bottom: 4px solid #fff200; */
+    background: #303481;
+    color: #fff200;
+    width: 100%;
+    height: 20%;
+    padding-left: 1%;
+    text-align: left;
+    font-size: 25px;
+    line-height: 1em;
+}
+
+.rpboard-input-btn-box {
+    width: 100%;
+
     height: 100%;
-    cursor: pointer;
-    font-size: 30px;
-    display: inline-block;
+    display: flex;
     position: relative;
 }
 
-/* 댓글 입력 버튼 */
-.rpboard-reply-replybtn-box .replybtn p {
-    font-weight: bold;
+.rpboard-input-box {
+    width: 85%;
+    height: 80%;
+}
+
+.input-box {
     width: 100%;
     height: 100%;
-    line-height: 3.5em;
+    font-size: 40px;
+    padding-left: 1%;
 }
 
-/* 댓글 입력 버튼 호버 */
-.rpboard-reply-replybtn-box .replybtn p:hover {
+.rpboard-rpBtn-box {
+    width: 15%;
+    height: 80%;
+}
+
+.rpBtn {
+    width: 100%;
+    height: 100%;
+}
+
+.rpBtn p{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 4em;
+    cursor: pointer;
+    font-weight: bold;
+}
+.rpBtn p:hover {
     background: #303481;
     color: #fff200;
-    transition: 0.2s;
+    transition: 0.1s;
+    opacity: 0.9;
 }
 
-/* 댓글 입력 버튼 호버 클릭 */
-.rpboard-reply-replybtn-box .replybtn p:active {
-    transform: scale(0.95);
-    transition: 0.2s;
+.rpBtn p:active {
+    transform: scale(0.97);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 댓글게시판 종료 ----------------------------------------------------------------------- */

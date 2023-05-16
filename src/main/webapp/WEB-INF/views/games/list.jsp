@@ -38,6 +38,10 @@
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
+                <div class="button-wrapper">
+                    <button class="game-modify-btn">수정하기</button>
+                    <button class="game-ranking-btn">랭킹보기</button>
+                </div>
             </a>
 
         </c:forEach>
@@ -80,7 +84,7 @@
     <div class="search-container">
         <form class="search-form">
             <label>
-                <input type="text" placeholder="Search..." name="keyword">
+                <input type="text" placeholder="Search..." name="keyword" id="search_keyword">
             </label>
             <button>Search</button>
         </form>
@@ -91,9 +95,8 @@
 
     // main function
     (() => {
-        // 검색 버튼 이벤트
-
-
+        // 검색 버튼 이벤트 등록
+        searchBtnEvent();
     })();
 
     function searchBtnEvent() {
@@ -102,8 +105,8 @@
         $searchBtn.onclick = e => {
             e.preventDefault();
             window.location.href = "/games/list?pageNo=" + ${maker.page.pageNo}
-                +"&amount=" + ${maker.page.amount}
-                +"&keyword=" + e.closest('.search-form input[name="keyword"]').value;
+                +"&amount=9"
+                +"&keyword=" + document.getElementById('search_keyword').value;
         };
     }
 </script>

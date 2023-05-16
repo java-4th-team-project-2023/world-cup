@@ -10,7 +10,7 @@ public class Page {
     private int pageNo;
     private int amount;
 
-    public Page(){
+    public Page() {
         this.pageNo = 1;
         this.amount = 20;
     }

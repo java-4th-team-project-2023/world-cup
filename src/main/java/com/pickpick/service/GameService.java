@@ -8,12 +8,13 @@ import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
 import com.pickpick.repository.GameMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Service @Slf4j
 @RequiredArgsConstructor
 public class GameService {
 
@@ -54,14 +55,28 @@ public class GameService {
     }
 
     // 게임 등록
-    public boolean insertGame(GameInsertRequestDTO dto) {
+    public int insertGame(GameInsertRequestDTO dto) {
         return mapper.insertGame(Game.builder()
                         .gameName(dto.getGameName())
                         .accountId(dto.getAccountId())
                 .build());
     }
 
+    // 게임 숫자 조회
     public int countGame() {
         return mapper.countGame();
     }
+
+    // 계정 id로 게임 조회
+     public List<GameListResponseDTO> findGameByAccountId(String accountId, Search page) {
+         return mapper.findGameByAccountId(accountId, page).stream()
+                 .map(g -> new GameListResponseDTO(g, mapper.randomPlayerImage(g.getGameId())))
+                 .collect(Collectors.toList());
+     }
+
+     // 게임 id로 게임 조회
+    public Game findGameById(int gameId) {
+        return mapper.findGameById(gameId);
+    }
+
 }

@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String home(Model model, Search page) {
+    public String home() {
 
         log.info("/ GET!");
-
-        model.addAttribute("page", page);
 
         return "redirect:/games/list";
     }
