@@ -12,8 +12,8 @@
             <!--상단 BAR-MENU-->
             <nav class="gnb">
                 <ul class="header-menu-box">
-                    <li class="header-menu-list"><a href="#">HOME</a></li>
-                    <li class="header-menu-list"><a href="#">월드컵 만들기</a></li>
+                    <li class="header-menu-list"><a href="/">HOME</a></li>
+                    <li class="header-menu-list"><a href="/games/make">월드컵 만들기</a></li>
                     <!-- <c:if test="${asdf}">  -->
                     <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
                     <!-- </c:if> -->

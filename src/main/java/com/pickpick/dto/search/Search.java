@@ -10,9 +10,14 @@ public class Search extends Page {
     // 검색 키워드
     private String keyword;
 
-    public Search(int pageNo, int amount, String keyword) {
-        super(pageNo, amount);
-        this.keyword = keyword;
+    public Search() {
+        keyword = "";
     }
 
+    public void setKeyword(String keyword) {
+        if (keyword == null) {
+            keyword = "";
+        }
+        this.keyword = keyword;
+    }
 }

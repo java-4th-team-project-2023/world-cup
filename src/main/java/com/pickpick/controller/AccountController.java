@@ -40,7 +40,7 @@ public class AccountController {
     public String signUp(SignUpRequestDTO dto){
         log.info("/account/sign-up POST ! - {}",dto);
         boolean flag = accountService.join(dto);
-        return "redirect:/account/login"; // 리스트로 보낼지 어디로 보낼지 상의
+        return "redirect:/"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
 //     아이디, 이메일 중복검사
@@ -54,11 +54,11 @@ public class AccountController {
     }
 
     // 로그인 양식 요청
-//    @GetMapping("/sign-in")
-//    public String signIn(){
-//        log.info("/account/sign-in GET - forwarding to jsp");
-//        return "account/sign-in";
-//    }
+    @GetMapping("/sign-in")
+    public String signIn(){
+        log.info("/account/sign-in GET - forwarding to jsp");
+        return "account/sign-in";
+    }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDTO dto
@@ -74,7 +74,7 @@ public class AccountController {
 
             // 세션에 로그인 정보 저장
             accountService.maintainLoginState(request.getSession(),dto.getAccountId());
-            return "redirect:/games/reply";
+            return "redirect:/games/list";
         }
         // 1회용으로 쓰고 버릴 데이터
         attributes.addFlashAttribute("msg",result);
