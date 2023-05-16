@@ -1,6 +1,7 @@
 package com.pickpick.service;
 
 import com.pickpick.dto.game.GameInsertRequestDTO;
+import com.pickpick.dto.game.GameListResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.game.PlayCountUpdateRequestDTO;
 import com.pickpick.dto.search.Search;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +20,11 @@ public class GameService {
     private final GameMapper mapper;
 
     // 전체 게임 목록 조회
-    public List<Game> findAll(Search page) {
-        return mapper.findAll(page);
+    public List<GameListResponseDTO> findAll(Search page) {
+
+        return mapper.findAll(page).stream()
+                .map(g -> new GameListResponseDTO(g, mapper.randomPlayerImage(g.getGameId())))
+                .collect(Collectors.toList());
     }
 
     // 게임 플레이 수 업데이트
