@@ -8,7 +8,7 @@
         SELECT *
         FROM game_tbl
         <if test="keyword != ''">
-            WHERE game_name LIKE ('%'|| #{keyword} || '%')
+            WHERE game_name LIKE CONCAT('%', #{keyword}, '%')
         </if>
         LIMIT #{pageStart}, #{amount}
     </select>

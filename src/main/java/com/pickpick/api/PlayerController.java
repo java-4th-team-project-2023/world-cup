@@ -135,9 +135,12 @@ public class PlayerController {
     }
 
     // 특정 게임의 선수 목록 조회
-    @GetMapping("/{gameId}")
+    @GetMapping("/{gameId}/pageNo/{pageNo}/amount/{amount}")
     public ResponseEntity<?> findAll(@PathVariable int gameId,
-                                     @RequestBody Search page) {
+                                     @PathVariable int pageNo,
+                                     @PathVariable int amount) {
+
+        Search page = new Search(pageNo, amount, "");
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 
