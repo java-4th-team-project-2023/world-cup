@@ -17,22 +17,26 @@
 
 <div id="main-wrapper">
 
-    <div class="page-amount-select">
-        <label for="page-size">Items per page:</label>
-        <select name="page-size" id="page-size">
-            <option value="9">9</option>
-            <option value="15">15</option>
-            <option value="21">21</option>
-            <option value="27">27</option>
-        </select>
-    </div>
+<%--    <div class="page-amount-select">--%>
+<%--        <label for="page-size">Items per page:</label>--%>
+<%--        <select name="page-size" id="page-size">--%>
+<%--            <option value="9">9</option>--%>
+<%--            <option value="15">15</option>--%>
+<%--            <option value="21">21</option>--%>
+<%--            <option value="27">27</option>--%>
+<%--        </select>--%>
+<%--    </div>--%>
 
     <div class="card-list">
 
         <c:forEach items="${gameList}" var="g">
 
             <a href="https://example.com" class="card" data-game-id="${g.gameId}">
-                <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
+                <div class="img-box">
+                    <c:forEach items="${g.thumbnails}" var="t">
+                        <img src="${t}" alt="thumbnails">
+                    </c:forEach>
+                </div>
                 <h3>${g.gameName}</h3>
             </a>
 
@@ -78,7 +82,7 @@
             <label>
                 <input type="text" placeholder="Search..." name="keyword">
             </label>
-            <button type="submit">Search</button>
+            <button>Search</button>
         </form>
     </div>
 </div>
@@ -87,9 +91,21 @@
 
     // main function
     (() => {
+        // 검색 버튼 이벤트
+
 
     })();
 
+    function searchBtnEvent() {
+        const $searchBtn = document.querySelector('.search-form button');
+
+        $searchBtn.onclick = e => {
+            e.preventDefault();
+            window.location.href = "/games/list?pageNo=" + ${maker.page.pageNo}
+                +"&amount=" + ${maker.page.amount}
+                +"&keyword=" + e.closest('.search-form input[name="keyword"]').value;
+        };
+    }
 </script>
 
 </body>

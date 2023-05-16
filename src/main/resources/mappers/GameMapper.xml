@@ -8,7 +8,7 @@
         SELECT *
         FROM game_tbl
         <if test="keyword != ''">
-            WHERE game_name=#{keyword}
+            WHERE game_name LIKE ('%'|| #{keyword} || '%')
         </if>
         LIMIT #{pageStart}, #{amount}
     </select>
@@ -44,5 +44,13 @@
     <select id="countGame" resultType="int">
         select count(*)
         from game_tbl
+    </select>
+
+    <select id="randomPlayerImage" resultType="String">
+        select player_img_path
+        from player_tbl
+        where game_id=#{gameId}
+        order by rand()
+        limit 0, 2
     </select>
 </mapper>
