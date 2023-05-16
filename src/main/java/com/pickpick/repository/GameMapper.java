@@ -26,4 +26,6 @@ public interface GameMapper {
 
     // 게임 등록
     boolean insertGame(Game game);
+
+    int countGame();
 }

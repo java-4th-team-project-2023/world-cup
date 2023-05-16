@@ -55,4 +55,8 @@ public class GameService {
                         .accountId(dto.getAccountId())
                 .build());
     }
+
+    public int countGame() {
+        return mapper.countGame();
+    }
 }

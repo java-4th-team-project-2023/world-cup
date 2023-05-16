@@ -52,11 +52,16 @@
 }
 
 .page-select {
-    margin-top: 20px;
+    width: fit-content;
+    margin: 20px auto 0;
+
     text-align: center;
+    display: flex;
+
+    text-decoration: none;
 }
 
-.page-select button {
+.page-select a {
     margin-right: 10px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -66,13 +71,15 @@
     transition: background-color 0.2s ease;
 
     font-size: 1.5em;
+
+    color: black;
 }
 
-.page-select button:hover {
+.page-select a:hover {
     background-color: #eee;
 }
 
-.page-select button.active {
+.page-select a.active {
     background-color: #333;
     color: #fff;
 }

@@ -40,4 +40,9 @@
         INSERT INTO game_tbl (game_name, account_id)
         VALUES (#{gameName}, #{accountId})
     </insert>
+
+    <select id="countGame" resultType="int">
+        select count(*)
+        from game_tbl
+    </select>
 </mapper>

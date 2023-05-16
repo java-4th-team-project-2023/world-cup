@@ -1,5 +1,6 @@
 package com.pickpick.controller;
 
+import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
@@ -28,7 +29,9 @@ public class GameController {
     public String list(Model model,
                        Search page) {
 
+        log.info("/games/list GET! page: {}", page);
         model.addAttribute("gameList", gameService.findAll(page));
+        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
 
         return "games/list";
     }
