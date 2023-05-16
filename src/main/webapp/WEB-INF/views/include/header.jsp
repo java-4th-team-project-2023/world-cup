@@ -17,7 +17,7 @@
                     <!-- <c:if test="${asdf}">  -->
                     <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
                     <!-- </c:if> -->
-                    <div class="login-box"><a href="#" id="Login">LOGIN</a></div>
+                    <li class="login-box"><a href="#" id="Login">LOGIN</a></li>
                 </ul>
                 <input type="checkbox" id="icon">
                 <label for="icon">
