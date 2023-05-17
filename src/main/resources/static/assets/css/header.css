@@ -317,4 +317,5 @@ input#icon:checked+label>span:nth-child(3) {
 /* 메인 컨텐츠 아래로 내리기 */
 #main-wrapper {
     padding-top: 100px;
+    height: fit-content;
 }
