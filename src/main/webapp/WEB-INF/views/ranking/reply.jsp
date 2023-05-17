@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -8,80 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <%@ include file="../include/static-head.jsp" %>
+
     <link rel="stylesheet" href="/assets/css/reply.css">
-    <script src="/assets/js/burgerbtn.js" defer></script>
-    <script src="/assets/js/topbtn.js" defer></script>
-    <!-- <script src="/assets/js/bottombtn.js" defer></script> -->
-    <script src="/assets/js/search.js" defer></script>
-    <!-- <script src="/assets/js/localdate.js" defer></script> -->
+
 </head>
 <body>
 
-    <!--header 시작 -->
-    <header>
-        <!-- header -->
-        <div class="header">
-            <!-- header 묶음 box -->
-            <div class="header-container">
-                <!-- header-logo -->
-                <h1 class="logo">
-                    <!-- header-logo -->
-                    <a href="#" id="Logo"><i class="far fa-hand-rock"></i></a>
-                </h1>
+<%@ include file="../include/header.jsp" %>
 
-                <!-- 상단 BAR-MENU -->
-                <nav class="gnb">
-                    <!-- 상단 BAR-MENU box -->
-                    <ul class="header-menu-box">
-                        <!-- 상단 BAR-MENU 목록 -->
-                        <li class="header-menu-list"><a href="#">HOME</a></li>
-                        <li class="header-menu-list"><a href="#">월드컵 만들기</a></li>
+<!--  -->
 
-                        <!-- <c:if test="${}">  (반복처리) -->
-                        <li class="header-menu-list"><a href="#">내가 만든 월드컵</a></li>
-                        <div class="login-box"><a href="/views/jsp/login.html" id="Login">LOGIN</a></div>
-                        <!-- </c:if> -->
+<div id="main-wrapper">
 
-                    </ul> <!-- end header-menu-box -->
-
-                    <!-- 햄버거 버튼 시작 -->
-                    <input type="checkbox" id="icon">
-                    <!-- 햄버거 버튼 -->
-                    <label for="icon">
-                        <span></span> <!-- 햄버거 버튼 첫번째 막대기 -->
-                        <span></span> <!-- 햄버거 버튼 두번째 막대기 -->
-                        <span></span> <!-- 햄버거 버튼 세번째 막대기 -->
-                    </label>
-
-                    <!-- 햄버거 버튼 클릭시 나오는 메뉴창 -->
-                    <nav class="inr-menu">
-                        <!-- 햄버거 버튼 클릭시 나오는 메뉴창 리스트 box-->
-                        <ul class="inr-menu-list-box">
-                            <!-- 햄버거 버튼 클릭시 나오는 메뉴창 리스트 -->
-                            <li class="inr-menu-list"><a href="#">내 정보</a></li>
-                            <li class="inr-menu-list"><a href="#">menu2</a></li>
-                            <li class="inr-menu-list"><a href="#">menu3</a></li>
-                            <li class="inr-menu-list"><a href="#">menu4</a></li>
-                            <li class="inr-menu-list"><a href="#">menu5</a></li>
-                        </ul> <!-- end inr-menu-list-box -->
-                    </nav> <!-- end inr-menu -->
-            </div> <!-- end gnb -->
-        </div> <!-- end header-container -->
-    </header> <!-- header 종료 -->
-
-    <!-- 올라가기 버튼 -->
-    <button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-up-circle-fill"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
-        </svg></button>
-
-    <!--header 끝 -->
-
-    <!--  -->
-
-    <!-- reply container 시작 -->
     <section class="rank-reply-wrapper">
 
         <!-- 결과창 + 댓글게시판 box -->
@@ -105,9 +44,15 @@
                         <input type="text" class="search-text" id="Search-Text" placeholder="Search...">
                         <!-- 검색창 버튼 -->
                         <span><button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
-                                    alt="search" id="Search"></button></span>
+                                                                                      alt="search" id="Search"></button></span>
                     </div> <!-- end search-box -->
                 </div> <!-- end select-search-box -->
+
+                <div class="winner-img-box">
+                    <div class="winner-img-name">OOO 월드컵 OOO강 우승</div>
+                    <div class="winner-img"></div>
+                </div>
+
             </section> <!-- end rank-box -->
 
             <!-- 댓글 게시판 box -->
@@ -120,8 +65,11 @@
                         <a href="#">
                             <li class="rpheader-list">다시하기</li>
                         </a>
-                        <a href="#">
+                        <a href="/views/include/header.html">
                             <li class="rpheader-list">목 록</li>
+                        </a>
+                        <a href="/views/jsp/ranking.html">
+                            <li class="rpheader-list">랭 킹</li>
                         </a>
                         <a href="#">
                             <li class="rpheader-list">공 유</li>
@@ -142,8 +90,6 @@
                                 <div class="bot-btns">
                                     <p class="moveBottomBtn">댓글 쓰러가기</p>
                                 </div>
-
-                                <!-- <button type="button" class="rpwriter"></button> -->
 
                                 <!-- 댓글 총 갯수 -->
                                 <div class="rpcount">
@@ -173,6 +119,7 @@
                                 <!-- 댓글 main -->
                                 <div class="rpboard-viewmain">
 
+
                                     <!-- 반복 -->
                                     <!-- 댓글 박스 시작 -->
                                     <div class="rpboard-rpbox">
@@ -197,7 +144,7 @@
                                     </div> <!-- end rpboard-rpbox -->
                                     <!-- 댓글 박스 종료 -->
 
-                                    
+
                                     <!-- 댓글 더보기 버튼 -->
                                     <div class="rpboard-more-view-btn">
                                         <p>더 보기</p>
@@ -209,69 +156,58 @@
                             </section> <!-- end rpboard-viewmain-box -->
 
 
-
-
-
-
-
-
-
-
-
-
-
                         </div> <!-- end rpboard-list -->
                     </div> <!-- end rpboard-list-box -->
                 </section> <!-- end rpboard-box -->
-                
 
-                <!-- 댓글 입력창 + 댓글 입력 버튼 -->
-                <section class="rpboard-reply-replybtn-box">
-                    <!-- 댓글 입력창 -->
-                    <div class="rpboard-reply">
-                        <input type="text" name="reply" id="Reply" placeholder="댓글을 입력해주세요...">
-                    </div> <!-- end rpboard-reply -->
-                    <!-- 댓글 입력 버튼 -->
-                    <button type="button" class="replybtn">
-                        <p>등 록</p>
-                    </button> <!-- end replybtn -->
-                </section> <!-- rppboard-reply-replybtn-box -->
+                <section class="rpboard-user-nickname-reply-replyBtn-box">
+                    <div class="user-nickname">핵인싸 개간지 조경훈</div>
+                    <div class="rpboard-input-btn-box">
+                        <div class="rpboard-input-box"><input type="text" class="input-box"
+                                                              placeholder="댓글을 입력해주세요..."></input></div>
+                        <div class="rpboard-rpBtn-box">
+                            <button class="rpBtn"><p>등 록</p></button>
+                        </div>
+                    </div>
+                </section>
 
-                
 
             </section> <!-- end reply-box -->
 
-            
+
+        </div>
     </section>
     <!-- reply container 끝 -->
+</div>
 
-    <script>
-        // 해당 게임 아이디 (진호형꺼에서 받아오기)
-        const gameId = '${game.gameId}';
+<script>
+    // 해당 게임 아이디 (진호형꺼에서 받아오기)
+    const gameId = '${game.gameId}';
 
-         // 댓글 요청 URI
-         const URL = '/api/replies';
+    // 댓글 요청 URI
+    const URL = '/api/replies';
 
 
-        // 댓글 목록 불러오기 함수 
-        function getReplyList(pageNo=1) {
+    // 댓글 목록 불러오기 함수
+    function getReplyList(pageNo = 1) {
 
-    fetch(`\${URL}/3/page/\${pageNo}`) // ${gameId}
-        .then(res => res.json())
-        .then(responseResult => {
-        console.log(responseResult);
-        // const 
-        // renderReplyList(responseResult);
-    });
-}
+        fetch(`\${URL}/3/page/\${pageNo}`) // ${gameId}
+            .then(res => res.json())
+            .then(responseResult => {
+                console.log(responseResult);
+                // const
+                // renderReplyList(responseResult);
+            });
+    }
+
     //========= 메인 실행부 =========//
-    (function() {
+    (function () {
 
 // 첫 댓글 페이지 불러오기
-getReplyList();
+        getReplyList();
     })();
 
-    </script>
+</script>
 
 </body>
 </html>

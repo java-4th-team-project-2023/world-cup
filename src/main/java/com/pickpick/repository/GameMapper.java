@@ -26,7 +26,7 @@ public interface GameMapper {
     int countPlayer(int gameId);
 
     // 게임 등록
-    int insertGame(Game game);
+    boolean insertGame(Game game);
 
     int countGame();
 
