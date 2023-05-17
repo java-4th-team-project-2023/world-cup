@@ -93,7 +93,7 @@
 
                                 <!-- 댓글 총 갯수 -->
                                 <div class="rpcount">
-                                    <p>댓글 : n개</p>
+                                    <p>총 댓글 : 0 개</p>
                                 </div> <!-- end rpcount -->
 
                                 <!-- 댓글 정렬 기준 -->
@@ -146,13 +146,12 @@
 
 
                                     <!-- 댓글 더보기 버튼 -->
-                                    <div class="rpboard-more-view-btn">
-                                        <p>더 보기</p>
-                                    </div>
 
 
                                 </div> <!-- end rpboard-viewmain -->
-
+                                <div class="rpboard-more-view-btn">
+                                    <p>더 보기</p>
+                                </div>
                             </section> <!-- end rpboard-viewmain-box -->
 
 
@@ -160,13 +159,15 @@
                     </div> <!-- end rpboard-list-box -->
                 </section> <!-- end rpboard-box -->
 
+                <!-- 댓글 입력창 + 댓글 입력 버튼 -->
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
-                    <div class="user-nickname">핵인싸 개간지 조경훈</div>
+                    <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
                     <div class="rpboard-input-btn-box">
-                        <div class="rpboard-input-box"><input type="text" class="input-box"
+                        <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                                               placeholder="댓글을 입력해주세요..."></input></div>
                         <div class="rpboard-rpBtn-box">
-                            <button class="rpBtn"><p>등 록</p></button>
+                            <button class="rpBtn" type="button"><p>등 록
+                                <p></button>
                         </div>
                     </div>
                 </section>
@@ -187,17 +188,138 @@
     // 댓글 요청 URI
     const URL = '/api/replies';
 
+    // 댓글 목록 렌더링 함수
+    function renderReplyList({
+                                 count, pageMaker, replyList
+                             }) {
+
+        // 총 댓글 수 렌더링
+        document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
+
+        // 댓글 내용 렌더링
+        // 각 댓글 하나의 태그
+        let tag = '';
+
+        if (replyList === null || replyList.length === 0) {
+            document.querySelector('.rpboard-viewmain-box').textContent = "댓글이 아직 없습니다!";
+
+        } else {
+            for (let rep of replyList) {
+
+                const {gameId, replyNo, writer, text, date} = rep;
+
+                // document.querySelector('.rpboard-nickname').textContent = writer;
+                // document.querySelector('.rpboard-replies').textContent = text;
+                // document.querySelector('.rpboard-nickname-local-date-box').textContent = date;
+
+                tag += "<div class='rpboard-rpbox'>" +
+                    "<div class='rpboard-nickname-local-date-box' data-replyNo='" + replyNo + "'>" +
+                    "<div class='rpboard-nickname'>" + writer + "</div>" +
+                    "<span class='rpboard-local-date-box'>" + date + "</span>" +
+                    "</div>" +
+                    "<div class='rpboard-replies-box'>" +
+                    "<div class='rpboard-replies'>" + text + "</div>" +
+                    "</div>" +
+                    "<div class='rpboard-like-report-box'>" +
+                    "<div class='like' id='Like'>좋아요</div>" +
+                    "<div class='report' id='Report'>신고</div>" +
+                    "</div>" +
+                    "</div>";
+
+
+                // if (currentAccount === rep.account || auth === 'ADMIN') {
+                //     tag +=
+                //         "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' data-bs-toggle='modal' data-bs-target='#replyModifyModal'>수정</a>&nbsp;" +
+                //         "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>";
+                // // }
+                // tag += "       </div>" +
+                //     "    </div>" +
+                //     " </div>";
+            }
+        }
+
+
+        // 생성된 댓글 tag 렌더링
+        document.querySelector('.rpboard-viewmain').innerHTML = tag;
+
+        // 페이지 렌더링
+        // renderPage(pageInfo);
+
+    }
+
 
     // 댓글 목록 불러오기 함수
     function getReplyList(pageNo = 1) {
-
-        fetch(`\${URL}/3/page/\${pageNo}`) // ${gameId}
+        fetch(`\${URL}/2/page/\${pageNo}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
                 console.log(responseResult);
-                // const
-                // renderReplyList(responseResult);
+                renderReplyList(responseResult);
             });
+
+
+    }
+
+    // 댓글 등록 처리 이벤트 함수
+    function makeReplyRegisterClickEvent() {
+
+        const $regBtn = document.querySelector('.rpBtn');
+
+        $regBtn.onclick = e => {
+
+            const $rt = document.querySelector('.input-box');
+            const $rw = document.querySelector('.user-nickname');
+
+            console.log($rt.value);
+            console.log($rw.value);
+
+
+            // 클라이언트 입력값 검증
+            if ($rt.value.trim() === '') {
+                alert('댓글 내용은 필수입니다!');
+                return;
+            } else if ($rw.value.trim() === '') {
+                alert('댓글 작성자 이름은 필수입니다!');
+                return;
+            } else if ($rw.value.trim().length < 2 || $rw.value.trim().length > 8) {
+                alert('댓글 작성자 이름은 2~8자 사이로 작성하세요!');
+                return;
+            }
+
+
+            // # 서버로 보낼 데이터
+            const payload = {
+                text: $rt.value,
+                writer: $rw.value,
+                gameId: 2
+            };
+
+            // # GET방식을 제외하고 필요한 객체
+            const requestInfo = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+
+            // # 서버에 POST요청 보내기
+            fetch(URL, requestInfo)
+                .then(res => {
+                    if (res.status === 200) {
+                        alert('댓글이 정상 등록됨!');
+                        // 입력창 비우기
+                        $rt.value = '';
+                        $rw.value = '';
+
+                        // 마지막페이지 번호
+                        // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                        getReplyList();
+                    } else {
+                        alert('댓글 등록에 실패함!');
+                    }
+                });
+        };
     }
 
     //========= 메인 실행부 =========//
@@ -205,6 +327,10 @@
 
 // 첫 댓글 페이지 불러오기
         getReplyList();
+        getReplyList();
+
+// 댓글 등록 이벤트 등록
+        makeReplyRegisterClickEvent();
     })();
 
 </script>

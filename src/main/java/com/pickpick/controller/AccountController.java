@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static com.pickpick.service.LoginResult.SUCCESS;
@@ -37,10 +38,11 @@ public class AccountController {
 
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
-    public String signUp(SignUpRequestDTO dto, HttpSession session){
+    public String signUp(SignUpRequestDTO dto
+                        , HttpSession session){
         log.info("/account/sign-up POST ! - {}",dto);
         boolean flag = accountService.join(dto, session);
-        return "redirect:/"; // 리스트로 보낼지 어디로 보낼지 상의
+        return "redirect:/games/list"; // 리스트로 보낼지 어디로 보낼지 상의
     }
 
 //     아이디, 이메일 중복검사
