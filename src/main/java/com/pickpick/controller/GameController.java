@@ -1,19 +1,27 @@
 package com.pickpick.controller;
 
+import com.pickpick.dto.account.response.LoginUserResponseDTO;
+import com.pickpick.dto.game.GameInsertRequestDTO;
+import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
+import com.pickpick.service.PlayerService;
+import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.juli.logging.Log;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,13 +30,16 @@ import java.util.List;
 public class GameController {
 
     private final GameService gameService;
+    private final PlayerService playerService;
 
     // 게임 목록 페이지
     @GetMapping("/list")
     public String list(Model model,
                        Search page) {
 
+        log.info("/games/list GET! page: {}", page);
         model.addAttribute("gameList", gameService.findAll(page));
+        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
 
         return "games/list";
     }
@@ -41,15 +52,69 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-        return "/games/make";
+        return "games/make";
+    }
+
+    // 게임 만들기 요청
+    @PostMapping("/make")
+    public String makeGame(String gameName, HttpSession session) {
+
+        log.info("/games/make POST! gameName: {}", gameName);
+
+        LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
+
+        if (login == null) {
+            return "redirect:/account/sign-in";
+        }
+
+        int gameId = gameService.insertGame(GameInsertRequestDTO.builder()
+                .gameName(gameName)
+                .accountId(login.getAccountId())
+                .build());
+
+        return "redirect:/games/modify?gameId=" + gameId;
     }
 
     // 랭킹 페이지 이동
     @GetMapping("/reply")
-    public String makeRanking(HttpSession session){
+    public String makeRanking(HttpSession session) {
         System.out.println("들옴");
-        log.info(" session: {}",session.getAttribute("login"));
+        log.info(" session: {}", session.getAttribute("login"));
         return "jsp/reply";
+    }
+
+    // 게임 수정 페이지 이동
+    @GetMapping("/modify")
+    public String modifyGame(Integer gameId, Model model, HttpSession session) {
+
+        log.info("/games/modify GET! gameId : {} ", gameId);
+
+        if (session.getAttribute(LoginUtil.LOGIN_KEY) == null) {
+            return "redirect:/account/sign-in";
+        }
+
+        if (!Objects.equals(LoginUtil.getCurrentLoginMemberAccount(session), gameService.findGameById(gameId).getAccountId())) {
+            return "redirect:/games/list";
+        }
+
+        model.addAttribute("gameId", gameId);
+
+        return "games/modify";
+    }
+
+    // 내가 만든 월드컵 목록 이동
+    @GetMapping("/my-world-cup")
+    public String myWorldCup(Model model, Search page, HttpSession session) {
+
+        if (session.getAttribute("login") == null) {
+            return "redirect:/account/sign-in";
+        }
+
+        log.info("/games/my-world-cup GET! page: {}", page);
+        model.addAttribute("gameList", gameService.findGameByAccountId(LoginUtil.getCurrentLoginMemberAccount(session), page));
+        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
+
+        return "games/list";
     }
 
 }

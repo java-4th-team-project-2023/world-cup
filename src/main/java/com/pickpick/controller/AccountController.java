@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.net.http.HttpResponse;
-
 import static com.pickpick.service.LoginResult.SUCCESS;
 
 @Controller
@@ -30,12 +28,13 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    // 로그인 양식 요청
-    @GetMapping("/sign-in")
-    public String signIn() {
-        log.info("/account/sign-in GET - forwarding to jsp");
-        return "account/login";
-    }
+    // 회원가입 요청
+//    @GetMapping("/sign-up")
+//    public String signUp(){
+//        log.info("/account/sign-up GET - forwarding to jsp");
+//
+//        return "account/sign-up";
+//    }
 
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
@@ -56,13 +55,18 @@ public class AccountController {
         return ResponseEntity.ok().body(flag);
     }
 
+    // 로그인 양식 요청
+    @GetMapping("/sign-in")
+    public String signIn(){
+        log.info("/account/sign-in GET - forwarding to jsp");
+        return "account/sign-in";
+    }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDTO dto
                          // 리다이렉션시 2번째 응답에 데이터를 보내기 위함
             , RedirectAttributes attributes
-            , HttpServletRequest request
-            , HttpServletResponse response){
+            , HttpServletRequest request){
         log.info("/account/sign-in POST ! - {}",dto);
 
         LoginResult result = accountService.authenticate(dto);
