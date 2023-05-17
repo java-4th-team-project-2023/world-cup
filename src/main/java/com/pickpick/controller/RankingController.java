@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RankingController {
 
     @GetMapping("/ranking")
-    public String replyPage() {
+    public String replyPage(){
         log.info("하이루 랭킹페이지 들어옴");
         return "rank/ranking";
     }
