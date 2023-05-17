@@ -80,7 +80,7 @@ public class GameController {
     public String makeRanking(HttpSession session) {
         System.out.println("들옴");
         log.info(" session: {}", session.getAttribute("login"));
-        return "jsp/reply";
+        return "rank/ranking";
     }
 
     // 게임 수정 페이지 이동

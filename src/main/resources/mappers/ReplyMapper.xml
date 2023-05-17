@@ -18,14 +18,14 @@
 
     <select id="findOne" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id
         FROM tbl_reply
         WHERE reply_no = #{replyNo}
     </select>
 
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no

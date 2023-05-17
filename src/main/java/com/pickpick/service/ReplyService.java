@@ -52,7 +52,7 @@ public class ReplyService {
         if (LoginUtil.isLogin(session)){
             reply.setAccountId(getCurrentLoginMemberAccount(session));
         }
-//        log.info("!!!!!login: {}",reply.getAccountId());
+        log.info("!!!!!gameId : {}",reply.getGameId());
         boolean flag = replyMapper.save(reply);
         if (!flag) {
             log.warn("reply save fail!");

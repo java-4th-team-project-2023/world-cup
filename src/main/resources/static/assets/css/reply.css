@@ -1,3 +1,8 @@
+@import url('/assets/css/header.css');
+
+* {
+    box-sizing: border-box;
+}
 
 /* 결과창 시작 -------------------------------------------------------------------------- */
 /* 결과창 + 댓글게시판 */
@@ -132,6 +137,7 @@
     height: 100%;
     position: relative;
 }
+
 .winner-img-name {
     border-bottom: 4px solid #fff200;
     width: 100%;
@@ -141,8 +147,9 @@
     text-align: center;
     font-size: 65px;
 }
+
 .winner-img {
-    background: url('/assets/img/cat.jpg') no-repeat;
+    background: url('/assets/img/Bomb.png') no-repeat;
     background-size: 100%;
     width: 100%;
     height: 90%;
@@ -156,6 +163,7 @@
     transition: 0.5s;
     opacity: 0.9;
 }
+
 
 /* 우승 이미지 종료 -------------------------------------------------------------------------- */
 
@@ -289,12 +297,25 @@
     font-weight: bold;
 }
 
+
 /* 댓글 총 갯수 */
 .rplist-header .rpcount p {
     width: 100%;
     height: 100%;
-    font-size: 29px;
+    font-size: 28px;
     line-height: 1em;
+}
+
+.rplist-header .rpcount p::before {
+    content: "";
+    display: inline-block;
+    background: url("../img/Reply.png") no-repeat;
+    border-radius: 50%;
+    background-size: 85%;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 10px; 
 }
 
 /* 댓글 정렬 기준 */
@@ -325,7 +346,6 @@
     transition: 0.2s;
 }
 
-/* 댓글 정렬 기준 클릭 시 드롭 다운 메뉴 */
 .rplist-header .rpsorting:active {
     transition: 0.1s;
     transform: scale(0.95);
@@ -467,17 +487,24 @@
     border-radius: 5px;
     background: #fff;
     width: 100%;
-    height: 22%;
+    height: 15%;
     padding: 1%;
     font-size: 25px;
     margin-bottom: 10px;
-    cursor: pointer;
+    position: relative;
 }
 
-.rpboard-rpbox:hover {
-    transform: scale(0.995);
-    opacity: 0.9;
-    transition: 0.3s;
+/* 사용자 댓글 박스 호버 */
+.rpboard-rpbox:hover .rpboard-modify-replies-box {
+    transform: scale(0.99);
+    transition: 0.2s;
+    display: block;
+}
+
+.rpboard-rpbox:hover .rpboard-delete-replies-box {
+    transform: scale(0.99);
+    transition: 0.2s;
+    display: block;
 }
 
 /* 사용자 닉네임 + 댓글 작성 일자 box */
@@ -487,7 +514,7 @@
     border-radius: 5px 5px 0px 0px;
     background: #D6E6F2;
     width: 100%;
-    height: 17%;
+    height: 25%;
     display: flex;
     position: relative;
 }
@@ -499,10 +526,19 @@
     padding-left: 1%;
     font-size: 30px;
     line-height: 0.9em;
+    position: relative;
+}
 
-    position: absolute;
-    top: 0;
-    left: 0;
+.rpboard-nickname::before {
+    content: "";
+    display: inline-block;
+    background-image: url("../img/Profile.png");
+    border-radius: 50%;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 /* 댓글 작성 일자 */
@@ -522,6 +558,9 @@
     content: attr(data-timestamp);
 }
 
+
+
+
 /* 댓글창 box */
 .rpboard-replies-box {
     background: #D6E6F2;
@@ -530,6 +569,8 @@
     width: 100%;
     height: 50%;
     padding: 0;
+    display: flex;
+    position: relative;
 }
 
 /* 댓글창 */
@@ -537,6 +578,60 @@
     width: 100%;
     height: 100%;
     padding: 0 1%;
+}
+
+/* 댓글 수정 버튼 box */
+.rpboard-modify-replies-box {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    z-index: 2;
+}
+
+/* 댓글 수정 버튼 */
+.rpboard-modify-replies-btn {
+    border: none;
+    background: url('/assets/img/modify.png') no-repeat;
+    background-size: 90%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* 댓글 수정 버튼 호버 */
+.rpboard-modify-replies-btn:hover {
+    transform: scale(1.2);
+}
+
+/* 댓글 삭제 버튼 box */
+.rpboard-delete-replies-box {
+    /* border: 2px solid rgb(255, 97, 116);
+    border-radius: 3px; */
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    z-index: 2;
+}
+
+/* 댓글 삭제 버튼 */
+.rpboard-delete-replies-btn {
+    border: none;
+    background: url('/assets/img/Delete.png') no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* 댓글 삭제 버튼 호버 */
+.rpboard-delete-replies-btn:hover {
+    transform: scale(1.2);
 }
 
 /* 댓글 좋아요 + 댓글 신고 box */
@@ -549,6 +644,11 @@
     width: 10%;
     text-align: left;
     cursor: pointer;
+}
+
+#Like:hover {
+    color: #303481;
+    font-weight: bold;
 }
 
 #Like::before {
@@ -569,6 +669,12 @@
     cursor: pointer;
 }
 
+
+#Report:hover {
+    color: red;
+    font-weight: bold;
+}
+
 #Report::before {
     content: "";
     display: inline-block;
@@ -581,7 +687,7 @@
 }
 
 /* 대댓글 */
-.reply-to-comment {
+/* .reply-to-comment {
     text-align: left;
     cursor: pointer;
 }
@@ -595,10 +701,10 @@
     height: 20px;
     vertical-align: middle;
     margin-right: 10px;
-}
+} */
 
 /* 댓글 더보기 버튼 box*/
-.rpboard-more-view-btn {
+/* .rpboard-more-view-btn {
     box-shadow: 2px 2px 2px 1px black;
     background: #D6E6F2;
     border-radius: 10px;
@@ -608,10 +714,10 @@
     right: 2%;
     bottom: 14%;
     z-index: 10;
-}
+} */
 
 /* 댓글 더보기 버튼 */
-.rpboard-more-view-btn p {
+/* .rpboard-more-view-btn p {
     border-radius: 10px;
     width: 100%;
     height: 100%;
@@ -623,15 +729,15 @@
     position: absolute;
     top: 0;
     right: 0;
-}
+} */
 
 /* 댓글 더보기 버튼 호버 */
-.rpboard-more-view-btn p:hover {
+/* .rpboard-more-view-btn p:hover {
     background: #303481;
     color: #fff200;
     transition: 0.1s;
     opacity: 0.9;
-}
+} */
 
 
 
@@ -660,7 +766,19 @@
     padding-left: 1%;
     text-align: left;
     font-size: 25px;
-    line-height: 1em;
+    line-height: 1.2em;
+}
+
+.user-nickname::before {
+    content: "";
+    display: inline-block;
+    background-image: url("../img/Profile.png");
+    border-radius: 50%;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 .rpboard-input-btn-box {
@@ -693,7 +811,7 @@
     height: 100%;
 }
 
-.rpBtn p{
+.rpBtn p {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -702,6 +820,7 @@
     cursor: pointer;
     font-weight: bold;
 }
+
 .rpBtn p:hover {
     background: #303481;
     color: #fff200;
@@ -712,5 +831,47 @@
 .rpBtn p:active {
     transform: scale(0.97);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 댓글게시판 종료 ----------------------------------------------------------------------- */

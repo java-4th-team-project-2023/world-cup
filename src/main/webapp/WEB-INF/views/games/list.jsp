@@ -31,7 +31,7 @@
 
         <c:forEach items="${gameList}" var="g">
 
-            <a href="https://example.com" class="card" data-game-id="${g.gameId}">
+            <a href="/rank/ranking?gameId=${g.gameId}" class="card" data-game="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
@@ -93,6 +93,12 @@
 
 <script>
 
+    const $rankBtn = document.querySelector('.game-ranking-btn');
+    $rankBtn.onclick = e => {
+        console.log("이동");
+        const $gameId = e.target.closest('a.card').dataset.game;
+        window.location.href = 'rank/ranking?gameId='+$gameId;
+    };
     // main function
     (() => {
         // 검색 버튼 이벤트 등록
@@ -103,12 +109,13 @@
         const $searchBtn = document.querySelector('.search-form button');
 
         $searchBtn.onclick = e => {
-            e.preventDefault();
-            window.location.href = "/games/list?pageNo=" + ${maker.page.pageNo}
-                +"&amount=9"
-                +"&keyword=" + document.getElementById('search_keyword').value;
+            e.preventDefault()
+            window.location.href = '/games/list?pageNo=' + '${maker.page.pageNo}'
+                +'&amount=9'
+                +'&keyword=' + document.getElementById('search_keyword').value;
         };
     }
+
 
 </script>
 
