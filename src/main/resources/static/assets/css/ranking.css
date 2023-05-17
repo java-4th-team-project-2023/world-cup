@@ -17,7 +17,7 @@
 
 /* 결과창 묶음 box */
 .rank-reply-wrapper .rank-reply-box .rank-box {
-    background: #D6E6F2;
+    background: #d6e6f2;
     border-bottom: 2px solid #000;
     width: 50%;
     height: 100%;
@@ -31,19 +31,17 @@
     width: 50%;
     height: 6%;
     padding-left: 1%;
-    background: #D6E6F2;
     display: flex;
     align-items: center;
     position: fixed;
     top: 10%;
     left: 0;
     z-index: 1;
-    display: none;
 }
 
 /* 결과창 header::after */
 .rank-reply-wrapper .rank-reply-box .rank-box .select-search-box::after {
-    content: '개씩 보기';
+    content: "개씩 보기";
     margin-left: 5px;
     font-weight: bold;
     font-size: 20px;
@@ -52,7 +50,7 @@
 /* 결과창 갯수 출력 box */
 .rank-reply-wrapper .rank-reply-box .rank-box .select-search-box .select-view-number {
     width: 6%;
-    background: #D6E6F2;
+    background: #d6e6f2;
     font-size: 20px;
     text-align: center;
     font-weight: bold;
@@ -91,7 +89,7 @@
 
 /* 결과창 검색창 버튼 */
 .search-btn {
-    background: #D6E6F2;
+    background: #d6e6f2;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -122,42 +120,223 @@
     left: 20%;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 랭킹 페이지 */
+.ranking-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+/* 랭킹 페이지 header */
+.rkheader {
+    background: #303481;
+    color: #fff200;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 랭킹 페이지 header 목록 */
+.rkheader-list {
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.rkheader-list:last-child {
+    border: none;
+}
+
+/* 랭킹 페이지 header 목록 text */
+.rkheader-list-text {
+    font-size: 25px;
+}
+.rkheader-list-text:hover {
+    transform: scale(1.1);
+}
+
+/* 순위 */
+#Ranking {
+    width: 5%;
+}
+
+/* 이미지 */
+#Image {
+    width: 25%;
+}
+
+/* 이름 */
+#Name {
+    width: 10%;
+}
+
+/* 우승 비율 */
+#Winning-Percentage {
+    width: 30%;
+}
+
+/* 승률 */
+#Winning-Rate {
+    width: 30%;
+}
+
+.rkboard-ranking-wrapper {
+    border-bottom: 4px solid #303481;
+    width: 100%;
+    height: 10%;
+    background: #f5f5f5;
+}
+
+.rkboard-ranking-list-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.rkboard-ranking-list {
+    border-right: 1px solid #000;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+}
+
+.rkboard-ranking-list:first-child,
+.rkboard-ranking-list:nth-child(3) {
+    line-height: 3.5em;
+}
+.rkboard-ranking-list:first-child:hover,
+.rkboard-ranking-list:nth-child(3):hover {
+    border: 1px solid #fff200;
+    cursor: pointer;
+    color: #fff200;
+    background: #303481;
+    transition: 0.2s;
+    opacity: 0.9;
+}
+
+.rkboard-ranking-list:last-child {
+    border: none;
+}
+
+.rkboard-ranking-list img {
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+.rkboard-ranking-list img:hover {
+    transform: scale(1.2);
+    transition: 0.2s;
+    opacity: 0.9;
+}
+
+.graph {
+    border: 1px solid #303481;
+    box-shadow: 2px 2px 2px 1px black;
+    border-radius: 5px;
+    width: 90%;
+    height: 30%;
+    background-color: #fff;
+    position: absolute;
+    top: 45%;
+    left: 5%;
+}
+
+.bar-text {
+    border-radius: 5px;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+}
+.bar-text p{
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1.2em;
+}
+
+.bar {
+    width: 0;
+    height: 100%;
+    background:linear-gradient(150deg, #303481 ,#9197ff);
+    box-shadow: 2px 2px 2px 1px #303481;
+    position: absolute;
+    bottom: 0;
+    transition: width 0.5s;
+}
+
+
+
 /* 결과창 종료 -------------------------------------------------------------------------- */
 
 
 
-/* 우승 이미지 시작 -------------------------------------------------------------------------- */
-.winner-img-box {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.winner-img-name {
-    border-bottom: 4px solid #fff200;
-    width: 100%;
-    height: 10%;
-    background: #303481;
-    color: #fff200;
-    text-align: center;
-    font-size: 65px;
-}
-.winner-img {
-    background: url('/assets/img/cat.jpg') no-repeat;
-    background-size: 100%;
-    width: 100%;
-    height: 90%;
-    position: absolute;
-    top: 10%;
-    left: 0;
-}
 
-.winner-img:hover {
-    transform: scale(0.98);
-    transition: 0.5s;
-    opacity: 0.9;
-}
 
-/* 우승 이미지 종료 -------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -173,7 +352,7 @@
 .rpheader {
     border-left: 2px solid #000;
     border-bottom: 2px solid #000;
-    background: #D6E6F2;
+    background: #d6e6f2;
     position: fixed;
     width: 50%;
     height: 6.3%;
@@ -211,25 +390,25 @@
 
 /* 댓글게시판 header 리스트 첫번째 버튼 (다시하기) */
 .rpheader .rpheader-list-box a:first-child {
-    background: #D6E6F2;
+    background: #d6e6f2;
     line-height: 1.6em;
 }
 
 /* 댓글게시판 header 리스트 두번째 버튼 (목 록) */
 .rpheader .rpheader-list-box a:nth-child(2) {
-    background: #D6E6F2;
+    background: #d6e6f2;
     line-height: 1.4em;
 }
 
 /* 댓글게시판 header 리스트 세번째 버튼 (랭 킹) */
 .rpheader .rpheader-list-box a:nth-child(3) {
-    background: #D6E6F2;
+    background: #d6e6f2;
     line-height: 1.5em;
 }
 
 /* 댓글게시판 header 리스트 세번째 버튼 (공 유) */
 .rpheader .rpheader-list-box a:nth-child(4) {
-    background: #D6E6F2;
+    background: #d6e6f2;
     line-height: 1.4em;
 }
 
@@ -346,7 +525,7 @@
 /* 댓글 정렬 기준 드롭 다운 메뉴 */
 .rpsorting-wrapper {
     border: 1px solid #000;
-    background: #D6E6F2;
+    background: #d6e6f2;
     width: 21%;
     height: 61px;
     position: absolute;
@@ -398,12 +577,12 @@
 /* 댓글쓰기 (내려가기) 버튼 */
 .bot-btns p {
     border-radius: 5px;
-    background: #D6E6F2;
+    background: #d6e6f2;
     color: black;
     box-shadow: 2px 2px 2px 1px black;
     width: 15%;
     height: 60%;
-    transition: .2s;
+    transition: 0.2s;
     line-height: 2em;
     font-size: 25px;
     font-weight: bold;
@@ -429,21 +608,9 @@
     transform: scale(0.95);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* 댓글 게시판 전체 */
 .rpboard-viewmain-box {
-    background: #D6E6F2;
+    background: #d6e6f2;
     width: 100%;
     height: 100%;
     padding-top: 2%;
@@ -453,7 +620,7 @@
 /* 댓글 main */
 .rpboard-viewmain-box .rpboard-viewmain {
     border-radius: 5px;
-    background: #D6E6F2;
+    background: #d6e6f2;
     width: 95%;
     height: 100%;
     margin: 0 auto;
@@ -474,18 +641,18 @@
     cursor: pointer;
 }
 
+/* 사용자 댓글 박스 호버 */
 .rpboard-rpbox:hover {
-    transform: scale(0.995);
-    opacity: 0.9;
-    transition: 0.3s;
+    transform: scale(0.99);
+    transition: 0.2s;
 }
 
 /* 사용자 닉네임 + 댓글 작성 일자 box */
 .rpboard-nickname-local-date-box {
-    border-top: 2px solid #D6E6F2;
+    border-top: 2px solid #d6e6f2;
     border-bottom: 2px solid white;
     border-radius: 5px 5px 0px 0px;
-    background: #D6E6F2;
+    background: #d6e6f2;
     width: 100%;
     height: 17%;
     display: flex;
@@ -524,8 +691,8 @@
 
 /* 댓글창 box */
 .rpboard-replies-box {
-    background: #D6E6F2;
-    border: 1px solid #D6E6F2;
+    background: #d6e6f2;
+    border: 1px solid #d6e6f2;
     border-radius: 0px 0px 5px 5px;
     width: 100%;
     height: 50%;
@@ -597,49 +764,41 @@
     margin-right: 10px;
 }
 
-/* 댓글 더보기 버튼 box*/
-.rpboard-more-view-btn {
-    box-shadow: 2px 2px 2px 1px black;
-    background: #D6E6F2;
-    border-radius: 10px;
-    width: 12%;
-    height: 5%;
-    position: absolute;
-    right: 2%;
-    bottom: 14%;
-    z-index: 10;
-}
+/* 댓글 더보기 버튼 box */
+/* .rpboard-more-view-btn {
+  box-shadow: 2px 2px 2px 1px black;
+  background: #d6e6f2;
+  border-radius: 10px;
+  width: 12%;
+  height: 5%;
+  position: absolute;
+  right: 2%;
+  bottom: 14%;
+  z-index: 10;
+} */
 
 /* 댓글 더보기 버튼 */
-.rpboard-more-view-btn p {
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    line-height: 1.9em;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
+/* .rpboard-more-view-btn p {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1.9em;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
 
 /* 댓글 더보기 버튼 호버 */
-.rpboard-more-view-btn p:hover {
-    background: #303481;
-    color: #fff200;
-    transition: 0.1s;
-    opacity: 0.9;
-}
-
-
-
-
-
-
-
-
+/* .rpboard-more-view-btn p:hover {
+  background: #303481;
+  color: #fff200;
+  transition: 0.1s;
+  opacity: 0.9;
+} */
 
 .rpboard-user-nickname-reply-replyBtn-box {
     border: 4px solid #303481;
@@ -652,7 +811,6 @@
 }
 
 .user-nickname {
-    /* border-bottom: 4px solid #fff200; */
     background: #303481;
     color: #fff200;
     width: 100%;
@@ -693,7 +851,7 @@
     height: 100%;
 }
 
-.rpBtn p{
+.rpBtn p {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -702,6 +860,7 @@
     cursor: pointer;
     font-weight: bold;
 }
+
 .rpBtn p:hover {
     background: #303481;
     color: #fff200;

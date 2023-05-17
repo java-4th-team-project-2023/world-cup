@@ -37,7 +37,9 @@
                         <li class="inr-menu-list"><a href="#">menu2</a></li>
                         <li class="inr-menu-list"><a href="#">menu3</a></li>
                         <li class="inr-menu-list"><a href="#">menu4</a></li>
-                        <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
+                        <c:if test="${login ne null}">
+                            <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
+                        </c:if>
                     </ul>
                 </nav>
             </nav>
