@@ -20,7 +20,7 @@ POST localhost:8585/api/v1/players
 Content-Type: application/json
 
 {
-  "gameId": 1,
-  "playerImgPath": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWmr4ikE7hzXQvgC0lbeJXhCErF5V0bH_87Vh-0Mf6mQ&s",
-  "playerName": "솔의눈"
+  "gameId": 8,
+  "playerImgPath": "g",
+  "playerName": "g"
 }
