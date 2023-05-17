@@ -109,6 +109,7 @@
                 +"&keyword=" + document.getElementById('search_keyword').value;
         };
     }
+
 </script>
 
 </body>

@@ -17,8 +17,8 @@ public class RankingController {
     }
 
     @GetMapping("/winner")
-    public String winnerPage(){
-        log.info("winnerPage");
+    public String winnersPage() {
+        log.info("/rank/winner GET! ");
         return "rank/winner";
     }
 
