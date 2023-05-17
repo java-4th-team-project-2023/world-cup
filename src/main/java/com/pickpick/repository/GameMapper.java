@@ -4,6 +4,7 @@ import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Collection;
 import java.util.List;
 
 @Mapper
@@ -26,4 +27,13 @@ public interface GameMapper {
 
     // 게임 등록
     boolean insertGame(Game game);
+
+    int countGame();
+
+    // 랜덤으로 두 명의 선수 이미지 경로 리턴
+    List<String> randomPlayerImage(int gameId);
+
+    List<Game> findGameByAccountId(String accountId, Search page);
+
+    Game findGameById(int gameId);
 }

@@ -17,76 +17,99 @@
 
 <div id="main-wrapper">
 
-    <div class="page-amount-select">
-        <label for="page-size">Items per page:</label>
-        <select name="page-size" id="page-size">
-            <option value="9">9</option>
-            <option value="15">15</option>
-            <option value="21">21</option>
-            <option value="27">27</option>
-        </select>
-    </div>
+<%--    <div class="page-amount-select">--%>
+<%--        <label for="page-size">Items per page:</label>--%>
+<%--        <select name="page-size" id="page-size">--%>
+<%--            <option value="9">9</option>--%>
+<%--            <option value="15">15</option>--%>
+<%--            <option value="21">21</option>--%>
+<%--            <option value="27">27</option>--%>
+<%--        </select>--%>
+<%--    </div>--%>
 
     <div class="card-list">
-        <a href="/rank/ranking" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 1</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 2</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 3</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 4</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 5</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 6</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 7</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 8</h3>
-        </a>
-        <a href="https://example.com" class="card">
-            <img src="https://via.placeholder.com/300x200" alt="Placeholder Image">
-            <h3>Card 9</h3>
-        </a>
+
+        <c:forEach items="${gameList}" var="g">
+
+            <a href="https://example.com" class="card" data-game-id="${g.gameId}">
+                <div class="img-box">
+                    <c:forEach items="${g.thumbnails}" var="t">
+                        <img src="${t}" alt="thumbnails">
+                    </c:forEach>
+                </div>
+                <h3>${g.gameName}</h3>
+                <div class="button-wrapper">
+                    <button class="game-modify-btn">수정하기</button>
+                    <button class="game-ranking-btn">랭킹보기</button>
+                </div>
+            </a>
+
+        </c:forEach>
     </div>
 
-    <div class="page-select">
-        <button class="page-link first">First</button>
-        <button class="page-link prev">Prev</button>
-        <button class="page-link" data-page="1">1</button>
-        <button class="page-link" data-page="2">2</button>
-        <button class="page-link" data-page="3">3</button>
-        <button class="page-link" data-page="4">4</button>
-        <button class="page-link" data-page="5">5</button>
-        <button class="page-link next">Next</button>
-        <button class="page-link last">Last</button>
-    </div>
+
+    <ul class="page-select">
+
+
+        <li class="page-item"><a class="page-link"
+                                 href="/games/list?pageNo=${1}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+        </li>
+
+
+        <c:if test="${maker.prev}">
+            <li class="page-item"><a class="page-link"
+                                     href="/games/list?pageNo=${maker.begin - 1}&type=${s.type}&keyword=${s.keyword}">prev</a>
+            </li>
+        </c:if>
+
+        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}" step="1">
+            <li data-page-num="${i}" class="page-item">
+                <a class="page-link" href="/games/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+            </li>
+        </c:forEach>
+
+        <c:if test="${maker.next}">
+            <li class="page-item"><a class="page-link"
+                                     href="/games/list?pageNo=${maker.end + 1}&type=${s.type}&keyword=${s.keyword}">next</a>
+            </li>
+        </c:if>
+
+        <li class="page-item"><a class="page-link"
+                                 href="/games/list?pageNo=${maker.finalPage}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+        </li>
+
+    </ul>
+
 
     <div class="search-container">
         <form class="search-form">
             <label>
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search..." name="keyword" id="search_keyword">
             </label>
-            <button type="submit">Search</button>
+            <button>Search</button>
         </form>
     </div>
 </div>
+
+<script>
+
+    // main function
+    (() => {
+        // 검색 버튼 이벤트 등록
+        searchBtnEvent();
+    })();
+
+    function searchBtnEvent() {
+        const $searchBtn = document.querySelector('.search-form button');
+
+        $searchBtn.onclick = e => {
+            e.preventDefault();
+            window.location.href = "/games/list?pageNo=" + ${maker.page.pageNo}
+                +"&amount=9"
+                +"&keyword=" + document.getElementById('search_keyword').value;
+        };
+    }
+</script>
 
 </body>
 </html>

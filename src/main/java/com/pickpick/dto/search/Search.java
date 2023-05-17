@@ -1,12 +1,10 @@
 package com.pickpick.dto.search;
 
 import com.pickpick.dto.page.Page;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
-@Setter @Getter @ToString
+@Setter @Getter @ToString(callSuper = true)
 @AllArgsConstructor
 public class Search extends Page {
 
@@ -14,6 +12,13 @@ public class Search extends Page {
     private String keyword;
 
     public Search() {
-        this.keyword = "";
+        keyword = "";
+    }
+
+    public void setKeyword(String keyword) {
+        if (keyword == null) {
+            keyword = "";
+        }
+        this.keyword = keyword;
     }
 }

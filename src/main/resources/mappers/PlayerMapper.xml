@@ -35,10 +35,10 @@
         SELECT *
         FROM player_tbl
         WHERE game_id=#{gameId}
-        <if test="keyword != ''">
-            AND player_name LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.keyword != ''">
+            AND player_name LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        LIMIT #{pageStart}, #{amount}
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <select id="findOne" resultType="player">

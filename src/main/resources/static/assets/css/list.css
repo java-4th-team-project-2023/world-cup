@@ -11,14 +11,21 @@
     box-sizing: border-box;
     text-align: center;
     vertical-align: top;
+    height: 260px;
 
     color: #000;
 }
 
+.card .img-box {
+    display: flex;
+}
+
 .card img {
-    max-width: 100%;
-    height: auto;
     margin-bottom: 10px;
+
+    width: 50%;
+    height: 200px;
+
 }
 
 .card h3 {
@@ -31,32 +38,37 @@
     margin: 10px 0 0;
 }
 
-.page-amount-select {
-    position: fixed;
-    top: 110px;
-    right: 10px;
-    z-index: 1;
-}
+/*.page-amount-select {*/
+/*    position: fixed;*/
+/*    top: 110px;*/
+/*    right: 10px;*/
+/*    z-index: 1;*/
+/*}*/
 
-.page-amount-select label {
-    display: inline-block;
-    margin-right: 10px;
-}
+/*.page-amount-select label {*/
+/*    display: inline-block;*/
+/*    margin-right: 10px;*/
+/*}*/
 
-.page-amount-select select {
-    font-size: 20px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #f7f7f7;
-}
+/*.page-amount-select select {*/
+/*    font-size: 20px;*/
+/*    padding: 5px 10px;*/
+/*    border-radius: 5px;*/
+/*    border: none;*/
+/*    background-color: #f7f7f7;*/
+/*}*/
 
 .page-select {
-    margin-top: 20px;
+    width: fit-content;
+    margin: 20px auto 0;
+
     text-align: center;
+    display: flex;
+
+    text-decoration: none;
 }
 
-.page-select button {
+.page-select a {
     margin-right: 10px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -66,13 +78,15 @@
     transition: background-color 0.2s ease;
 
     font-size: 1.5em;
+
+    color: black;
 }
 
-.page-select button:hover {
+.page-select a:hover {
     background-color: #eee;
 }
 
-.page-select button.active {
+.page-select a.active {
     background-color: #333;
     color: #fff;
 }
@@ -101,7 +115,7 @@
     flex: 1;
 }
 
-.search-form button[type="submit"] {
+.search-form button {
     border: none;
     outline: none;
     background-color: #333;
@@ -111,4 +125,6 @@
     padding: 5px 10px;
     border-radius: 5px;
     margin-left: 10px;
+
+    cursor: pointer;
 }
