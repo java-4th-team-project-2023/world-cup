@@ -355,7 +355,7 @@
                     } = rep;
 
                     tag += "<div class='rpboard-rpbox'>" +
-                        "<div class='rpboard-nickname-local-date-box' data-replyNo='" + replyNo + "'>";
+                        "<div class='rpboard-nickname-local-date-box' data-reply-no='" + replyNo + "'>";
 
                     if (currentAccount === rep.accountId) { //|| auth === 'ADMIN'
                         tag +="<div class='rpboard-delete-replies-box'>" +
@@ -471,24 +471,28 @@
          // 댓글 삭제+수정모달 이벤트 처리 함수
          function replyRemoveClickEvent() {
 
-const $replyData = document.getElementById('replyData');
+// const $replyData = document.querySelector('.rpboard-delete-replies-box');
 
-$replyData.onclick = e => {
+// $replyData.onclick = e => {
 
-    e.preventDefault();
+//     e.preventDefault();
 
     // 삭제할 댓글의 PK값 읽기
-    const rno = e.target.closest('#replyContent').dataset.replyid;
-
-    if (e.target.matches('#replyDelBtn')) {
-        // console.log('삭제버튼 클릭!!');
+    const $viewMain = document.querySelector('.rpboard-viewmain');
+    
+   $viewMain.onclick = e =>{
+        if(!e.target.matches('.rpboard-delete-replies-btn')){
+            return;
+        }
+        const $replyNo = e.target.closest('.rpboard-nickname-local-date-box').dataset.replyNo;
+        console.log('삭제버튼 클릭!!');
 
         if (!confirm('정말 삭제합니까?')) return;
 
-        // console.log(rno);
+        console.log($replyNo);
 
         // 서버에 삭제 비동기 요청
-        fetch(URL + '/' + rno, {
+        fetch(URL + '/' + $replyNo, {
             method: 'DELETE'
         }).then(res => {
             if (res.status === 200) {
@@ -500,25 +504,26 @@ $replyData.onclick = e => {
         }).then(responseResult => {
             renderReplyList(responseResult);
         });
-
-
-    } else if (e.target.matches('#replyModBtn')) {
-        // console.log('수정 화면 진입!');
-
-        // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
-        const replyText = e.target.parentElement.previousElementSibling.textContent;
-        // console.log(replyText);
-
-        // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
-        document.getElementById('modReplyText').value = replyText;
-
-        // 다음 수정완료 처리를 위해 미리 
-        // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
-        const $modal = document.querySelector('.modal');
-        $modal.dataset.rno = rno;
     }
+
+    
+    // else if (e.target.matches('#replyModBtn')) {
+    //     // console.log('수정 화면 진입!');
+
+    //     // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
+    //     const replyText = e.target.parentElement.previousElementSibling.textContent;
+    //     // console.log(replyText);
+
+    //     // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
+    //     document.getElementById('modReplyText').value = replyText;
+
+    //     // 다음 수정완료 처리를 위해 미리 
+    //     // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
+    //     const $modal = document.querySelector('.modal');
+    //     $modal.dataset.rno = rno;
+    // }
 };
-}
+// }
 
         //========= 메인 실행부 =========//
         (function () {
@@ -531,6 +536,8 @@ $replyData.onclick = e => {
 
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
+
+            // setTimeout(replyRemoveClickEvent, 5000);
         })();
     </script>
 
