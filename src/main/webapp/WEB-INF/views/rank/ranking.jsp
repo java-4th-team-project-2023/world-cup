@@ -294,7 +294,7 @@
         // 댓글 목록 불러오기 함수 
         function getReplyList(pageNo=1) {
 
-    fetch(`\${URL}/2/page/\${pageNo}`) // ${gameId}
+    fetch(`\${URL}/9/page/\${pageNo}`) // ${gameId}
         .then(res => res.json())
         .then(responseResult => {
         console.log(responseResult);
