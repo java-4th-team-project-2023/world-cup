@@ -16,4 +16,10 @@ public class RankingController {
         return "rank/ranking";
     }
 
+    @GetMapping("/winner")
+    public String winnerPage(){
+        log.info("winnerPage");
+        return "rank/winner";
+    }
+
 }
