@@ -49,10 +49,10 @@ public class ReplyService {
     public ReplyListResponseDTO save(ReplySaveRequestDTO dto, HttpSession session) throws SQLException {
 
         Reply reply = dto.toEntity();
-        if (session.getId().equals(LOGIN_KEY)){
+        if (LoginUtil.isLogin(session)){
             reply.setAccountId(getCurrentLoginMemberAccount(session));
         }
-
+//        log.info("!!!!!login: {}",reply.getAccountId());
         boolean flag = replyMapper.save(reply);
         if (!flag) {
             log.warn("reply save fail!");
