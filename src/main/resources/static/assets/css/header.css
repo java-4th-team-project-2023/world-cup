@@ -1,115 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Single+Day&family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Single+Day&family=Sniglet&display=swap');
+
 * {
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
     margin: 0;
     padding: 0;
-    transition: 0.5s;
+    font-family: 'Dongle', sans-serif;
+    word-spacing: 0.1em;
+    letter-spacing: 0.1em;
 }
 
 body {
     width: 100%;
-    /* height: 100vh; */
-    height: 1200px;
-    background: lightgray;
-    /* background: linear-gradient(140deg, lightgray, black); */
+    height: 1400px;
+    padding-bottom: 50px;
 }
 
+/* 상단 헤더 */
 header {
     border-bottom: 4px solid #000;
+    background: #D6E6F2;
     width: 100%;
     height: 10%;
     position: fixed;
+    z-index: 9999;
 }
 
+/* 상단 헤더 전체 box */
 .header {
     width: 100%;
     height: 100%;
 }
 
+/* logo, gnb 묶음 box */
 .header-container {
     width: 100%;
     height: 100%;
     display: flex;
+    z-index: 100;
 }
 
+/* logo */
 h1.logo {
     width: 6%;
     height: 100%;
     padding: 0;
 }
 
+/* logo 호버 */
 h1.logo a#Logo:hover {
-    opacity: 0.9;
-    color: white;
-    transition: 0.3s;
+    opacity: 0.5;
+    transition: 0.1s;
+    color: red;
 }
 
+/* logo */
 h1.logo a i {
     width: 100%;
     text-align: center;
     line-height: 2.5em;
 }
 
+/* 상단 BAR-MENU */
 .gnb {
     width: 100%;
     position: relative;
 }
 
+/* 상단 BAR-MENU box */
 .gnb ul {
     width: 100%;
     height: 100%;
     display: flex;
 }
 
+/* 상단 BAR-MENU 목록 묶음 */
 .gnb ul li.header-menu-list {
-    width: 10%;
+    background: #D6E6F2;
+    border-radius: 5px;
+    width: 15%;
     height: 100%;
+    margin-right: 5px;
+    font-size: 30px;
+    line-height: 3em;
     text-align: center;
-    line-height: 4em;
-    font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
 }
 
+/* 상단 BAR-MENU 목록 호버 */
+.gnb ul li.header-menu-list:hover {
+    box-shadow: 2px 2px 2px 1px black;
+    border-radius: 5px;
+    transition: 0.1s;
+    opacity: 0.9;
+}
+
+.gnb ul li.header-menu-list:active {
+    transform: scale(0.95);
+}
+
+/* 상단 BAR-MENU 목록 */
 .gnb ul li.header-menu-list a {
-    width: 100%;
+    background: #D6E6F2;
     color: black;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
 }
 
+/* 상단 BAR-MENU 목록 호버 */
+.gnb ul li.header-menu-list a:hover {
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    border-radius: 5px;
+    color: #fff200;
+    background: #303481;
+    transition: 0.2s;
+    opacity: 0.9;
+}
+
+/* 상단 BAR-MENU 로그인 박스 */
 .gnb ul .login-box {
     width: 5%;
     height: 100%;
     font-weight: bold;
     text-align: center;
-    line-height: 4em;
     position: absolute;
     top: 0;
     right: 6%;
     font-size: 20px;
-
 }
 
+/* 상단 BAR-MENU 로그인 */
+/* 상단 BAR-MENU 로그인 박스 호버 */
+.gnb ul .login-box:hover {
+    border-bottom: 8px solid #000;
+    transition: 0.1s;
+}
+
+/* 상단 BAR-MENU 로그인 */
 .gnb ul .login-box a {
-    display: inline-block;
     width: 100%;
     height: 100%;
     color: black;
+    position: absolute;
+    font-size: 35px;
+    line-height: 2.5em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-
-
+/* 상단 BAR-MENU 로그인 */
 .gnb ul .login-box a#Login {
     width: 100%;
+    height: 100%;
 }
 
+/* 상단 BAR-MENU 로그인 박스 호버 */
+.gnb ul .login-box a#Login:hover {
+    border-bottom: 93px solid #303481;
+    color: #fff200;
+    transition: 0.1s;
+    opacity: 0.9;
+}
+
+/* 햄버거 버튼 메뉴창 */
 input#icon {
     display: none;
 }
 
-
+/* 햄버거 버튼 메뉴창 */
 input#icon+label {
     position: absolute;
-    right: 1%;
+    right: 1.5%;
     top: 25%;
     display: block;
     width: 50px;
@@ -117,6 +186,7 @@ input#icon+label {
     cursor: pointer;
 }
 
+/* 햄버거 버튼 메뉴창 */
 input#icon+label>span {
     position: absolute;
     display: block;
@@ -128,40 +198,46 @@ input#icon+label>span {
     z-index: 2;
 }
 
+/* 햄버거 버튼 첫번째 막대기 */
 input#icon+label>span:nth-child(1) {
     top: 0px;
 }
 
+/* 햄버거 버튼 두번째 막대기 */
 input#icon+label>span:nth-child(2) {
     top: 50%;
     transform: translateY(-50%);
 }
 
+/* 햄버거 버튼 세번째 막대기 */
 input#icon+label>span:nth-child(3) {
     bottom: 0px;
 }
 
-
+/* 햄버거 버튼 클릭 시 첫번째 막대기 이동 방향 설정 */
 input#icon:checked+label>span:nth-child(1) {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
 }
 
+/* 햄버거 버튼 클릭 시 두번째 막대기 이동 방향 설정 */
 input#icon:checked+label>span:nth-child(2) {
     opacity: 0;
 }
 
+/* 햄버거 버튼 클릭 시 세번째 막대기 이동 방향 설정 */
 input#icon:checked+label>span:nth-child(3) {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창 */
 #icon+label+.inr-menu {
-    border-left: 4px solid #000;
+    border-left: 4px solid black;
     position: fixed;
     width: 400px;
     height: 100%;
-    background: lightgray;
+    background: #D6E6F2;
     top: 0px;
     box-sizing: border-box;
     right: -450px;
@@ -169,10 +245,12 @@ input#icon:checked+label>span:nth-child(3) {
     transition: all 0.35s;
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창 */
 #icon:checked+label+.inr-menu {
     right: 0px;
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창안의 메뉴 리스트 묶음 box */
 .inr-menu .inr-menu-list-box {
     width: 100%;
     height: 100vh;
@@ -183,14 +261,17 @@ input#icon:checked+label>span:nth-child(3) {
     text-align: center;
     line-height: 2em;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창안의 메뉴 리스트 클래스 묶음 */
 .inr-menu .inr-menu-list-box li.inr-menu-list {
     width: 100%;
     height: 8%;
+    margin-bottom: 1.5px;
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창안의 메뉴 리스트 */
 .inr-menu .inr-menu-list-box li.inr-menu-list a {
     display: block;
     width: 100%;
@@ -198,29 +279,42 @@ input#icon:checked+label>span:nth-child(3) {
     color: black;
 }
 
+/* 햄버거 버튼 클릭 시 나오는 메뉴창안의 메뉴 리스트 호버 */
 .inr-menu .inr-menu-list-box li.inr-menu-list a:hover {
-    border: 1px solid white;
-    width: 100%;
-    background: linear-gradient(150deg, white, black);
-    color: white;
-    border-radius: 10px;
-    transition: 0.3s;
+    background: #303481;
+    color: #fff200;
+    border-radius: 20px 0px 20px 0px;
+    box-shadow: 0px 3px 1px 1px black;
+    transition: 0.1s;
+    opacity: 0.9;
 }
 
-.scrollbtn-box {
-    background: yellow;
-    width: 5%;
-    height: 100%;
+/* 위로가기 버튼 */
+#go-top {
+    display: none;
     border-radius: 50%;
-    position: absolute;
-    bottom: 0;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    outline: 0;
+    background: #F5F5F5;
+    cursor: pointer;
+    z-index: 9999;
+    color: #D6E6F2;
 }
-.scrollbtn-box .scrollbtn {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* 위로가기 버튼 호버 */
+#go-top:hover {
+    border: 1px solid #fff200;
+    background: #fff200;
+    color: #303481;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+/* 메인 컨텐츠 아래로 내리기 */
+#main-wrapper {
+    padding-top: 100px;
 }

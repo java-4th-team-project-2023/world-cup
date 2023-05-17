@@ -1,0 +1,150 @@
+/* @import url('/assets/css/header.css'); */
+@import url(../css/common.css);
+
+body{
+    background: #F5F5F5;
+}
+.modify-wrapper {
+    background: #fff;
+    margin: 20px auto;
+    border: 1px solid #000;
+    width: 95%;
+    margin: 10% auto;
+    height: 100vh;
+}
+
+.menu-wrapper {
+    display: flex;
+    width: 100%;
+    background-color: #F5F5F5;
+    border-bottom: 2px solid #F5F5F5;
+
+
+}
+.menu-wrapper>p{
+    /* border: 1px solid #000; */
+    color: #000;
+    width: 200px;
+    height: 70px;
+    text-align: center;
+    padding: 1%;
+}
+.menu-wrapper>p:hover {
+    background-color: #fff;
+    border: 1px solid#d3d3d3;
+    border-bottom: 0px;
+    color: #303481;
+    font-weight: 700;
+}
+
+.upload-new-wrapper {
+    margin: 10% auto;
+    height: 100vh;
+    width: 95%;
+    border: 1px solid red;
+    background-color: #fff;
+}
+
+.container-title {
+    width: 100%;
+    height: 5%;
+    padding: 1%;
+    border: 0.5px solid #d3d3d3;
+    
+}
+form{
+    height: 90%;
+}
+.upload-info-theme{
+    border: 1px solid #000;
+    height: 80%;
+}
+.upload-info-theme>span{
+    border: 1px solid #b92086;
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 1%;
+}
+.basic-info {
+    /* border: 1px solid rebeccapurple; */
+    height: fit-content;
+    margin: auto 1%;
+}
+
+.flex {
+
+    display: flex;
+    height: 50px;
+    /* justify-content: center; */
+    
+}
+
+.input-wrapper {
+    border: 1px solid blue;
+
+    justify-content: center;
+    width: 85%;
+    height: 50px;
+    margin-left: 3%;
+    
+}
+input {
+    border: 0px;
+    width: 99%;
+    height: 90%;
+    outline: none;
+    font-size: 20px;
+    /* background-color: #000; */
+}
+.title {
+    font-size: 20px;
+    margin-left: 5%;
+    padding: 1%;
+    
+}
+
+.info-title-wrapper {
+    height: 10%;
+    border-bottom: 1px dashed #ddd2d2;
+    margin-bottom: 1%;
+    padding-top: 1.5%;
+}
+.info-detail-wrapper{
+    height: 10%;
+    border-bottom: 1px dashed #ddd2d2;
+    margin-bottom: 1%;
+    padding-top: 1%;
+}
+.info-img-upload-wrapper{
+    /* border: 1px solid #dbcd04; */
+    height: 200px;
+    width: 100%;
+}
+
+.upload-img {
+    height: 100px;
+    margin: 10px;
+    border: 1px solid #000;
+
+    
+}
+
+.upload-img>p {
+    margin: 30px auto;
+    border: 1px solid #000;
+    width: fit-content;
+    
+}
+.upload-list-title {
+    border: 1px solid aqua;
+    margin-left: 10px;
+
+}
+.upload-list {
+    margin: 10px auto;
+    border: 1px solid pink;
+    height: 30vh;
+    width: 85vw;
+
+
+}

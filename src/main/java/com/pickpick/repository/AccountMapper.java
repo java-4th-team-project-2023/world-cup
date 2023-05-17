@@ -2,6 +2,7 @@ package com.pickpick.repository;
 
 import com.pickpick.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AccountMapper {
@@ -13,6 +14,8 @@ public interface AccountMapper {
     Account findAccount(String accountId);
 
     // 중복 체크(account, email) 기능
-    int isDuplicate(String type, String keyword);
+    int isDuplicate(
+            @Param("type") String type
+            ,@Param("keyword") String keyword);
 
 }

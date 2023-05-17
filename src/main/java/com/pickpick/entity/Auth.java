@@ -1,5 +1,5 @@
 package com.pickpick.entity;
 
 public enum Auth {
-    ADMIN, COMMON
+    ADMIN, COMMON, NON_MEMBER
 }

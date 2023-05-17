@@ -1,26 +1,22 @@
 package com.pickpick.dto.page;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Setter
-@Getter
+@Setter @Getter
 @AllArgsConstructor
-@ToString
+@ToString @Builder
 public class Page {
 
     private int pageNo;
     private int amount;
 
-    public Page(){
+    public Page() {
         this.pageNo = 1;
         this.amount = 20;
     }
 
     public void setPageNo(int pageNo) {
-        if (pageNo < 1 || pageNo > Integer.MAX_VALUE) {
+        if (pageNo < 1 || pageNo == Integer.MAX_VALUE) {
             this.pageNo = 1;
             return;
         }
@@ -28,8 +24,8 @@ public class Page {
     }
 
     public void setAmount(int amount) {
-        if (amount < 20 || amount > 25) {
-            this.amount = 20;
+        if (amount < 9 || amount > 30) {
+            this.amount = 9;
             return;
         }
         this.amount = amount;

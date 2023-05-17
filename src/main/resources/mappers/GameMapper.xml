@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pickpick.repository.GameMapper">
+
+    <select id="findAll" resultType="game">
+        SELECT *
+        FROM game_tbl
+        <if test="keyword != ''">
+            WHERE game_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        LIMIT #{pageStart}, #{amount}
+    </select>
+
+    <update id="updatePlayCount">
+        UPDATE game_tbl
+        SET play_count=#{playCount}
+        WHERE game_id=#{gameId}
+    </update>
+
+    <update id="updateGameName">
+        UPDATE game_tbl
+        SET game_name=#{gameName}
+        WHERE game_id=#{gameId}
+    </update>
+
+    <delete id="deleteGame">
+        DELETE FROM game_tbl
+        WHERE game_id=#{gameId}
+    </delete>
+
+    <select id="countPlayer" resultType="int">
+        SELECT COUNT(*)
+        FROM player_tbl
+        WHERE game_id=#{gameId}
+    </select>
+
+    <insert id="insertGame" parameterType="game">
+
+        INSERT INTO game_tbl (game_name, account_id)
+        VALUES (#{gameName}, #{accountId})
+
+        <selectKey resultType="int" keyProperty="gameId" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+
+    </insert>
+
+    <select id="countGame" resultType="int">
+        select count(*)
+        from game_tbl
+    </select>
+
+    <select id="randomPlayerImage" resultType="String">
+        select player_img_path
+        from player_tbl
+        where game_id=#{gameId}
+        order by rand()
+        limit 0, 2
+    </select>
+
+    <select id="findGameByAccountId" resultType="game">
+        select *
+        from game_tbl
+        where account_id=#{accountId}
+        <if test="page.keyword != ''">
+            and game_name like concat('%', #{page.keyword}, '%')
+        </if>
+        limit #{page.pageStart}, #{page.amount}
+    </select>
+
+    <select id="findGameById" resultType="game">
+        select *
+        from game_tbl
+        where game_id=#{gameId}
+    </select>
+</mapper>

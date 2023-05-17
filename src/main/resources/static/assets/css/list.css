@@ -1,0 +1,130 @@
+@import url(header.css);
+
+.card {
+    display: inline-block;
+    width: 23%;
+    margin: 1%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: top;
+    height: 260px;
+
+    color: #000;
+}
+
+.card .img-box {
+    display: flex;
+}
+
+.card img {
+    margin-bottom: 10px;
+
+    width: 50%;
+    height: 200px;
+
+}
+
+.card h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.card p {
+    font-size: 20px;
+    margin: 10px 0 0;
+}
+
+/*.page-amount-select {*/
+/*    position: fixed;*/
+/*    top: 110px;*/
+/*    right: 10px;*/
+/*    z-index: 1;*/
+/*}*/
+
+/*.page-amount-select label {*/
+/*    display: inline-block;*/
+/*    margin-right: 10px;*/
+/*}*/
+
+/*.page-amount-select select {*/
+/*    font-size: 20px;*/
+/*    padding: 5px 10px;*/
+/*    border-radius: 5px;*/
+/*    border: none;*/
+/*    background-color: #f7f7f7;*/
+/*}*/
+
+.page-select {
+    width: fit-content;
+    margin: 20px auto 0;
+
+    text-align: center;
+    display: flex;
+
+    text-decoration: none;
+}
+
+.page-select a {
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    font-size: 1.5em;
+
+    color: black;
+}
+
+.page-select a:hover {
+    background-color: #eee;
+}
+
+.page-select a.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.search-form input[type="text"] {
+    border: none;
+    outline: none;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding: 5px;
+    flex: 1;
+}
+
+.search-form button {
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+
+    cursor: pointer;
+}

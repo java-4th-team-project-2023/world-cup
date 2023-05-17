@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/resources/static/assets/css/login.css">
-    <script src="/resources/static/assets/js/login.js" defer></script>
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <script src="/assets/js/login.js" defer></script>
 
 </head>
 
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="/account/sign-up" method="post">
                 <h1>Create Account</h1>
                 <div class="social-container">
                     <a href="#" class="social" id="KakaoTalk"></a>
@@ -23,14 +25,14 @@
                     <a href="#" class="social" id="Naver"></a>
                 </div>
                 <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
+                <input type="text" name="accountId" placeholder="아이디" />
+                <input type="email" name="email" placeholder="이메일" />
+                <input type="password" name="password" placeholder="비밀번호" />
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="/account/sign-in" method="post">
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <a href="#" class="social" id="KakaoTalk"></a>
@@ -38,8 +40,8 @@
                     <a href="#" class="social" id="Naver"></a>
                 </div>
                 <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="accountId" placeholder="아이디" />
+                <input type="password" name="password" placeholder="비밀번호" />
                 <a href="#" id="Text">Forgot your password?</a>
                 <button>Sign In</button>
             </form>

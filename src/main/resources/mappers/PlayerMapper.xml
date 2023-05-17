@@ -35,6 +35,10 @@
         SELECT *
         FROM player_tbl
         WHERE game_id=#{gameId}
+        <if test="page.keyword != ''">
+            AND player_name LIKE CONCAT('%', #{page.keyword}, '%')
+        </if>
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <select id="findOne" resultType="player">
@@ -50,4 +54,5 @@
         ORDER BY RAND()
         LIMIT 1, #{number}
     </select>
+
 </mapper>

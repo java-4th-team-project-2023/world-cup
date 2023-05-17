@@ -6,29 +6,30 @@
 
     <insert id="save">
         INSERT INTO reply_tbl
-            (text, writer, game_id)
+            (text, writer, game_id, account_id)
         VALUES
-            (#{text}, #{writer}, #{gameId})
+            (#{text}, #{writer}, #{gameId}, #{accountId})
     </insert>
-
-    <update id="modify">
-        UPDATE reply_tbl
-        SET text = #{text}
-        WHERE game_id = #{gameId}
-    </update>
 
     <delete id="deleteOne">
         DELETE FROM reply_tbl
         WHERE reply_no = #{replyNo}
     </delete>
 
+    <select id="findOne" resultType="reply">
+        SELECT
+        reply_no, text, writer, date, like_count, account_id, game_id
+        FROM tbl_reply
+        WHERE reply_no = #{replyNo}
+    </select>
+
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, game_id, writer, text, date
+        reply_no, text, writer, date, like_count, account_id, game_id
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
-        LIMIT #{page.getPageStart}, #{page.amount}
+<!--        LIMIT #{page.getPageStart}, #{page.amount}-->
     </select>
 
     <select id="count" resultType="int">
@@ -36,6 +37,24 @@
         FROM reply_tbl
         WHERE game_id = #{gameId}
     </select>
+
+    <select id="findLikeOne" resultType="int">
+        SELECT count(*)
+        FROM reply_like_tbl
+        WHERE reply_no = #{replyNo} and account_id = #{accountId}
+    </select>
+
+    <insert id="addLikeUser">
+        INSERT INTO reply_like_tbl
+        (reply_no, account_id)
+        VALUES (#{replyNo}, #{accountId})
+    </insert>
+
+    <update id="likeUpCounting">기
+        UPDATE reply_tbl
+        SET like_count = like_count + 1
+        WHERE reply_no = #{replyNo}
+    </update>
 
 
 </mapper>
