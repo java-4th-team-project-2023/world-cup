@@ -71,7 +71,7 @@
 
         const $playerList = document.getElementById('player-list');
 
-        responseResult.forEach(p => {밋
+        responseResult.forEach(p => {
 
             const $player = document.createElement('li');
             $player.classList.add('list-content');

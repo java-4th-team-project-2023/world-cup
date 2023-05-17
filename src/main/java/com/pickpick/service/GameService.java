@@ -56,10 +56,16 @@ public class GameService {
 
     // 게임 등록
     public int insertGame(GameInsertRequestDTO dto) {
-        return mapper.insertGame(Game.builder()
-                        .gameName(dto.getGameName())
-                        .accountId(dto.getAccountId())
-                .build());
+        Game newGame = Game.builder()
+                .gameName(dto.getGameName())
+                .accountId(dto.getAccountId())
+                .build();
+
+        if (!mapper.insertGame(newGame)) {
+            return -1;
+        }
+
+        return newGame.getGameId();
     }
 
     // 게임 숫자 조회

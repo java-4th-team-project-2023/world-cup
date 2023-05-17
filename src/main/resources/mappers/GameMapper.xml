@@ -36,14 +36,14 @@
         WHERE game_id=#{gameId}
     </select>
 
-    <insert id="insertGame">
+    <insert id="insertGame" parameterType="game">
+
+        INSERT INTO game_tbl (game_name, account_id)
+        VALUES (#{gameName}, #{accountId})
 
         <selectKey resultType="int" keyProperty="gameId" order="AFTER">
             select LAST_INSERT_ID()
         </selectKey>
-
-        INSERT INTO game_tbl (game_name, account_id)
-        VALUES (#{gameName}, #{accountId})
 
     </insert>
 
