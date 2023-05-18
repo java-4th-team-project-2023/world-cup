@@ -20,6 +20,7 @@ public class ReplyDetailResponseDTO {
     private String writer;
     @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm")
     private LocalDateTime date;
+    private String accountId;
 
     public ReplyDetailResponseDTO(Reply reply){
         this.replyNo = reply.getReplyNo();
@@ -27,5 +28,6 @@ public class ReplyDetailResponseDTO {
         this.text = reply.getText();
         this.writer = reply.getWriter();
         this.date = reply.getDate();
+        this.accountId = reply.getAccountId();
     }
 }

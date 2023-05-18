@@ -2,6 +2,7 @@ package com.pickpick.service;
 
 import com.pickpick.dto.page.Page;
 import com.pickpick.dto.page.PageMaker;
+import com.pickpick.dto.reply.request.ReplyLikeRequestDTO;
 import com.pickpick.dto.reply.response.ReplyDetailResponseDTO;
 import com.pickpick.dto.reply.response.ReplyListResponseDTO;
 import com.pickpick.dto.reply.request.ReplyModifyRequestDTO;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.pickpick.util.LoginUtil.*;
 import static java.util.stream.Collectors.*;
@@ -52,7 +52,7 @@ public class ReplyService {
         if (LoginUtil.isLogin(session)){
             reply.setAccountId(getCurrentLoginMemberAccount(session));
         }
-//        log.info("!!!!!login: {}",reply.getAccountId());
+        log.info("!!!!!gameId : {}",reply.getGameId());
         boolean flag = replyMapper.save(reply);
         if (!flag) {
             log.warn("reply save fail!");
@@ -89,14 +89,22 @@ public class ReplyService {
     }
 
     // 댓글 좋아요 기능
-    public boolean likeReply(int replyNo,HttpSession session) {
-        if(isLogin(session))return false;
+    public ReplyListResponseDTO likeReply(ReplyLikeRequestDTO dto, HttpSession session) {
         String loginMemberAccount = getCurrentLoginMemberAccount(session);
 
-        int likeOne = replyMapper.findLikeOne(replyNo, loginMemberAccount);
-        if (likeOne == 1) return false;
-        replyMapper.addLikeUser(replyNo,loginMemberAccount);
-        replyMapper.likeUpCounting(replyNo);
-        return true;
+        int likeOne = replyMapper.findLikeOne(dto.getReplyNo(), loginMemberAccount);
+        replyMapper.addLikeUser(dto.getReplyNo(),loginMemberAccount);
+        replyMapper.likeUpCounting(dto.getReplyNo());
+        return getList(dto.getGameId(),new Page(1,20));
+    }
+
+    // 댓글 신고 기능
+    public ReplyListResponseDTO reportReply(ReplyLikeRequestDTO dto, HttpSession session) {
+        String loginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        int likeOne = replyMapper.findReportOne(dto.getReplyNo(), loginMemberAccount);
+        replyMapper.addReportUser(dto.getReplyNo(),loginMemberAccount);
+        replyMapper.ReportUpCounting(dto.getReplyNo());
+        return getList(dto.getGameId(),new Page(1,20));
     }
 }

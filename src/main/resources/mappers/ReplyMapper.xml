@@ -18,14 +18,14 @@
 
     <select id="findOne" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id
-        FROM tbl_reply
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id
+        FROM reply_tbl
         WHERE reply_no = #{replyNo}
     </select>
 
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
@@ -50,9 +50,27 @@
         VALUES (#{replyNo}, #{accountId})
     </insert>
 
-    <update id="likeUpCounting">기
+    <update id="likeUpCounting">
         UPDATE reply_tbl
         SET like_count = like_count + 1
+        WHERE reply_no = #{replyNo}
+    </update>
+
+    <select id="findReportOne" resultType="int">
+        SELECT count(*)
+        FROM reply_report_tbl
+        WHERE reply_no = #{replyNo} and account_id = #{accountId}
+    </select>
+
+    <insert id="addReportUser">
+        INSERT INTO reply_report_tbl
+        (reply_no, account_id)
+        VALUES (#{replyNo}, #{accountId})
+    </insert>
+
+    <update id="ReportUpCounting">
+        UPDATE reply_tbl
+        SET report_count = report_count + 1
         WHERE reply_no = #{replyNo}
     </update>
 
