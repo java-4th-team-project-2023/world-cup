@@ -31,7 +31,7 @@
 
         <c:forEach items="${gameList}" var="g">
 
-            <a href="https://example.com" class="card" data-game-id="${g.gameId}">
+            <a href="/games/start?gameId=${g.gameId}" class="card" data-game-id="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
