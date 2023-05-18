@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface PlayingGameMapper {
 
-    void save(PlayingGame playingGame);
+    int save(PlayingGame playingGame);
 
     List<PlayingGame> findByAccountId(int accountId, Page page);
 

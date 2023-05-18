@@ -114,4 +114,5 @@ public class PlayerService {
                 .map(PlayerGameResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
 }
