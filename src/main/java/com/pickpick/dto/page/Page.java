@@ -12,7 +12,7 @@ public class Page {
 
     public Page() {
         this.pageNo = 1;
-        this.amount = 20;
+        this.amount = 4;
     }
 
     public void setPageNo(int pageNo) {

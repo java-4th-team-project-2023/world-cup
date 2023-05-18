@@ -292,7 +292,9 @@
 
                 <!-- 댓글 입력창 + 댓글 입력 버튼 -->
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
-                    <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
+                    <c:if test="${empty login}">
+                        <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
+                    </c:if>
                     <div class="rpboard-input-btn-box">
                         <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                 placeholder="댓글을 입력해주세요..."></input></div>
@@ -328,6 +330,8 @@
         // 비동기 처리(댓글번호)
         const $viewMain = document.querySelector('.rpboard-viewmain');
 
+
+
         // 댓글 목록 렌더링 함수
         function renderReplyList({
             count,
@@ -347,41 +351,53 @@
 
             } else {
                 for (let rep of replyList) {
-                    console.log("###"+rep.accountId);
+                    console.log("###" + rep.accountId);
                     const {
                         gameId,
                         replyNo,
                         writer,
                         text,
                         date,
-                        accountId
+                        accountId,
+                        pageMaker
                     } = rep;
 
-                    tag += "<div class='rpboard-rpbox'>" +
-                        "<div class='rpboard-nickname-local-date-box' data-reply-no='" + replyNo + "'>";
+                    tag += `
+                    <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
+                        <div class="rpboard-nickname-local-date-box">`;
 
-                    if (currentAccount === rep.accountId) { //|| auth === 'ADMIN'
-                        tag +="<div class='rpboard-delete-replies-box'>" +
-                            "<button class='rpboard-delete-replies-btn'></button></div>";
+                    if (currentAccount === rep.accountId) {
+                        tag += `
+                            <div class="rpboard-delete-replies-box">
+                            <button class="rpboard-delete-replies-btn"></button>
+                            </div>`;
                     }
 
-                    tag += "<div class='rpboard-nickname'>" + writer + "</div>" +
-                        "<span class='rpboard-local-date-box'>" + date + "</span>" +
-                        "</div>" +
-                        "<div class='rpboard-replies-box'>" +
-                        "<div class='rpboard-replies'>" + text + "</div>";
-                    if (currentAccount === rep.accountId) { //|| auth === 'ADMIN'
-                        tag +="<div class ='rpboard-modify-replies-box'>" +
-                            "<button class ='rpboard-modify-replies-btn'></button> </div>";
+                    tag += `
+                            <div class="rpboard-nickname">\${writer}</div>
+                            <span class="rpboard-local-date-box">\${date}</span>
+                        </div>
+                        <div class="rpboard-replies-box">
+                            <div class="rpboard-replies">\${text}</div>`;
+
+                    if (currentAccount === rep.accountId) {
+                        tag += `
+                            <div class="rpboard-modify-replies-box">
+                            <button class="rpboard-modify-replies-btn"></button>
+                            </div>`;
                     }
-                    tag +="</div>" +
-                        "<div class='rpboard-like-report-box'>" +
-                        "<div class='like' id='Like'><button class ='rpboard-like-replies-btn'>좋아요</button></div>" +
-                        "<div class='report' id='Report'><button class ='rpboard-report-replies-btn'></button>신고</div>" +
-                        "</div>" +
-                        "</div>";
 
-
+                    tag += `
+                        </div>
+                        <div class="rpboard-like-report-box">
+                            <div class="like" id="Like">
+                            <button class="rpboard-like-replies-btn">좋아요</button>
+                            </div>
+                            <div class="report" id="Report">
+                            <button class="rpboard-report-replies-btn">신고</button>
+                            </div>
+                        </div>
+                    </div>`;
 
                 }
             }
@@ -389,9 +405,6 @@
 
             // 생성된 댓글 tag 렌더링
             document.querySelector('.rpboard-viewmain').innerHTML = tag;
-
-            // 페이지 렌더링
-            // renderPage(pageInfo);
 
         }
 
@@ -460,8 +473,6 @@
                             $rt.value = '';
                             $rw.value = '';
 
-                            // 마지막페이지 번호
-                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
                             getReplyList();
                         } else {
 
@@ -471,101 +482,118 @@
             };
         }
 
-         // 댓글 삭제+수정모달 이벤트 처리 함수
-         function replyRemoveClickEvent() {
+        // 댓글 삭제,좋아요,신고 기능 함수
+        function replyRemoveClickEvent() {
 
-// const $replyData = document.querySelector('.rpboard-delete-replies-box');
+            $viewMain.onclick = e => {
+                const rp = e.target.closest('.rpboard-rpbox');
+                // console.log(rp);
+                const $replyNo = rp.dataset.replyNo;
+                if (e.target.matches('.rpboard-delete-replies-btn')) { // 삭제 기능
+                    console.log('삭제버튼 클릭!!');
+                    if (!confirm('정말 삭제합니까?')) return;
 
-// $replyData.onclick = e => {
-
-//     e.preventDefault();
-
-    // 삭제할 댓글의 PK값 읽기
-    
-    
-   $viewMain.onclick = e =>{
-        if(!e.target.matches('.rpboard-delete-replies-btn')){
-            return;
-        }
-        const $replyNo = e.target.closest('.rpboard-nickname-local-date-box').dataset.replyNo;
-        console.log('삭제버튼 클릭!!');
-
-        if (!confirm('정말 삭제합니까?')) return;
-
-        console.log($replyNo);
-
-        // 서버에 삭제 비동기 요청
-        fetch(URL + '/' + $replyNo, {
-            method: 'DELETE'
-        }).then(res => {
-            if (res.status === 200) {
-                alert('댓글이 정상 삭제됨!');
-                return res.json();
-            } else {
-                alert('댓글 삭제 실패!');
-            }
-        }).then(responseResult => {
-            renderReplyList(responseResult);
-        });
-    }
-
-    
-    // else if (e.target.matches('#replyModBtn')) {
-    //     // console.log('수정 화면 진입!');
-
-    //     // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
-    //     const replyText = e.target.parentElement.previousElementSibling.textContent;
-    //     // console.log(replyText);
-
-    //     // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
-    //     document.getElementById('modReplyText').value = replyText;
-
-    //     // 다음 수정완료 처리를 위해 미리 
-    //     // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
-    //     const $modal = document.querySelector('.modal');
-    //     $modal.dataset.rno = rno;
-    // }
-};
-
-    function likeReportClickEvent() {
-    $viewMain.onclick = e => {
-        if (!e.target.matches('.rpboard-like-replies-btn')) {
-            return;
-        }
-        const $likeReplyNo = e.target.closest('.rpboard-nickname-local-date-box').dataset.replyNo;
-        console.log(document.querySelector('.rpboard-nickname-local-date-box'));
-        console.log('좋아요 클릭!!');
-
-        // # 서버로 보낼 데이터
-        const payload = {
-            replyNo: $likeReplyNo.value,
-            gameId: +gameId
-        };
-
-        // # GET방식을 제외하고 필요한 객체
-        const requestInfo = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        };
-
-        // # 서버에 POST요청 보내기
-        fetch(`${URL}/like`, requestInfo)
-            .then(res => {
-                if (res.status === 200) {
-                    alert('좋아요가 정상 등록됨!');
-
-                    // 마지막페이지 번호
-                    // const lastPageNo = document.querySelector('.pagination').dataset.fp;
-                    getReplyList();
-                } else {
-                    alert('좋아요 등록에 실패함!');
+                    // console.log($replyNo);
+                    // 서버에 삭제 비동기 요청
+                    fetch(URL + '/' + $replyNo, {
+                        method: 'DELETE'
+                    }).then(res => {
+                        if (res.status === 200) {
+                            alert('댓글이 정상 삭제됨!');
+                            return res.json();
+                        } else {
+                            alert('댓글 삭제 실패!');
+                        }
+                    }).then(responseResult => {
+                        renderReplyList(responseResult);
+                    });
                 }
-            });
-    };
-}
+                if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
+
+                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    console.log('좋아요 클릭!!');
+
+                    // # 서버로 보낼 데이터
+                    const payload = {
+                        replyNo: $replyNo,
+                        gameId: +gameId
+                    };
+
+                    // # GET방식을 제외하고 필요한 객체
+                    const requestInfo = {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    };
+
+                    // # 서버에 POST요청 보내기
+                    fetch(URL + "/like", requestInfo)
+                        .then(res => {
+                            if (res.status === 200) {
+                                alert('좋아요가 정상!');
+
+                                getReplyList();
+                            } else {
+                                alert('좋아요 실패함!');
+                            }
+                        });
+                }
+                if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
+
+                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    console.log('신고 클릭!!');
+
+                    // # 서버로 보낼 데이터
+                    const payload = {
+                        replyNo: $replyNo,
+                        gameId: +gameId
+                    };
+
+                    // # GET방식을 제외하고 필요한 객체
+                    const requestInfo = {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    };
+
+                    // # 서버에 POST요청 보내기
+                    fetch(URL + "/report", requestInfo)
+                        .then(res => {
+                            if (res.status === 200) {
+                                alert('신고 정상!');
+
+                                // 마지막페이지 번호
+                                // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                                getReplyList();
+                            } else {
+                                alert('신고 실패함!');
+                            }
+                        });
+                }
+            }
+
+
+            // else if (e.target.matches('#replyModBtn')) {
+            //     // console.log('수정 화면 진입!');
+
+            //     // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
+            //     const replyText = e.target.parentElement.previousElementSibling.textContent;
+            //     // console.log(replyText);
+
+            //     // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
+            //     document.getElementById('modReplyText').value = replyText;
+
+            //     // 다음 수정완료 처리를 위해 미리 
+            //     // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
+            //     const $modal = document.querySelector('.modal');
+            //     $modal.dataset.rno = rno;
+            // }
+        };
+
 
 
         //========= 메인 실행부 =========//
@@ -580,10 +608,6 @@
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
 
-            // 좋아요, 신고하기 이벤트
-            likeReportClickEvent();
-
-            // setTimeout(replyRemoveClickEvent, 5000);
         })();
     </script>
 

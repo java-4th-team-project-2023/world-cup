@@ -1,6 +1,7 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
+import com.pickpick.dto.reply.request.ReplyLikeRequestDTO;
 import com.pickpick.dto.reply.response.ReplyListResponseDTO;
 import com.pickpick.dto.reply.request.ReplyModifyRequestDTO;
 import com.pickpick.dto.reply.request.ReplySaveRequestDTO;
@@ -64,10 +65,24 @@ public class ReplyController {
     // 댓글 좋아요 기능
     @PostMapping("/like")
     public ResponseEntity<?> likeReply(
-            @RequestParam("replyNo") int replyNo
+            @Validated @RequestBody ReplyLikeRequestDTO dto
             , HttpSession session) {
         // 댓글 좋아요 로직 수행
-        replyService.likeReply(replyNo, session);
+        log.info("rNo {}",dto);
+        replyService.likeReply(dto,session);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+    // 댓글 신고 기능
+    @PostMapping("/report")
+    public ResponseEntity<?> reportReply(
+            @Validated @RequestBody ReplyLikeRequestDTO dto
+            , HttpSession session) {
+        // 댓글 좋아요 로직 수행
+        log.info("!!!! {}",dto);
+        replyService.reportReply(dto,session);
         return ResponseEntity.ok().build();
     }
 
