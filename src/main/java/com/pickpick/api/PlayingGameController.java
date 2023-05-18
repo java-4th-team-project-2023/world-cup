@@ -51,9 +51,15 @@ public class PlayingGameController {
 
     }
 
+    // 매치가 끝난 후 업데이트
+    @PutMapping("{winnerId}/{loserId}")
+    public ResponseEntity<?> updateEndOfMatch(@PathVariable int winnerId, @PathVariable int loserId) {
+        return null;
+    }
+
     // 라운드가 끝난 후 업데이트 요청
     @PutMapping
-    public ResponseEntity<?> updateEndOfMatch(@Validated @RequestBody MatchUpdateRequestDTO dto) {
+    public ResponseEntity<?> updateEndOfRound(@Validated @RequestBody MatchUpdateRequestDTO dto) {
 
         log.info("/api/v1/plays PUT!");
 
