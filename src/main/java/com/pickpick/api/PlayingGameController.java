@@ -1,12 +1,15 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
+import com.pickpick.dto.playingGame.MatchPlayingRequestDTO;
 import com.pickpick.dto.playingGame.MatchUpdateRequestDTO;
+import com.pickpick.dto.playingGame.PlayingGameAndPlayersResponseDTO;
 import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
 import com.pickpick.service.PlayingGameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,16 +48,26 @@ public class PlayingGameController {
 
         log.info("/api/v1/plays POST!");
 
-        service.saveGameAndPlayers(dto);
+        int playingGameId = service.saveGameAndPlayers(dto);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(playingGameId);
 
     }
 
     // 매치가 끝난 후 업데이트
-    @PutMapping("{winnerId}/{loserId}")
-    public ResponseEntity<?> updateEndOfMatch(@PathVariable int winnerId, @PathVariable int loserId) {
-        return null;
+    @PutMapping("/{playingGameId}/{winnerId}/{loserId}")
+    public ResponseEntity<?> updateEndOfMatch(
+            @PathVariable int playingGameId,
+            @PathVariable int winnerId,
+            @PathVariable int loserId
+    ) {
+        PlayingGameAndPlayersResponseDTO dto = service.match(MatchPlayingRequestDTO.builder()
+                .playingGameId(playingGameId)
+                .winnerId(winnerId)
+                .loserId(loserId)
+                .build());
+
+        return ResponseEntity.ok().body(dto);
     }
 
     // 라운드가 끝난 후 업데이트 요청

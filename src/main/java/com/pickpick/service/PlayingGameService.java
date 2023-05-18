@@ -1,18 +1,16 @@
 package com.pickpick.service;
 
 import com.pickpick.dto.page.Page;
-import com.pickpick.dto.playingGame.PlayingGameAndPlayersResponseDTO;
-import com.pickpick.dto.playingGame.PlayingGameListResponseDTO;
-import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
-import com.pickpick.dto.playingGame.MatchUpdateRequestDTO;
+import com.pickpick.dto.playingGame.*;
 import com.pickpick.entity.PlayingGame;
 import com.pickpick.entity.PlayingGamePlayers;
+import com.pickpick.repository.LoserPlayerMapper;
 import com.pickpick.repository.PlayingGameMapper;
 import com.pickpick.repository.PlayingGamePlayersMapper;
+import com.pickpick.repository.WinnerPlayerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +22,8 @@ public class PlayingGameService {
     private final PlayingGameMapper playingGameMapper;
     private final PlayingGamePlayersMapper playingGamePlayersMapper;
     private final PlayerService playerService;
+    private final WinnerPlayerMapper winnerPlayerMapper;
+    private final LoserPlayerMapper loserPlayerMapper;
 
     public int saveGameAndPlayers(PlayingGameSaveRequestDTO dto) {
 
@@ -99,6 +99,28 @@ public class PlayingGameService {
                 .map(PlayingGameListResponseDTO::new)
                 .collect(Collectors.toList());
 
+    }
+
+    public PlayingGameAndPlayersResponseDTO match(MatchPlayingRequestDTO dto) {
+        // 카운트 증가 처리
+        playerService.playerMatchWin(dto.getWinnerId());
+        playerService.playerMatchLose(dto.getLoserId());
+
+        // playingGamePlayers 테이블에서 제거
+        playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
+                        .playingGameId(dto.getPlayingGameId())
+                        .playerId(dto.getWinnerId())
+                .build());
+        playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
+                .playingGameId(dto.getPlayingGameId())
+                .playerId(dto.getLoserId())
+                .build());
+
+        // 각각 winner loser 테이블에 추가
+        winnerPlayerMapper.save(dto.getWinnerId(), dto.getPlayingGameId());
+        loserPlayerMapper.save(dto.getWinnerId(), dto.getLoserId());
+
+        return findOne(dto.getPlayingGameId());
     }
 
 }

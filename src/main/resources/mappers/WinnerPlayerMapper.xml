@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pickpick.repository.WinnerPlayerMapper">
+
+    <insert id="save">
+        insert into winner_players_tbl (playing_game_id, player_id)
+        values (#{playingGameId}, #{winnerId})
+    </insert>
+
+    <delete id="delete">
+        delete from winner_players_tbl
+        where player_id=#{winnerId}
+        and playing_game_id=#{playingGameId}
+    </delete>
+
+    <select id="findAll" resultType="Integer">
+        select player_id
+        from winner_players_tbl
+        where playing_game_id=#{playingGameId}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from winner_players_tbl
+        where playing_game_id=#{playingGameId}
+    </select>
+
+    <delete id="deleteAll">
+        delete from winner_players_tbl
+        where playing_game_id=#{playingGameId}
+    </delete>
+
+</mapper>
