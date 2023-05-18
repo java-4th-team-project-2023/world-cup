@@ -32,11 +32,20 @@ public interface ReplyMapper {
     int count(int gameId);
 
     // 해당 회원이 좋아요한 댓글 존재하는지
-    int findLikeOne(int replyNo, String accountId);
+    int findLikeOne(@Param("replyNo") int replyNo,@Param("accountId") String accountId);
 
     // 좋아요하면 테이블 data넣기
-    boolean addLikeUser(int replyNo, String accountId);
+    boolean addLikeUser(@Param("replyNo")int replyNo,@Param("accountId") String accountId);
 
     // 좋아요 횟수 올리기
     int likeUpCounting(int replyNo);
+
+    // 해당 회원이 신고한 댓글 존재하는지
+    int findReportOne(@Param("replyNo") int replyNo,@Param("accountId") String accountId);
+
+    // 신고하면 테이블 data넣기
+    boolean addReportUser(@Param("replyNo")int replyNo,@Param("accountId") String accountId);
+
+    // 신고 횟수 올리기
+    int ReportUpCounting(int replyNo);
 }

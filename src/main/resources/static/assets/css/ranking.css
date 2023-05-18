@@ -620,6 +620,7 @@
   height: 100%;
   padding-top: 2%;
   position: relative;
+  overflow: auto;
 }
 
 /* 댓글 main */
