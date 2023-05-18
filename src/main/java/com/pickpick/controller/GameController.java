@@ -126,7 +126,7 @@ public class GameController {
         model.addAttribute("gameId", gameId);
         model.addAttribute("playerCount", playerCount);
 
-        return "game/start";
+        return "games/start";
     }
 
 }

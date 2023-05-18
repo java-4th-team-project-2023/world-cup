@@ -123,7 +123,7 @@
 
 
 
-    <div id="game">
+    <div id="game" data-player-count="${playerCount}">
 
     </div>
   

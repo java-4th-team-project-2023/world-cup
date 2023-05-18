@@ -12,7 +12,7 @@
 
 function calRound() {
 
-    const playerNum = 20;
+    const playerNum = document.getElementById('game').dataset.playerCount;
     let n = 2;
     while (playerNum >> n > 0) {
 
