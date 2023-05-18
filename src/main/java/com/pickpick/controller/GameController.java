@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -115,6 +116,17 @@ public class GameController {
         model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
 
         return "games/list";
+    }
+
+    // 게임 플레이 페이지 이동
+    @GetMapping("/start")
+    public String gameStart(int gameId, Model model) {
+        int playerCount = gameService.countPlayer(gameId);
+
+        model.addAttribute("gameId", gameId);
+        model.addAttribute("playerCount", playerCount);
+
+        return "games/start";
     }
 
 }
