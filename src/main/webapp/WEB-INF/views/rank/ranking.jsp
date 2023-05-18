@@ -325,6 +325,9 @@
         const currentAccount = '${login.accountId}';
         console.log("!!!" + currentAccount);
 
+        // 비동기 처리(댓글번호)
+        const $viewMain = document.querySelector('.rpboard-viewmain');
+
         // 댓글 목록 렌더링 함수
         function renderReplyList({
             count,
@@ -373,8 +376,8 @@
                     }
                     tag +="</div>" +
                         "<div class='rpboard-like-report-box'>" +
-                        "<div class='like' id='Like'>좋아요</div>" +
-                        "<div class='report' id='Report'>신고</div>" +
+                        "<div class='like' id='Like'><button class ='rpboard-like-replies-btn'>좋아요</button></div>" +
+                        "<div class='report' id='Report'><button class ='rpboard-report-replies-btn'></button>신고</div>" +
                         "</div>" +
                         "</div>";
 
@@ -478,7 +481,7 @@
 //     e.preventDefault();
 
     // 삭제할 댓글의 PK값 읽기
-    const $viewMain = document.querySelector('.rpboard-viewmain');
+    
     
    $viewMain.onclick = e =>{
         if(!e.target.matches('.rpboard-delete-replies-btn')){
@@ -523,7 +526,47 @@
     //     $modal.dataset.rno = rno;
     // }
 };
-// }
+
+    function likeReportClickEvent() {
+    $viewMain.onclick = e => {
+        if (!e.target.matches('.rpboard-like-replies-btn')) {
+            return;
+        }
+        const $likeReplyNo = e.target.closest('.rpboard-nickname-local-date-box').dataset.replyNo;
+        console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+        console.log('좋아요 클릭!!');
+
+        // # 서버로 보낼 데이터
+        const payload = {
+            replyNo: $likeReplyNo.value,
+            gameId: +gameId
+        };
+
+        // # GET방식을 제외하고 필요한 객체
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+
+        // # 서버에 POST요청 보내기
+        fetch(`${URL}/like`, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    alert('좋아요가 정상 등록됨!');
+
+                    // 마지막페이지 번호
+                    // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                    getReplyList();
+                } else {
+                    alert('좋아요 등록에 실패함!');
+                }
+            });
+    };
+}
+
 
         //========= 메인 실행부 =========//
         (function () {
@@ -536,6 +579,9 @@
 
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
+
+            // 좋아요, 신고하기 이벤트
+            likeReportClickEvent();
 
             // setTimeout(replyRemoveClickEvent, 5000);
         })();
