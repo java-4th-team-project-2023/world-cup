@@ -1,10 +1,7 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
-import com.pickpick.dto.player.PlayerGameResponseDTO;
-import com.pickpick.dto.player.PlayerListResponseDTO;
-import com.pickpick.dto.player.PlayerModifyRequestDTO;
-import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.dto.player.*;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import com.pickpick.service.PlayerService;
@@ -153,6 +150,16 @@ public class PlayerController {
         if (playerList == null) return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok().body(playerList);
+    }
+
+    // 선수 한 명 조회
+    @GetMapping("/{playerId}")
+    public ResponseEntity<?> findOne(@PathVariable int playerId) {
+        PlayerOneResponseDTO player = playerService.findOne(playerId);
+
+        if (player == null) return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok().body(player);
     }
 
 }
