@@ -12,6 +12,8 @@ import com.pickpick.repository.PlayingGamePlayersMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,16 +23,28 @@ public class PlayingGameService {
 
     private final PlayingGameMapper playingGameMapper;
     private final PlayingGamePlayersMapper playingGamePlayersMapper;
+    private final PlayerService playerService;
 
-    public void saveGameAndPlayers(PlayingGameSaveRequestDTO dto) {
-        playingGameMapper.save(PlayingGame.builder()
+    public int saveGameAndPlayers(PlayingGameSaveRequestDTO dto) {
+
+        // 우선 플레이중인 게임을 만든 뒤 id를 리턴받는다.
+        int playingGameId = playingGameMapper.save(PlayingGame.builder()
                 .gameId(dto.getGameId())
                 .totalRound(dto.getTotalRound())
                 .accountId(dto.getAccountId())
                 .currentRound(dto.getCurrentRound())
                 .build());
-        dto.getPlayers()
-                .forEach(playingGamePlayersMapper::save);
+        // 그후 플레이어 목록과 위의 id를 이용하여 플레이중인 게임 플레이어들을 db에 저장한다.
+        dto.getPlayerIdList()
+                .forEach(pId -> {
+                    PlayingGamePlayers newPlayingGamePlayer = PlayingGamePlayers.builder()
+                            .playerId(pId)
+                            .playingGameId(playingGameId)
+                            .build();
+                    playingGamePlayersMapper.save(newPlayingGamePlayer);
+                });
+
+        return playingGameId;
     }
 
     public void updateEndOfMatch(MatchUpdateRequestDTO dto) {
@@ -68,11 +82,13 @@ public class PlayingGameService {
         List<PlayingGamePlayers> players = playingGamePlayersMapper.findAllByGameId(playingGameId);
 
         return PlayingGameAndPlayersResponseDTO.builder()
-                .playingGameId(game.getPlayingGameId())
-                .gameId(game.getGameId())
                 .totalRound(game.getTotalRound())
                 .currentRound(game.getCurrentRound())
-                .players(players)
+                .randomTwoPlayers(players.stream()
+                        .sorted(Comparator.comparingInt(a -> (int) (Math.random() * players.size())))
+                        .limit(2)
+                        .map(p -> playerService.findOne(p.getPlayerId()))
+                        .collect(Collectors.toList()))
                 .build();
 
     }

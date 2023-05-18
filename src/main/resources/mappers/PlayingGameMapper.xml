@@ -7,6 +7,10 @@
     <insert id="save">
         insert into playing_game_tbl (game_id, round_num, account_id, current_round)
         values (#{gameId}, #{totalRound}, #{currentRoung}, #{accountId})
+
+        <selectKey resultType="int" keyProperty="playingGameId" order="AFTER">
+            select LAST_INSERT_ID();
+        </selectKey>
     </insert>
 
     <select id="findByAccountId" resultType="playingGame">

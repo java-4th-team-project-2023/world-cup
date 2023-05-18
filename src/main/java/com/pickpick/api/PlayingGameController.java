@@ -63,7 +63,7 @@ public class PlayingGameController {
         return ResponseEntity.ok().build();
     }
 
-    // 게임 종료 혹은 삭제
+    // 게임 삭제
     @DeleteMapping("/{playingGameId}")
     public ResponseEntity<?> delete(@PathVariable int playingGameId) {
 

@@ -1,21 +1,26 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
-import com.pickpick.dto.player.PlayerGameResponseDTO;
-import com.pickpick.dto.player.PlayerListResponseDTO;
-import com.pickpick.dto.player.PlayerModifyRequestDTO;
-import com.pickpick.dto.player.PlayerRegisterRequestDTO;
+import com.pickpick.dto.player.*;
+import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
 import com.pickpick.dto.search.Search;
+import com.pickpick.entity.Account;
 import com.pickpick.entity.Player;
+import com.pickpick.entity.PlayingGamePlayers;
 import com.pickpick.service.PlayerService;
+import com.pickpick.service.PlayingGameService;
+import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +28,7 @@ import java.util.List;
 public class PlayerController {
 
     private final PlayerService playerService;
+    private final PlayingGameService playingGameService;
 
     // 선수 등록
     @PostMapping
@@ -42,16 +48,37 @@ public class PlayerController {
         return ResponseEntity.ok().body(flag);
     }
 
-    // 게임 생성 후 '강' 수에 맞는 선수 목록 리턴
-    @GetMapping("/{gameId}/num/{number}")
-    public ResponseEntity<?> getGameplayPlayers(@PathVariable int gameId, @PathVariable int number) {
+    // 게임 생성 후 '강' 수에 맞는 선수 목록을 PlayingGameService 에 전달하여 PlayingGame 생성후
+    @PostMapping("/{gameId}/num/{number}")
+    public ResponseEntity<?> getGameplayPlayers(
+            HttpSession session,
+            @PathVariable int gameId, @PathVariable int number
+    ) {
+        log.info("/api/v1/players/{}/num/{} GET!", gameId, number);
+
         List<PlayerGameResponseDTO> playerList = playerService.findN(gameId, number);
 
-        log.info("/api/v1/players/{}/num/{} GET! playerList: {}", gameId, number, playerList);
+        int playingGameId = playingGameService.saveGameAndPlayers(PlayingGameSaveRequestDTO.builder()
+                .gameId(gameId)
+                .totalRound(number)
+                .accountId(((Account) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId())
+                .currentRound(number)
+                .playerIdList(playerList.stream()
+                        .map(PlayerGameResponseDTO::getPlayerId)
+                        .collect(Collectors.toList()))
+                .build());
 
-        if (playerList.size() < number) return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(playingGameId);
+    }
 
-        return ResponseEntity.ok().body(playerList);
+    // 선수 한명 리턴
+    @GetMapping("/{playerId}")
+    public ResponseEntity<?> getPlayer(@PathVariable int playerId) {
+        log.info("/api/v1/players/{} GET!", playerId);
+
+        PlayerOneResponseDTO player = playerService.findOne(playerId);
+
+        return ResponseEntity.ok().body(player);
     }
 
     // 선수 매치
