@@ -322,6 +322,12 @@
         };
     }
 
+    function getPlayerInfo() {
+
+        fetch("")
+
+    }
+
     //========= 메인 실행부 =========//
     (function () {
 

@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RankingController {
 
     @GetMapping("/ranking")
-    public String replyPage(Integer gameId, Model model){
-        log.info("하이루 랭킹페이지 들어옴 {}" ,gameId);
-        model.addAttribute("gameId",gameId);
+    public String replyPage(Integer gameId, Model model) {
+        log.info("하이루 랭킹페이지 들어옴 {}", gameId);
+        model.addAttribute("gameId", gameId);
         return "rank/ranking";
     }
 
     @GetMapping("/winner")
-    public String winnersPage(Integer gameId, int playerId) {
+    public String winnersPage(Integer gameId, int playerId, Model model) {
         log.info("/rank/winner GET! ");
+        model.addAttribute("gameId", gameId);
+        model.addAttribute("playerId", playerId);
         return "rank/winner";
     }
 

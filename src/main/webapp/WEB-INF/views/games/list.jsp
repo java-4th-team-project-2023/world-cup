@@ -31,7 +31,7 @@
 
         <c:forEach items="${gameList}" var="g">
 
-            <a href="/rank/ranking?gameId=${g.gameId}" class="card" data-game="${g.gameId}">
+            <a href="/games/start?gameId=${g.gameId}" class="card" data-game="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
@@ -40,7 +40,7 @@
                 <h3>${g.gameName}</h3>
                 <div class="button-wrapper">
                     <button class="game-modify-btn">수정하기</button>
-                    <button class="game-ranking-btn">랭킹보기</button>
+                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
                 </div>
             </a>
 
