@@ -82,17 +82,34 @@ public class PlayingGameController {
         return ResponseEntity.ok().body(dto);
     }
 
-    // 라운드가 끝난 후 업데이트 요청
-    @PutMapping
-    public ResponseEntity<?> updateEndOfRound(@Validated @RequestBody MatchUpdateRequestDTO dto) {
+    // 리셋 요청
+    @PutMapping("/{playingGameId}")
+    public ResponseEntity<?> reset(@PathVariable int playingGameId) {
 
-        log.info("/api/v1/plays PUT!");
+        log.info("/api/v1/plays/{} PUT!", playingGameId);
 
-        service.updateEndOfMatch(dto);
-        service.updateEndOfRound(dto.getPlayingGameId());
+        PlayingGameAndPlayersResponseDTO dto = service.reset(playingGameId);
 
-        return ResponseEntity.ok().build();
+        // dto가 null 인 것은 라운드 처음이기 때문에 리셋할 수 없다는 것
+        if (dto == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().body(dto);
     }
+
+//    // 라운드가 끝난 후 업데이트 요청
+//    필요없을듯...
+//    @PutMapping
+//    public ResponseEntity<?> updateEndOfRound(@Validated @RequestBody MatchUpdateRequestDTO dto) {
+//
+//        log.info("/api/v1/plays PUT!");
+//
+//        service.updateEndOfMatch(dto);
+//        service.updateEndOfRound(dto.getPlayingGameId());
+//
+//        return ResponseEntity.ok().build();
+//    }
 
     // 게임 삭제
     @DeleteMapping("/{playingGameId}")

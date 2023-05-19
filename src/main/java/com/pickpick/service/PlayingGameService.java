@@ -159,6 +159,8 @@ public class PlayingGameService {
                         .playerId(p)
                         .build())
         );
+
+        return findOne(playingGameId);
     }
 
     public int getGameId(int playingGameId) {
