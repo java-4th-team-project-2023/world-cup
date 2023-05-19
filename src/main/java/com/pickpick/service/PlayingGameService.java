@@ -9,13 +9,14 @@ import com.pickpick.repository.PlayingGameMapper;
 import com.pickpick.repository.PlayingGamePlayersMapper;
 import com.pickpick.repository.WinnerPlayerMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Service @Slf4j
 @RequiredArgsConstructor
 public class PlayingGameService {
 
@@ -28,12 +29,19 @@ public class PlayingGameService {
     public int saveGameAndPlayers(PlayingGameSaveRequestDTO dto) {
 
         // 우선 플레이중인 게임을 만든 뒤 id를 리턴받는다.
-        int playingGameId = playingGameMapper.save(PlayingGame.builder()
+        PlayingGame newPlayingGame = PlayingGame.builder()
                 .gameId(dto.getGameId())
                 .totalRound(dto.getTotalRound())
                 .accountId(dto.getAccountId())
                 .currentRound(dto.getCurrentRound())
-                .build());
+                .build();
+
+        playingGameMapper.save(newPlayingGame);
+
+        int playingGameId = newPlayingGame.getPlayingGameId();
+
+        log.info("playingGameId : {}", playingGameId);
+
         // 그후 플레이어 목록과 위의 id를 이용하여 플레이중인 게임 플레이어들을 db에 저장한다.
         dto.getPlayerIdList()
                 .forEach(pId -> {
@@ -126,7 +134,6 @@ public class PlayingGameService {
         if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0 && winnerPlayerMapper.count(dto.getPlayingGameId()) == 1) { // 게임 끝
             playingGameMapper.delete(dto.getPlayingGameId());
             playerService.playerWin(dto.getWinnerId());
-            return null;
         } else if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0) { // 라운드 끝
             // 위너 플레이어 테이블의 모든 선수들을 플레잉 게임 플레이어 테이블로 이동
             winnerPlayerMapper.findAll(dto.getPlayingGameId()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()

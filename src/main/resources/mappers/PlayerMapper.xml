@@ -51,7 +51,7 @@
     <select id="findN" resultType="player">
         SELECT *
         FROM player_tbl
-        WHERE game_id=#{game_id}
+        WHERE game_id=#{gameId}
         ORDER BY RAND()
         LIMIT 1, #{number}
     </select>

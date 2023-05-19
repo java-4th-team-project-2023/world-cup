@@ -72,10 +72,10 @@ public class PlayingGameController {
                 .loserId(loserId)
                 .build());
 
-        // dto가 null 이면 게임 끝난 것
-        if (dto == null) {
+        // 랜덤한 두 명의 플레이어 길이가 0이면 게임 끝남
+        if (dto.getRandomTwoPlayers().size() == 0) {
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&winnerId=" + winnerId));
+            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&playerId=" + winnerId + "&round=" + dto.getTotalRound()));
             return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         }
 
