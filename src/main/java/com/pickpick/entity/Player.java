@@ -3,7 +3,7 @@ package com.pickpick.entity;
 import lombok.*;
 
 /*
-CREATE TABLE worldcup_entity_tbl (
+CREATE TABLE player_tbl (
     entity_id int(9) AUTO_INCREMENT,
     game_id int(9) NOT NULL,
     fight_count int(9) DEFAULT 0,
