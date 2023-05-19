@@ -105,4 +105,16 @@ public class ReplyController {
         }
 
     }
+
+    // 댓글 수정 기능
+    @PutMapping("/modify")
+    public ResponseEntity<?> modify(
+            @Validated @RequestBody ReplyModifyRequestDTO dto,
+            HttpSession session){
+
+            ReplyListResponseDTO responseDTO = replyService.modify(dto,session);
+
+
+        return ResponseEntity.ok().body(responseDTO);
+    }
 }

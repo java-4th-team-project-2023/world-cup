@@ -502,29 +502,33 @@
                                 alert('신고 실패함!');
                             }
                         });
+                }else if (e.target.matches('.rpboard-modify-replies-btn')) { // 수정 기능
+
+                    const payload = {
+                        replyNo: $replyNo,
+                        gameId: +gameId,
+                        text: text
+                    };
+
+                    const requestInfo = {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    }
+
+
                 }
-                    else{
+                    else{ // 다른곳 클릭하면 보여줌
                         console.log("다른곳 클릭");
                         return;
                 }   
+
+               
+
+
             }
-
-
-            // else if (e.target.matches('#replyModBtn')) {
-            //     // console.log('수정 화면 진입!');
-
-            //     // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
-            //     const replyText = e.target.parentElement.previousElementSibling.textContent;
-            //     // console.log(replyText);
-
-            //     // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
-            //     document.getElementById('modReplyText').value = replyText;
-
-            //     // 다음 수정완료 처리를 위해 미리 
-            //     // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
-            //     const $modal = document.querySelector('.modal');
-            //     $modal.dataset.rno = rno;
-            // }
         };
 
 

@@ -63,13 +63,15 @@ public class ReplyService {
         return getList(dto.getGameId(),new Page(1,20));
     }
 
-    public ReplyListResponseDTO modify(ReplyModifyRequestDTO dto) throws SQLException{
+    public ReplyListResponseDTO modify(ReplyModifyRequestDTO dto,HttpSession session){
 
         Reply reply = dto.toEntity();
+        String loginMemberAccount = getCurrentLoginMemberAccount(session);
+        reply.setAccountId(loginMemberAccount);
         boolean flag = replyMapper.modify(reply);
         if (!flag){
             log.warn("reply modify fail!");
-            throw new SQLException("댓글 수정 실패");
+
         }
 
         return getList(dto.getGameId(),new Page(1,20));

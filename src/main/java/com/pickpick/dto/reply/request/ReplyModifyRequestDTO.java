@@ -12,14 +12,15 @@ import lombok.*;
 @Builder
 public class ReplyModifyRequestDTO {
 
-    private String writer;
+    private String accountId;
     private String text;
     private int gameId;
+    private int replyNo;
 
     public Reply toEntity(){
         return Reply.builder()
                 .gameId(this.gameId)
-                .writer(this.writer)
+                .replyNo(this.replyNo)
                 .text(this.text)
                 .build();
     }
