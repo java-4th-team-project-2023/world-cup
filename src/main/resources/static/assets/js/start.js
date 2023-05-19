@@ -31,42 +31,64 @@ function selectRound() {
     document.getElementById('send').onclick = e => {
         const selectedValue = document.getElementById('round').value;
 
-        const playingGameId = sendRoundToPlayerController(selectedValue);
+        sendRoundToPlayerController(selectedValue);
 
-        fetch(`/api/v1/plays/${playingGameId}`)
-            .then(res => res.json())
-            .then(({totalRound, currentRound, randomTwoPlayers}) => {
-                renderPlayers(randomTwoPlayers);
-            });
     }
 
 }
 
 // PlayerController 로 데이터 전달
 function sendRoundToPlayerController(round) {
-    return fetch(`/api/v1/players/${document.getElementById('game').dataset.gameId}/num/${round}`,
+     fetch(`/api/v1/players/${document.getElementById('game').dataset.gameId}/num/${round}`,
         {
             method: 'POST'
         })
         .then(res => res.json())
         .then(
-            rr => rr
+            playingGameId => {
+                fetch(`/api/v1/plays/${playingGameId}`)
+                    .then(res => res.json())
+                    .then(({totalRound, currentRound, randomTwoPlayers}) => {
+                        renderPlayers(randomTwoPlayers);
+                        renderRoundInfo(currentRound);
+                        document.getElementById('game').dataset.playingGameId = playingGameId;
+                    });
+            }
         );
 }
 
-// 대결 player 선택하고 게임 다시시작 
+// 현재 라운드 정보를 뿌려준다
+function renderRoundInfo(currentRound) {
+    document.getElementById('round-info').textContent = currentRound + '강';
+}
+
+// 클릭하면 커지는 이벤트 등록
 function selectOne() {
     const $game = document.getElementById('game');
- 
-    $game.onclick = e => {
-        console.log(e.target.dataset.playerId);
-        e.target.classList.add('bigger');
 
+    $game.onclick = e => {
+        const winnerId = e.target.dataset.playerId;
+        const loserId = (e.target.matches('.left') ?
+            document.querySelector('.right').dataset.playerId : document.querySelector('.left').dataset.playerId);
+
+
+        e.target.classList.add('bigger');
         setTimeout(() => {
             e.target.classList.remove('bigger');
-            $game.textContent='';
-            renderPlayers();
-        }, 3000);       
+
+            $game.textContent = '';
+            fetch(`/api/v1/plays/${$game.dataset.playingGameId}/${winnerId}/${loserId}`,
+                {
+                    method: 'PUT'
+                })
+                .then(res => res.json())
+                .then(
+                    ({currentRound, randomTwoPlayers}) => {
+                        renderRoundInfo(currentRound);
+                        renderPlayers(randomTwoPlayers);
+                    }
+                );
+        }, 3000);
 
     }
 }

@@ -2,24 +2,21 @@
 
 body {
     background: #F5F5F5;
-    width: 100%;
+    margin: 0;
+    width: 100vw;
     height: 100vh;
-
 }
 
 header {
     position: relative;
-    height: 10%;
 }
 
 #main-wrapper {
     padding: 0;
-    height: 90%;
 }
 
 .wrapper {
 
-    width: 100%;
     position: relative;
     /* border: 1px solid red; */
 
@@ -32,9 +29,14 @@ header {
     display: flex;
 }
 
+#game section {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 .left {
-    height: 90vh;
+    height: 80vh;
     width: 50%;
     /*background-color: orange;*/
     left: 0;
@@ -42,7 +44,7 @@ header {
 }
 
 .right {
-    height: 90vh;
+    height: 80vh;
     width: 50%;
     /*background-color: aqua;*/
     right: 0;
@@ -163,6 +165,10 @@ header {
     z-index: 10;
     transition: 1s;
 
+}
+
+#game-wrapper {
+    height: 90%;
 }
 
 /* 게임 타이틀 래퍼 */

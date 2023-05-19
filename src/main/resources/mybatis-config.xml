@@ -35,5 +35,10 @@
         <mapper resource="mappers/PlayingGameMapper.xml" />
 
         <mapper resource="mappers/PlayingGamePlayersMapper.xml" />
+
+        <mapper resource="mappers/WinnerPlayerMapper.xml" />
+
+        <mapper resource="mappers/LoserPlayerMapper.xml" />
+
     </mappers>
 </configuration>

@@ -125,10 +125,9 @@ public class PlayingGameService {
                 .playerId(dto.getLoserId())
                 .build());
 
-
         // 각각 winner loser 테이블에 추가
         winnerPlayerMapper.save(dto.getWinnerId(), dto.getPlayingGameId());
-        loserPlayerMapper.save(dto.getWinnerId(), dto.getLoserId());
+        loserPlayerMapper.save(dto.getLoserId(), dto.getPlayingGameId());
 
         // 라운드가 끝났는지 중간인지 확인하는 로직
         if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0 && winnerPlayerMapper.count(dto.getPlayingGameId()) == 1) { // 게임 끝
@@ -136,12 +135,21 @@ public class PlayingGameService {
             playerService.playerWin(dto.getWinnerId());
         } else if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0) { // 라운드 끝
             // 위너 플레이어 테이블의 모든 선수들을 플레잉 게임 플레이어 테이블로 이동
+
             winnerPlayerMapper.findAll(dto.getPlayingGameId()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
                     .playingGameId(dto.getPlayingGameId())
                     .playerId(p)
                     .build()));
             // 위너 플레이어 테이블을 비워주기
             winnerPlayerMapper.deleteAll(dto.getPlayingGameId());
+
+            // currentRound를 2로 나눠주기
+            PlayingGame playingGame = playingGameMapper.findOne(dto.getPlayingGameId());
+            playingGame
+                    .setCurrentRound(playingGame.getCurrentRound() >> 1);
+
+            // 업데이트
+            playingGameMapper.update(playingGame);
         }
         return findOne(dto.getPlayingGameId());
     }

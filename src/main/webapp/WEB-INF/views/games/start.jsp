@@ -63,9 +63,9 @@
     </div>
 </div>
 
-<div id="main-wrapper">
+<div id="game-wrapper">
 
-    <div id="game-title-wrapper">${gameName}</div>
+    <div id="game-title-wrapper">${gameName}<span id="round-info"></span></div>
 
     <div id="game" data-player-count="${playerCount}" data-game-id="${gameId}">
 
