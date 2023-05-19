@@ -4,11 +4,9 @@
     document.querySelector('.hiddenBtn').click();
     calRound();
     selectOne();
-
 })();
 
 // 게임 라운드 정하기 함수
-
 function calRound() {
 
     const playerNum = document.getElementById('game').dataset.playerCount;

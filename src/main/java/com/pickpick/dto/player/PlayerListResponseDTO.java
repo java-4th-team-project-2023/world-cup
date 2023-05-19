@@ -17,8 +17,16 @@ public class PlayerListResponseDTO {
 
     public PlayerListResponseDTO(Player player) {
         playerId = player.getPlayerId();
-        matchWinRate = (double) player.getSelectedWinCount() / player.getFightCount() * 100;
-        finalWinRate = (double) player.getFinalWinCount() / player.getJoinGameCount() * 100;
+        try {
+            matchWinRate = (double) player.getSelectedWinCount() / player.getFightCount() * 100;
+        } catch (ArithmeticException e) {
+            matchWinRate = 0.0;
+        }
+        try {
+            finalWinRate = (double) player.getFinalWinCount() / player.getJoinGameCount() * 100;
+        } catch (ArithmeticException e) {
+            finalWinRate = 0.0;
+        }
         playerImgPath = player.getPlayerImgPath();
         playerName = player.getPlayerName();
     }

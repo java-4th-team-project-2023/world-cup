@@ -51,6 +51,8 @@ public class ReplyService {
         Reply reply = dto.toEntity();
         if (LoginUtil.isLogin(session)){
             reply.setAccountId(getCurrentLoginMemberAccount(session));
+        } else {
+            reply.setAccountId(dto.getAccountId());
         }
         log.info("!!!!!gameId : {}",reply.getGameId());
         boolean flag = replyMapper.save(reply);
