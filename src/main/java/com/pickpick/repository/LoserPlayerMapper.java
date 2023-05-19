@@ -15,6 +15,6 @@ public interface LoserPlayerMapper {
 
     int count(int playingGameId);
 
-    void deleteAll(int playingGameId);
 
+    int findLatest(int playingGameId);
 }

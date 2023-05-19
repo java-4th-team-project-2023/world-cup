@@ -32,4 +32,12 @@
         where playing_game_id=#{playingGameId}
     </delete>
 
+    <select id="findLatest" resultType="int">
+        select player_id
+        from winner_players_tbl
+        where playing_game_id=#{playingGameId}
+        order by date_time desc
+        limit 1
+    </select>
+
 </mapper>

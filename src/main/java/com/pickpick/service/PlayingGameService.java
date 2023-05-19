@@ -63,9 +63,9 @@ public class PlayingGameService {
 
         // 현재 라운드를 2로 나눈 후 업데이트
         playingGameMapper.update(PlayingGame.builder()
-                        .playingGameId(playingGameId)
-                        .currentRound(playingGameMapper.findOne(playingGameId)
-                                .getCurrentRound() >> 1)
+                .playingGameId(playingGameId)
+                .currentRound(playingGameMapper.findOne(playingGameId)
+                        .getCurrentRound() >> 1)
                 .build());
 
     }
@@ -102,25 +102,67 @@ public class PlayingGameService {
     }
 
     public PlayingGameAndPlayersResponseDTO match(MatchPlayingRequestDTO dto) {
+
         // 카운트 증가 처리
         playerService.playerMatchWin(dto.getWinnerId());
         playerService.playerMatchLose(dto.getLoserId());
 
         // playingGamePlayers 테이블에서 제거
         playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
-                        .playingGameId(dto.getPlayingGameId())
-                        .playerId(dto.getWinnerId())
+                .playingGameId(dto.getPlayingGameId())
+                .playerId(dto.getWinnerId())
                 .build());
         playingGamePlayersMapper.delete(PlayingGamePlayers.builder()
                 .playingGameId(dto.getPlayingGameId())
                 .playerId(dto.getLoserId())
                 .build());
 
+
         // 각각 winner loser 테이블에 추가
         winnerPlayerMapper.save(dto.getWinnerId(), dto.getPlayingGameId());
         loserPlayerMapper.save(dto.getWinnerId(), dto.getLoserId());
 
+        // 라운드가 끝났는지 중간인지 확인하는 로직
+        if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0 && winnerPlayerMapper.count(dto.getPlayingGameId()) == 1) { // 게임 끝
+            playingGameMapper.delete(dto.getPlayingGameId());
+            playerService.playerWin(dto.getWinnerId());
+            return null;
+        } else if (playingGamePlayersMapper.count(dto.getPlayingGameId()) == 0) { // 라운드 끝
+            // 위너 플레이어 테이블의 모든 선수들을 플레잉 게임 플레이어 테이블로 이동
+            winnerPlayerMapper.findAll(dto.getPlayingGameId()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+                    .playingGameId(dto.getPlayingGameId())
+                    .playerId(p)
+                    .build()));
+            // 위너 플레이어 테이블을 비워주기
+            winnerPlayerMapper.deleteAll(dto.getPlayingGameId());
+        }
         return findOne(dto.getPlayingGameId());
+    }
+
+    public PlayingGameAndPlayersResponseDTO reset(int playingGameId) {
+
+        // 위너 테이블에 아무것도 없으면 리셋할 수 없음
+        if (winnerPlayerMapper.count(playingGameId) == 0) {
+            return null;
+        }
+
+        // 위너 테이블과 루저 테이블에서 가장 최근에 추가된 선수들을 하나씩 가져옴
+        int winnerId = winnerPlayerMapper.findLatest(playingGameId);
+        int loserId = loserPlayerMapper.findLatest(playingGameId);
+
+        List<Integer> resetPlayerList = List.of(winnerId, loserId);
+
+        // 다시 플레잉 게임 플레이어 테이블에 담기
+        resetPlayerList.forEach(
+                p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+                        .playingGameId(playingGameId)
+                        .playerId(p)
+                        .build())
+        );
+    }
+
+    public int getGameId(int playingGameId) {
+        return playingGameMapper.getGameId(playingGameId);
     }
 
 }

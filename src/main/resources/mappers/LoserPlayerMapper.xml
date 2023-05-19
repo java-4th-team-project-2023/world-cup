@@ -27,9 +27,12 @@
         where playing_game_id=#{playingGameId}
     </select>
 
-    <delete id="deleteAll">
-        delete from loser_players_tbl
+    <select id="findLatest" resultType="int">
+        select player_id
+        from loser_players_tbl
         where playing_game_id=#{playingGameId}
-    </delete>
+        order by date_time desc
+        limit 1
+    </select>
 
 </mapper>

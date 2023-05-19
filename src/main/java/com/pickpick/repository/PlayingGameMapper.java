@@ -19,4 +19,6 @@ public interface PlayingGameMapper {
 
     void update(PlayingGame playingGame);
 
+    int getGameId(int playingGameId);
+
 }

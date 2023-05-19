@@ -8,10 +8,14 @@ import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
 import com.pickpick.service.PlayingGameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController @Slf4j
 @RequestMapping("/api/v1/plays")
@@ -61,11 +65,19 @@ public class PlayingGameController {
             @PathVariable int winnerId,
             @PathVariable int loserId
     ) {
+
         PlayingGameAndPlayersResponseDTO dto = service.match(MatchPlayingRequestDTO.builder()
                 .playingGameId(playingGameId)
                 .winnerId(winnerId)
                 .loserId(loserId)
                 .build());
+
+        // dto가 null 이면 게임 끝난 것
+        if (dto == null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&winnerId=" + winnerId));
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        }
 
         return ResponseEntity.ok().body(dto);
     }

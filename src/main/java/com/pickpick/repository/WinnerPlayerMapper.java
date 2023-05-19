@@ -17,4 +17,5 @@ public interface WinnerPlayerMapper {
 
     void deleteAll(int playingGameId);
 
+    int findLatest(int playingGameId);
 }
