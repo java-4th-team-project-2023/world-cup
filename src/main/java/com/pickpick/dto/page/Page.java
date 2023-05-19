@@ -1,11 +1,12 @@
 package com.pickpick.dto.page;
 
+import com.pickpick.dto.search.Search;
 import lombok.*;
 
 @Setter @Getter
 @AllArgsConstructor
 @ToString @Builder
-public class Page {
+public class Page extends Search {
 
     private int pageNo;
     private int amount;

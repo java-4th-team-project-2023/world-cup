@@ -75,7 +75,7 @@ public class PlayingGameController {
         // dto가 null 이면 게임 끝난 것
         if (dto == null) {
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&winnerId=" + winnerId));
+            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&playerId=" + winnerId));
             return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         }
 
