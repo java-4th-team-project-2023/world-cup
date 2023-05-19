@@ -82,6 +82,7 @@
 
                     <!-- 반복 -->
                     <!-- 랭킹 목록 box -->
+                    <c:forEach var="player" items="${playerList}">
                     <section class="rkboard-ranking-wrapper">
                         <ul class="rkboard-ranking-list-box">
                             <!-- 순위 -->
@@ -91,112 +92,34 @@
                             <!-- 이미지 -->
                             <li class="rkboard-ranking-list" id="Image">
                                 <a href="/assets/img/cat.jpg">
-                                    <img src="/assets/img/cat.jpg" alt="rkimg">
+                                    <img src="${player.playerImgPath}" alt="${player.playerName}">
                                 </a>
                             </li>
                             <!-- 이름 -->
                             <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">고양이1</p>
+                                <p class="rkboard-list-text">${player.playerName}</p>
                             </li>
                             <!-- 우승 비율 -->
                             <li class="rkboard-ranking-list" id="Winning-Percentage">
                                 <div class="graph">
                                     <div class="bar-text">
-                                        <p>90%</p>
+                                        <p>${player.finalWinRate}</p>
+                                    </div>
+                                    <div class="bar" style="width: '${player.finalWinRate}%'"></div>
+                                </div>
+                            </li>
+                            <!-- 승률 -->
+                            <li class="rkboard-ranking-list" id="Winning-Rate">
+                                <div class="graph">
+                                    <div class="bar-text">
+                                        <p>${player.matchWinRate}</p>
                                     </div>
                                     <div class="bar" style="width: 90%;"></div>
                                 </div>
                             </li>
-                            <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>90%</p>
-                                    </div>
-                                    <div class="bar" style="width: 90%;"></div>
-                                </div>
-                            </li>
                         </ul>
                     </section>
-
-                    <!-- 반복 -->
-                    <!-- 랭킹 목록 box -->
-                    <section class="rkboard-ranking-wrapper">
-                        <ul class="rkboard-ranking-list-box">
-                            <!-- 순위 -->
-                            <li class="rkboard-ranking-list" id="Ranking">
-                                <p class="rkboard-list-text">2</p>
-                            </li>
-                            <!-- 이미지 -->
-                            <li class="rkboard-ranking-list" id="Image">
-                                <a href="/assets/img/cat.jpg">
-                                    <img src="/assets/img/cat.jpg" alt="rkimg">
-                                </a>
-                            </li>
-                            <!-- 이름 -->
-                            <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">고양이2</p>
-                            </li>
-                            <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>50%</p>
-                                    </div>
-                                    <div class="bar" style="width: 50%;"></div>
-                                </div>
-                            </li>
-                            <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>50%</p>
-                                    </div>
-                                    <div class="bar" style="width: 50%;"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <!-- 반복 -->
-                    <!-- 랭킹 목록 box -->
-                    <section class="rkboard-ranking-wrapper">
-                        <ul class="rkboard-ranking-list-box">
-                            <!-- 순위 -->
-                            <li class="rkboard-ranking-list" id="Ranking">
-                                <p class="rkboard-list-text">3</p>
-                            </li>
-                            <!-- 이미지 -->
-                            <li class="rkboard-ranking-list" id="Image">
-                                <a href="/assets/img/cat.jpg">
-                                    <img src="/assets/img/cat.jpg" alt="rkimg">
-                                </a>
-                            </li>
-                            <!-- 이름 -->
-                            <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">고양이3</p>
-                            </li>
-                            <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>20%</p>
-                                    </div>
-                                    <div class="bar" style="width: 20%;"></div>
-                                </div>
-                            </li>
-                            <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>20%</p>
-                                    </div>
-                                    <div class="bar" style="width: 20%;"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-
+                </c:forEach>
 
                 </section>
 
@@ -291,10 +214,9 @@
                 </section> <!-- end rpboard-box -->
 
                 <!-- 댓글 입력창 + 댓글 입력 버튼 -->
+                <c:if test="${not empty login}">
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
-                    <c:if test="${empty login}">
                         <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
-                    </c:if>
                     <div class="rpboard-input-btn-box">
                         <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                 placeholder="댓글을 입력해주세요..."></input></div>
@@ -306,6 +228,7 @@
                         </div>
                     </div>
                 </section>
+            </c:if>
 
 
             </section> <!-- end reply-box -->
@@ -508,7 +431,7 @@
                         renderReplyList(responseResult);
                     });
                 }
-                if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
+                else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
                     console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('좋아요 클릭!!');
@@ -540,7 +463,7 @@
                             }
                         });
                 }
-                if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
+                else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
 
                     console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('신고 클릭!!');
@@ -574,6 +497,10 @@
                             }
                         });
                 }
+                    else{
+                        console.log("다른곳 클릭");
+                        return;
+                }   
             }
 
 

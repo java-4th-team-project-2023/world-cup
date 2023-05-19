@@ -42,6 +42,12 @@
         order by (final_win_count / join_game_count);
     </select>
 
+    <select id="findAllPlayer" resultType="player">
+        SELECT *
+        FROM player_tbl
+        WHERE game_id=#{gameId}
+    </select>
+
     <select id="findOne" resultType="player">
         SELECT *
         FROM player_tbl

@@ -49,8 +49,10 @@
             </div> <!-- end select-search-box -->
 
             <div class="winner-img-box">
-                <div class="winner-img-name">OOO 월드컵 OOO강 우승</div>
-                <div class="winner-img"></div>
+                <div class="winner-img-name">${dto.playerName} 월드컵 ${round}강 우승</div>
+                <div class="winner-img">
+                    <img src="${dto.playerImgPath}" alt="${dto.playerName}">
+                </div>
             </div>
 
         </section> <!-- end rank-box -->

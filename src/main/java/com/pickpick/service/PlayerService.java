@@ -95,6 +95,14 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
+    // 랭킹 페이지 목록 가져오기
+    public List<PlayerListResponseDTO> findAllPlayer(int gameId) {
+        return playerMapper.findAllPlayer(gameId)
+                .stream()
+                .map(PlayerListResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
     // 특정 선수 조회
     public PlayerOneResponseDTO findOne(int playerId) {
         return new PlayerOneResponseDTO(playerMapper.findOne(playerId));
