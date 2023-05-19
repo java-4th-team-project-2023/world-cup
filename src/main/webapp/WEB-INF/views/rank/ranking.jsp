@@ -105,7 +105,7 @@
                                     <div class="bar-text">
                                         <p>${player.finalWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: 90%;"></div>
+                                    <div class="bar" style="width: '${player.finalWinRate}%'"></div>
                                 </div>
                             </li>
                             <!-- 승률 -->
@@ -214,6 +214,7 @@
                 </section> <!-- end rpboard-box -->
 
                 <!-- 댓글 입력창 + 댓글 입력 버튼 -->
+                <c:if test="${not empty login}">
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
                         <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
                     <div class="rpboard-input-btn-box">
@@ -227,6 +228,7 @@
                         </div>
                     </div>
                 </section>
+            </c:if>
 
 
             </section> <!-- end reply-box -->
@@ -429,7 +431,7 @@
                         renderReplyList(responseResult);
                     });
                 }
-                if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
+                else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
                     console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('좋아요 클릭!!');
@@ -461,7 +463,7 @@
                             }
                         });
                 }
-                if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
+                else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
 
                     console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('신고 클릭!!');
@@ -495,6 +497,10 @@
                             }
                         });
                 }
+                    else{
+                        console.log("다른곳 클릭");
+                        return;
+                }   
             }
 
 

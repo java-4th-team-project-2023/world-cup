@@ -6,7 +6,7 @@ import lombok.*;
 @Setter @Getter
 @AllArgsConstructor
 @ToString @Builder
-public class Page extends Search {
+public class Page{
 
     private int pageNo;
     private int amount;

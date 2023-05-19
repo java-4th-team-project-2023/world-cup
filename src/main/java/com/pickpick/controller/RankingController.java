@@ -26,10 +26,7 @@ public class RankingController {
     @GetMapping("/ranking")
     public String replyPage(int gameId, Model model) {
         log.info("하이루 랭킹페이지 들어옴 {}", gameId);
-        Search page = new Page();
-        page.setPageNo(1);
-        page.setAmount(20);
-        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
+        List<PlayerListResponseDTO> playerList = playerService.findAllPlayer(gameId);
         model.addAttribute("gameId", gameId);
         model.addAttribute("playerList",playerList);
         return "rank/ranking";
