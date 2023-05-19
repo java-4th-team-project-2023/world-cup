@@ -14,4 +14,6 @@ public interface PlayingGamePlayersMapper {
 
     List<PlayingGamePlayers> findAllByGameId(int playingGameId);
 
+    int count(int playingGameId);
+
 }

@@ -1,14 +1,21 @@
 package com.pickpick.api;
 
 import com.pickpick.dto.page.Page;
+import com.pickpick.dto.playingGame.MatchPlayingRequestDTO;
 import com.pickpick.dto.playingGame.MatchUpdateRequestDTO;
+import com.pickpick.dto.playingGame.PlayingGameAndPlayersResponseDTO;
 import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
 import com.pickpick.service.PlayingGameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController @Slf4j
 @RequestMapping("/api/v1/plays")
@@ -45,29 +52,64 @@ public class PlayingGameController {
 
         log.info("/api/v1/plays POST!");
 
-        service.saveGameAndPlayers(dto);
+        int playingGameId = service.saveGameAndPlayers(dto);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(playingGameId);
 
     }
 
     // 매치가 끝난 후 업데이트
-    @PutMapping("{winnerId}/{loserId}")
-    public ResponseEntity<?> updateEndOfMatch(@PathVariable int winnerId, @PathVariable int loserId) {
-        return null;
+    @PutMapping("/{playingGameId}/{winnerId}/{loserId}")
+    public ResponseEntity<?> updateEndOfMatch(
+            @PathVariable int playingGameId,
+            @PathVariable int winnerId,
+            @PathVariable int loserId
+    ) {
+
+        PlayingGameAndPlayersResponseDTO dto = service.match(MatchPlayingRequestDTO.builder()
+                .playingGameId(playingGameId)
+                .winnerId(winnerId)
+                .loserId(loserId)
+                .build());
+
+        // dto가 null 이면 게임 끝난 것
+        if (dto == null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&winnerId=" + winnerId));
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        }
+
+        return ResponseEntity.ok().body(dto);
     }
 
-    // 라운드가 끝난 후 업데이트 요청
-    @PutMapping
-    public ResponseEntity<?> updateEndOfRound(@Validated @RequestBody MatchUpdateRequestDTO dto) {
+    // 리셋 요청
+    @PutMapping("/{playingGameId}")
+    public ResponseEntity<?> reset(@PathVariable int playingGameId) {
 
-        log.info("/api/v1/plays PUT!");
+        log.info("/api/v1/plays/{} PUT!", playingGameId);
 
-        service.updateEndOfMatch(dto);
-        service.updateEndOfRound(dto.getPlayingGameId());
+        PlayingGameAndPlayersResponseDTO dto = service.reset(playingGameId);
 
-        return ResponseEntity.ok().build();
+        // dto가 null 인 것은 라운드 처음이기 때문에 리셋할 수 없다는 것
+        if (dto == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().body(dto);
     }
+
+//    // 라운드가 끝난 후 업데이트 요청
+//    필요없을듯...
+//    @PutMapping
+//    public ResponseEntity<?> updateEndOfRound(@Validated @RequestBody MatchUpdateRequestDTO dto) {
+//
+//        log.info("/api/v1/plays PUT!");
+//
+//        service.updateEndOfMatch(dto);
+//        service.updateEndOfRound(dto.getPlayingGameId());
+//
+//        return ResponseEntity.ok().build();
+//    }
 
     // 게임 삭제
     @DeleteMapping("/{playingGameId}")

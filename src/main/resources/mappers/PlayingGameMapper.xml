@@ -36,4 +36,10 @@
         set current_round=#{currentRound}
         where playing_game_id=#{playingGameId}
     </update>
+
+    <select id="getGameId" resultType="int">
+        select game_id
+        from playing_game_tbl
+        where playing_game_id=#{playingGameId}
+    </select>
 </mapper>
