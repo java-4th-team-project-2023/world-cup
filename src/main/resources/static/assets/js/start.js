@@ -17,7 +17,7 @@ function calRound() {
     while (playerNum >> n > 0) {
 
         const $option = document.createElement('option');
-        $option.value = 2 ** n;
+        $option.value = `${2 ** n}`;
         console.log($option.value);
         $option.textContent = 2 ** n + '강';
         document.getElementById('round').appendChild($option);
