@@ -48,7 +48,7 @@ public class PlayerController {
         return ResponseEntity.ok().body(flag);
     }
 
-    // 게임 생성 후 '강' 수에 맞는 선수 목록을 PlayingGameService 에 전달하여 PlayingGame 생성후
+    // 게임 생성 후 '강' 수에 맞는 선수 목록을 PlayingGameService 에 전달하여 PlayingGame 생성후 playingGameId 리턴
     @PostMapping("/{gameId}/num/{number}")
     public ResponseEntity<?> getGameplayPlayers(
             HttpSession session,
@@ -58,10 +58,18 @@ public class PlayerController {
 
         List<PlayerGameResponseDTO> playerList = playerService.findN(gameId, number);
 
+        String accountId = null;
+
+        try {
+            accountId = ((Account) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId();
+        } catch (NullPointerException e) {
+            accountId = null;
+        }
+
         int playingGameId = playingGameService.saveGameAndPlayers(PlayingGameSaveRequestDTO.builder()
                 .gameId(gameId)
                 .totalRound(number)
-                .accountId(((Account) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId())
+                .accountId(accountId)
                 .currentRound(number)
                 .playerIdList(playerList.stream()
                         .map(PlayerGameResponseDTO::getPlayerId)
