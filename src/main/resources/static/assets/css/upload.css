@@ -1,9 +1,5 @@
-/* @import url('/assets/css/header.css'); */
-/* @import url(../css/common.css); */
-@import url(../css/header.css);
-
+@import url('/assets/css/header.css');
 body {
-    background: #F5F5F5;
     width: 100%;
     height: 1400px;
 }
@@ -24,20 +20,25 @@ body {
 .menu-wrapper>p {
     /* border: 1px solid #000; */
     color: #000;
-    width: 200px;
-    height: 70px;
-    font-size: 28px;
+    width: 150%;
+    height: 100%;
+    font-size: 35px;
     text-align: center;
     padding: 1%;
     cursor: pointer;
+    line-height: 1em;
 }
-
+.menu-wrapper>p:nth-child(2):hover {
+    background-color: #303481;
+    color: #fff200;
+    border-radius: 0px 100px 0px 0px;
+    opacity: 0.9;
+}
 .menu-wrapper>p:hover {
-    background-color: #fff;
-    border: 1px solid#d3d3d3;
-    border-bottom: 0px;
-    color: #303481;
-    font-weight: 700;
+    background-color: #303481;
+    color: #fff200;
+    border-radius: 100px 0px 0px 0px;
+    opacity: 0.9;
 }
 
 .upload-new-wrapper {
@@ -45,7 +46,6 @@ body {
     padding-bottom: 5%;
     height: fit-content;
     width: 95%;
-    /* border: 1px solid red; */
     background-color: #fff;
     position: absolute;
     top: 7.2%;
@@ -53,6 +53,7 @@ body {
 }
 
 .container-title {
+    border-bottom: 4px solid #fff200;
     background: #303481;
     color: #fff200;
     width: 100%;
@@ -63,9 +64,6 @@ body {
     text-align: center;
 }
 
-form {
-    height: 90%;
-}
 .upload-info-theme-box {
     border-bottom: 2px solid #000;
     width: 95%;
@@ -88,8 +86,6 @@ form {
     margin-left: 1%;
 } */
 .basic-info {
-    /* border: 1px solid rebeccapurple; */
-    /* border: 1px solid #000; */
     width: 95%;
     height: 100%;
     margin: 0 auto;
@@ -115,14 +111,13 @@ form {
 .flex {
 
     display: flex;
-
 }
 
 .input-wrapper {
-    /* background: aquamarine; */
     border: none;
-    width: 80%;
+    width: 78%;
     height: 100%;
+    padding: 0;
 }
 
 .input-wrapper:hover {
@@ -131,7 +126,7 @@ form {
 }
 
 input {
-    border: 2px solid #303481;
+    border: 2px solid red;
     border-radius: 5px;
     width: 100%;
     height: 100%;
@@ -139,21 +134,21 @@ input {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 0;
     /* background-color: #000; */
 }
 
-input:hover {
-    border: 2px solid red;
+input:active {   
+    transform: scale(0.9);
 }
 
 .info-title-wrapper {
     width: 100%;
     height: 20%;
-    display: flex;
-    /* border-bottom: 1px dashed #ddd2d2; */
 }
 
 .info-title-wrapper .title {
+    width: 15%;
     margin-top: 10px;
     font-size: 25px;
 }
@@ -182,34 +177,50 @@ input:hover {
     width: 100%;
     height: 10%;
     margin-top: 1%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 1%;
 }
 
 .btnWrapper {
-    width: 20%;
+    width: 50%;
     height: 100%;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.saveBtn,
-.plusBtn {
+.saveBtn {
+    background: #D6E6F2;
     border: 1px solid #000;
     box-shadow: 2px 2px 2px 1px black;
     border-radius: 5px;
+    border: none;
     width: 150px;
     font-size: 30px;
     /* margin: 5px auto; */
     cursor: pointer;
 }
 
-.saveBtn:hover,
+.plusBtn {
+    background: #D6E6F2;
+    box-shadow: 2px 2px 2px 1px black;
+    border-radius: 5px;
+    border: none;
+    width: 150px;
+    height: 60%;
+    margin: auto 0;
+    font-size: 30px;
+    /* margin: 5px auto; */
+    cursor: pointer;
+}
+
 .plusBtn:hover {
+    background: #303481;
+    color: #fff200;
+    opacity: 0.9;
+}
+
+.saveBtn:hover {
     background: #303481;
     color: #fff200;
     transition: 0.1s;
@@ -342,8 +353,9 @@ li {
     cursor: pointer;
 }
 
-.img-container button.changeimg:hover {
+.img-container button.changeimg:active {
     color: red;
+    transform: scale(0.95);
 }
 
 /* 기존 사진데이터 */
@@ -377,13 +389,10 @@ li {
     width: 90%;
     height: 50%;
     border-radius: 5px;
-    border: 2px solid #303481;
+    border: 2px solid red;
     padding-left: 3%;
 }
 
-.register-img-name-box #playerName:hover {
-    border: 2px solid red;
-}
 
 .register-img-name-box #playerName:active {
     transform: scale(0.9);
