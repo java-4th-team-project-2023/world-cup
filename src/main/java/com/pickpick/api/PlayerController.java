@@ -62,8 +62,7 @@ public class PlayerController {
 
         try {
             accountId = ((Account) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId();
-        } catch (NullPointerException e) {
-            accountId = null;
+        } catch (NullPointerException ignored) {
         }
 
         int playingGameId = playingGameService.saveGameAndPlayers(PlayingGameSaveRequestDTO.builder()
