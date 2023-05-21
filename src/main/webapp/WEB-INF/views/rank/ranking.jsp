@@ -203,9 +203,9 @@
 
 
                                 </div> <!-- end rpboard-viewmain -->
-                                <div class="rpboard-more-view-btn">
+                                <!-- <div class="rpboard-more-view-btn">
                                     <p>더 보기</p>
-                                </div>
+                                </div> -->
                             </section> <!-- end rpboard-viewmain-box -->
 
 
@@ -216,14 +216,13 @@
                 <!-- 댓글 입력창 + 댓글 입력 버튼 -->
                 <c:if test="${not empty login}">
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
-                        <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
+                        <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="익명">
                     <div class="rpboard-input-btn-box">
                         <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                 placeholder="댓글을 입력해주세요..."></input></div>
                         <div class="rpboard-rpBtn-box">
                             <button class="rpBtn" type="button">
-                                <p>등 록
-                                    <p>
+                                <p>등 록<p>
                             </button>
                         </div>
                     </div>
@@ -248,7 +247,7 @@
 
         // 로그인한 회원 계정명
         const currentAccount = '${login.accountId}';
-        console.log("!!!" + currentAccount);
+        // console.log("!!!" + currentAccount);
 
         // 비동기 처리(댓글번호)
         const $viewMain = document.querySelector('.rpboard-viewmain');
@@ -288,7 +287,8 @@
                         text,
                         date,
                         accountId,
-                        pageMaker
+                        pageMaker,
+                        likeCount
                     } = rep;
 
                     tag += `
@@ -321,6 +321,7 @@
                         <div class="rpboard-like-report-box">
                             <div class="like" id="Like">
                             <button class="rpboard-like-replies-btn">좋아요</button>
+                            \${likeCount}
                             </div>
                             <div class="report" id="Report">
                             <button class="rpboard-report-replies-btn">신고</button>
@@ -343,7 +344,7 @@
             fetch(`\${URL}/\${gameId}/page/\${pageNo}`) // ${gameId}
                 .then(res => res.json())
                 .then(responseResult => {
-                    console.log(responseResult);
+                    // console.log(responseResult);
                     renderReplyList(responseResult);
                 });
 
@@ -400,7 +401,7 @@
                             alert('댓글이 정상 등록됨!');
                             // 입력창 비우기
                             $rt.value = '';
-                            $rw.value = '';
+                            // $rw.value = '익명';
 
                             getReplyList();
                         } else {
@@ -439,7 +440,7 @@
                 }
                 else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
-                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('좋아요 클릭!!');
 
                     // # 서버로 보낼 데이터
@@ -471,7 +472,7 @@
                 }
                 else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
 
-                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('신고 클릭!!');
 
                     // # 서버로 보낼 데이터

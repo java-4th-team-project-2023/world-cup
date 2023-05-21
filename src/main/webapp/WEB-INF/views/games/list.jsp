@@ -31,7 +31,7 @@
 
         <c:forEach items="${gameList}" var="g">
 
-            <a href="/games/start?gameId=${g.gameId}" class="card" data-game="${g.gameId}">
+            <span  class="card" data-game="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
@@ -43,7 +43,7 @@
                     <button class="game-modify-btn">수정하기</button>
                     <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
                 </div>
-            </a>
+            </span>
         </c:forEach>
     </div>
 
@@ -100,9 +100,13 @@
     //     window.location.href = 'rank/ranking?gameId='+$gameId.value;
     // };
     // main function
+
+    
+
     (() => {
         // 검색 버튼 이벤트 등록
         searchBtnEvent();
+        
     })();
 
     function searchBtnEvent() {
@@ -115,6 +119,19 @@
                 +'&keyword=' + document.getElementById('search_keyword').value;
         };
     }
+
+        document.querySelector('.img-box').onclick = e =>{
+
+            const cardGameNum = document.querySelector('.card');
+
+            console.log(+cardGameNum.dataset.game);
+            
+            window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
+        }
+       
+       
+
+    
 
 </script>
 

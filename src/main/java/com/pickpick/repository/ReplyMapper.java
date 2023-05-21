@@ -23,10 +23,7 @@ public interface ReplyMapper {
     Reply findOne(int replyNo);
 
     // 댓글 목록 조회
-    List<Reply> findAll(
-            @Param("gId") int gameId,
-            @Param("page")Page page
-            );
+    List<Reply> findAll(@Param("gId") int gameId);
 
     // 총 댓글 수 조회
     int count(int gameId);
