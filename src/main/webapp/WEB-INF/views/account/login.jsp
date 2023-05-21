@@ -56,7 +56,7 @@
                     <a href="#" class="social" id="Naver"></a>
                 </div> <!-- end social-container -->
                 <span>또는 계정을 입력하세요!</span>
-                <input type="text" name="accountId" placeholder="Id" />
+                <input type="text" name="accountId" placeholder="Id" id="sign-in-account" />
                 <input type="password" name="password" placeholder="Password" />
                 <!-- 비밀번호 찾기 text -->
                 <a href="#" id="Text">비밀번호 찾기</a>

@@ -30,9 +30,9 @@ public class ReplyService {
     private final ReplyMapper replyMapper;
 
     // 댓글 조회기능
-    public ReplyListResponseDTO getList(int gameId, Page page) {
+    public ReplyListResponseDTO getList(int gameId) {
 
-        List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId, page)
+        List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId)
                 .stream()
                 .map(ReplyDetailResponseDTO::new)
                 .collect(toList());
@@ -40,7 +40,6 @@ public class ReplyService {
         log.info("!!!! count :{}",count);
         return ReplyListResponseDTO.builder()
                 .count(count)
-                .pageMaker(new PageMaker(page,count))
                 .replyList(replyList)
                 .build();
     }
@@ -60,7 +59,7 @@ public class ReplyService {
             log.warn("reply save fail!");
             throw new SQLException("댓글 저장 실패");
         }
-        return getList(dto.getGameId(),new Page(1,20));
+        return getList(dto.getGameId());
     }
 
     public ReplyListResponseDTO modify(ReplyModifyRequestDTO dto,HttpSession session){
@@ -74,7 +73,7 @@ public class ReplyService {
 
         }
 
-        return getList(dto.getGameId(),new Page(1,20));
+        return getList(dto.getGameId());
 
     }
 
@@ -86,10 +85,7 @@ public class ReplyService {
         int gameId = replyMapper.findOne(replyNo).getGameId();
         replyMapper.deleteOne(replyNo);
 
-        return getList(
-                gameId
-                , new Page(1, 10)
-        );
+        return getList(gameId);
     }
 
     // 댓글 좋아요 기능
@@ -99,7 +95,7 @@ public class ReplyService {
         int likeOne = replyMapper.findLikeOne(dto.getReplyNo(), loginMemberAccount);
         replyMapper.addLikeUser(dto.getReplyNo(),loginMemberAccount);
         replyMapper.likeUpCounting(dto.getReplyNo());
-        return getList(dto.getGameId(),new Page(1,20));
+        return getList(dto.getGameId());
     }
 
     // 댓글 신고 기능
@@ -109,6 +105,6 @@ public class ReplyService {
         int likeOne = replyMapper.findReportOne(dto.getReplyNo(), loginMemberAccount);
         replyMapper.addReportUser(dto.getReplyNo(),loginMemberAccount);
         replyMapper.ReportUpCounting(dto.getReplyNo());
-        return getList(dto.getGameId(),new Page(1,20));
+        return getList(dto.getGameId());
     }
 }

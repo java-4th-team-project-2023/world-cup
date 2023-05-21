@@ -33,6 +33,7 @@
     margin: 0 auto;
     text-align: center;
     position: relative;
+    cursor: pointer;
 }
 
 .card:hover {

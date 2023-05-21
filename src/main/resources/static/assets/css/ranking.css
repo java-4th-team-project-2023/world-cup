@@ -189,6 +189,7 @@
 .rkheader-list-text {
   font-size: 25px;
 }
+
 .rkheader-list-text:hover {
   transform: scale(1.1);
 }
@@ -244,6 +245,7 @@
 .rkboard-ranking-list:nth-child(3) {
   line-height: 3.5em;
 }
+
 .rkboard-ranking-list:first-child:hover,
 .rkboard-ranking-list:nth-child(3):hover {
   border: 1px solid #fff200;
@@ -289,7 +291,8 @@
   bottom: 100%;
   left: 0;
 }
-.bar-text p{
+
+.bar-text p {
   width: 100%;
   height: 100%;
   font-size: 25px;
@@ -300,7 +303,7 @@
 .bar {
   width: 0;
   height: 100%;
-  background:linear-gradient(150deg, #303481 ,#9197ff);
+  background: linear-gradient(150deg, #303481, #9197ff);
   box-shadow: 2px 2px 2px 1px #303481;
   position: absolute;
   bottom: 0;
@@ -350,7 +353,7 @@
 
 /* 댓글게시판 main header */
 .rplist-header {
-  border-bottom: 4px solid #000;
+  border-bottom: 4px solid #fff200;
   width: 100%;
   height: 6%;
   margin: 0 auto;
@@ -367,7 +370,6 @@
   width: fit-content;
   height: 60%;
   text-align: center;
-  font-weight: bold;
 }
 
 
@@ -396,7 +398,6 @@
   width: 19%;
   height: 100%;
   margin-top: 9px;
-  font-weight: bold;
   text-align: center;
   cursor: pointer;
   line-height: 1.8em;
@@ -440,7 +441,6 @@
 /* 댓글 정렬 기준 드롭 다운 메뉴 */
 .rpsorting-wrapper {
   border: 1px solid #000;
-  background: #D6E6F2;
   width: 21%;
   height: 61px;
   position: absolute;
@@ -490,7 +490,6 @@
 }
 
 .rpboard-viewmain-box {
-  background: #D6E6F2;
   width: 100%;
   height: 85%;
   padding-top: 2%;
@@ -502,7 +501,6 @@
 /* 댓글 main */
 .rpboard-viewmain-box .rpboard-viewmain {
   border-radius: 5px;
-  background: #D6E6F2;
   width: 95%;
   height: 100%;
   margin: 0 auto;
@@ -510,11 +508,10 @@
 
 /* 사용자 댓글 박스 */
 .rpboard-rpbox {
-  border-right: 2px solid #000;
-  border-bottom: 2px solid #000;
-  box-shadow: 2px 2px 3px 1px black;
-  border-radius: 5px;
-  background: #fff;
+  border-right: 2px solid #fff200;
+  border-bottom: 2px solid #fff200;
+  box-shadow: 0px 0px 3px 1px #fff200;
+  border-radius: 0px 0px 50px 0px;
   width: 100%;
   height: 15%;
   padding: 1%;
@@ -538,10 +535,10 @@
 
 /* 사용자 닉네임 + 댓글 작성 일자 box */
 .rpboard-nickname-local-date-box {
-  border-top: 2px solid #D6E6F2;
-  border-bottom: 2px solid white;
+  /* border-top: 2px solid #D6E6F2;
+  border-bottom: 2px solid white; */
   border-radius: 5px 5px 0px 0px;
-  background: #D6E6F2;
+  /* background: #D6E6F2; */
   width: 100%;
   height: 30%;
   display: flex;
@@ -592,8 +589,7 @@
 
 /* 댓글창 box */
 .rpboard-replies-box {
-  background: #D6E6F2;
-  border: 1px solid #D6E6F2;
+  border: 2px solid #fff200;
   border-radius: 0px 0px 5px 5px;
   width: 100%;
   height: 40%;
@@ -639,7 +635,7 @@
 
 /* 댓글 삭제 버튼 box */
 .rpboard-delete-replies-box {
-  border-radius: 0px 3px 0px 0px; 
+  border-radius: 0px 3px 0px 0px;
   width: 25px;
   height: 25px;
   position: absolute;
@@ -651,7 +647,7 @@
 
 /* 댓글 삭제 버튼 */
 .rpboard-delete-replies-btn {
-  border-radius: 0px 3px 0px 0px; 
+  border-radius: 0px 3px 0px 0px;
   border: none;
   background: url('/assets/img/kakaoTalk.png') no-repeat;
   background-size: 100%;
@@ -661,9 +657,10 @@
 }
 
 /* 댓글 삭제 버튼 호버 */
-.rpboard-delete-replies-btn:hover {
+.rpboard-delete-replies-btn:active {
   transform: scale(1.2);
 }
+
 .rpboard-rpbox:hover .rpboard-delete-replies-box .rpboard-rpbox .rpboard-delete-replies-text {
   display: block;
 }
@@ -721,9 +718,12 @@ span.delete-text {
 }
 
 .rpboard-delete-check-btn:hover {
-  background: #303481;
-  border: 1px solid #fff200;
-  color: #fff200;
+  border: 2px solid #fff200;
+  opacity: 0.8;
+}
+
+.rpboard-delete-check-btn:active {
+  transform: scale(0.95);
 }
 
 

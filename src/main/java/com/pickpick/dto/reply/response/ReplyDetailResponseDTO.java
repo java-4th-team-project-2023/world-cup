@@ -21,6 +21,7 @@ public class ReplyDetailResponseDTO {
     @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm")
     private LocalDateTime date;
     private String accountId;
+    private int likeCount;
 
     public ReplyDetailResponseDTO(Reply reply){
         this.replyNo = reply.getReplyNo();
@@ -29,5 +30,6 @@ public class ReplyDetailResponseDTO {
         this.writer = reply.getWriter();
         this.date = reply.getDate();
         this.accountId = reply.getAccountId();
+        this.likeCount = reply.getLikeCount();
     }
 }
