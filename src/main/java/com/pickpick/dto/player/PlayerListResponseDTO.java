@@ -17,14 +17,14 @@ public class PlayerListResponseDTO {
 
     public PlayerListResponseDTO(Player player) {
         playerId = player.getPlayerId();
-        try {
-            matchWinRate = (double) player.getSelectedWinCount() / player.getFightCount() * 100;
-        } catch (ArithmeticException e) {
+
+        matchWinRate = (double) player.getSelectedWinCount() / player.getFightCount() * 100;
+        finalWinRate = (double) player.getFinalWinCount() / player.getJoinGameCount() * 100;
+
+        if (player.getFightCount() == 0){
             matchWinRate = 0.0;
         }
-        try {
-            finalWinRate = (double) player.getFinalWinCount() / player.getJoinGameCount() * 100;
-        } catch (ArithmeticException e) {
+        if (player.getJoinGameCount() == 0){
             finalWinRate = 0.0;
         }
         playerImgPath = player.getPlayerImgPath();
