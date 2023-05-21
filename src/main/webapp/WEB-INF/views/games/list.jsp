@@ -102,12 +102,8 @@
     // main function
 
     
-
-    (() => {
-        // 검색 버튼 이벤트 등록
-        searchBtnEvent();
-        
-    })();
+    const $img_boxes = document.querySelectorAll('.img-box');
+    
 
     function searchBtnEvent() {
         const $searchBtn = document.querySelector('.search-form button');
@@ -120,17 +116,35 @@
         };
     }
 
-        document.querySelector('.img-box').onclick = e =>{
+    // function goGameStartPage(){
+    //     $img_box.onclick = e =>{
 
-            const cardGameNum = document.querySelector('.card');
+    //         // console.log(e.tartget);
+    //         const cardGameNum = e.target.closest('.card');
 
-            console.log(+cardGameNum.dataset.game);
+    //         console.log(+cardGameNum.dataset.game);
             
-            window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
-        }
-       
-       
+    //         window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
+    //     }
+    // }   
 
+    function goGameStartPage() {
+  $img_boxes.forEach($img_box => {
+    $img_box.addEventListener('click', e => {
+      const cardGameNum = e.target.closest('.card');
+      console.log(+cardGameNum.dataset.game);
+      window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
+    });
+  });
+}
+       
+    (() => {
+        // 검색 버튼 이벤트 등록
+        searchBtnEvent();
+        
+        // 게임 스타트 페이지 이동
+        goGameStartPage();
+    })();
     
 
 </script>
