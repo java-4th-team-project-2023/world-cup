@@ -38,11 +38,11 @@
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
-                <div class="button-wrapper">
-                    <button class="game-modify-btn">수정하기</button>
-                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
-                </div>
             </a>
+            <div class="button-wrapper">
+                <button class="game-modify-btn">수정하기</button>
+                <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
+            </div>
 
         </c:forEach>
     </div>
@@ -93,12 +93,12 @@
 
 <script>
 
-    const $rankBtn = document.querySelector('.game-ranking-btn');
-    $rankBtn.onclick = e => {
-        console.log("이동");
-        const $gameId = e.target.closest('a.card').dataset.game;
-        window.location.href = 'rank/ranking?gameId='+$gameId;
-    };
+    // const $rankBtn = document.querySelector('.game-ranking-btn');
+    // $rankBtn.onclick = e => {
+    //     console.log("이동");
+    //     const $gameId = e.target.closest('.card').dataset.game;
+    //     window.location.href = 'rank/ranking?gameId='+$gameId.value;
+    // };
     // main function
     (() => {
         // 검색 버튼 이벤트 등록
