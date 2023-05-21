@@ -25,7 +25,7 @@ p {
     line-height: 20px;
     letter-spacing: 0.5px;
     margin: 20px 0 30px;
-    color: #FFF200; 
+    color: #FFF200;
 }
 
 /* 로그인 화면 설명 글씨 호버 */
@@ -46,6 +46,8 @@ a {
     font-size: 25px;
     text-decoration: none;
     margin: 15px 0;
+    height: fit-content;
+    vertical-align: text-bottom;
 }
 
 /* 로그인 화면 버튼 */
@@ -90,6 +92,7 @@ button#SignInBtn:hover {
 button.ghost:hover {
     box-shadow: 0px 0px 5px 1px #FFF200;
 }
+
 button.ghost#signIn {
     width: 65%;
 }
@@ -326,7 +329,7 @@ a#Naver {
 
 /* 입력 오류 시 박스 떨림 효과 */
 .vibration {
-    animation: vibration 0.1s infinite;
+    animation: vibration 0.1s 10;
 }
 
 @keyframes vibration {

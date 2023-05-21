@@ -64,6 +64,8 @@
     padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    
+    font-size: 1.5em;
 }
 
 .page-select button:hover {
@@ -73,4 +75,40 @@
 .page-select button.active {
     background-color: #333;
     color: #fff;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.search-form input[type="text"] {
+    border: none;
+    outline: none;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding: 5px;
+    flex: 1;
+}
+
+.search-form button[type="submit"] {
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
 }

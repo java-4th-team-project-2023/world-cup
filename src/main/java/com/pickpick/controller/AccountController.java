@@ -59,7 +59,7 @@ public class AccountController {
     @GetMapping("/sign-in")
     public String signIn(){
         log.info("/account/sign-in GET - forwarding to jsp");
-        return "account/sign-in";
+        return "account/login";
     }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
