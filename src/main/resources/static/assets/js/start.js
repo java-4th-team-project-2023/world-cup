@@ -15,7 +15,7 @@ function calRound() {
 
         const $option = document.createElement('option');
         $option.value = `${2 ** n}`;
-        console.log($option.value);
+        // console.log($option.value);
         $option.textContent = 2 ** n + '강';
         document.getElementById('round').appendChild($option);
         n++;
@@ -25,19 +25,21 @@ function calRound() {
 }
 
 // 모달 확인 버튼 클릭시 PlayerController에서 playingGameId를 받아온다.
-function selectRound() {
-    document.getElementById('send').onclick = e => {
+async function selectRound() {
+    document.getElementById('send').onclick = async e => {
         const selectedValue = document.getElementById('round').value;
 
-        sendRoundToPlayerController(selectedValue);
+        await sendRoundToPlayerController(selectedValue);
+
+        addResetEvent();
 
     }
 
 }
 
 // PlayerController 로 데이터 전달
-function sendRoundToPlayerController(round) {
-     fetch(`/api/v1/players/${document.getElementById('game').dataset.gameId}/num/${round}`,
+async function sendRoundToPlayerController(round) {
+    fetch(`/api/v1/players/${document.getElementById('game').dataset.gameId}/num/${round}`,
         {
             method: 'POST'
         })
@@ -81,12 +83,17 @@ function selectOne() {
                 })
                 .then(res => res.json())
                 .then(
-                    ({currentRound, randomTwoPlayers}) => {
+                    ({totalRound, currentRound, randomTwoPlayers, gameId}) => {
+
+                        if (currentRound === 0) {
+                            window.location.href = `/rank/winner?gameId=${gameId}&playerId=${winnerId}&round=${totalRound}`;
+                        }
+
                         renderRoundInfo(currentRound);
                         renderPlayers(randomTwoPlayers);
                     }
                 );
-        }, 3000);
+        }, 2000);
 
     }
 }
@@ -111,4 +118,22 @@ function renderPlayers(randomTwoPlayers) {
 // 게임 이름과 몇강인지 표시하는 함수
 function renderGameInfo() {
     const $gameTitle = document.getElementById('game-title-wrapper');
+}
+
+// 리셋 버튼 등록 함수
+function addResetEvent() {
+    document.getElementById("resetBtn").onclick = e => {
+        const $game = document.getElementById('game');
+        fetch(`/api/v1/plays/${$game.dataset.playingGameId}`,
+            {
+                method: 'PUT'
+            })
+            .then(res => {
+
+                $game.textContent = '';
+
+                return res.json();
+            })
+            .then(({randomTwoPlayers}) => renderPlayers(randomTwoPlayers));
+    }
 }

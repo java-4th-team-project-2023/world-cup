@@ -15,5 +15,6 @@ public class PlayingGameAndPlayersResponseDTO {
     private int totalRound;
     private int currentRound;
     private List<PlayerOneResponseDTO> randomTwoPlayers;
+    private int gameId;
 
 }

@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
 @RestController @Slf4j
@@ -63,7 +65,8 @@ public class PlayingGameController {
     public ResponseEntity<?> updateEndOfMatch(
             @PathVariable int playingGameId,
             @PathVariable int winnerId,
-            @PathVariable int loserId
+            @PathVariable int loserId,
+            HttpServletResponse response
     ) {
 
         PlayingGameAndPlayersResponseDTO dto = service.match(MatchPlayingRequestDTO.builder()
@@ -71,13 +74,6 @@ public class PlayingGameController {
                 .winnerId(winnerId)
                 .loserId(loserId)
                 .build());
-
-        // 랜덤한 두 명의 플레이어 길이가 0이면 게임 끝남
-        if (dto.getRandomTwoPlayers().size() == 0) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/rank/winner?gameId=" + service.getGameId(playingGameId) + "&playerId=" + winnerId + "&round=" + dto.getTotalRound()));
-            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-        }
 
         return ResponseEntity.ok().body(dto);
     }
@@ -89,11 +85,6 @@ public class PlayingGameController {
         log.info("/api/v1/plays/{} PUT!", playingGameId);
 
         PlayingGameAndPlayersResponseDTO dto = service.reset(playingGameId);
-
-        // dto가 null 인 것은 라운드 처음이기 때문에 리셋할 수 없다는 것
-        if (dto == null) {
-            return ResponseEntity.badRequest().build();
-        }
 
         return ResponseEntity.ok().body(dto);
     }
