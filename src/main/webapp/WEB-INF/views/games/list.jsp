@@ -35,15 +35,15 @@
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
+                        <img src="${t}" alt="thumbnails">
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
+                <div class="button-wrapper">
+                    <button class="game-modify-btn">수정하기</button>
+                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
+                </div>
             </a>
-            <div class="button-wrapper">
-                <button class="game-modify-btn">수정하기</button>
-                <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
-            </div>
-
         </c:forEach>
     </div>
 
@@ -81,14 +81,14 @@
     </ul>
 
 
-    <div class="search-container">
+    <section class="search-container">
         <form class="search-form">
-            <label>
+            <div class="input-btn-box">
                 <input type="text" placeholder="Search..." name="keyword" id="search_keyword">
-            </label>
-            <button>Search</button>
+                <button><div class="search-btn-img-box"></div></button>
+            </div>
         </form>
-    </div>
+    </section>
 </div>
 
 <script>
