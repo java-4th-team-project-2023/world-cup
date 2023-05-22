@@ -21,4 +21,7 @@ public interface PlayingGameMapper {
 
     int getGameId(int playingGameId);
 
+    // 해당 계정이 플레이하던 게임이 있는지 확인
+    Integer searchByAccountId(String accountId, int gameId);
+
 }

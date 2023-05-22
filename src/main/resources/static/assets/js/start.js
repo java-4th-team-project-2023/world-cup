@@ -1,10 +1,41 @@
 // import * as timer from './timer';
 
 (() => {
-    document.querySelector('.hiddenBtn').click();
-    calRound();
+    checkExistGame();
     selectOne();
 })();
+
+function newGame() {
+    document.querySelector('.hiddenBtn').click();
+    calRound();
+}
+
+// 하던 게임이 있는지 확인하는 함수
+function checkExistGame() {
+
+
+    const $inrMenu = document.querySelector('.inr-menu');
+
+    const accountId = ($inrMenu === null) ? '' : $inrMenu.dataset.accountId;
+
+    fetch(`/api/v1/plays/${accountId}/${document.getElementById('game').dataset.gameId}`)
+        .then(res => {
+            if (res.status === 500) {
+                newGame();
+                console.log('새 게임!');
+            }
+            else return res.json();
+        })
+        .then(({playingGameId}) => {
+            fetch(`/api/v1/plays/${playingGameId}`)
+                .then(res => res.json())
+                .then(({totalRound, currentRound, randomTwoPlayers}) => {
+                    renderPlayers(randomTwoPlayers);
+                    renderRoundInfo(currentRound);
+                    document.getElementById('game').dataset.playingGameId = playingGameId;
+                });
+        })
+}
 
 // 게임 라운드 정하기 함수
 function calRound() {
@@ -21,7 +52,7 @@ function calRound() {
         n++;
 
     }
-    selectRound();
+    selectRound().then();
 }
 
 // 모달 확인 버튼 클릭시 PlayerController에서 playingGameId를 받아온다.
@@ -45,7 +76,7 @@ async function sendRoundToPlayerController(round) {
         })
         .then(res => res.json())
         .then(
-            playingGameId => {
+            ({playingGameId}) => {
                 fetch(`/api/v1/plays/${playingGameId}`)
                     .then(res => res.json())
                     .then(({totalRound, currentRound, randomTwoPlayers}) => {
@@ -113,11 +144,6 @@ function renderPlayers(randomTwoPlayers) {
         // console.log($section);
     }
 
-}
-
-// 게임 이름과 몇강인지 표시하는 함수
-function renderGameInfo() {
-    const $gameTitle = document.getElementById('game-title-wrapper');
 }
 
 // 리셋 버튼 등록 함수

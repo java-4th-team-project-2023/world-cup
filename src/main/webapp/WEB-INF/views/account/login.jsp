@@ -23,7 +23,7 @@
     <div class="container" id="container">
         <!-- 회원가입 정보 화면 box -->
         <div class="form-container sign-up-container">
-            <form id="signUpForm" action="#">
+            <form action="#">
                 <!-- 회원가입 정보 화면 -->
                 <h1 id="SignUp">회원가입</h1>
                 <div class="social-container">

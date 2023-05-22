@@ -206,22 +206,26 @@
                     if (currentAccount === rep.accountId) {
                         tag += `
                             <div class="rpboard-modify-replies-box">
-                            <button class="rpboard-modify-replies-btn"></button>
-                            </div>`;
+                                <button class="rpboard-modify-replies-btn"></button>
+                            </div>                           
+                            </div>
+                                <div class="rpboard-like-report-box">
+                                    <div class="like rpboard-like-replies-btn" id="Like">
+                                        <span>
+                                            <div class="like-count">\${likeCount}</div>
+                                        </span>
+                                        
+                                    </div>
+                                <div class="report rpboard-report-replies-btn" id="Report">
+                                    <div class="rpboard-btn">
+                                        <p>신고</p>
+                                    </div>
+                                </div>`;
                     }
+                    tag += `</div>
+                                </div>`;
 
-                    tag += `
-                        </div>
-                        <div class="rpboard-like-report-box">
-                            <div class="like" id="Like">
-                            <button class="rpboard-like-replies-btn">좋아요</button>
-                            \${likeCount}
-                            </div>
-                            <div class="report" id="Report">
-                            <button class="rpboard-report-replies-btn">신고</button>
-                            </div>
-                        </div>
-                    </div>`;
+                    
 
                 }
             }
