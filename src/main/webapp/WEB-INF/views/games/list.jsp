@@ -35,7 +35,6 @@
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
-                        <img src="${t}" alt="thumbnails">
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
