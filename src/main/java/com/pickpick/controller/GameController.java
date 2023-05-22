@@ -65,41 +65,44 @@ public class GameController {
     @PostMapping("/make")
     public String makeGame(HttpSession session, String gameName, String[] playerName,
                            @RequestParam("playerImgPath") MultipartFile[] file) {
-        String savePath = null;
-        for (MultipartFile multipartFile : file) {
-            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
-            savePath = fileUtil.uploadFile(multipartFile, rootPath);
-        }
-        for (String s : playerName) {
-            log.info("playerName은 무엇일까요 {}", s);
-        }
-        log.info("/games/make POST! gameName: {}", gameName);
 
+// 로그인
         LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
 
         if (login == null) {
             return "redirect:/account/sign-in";
         }
 
+//        for (MultipartFile multipartFile : file) {
+//            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
+//            savePath = fileUtil.uploadFile(multipartFile, rootPath);
+//        }
+        for (String s : playerName) {
+            log.info("playerName은 무엇일까요 {}", s);
+        }
+        log.info("/games/make POST! gameName: {}", gameName);
+
+
         GameInsertRequestDTO gameInsertRequestDTO = GameInsertRequestDTO.builder()
                 .gameName(gameName)
                 .accountId(login.getAccountId())
                 .build();
-
         int gameId = 0;
-        for (int i = 0; i < file.length; i++) {
-            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
-                    .playerName(playerName[i])
-                    .playerImgPath(file[i].getOriginalFilename())
-                    .build();
-
-            playerService.registerPlayer(playerRegisterRequestDTO);
-
-//            log.info("이게 맞나? {}", playerRegisterRequestDTO);
-
-        }
         gameId = gameService.insertGame(gameInsertRequestDTO);
         log.info("gameId: {}", gameId);
+
+//        각 이미지 경로넣기 및 이름 저장
+        String savePath = null;
+        for (int i = 0; i < file.length; i++) {
+            savePath = fileUtil.uploadFile(file[i],rootPath);
+            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
+                    .gameId(gameId)
+                    .playerName(playerName[i])
+                    .playerImgPath(savePath)
+                    .build();
+//      log.info("이게 맞나? {}",playerRegisterRequestDTO);
+            playerService.registerPlayer(playerRegisterRequestDTO);
+        }
 
         return "redirect:/games/modify?gameId=" + gameId;
     }
