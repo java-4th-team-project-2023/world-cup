@@ -22,11 +22,11 @@
 
 /* 결과창 묶음 box */
 .rank-reply-wrapper .rank-reply-box .rank-box {
-    background: #D6E6F2;
-    border-bottom: 2px solid #000;
+    /* background: #D6E6F2; */
+    border-bottom: 1px solid #303481;
     width: 50%;
     height: 100%;
-    padding-top: 3.22%;
+    padding-top: 3%;
     position: relative;
 }
 
@@ -34,7 +34,7 @@
 .rank-reply-wrapper .rank-reply-box .rank-box .select-search-box {
     border-bottom: 2px solid #000;
     width: 50%;
-    height: 6%;
+    height: 6.3%;
     padding-left: 1%;
     background: #D6E6F2;
     display: flex;
@@ -135,13 +135,16 @@
 .winner-img-box {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .winner-img-name {
     border-bottom: 4px solid #fff200;
     width: 100%;
     height: 10%;
+    border-radius: 0px 0px 50px 50px;
     background: #303481;
     color: #fff200;
     text-align: center;
@@ -149,19 +152,32 @@
 }
 
 .winner-img {
-    background: url('/assets/img/Bomb.png') no-repeat;
+    background: url('/assets/img/cat.jpg') no-repeat;
     background-size: 100%;
     width: 100%;
-    height: 90%;
+    height: 100%;
     position: absolute;
     top: 10%;
     left: 0;
+    animation: transformY 0.5s alternate infinite;
+}
+
+@keyframes transformY {
+    0% {
+        transform: translateY(0px);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(20px);
+        opacity: 1;
+    }
 }
 
 .winner-img:hover {
     transform: scale(0.98);
     transition: 0.5s;
-    opacity: 0.9;
+    opacity: 0.7;
 }
 
 
@@ -179,8 +195,7 @@
 
 /* 댓글게시판 header */
 .rpheader {
-    border-left: 2px solid #000;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #303481;
     background: #D6E6F2;
     position: fixed;
     width: 50%;
@@ -235,12 +250,6 @@
     line-height: 1.5em;
 }
 
-/* 댓글게시판 header 리스트 세번째 버튼 (공 유) */
-.rpheader .rpheader-list-box a:nth-child(4) {
-    background: #D6E6F2;
-    line-height: 1.4em;
-}
-
 /* 댓글게시판 header 리스트 버튼 호버 */
 .rpheader .rpheader-list-box a:hover {
     border-right: 2px solid #000;
@@ -254,7 +263,7 @@
 
 /* 댓글게시판 main */
 .rpboard-box {
-    border-left: 2px solid #000;
+    border-left: 1px solid #303481;
     width: 100%;
     height: 100%;
     padding-top: 5.5%;
@@ -270,15 +279,14 @@
 
 /* 댓글게시판 main 리스트 */
 .rpboard-box .rpboard-list-box .rpboard-list {
-    width: 95%;
+    width: 100%;
     height: 100%;
-    margin: 0 auto;
 }
 
 /* 댓글게시판 main header */
 .rplist-header {
     border-bottom: 4px solid #fff200;
-    border-radius: 50px;
+    border-radius: 0px 0px 30px 30px;
     width: 100%;
     height: 6%;
     margin: 0 auto;
@@ -363,7 +371,7 @@
     width: 25px;
     height: 25px;
     vertical-align: middle;
-    margin: 0 5px;
+    margin: 0 15px;
 }
 
 /* 댓글 정렬 기준 드롭 다운 메뉴 */
@@ -492,38 +500,31 @@
 .rpboard-rpbox {
     border-right: 2px solid #fff200;
     border-bottom: 2px solid #fff200;
-    box-shadow: 0px 0px 3px 1px #fff200;
     border-radius: 0px 5px 50px 5px;
     width: 100%;
     height: 15%;
     padding: 1%;
     font-size: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: relative;
 }
 
-.rpboard-rpbox:hover {
-    transform: scale(1.05);
-    transition: 0.1s;
-    /* animation: hoverRotateX 0.1s linear 2; */
+.rpboard-rpbox::before {
+    content: '';
+    background: #f5f5f5;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 0px 50px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
-@keyframes hoverRotateX {
-    0% {
-        transform: rotateX(0);
-        opacity: 0;
-    }
-    
-    50% {
-        transform: rotateX(180deg);
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: rotateX(360deg);
-        opacity: 1;
-    }
-
+.rpboard-rpbox:hover {
+    transform: scale(1.02);
+    transition: 0.1s;
 }
 
 /* 사용자 댓글 박스 호버 */
@@ -597,9 +598,7 @@
 /* 댓글창 box */
 .rpboard-replies-box {
     background: #303481;
-    border: 2px solid #fff200;
-    color: #fff200;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 20px 0px;
     width: 100%;
     height: 40%;
     padding: 0;
@@ -607,15 +606,15 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    /* opacity: 0.5; */
 }
 
 /* 댓글창 */
 .rpboard-replies {
     width: 100%;
     height: 100%;
-    padding: 0 1%;
-    line-height: 1.6em;
+    padding: 0 2%;
+    color: #fff200;
+    line-height: 1.7em;
 }
 
 /* 댓글 수정 버튼 box */
@@ -624,7 +623,7 @@
     height: 25px;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -1.5px;
     display: none;
     z-index: 1;
 }
@@ -646,19 +645,17 @@
 
 /* 댓글 삭제 버튼 box */
 .rpboard-delete-replies-box {
-    border-radius: 0px 3px 0px 0px;
-    width: 25px;
-    height: 25px;
+    width: 23px;
+    height: 23px;
     position: absolute;
     top: 0;
-    right: 2px;
+    right: 0;
     z-index: 1;
     display: none;
 }
 
 /* 댓글 삭제 버튼 */
 .rpboard-delete-replies-btn {
-    border-radius: 0px 3px 0px 0px;
     border: none;
     background: url('/assets/img/kakaoTalk.png') no-repeat;
     background-size: 100%;
@@ -756,8 +753,9 @@ span.delete-text {
 
 /* 댓글 좋아요 */
 #Like {
-    width: 13%;
+    width: 6%;
     padding-top: 2px;
+    color: black;
     text-align: left;
     cursor: pointer;
     display: flex;
@@ -767,7 +765,7 @@ span.delete-text {
     width: 60%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     text-decoration: none;
 }
@@ -775,10 +773,11 @@ span.delete-text {
 #Like a.rpboard-btn .like-count {
     font-weight: bold;
     color: red;
+    margin-left: 7px;
 }
 
 #Like a p {
-    color: #000;
+    color: blue;
 }
 
 #Like a p:hover {
@@ -790,19 +789,21 @@ span.delete-text {
 #Like::before {
     content: "";
     display: inline-block;
-    background-image: url("../img/Like.png");
+    background: url("../img/Like.png") no-repeat;
     background-size: 100%;
     width: 27px;
     height: 27px;
     vertical-align: bottom;
+    margin-top: 2px;
 }
 
 /* 댓글 신고 */
 #Report {
-    width: 15%;
+    width: 8%;
     text-align: left;
     cursor: pointer;
     display: inline;
+    margin-left: 10px;
 }
 
 #Report a {
@@ -945,13 +946,15 @@ span.delete-text {
 .rpboard-input-box {
     width: 85%;
     height: 80%;
+    background: #303481;
 }
 
 .input-box {
     width: 100%;
     height: 100%;
     font-size: 40px;
-    padding-left: 1%;
+    padding-left: 3%;
+    border-radius: 100px 0px 0px 100px;
 }
 
 .rpboard-rpBtn-box {

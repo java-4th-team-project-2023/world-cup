@@ -14,7 +14,7 @@
             <a href="/views/include/header.html">
                 <li class="rpheader-list">목 록</li>
             </a>
-            <a href="/views/jsp/ranking.html">
+            <a href="/rank/ranking?gameId=${gameId}">
                 <li class="rpheader-list">랭 킹</li>
             </a>
             <a href="#">
@@ -39,7 +39,7 @@
 
                     <!-- 댓글 총 갯수 -->
                     <div class="rpcount">
-                        <p>총 댓글 : 0 개</p>
+                        <p id="replyCnt">총 댓글 : 0 개</p>
                     </div> <!-- end rpcount -->
 
                     <!-- 댓글 정렬 기준 -->
@@ -89,18 +89,19 @@
     </section> <!-- end rpboard-box -->
 
     <!-- 댓글 입력창 + 댓글 입력 버튼 -->
-    <section class="rpboard-user-nickname-reply-replyBtn-box">
-        <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
-        <div class="rpboard-input-btn-box">
-            <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
-                                                  placeholder="댓글을 입력해주세요..."></input></div>
-            <div class="rpboard-rpBtn-box">
-                <button class="rpBtn" type="button"><p>등 록
-                    <p></button>
+    <c:if test="${not empty login}">
+        <section class="rpboard-user-nickname-reply-replyBtn-box">
+            <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="익명">
+            <div class="rpboard-input-btn-box">
+                <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
+                                                    placeholder="댓글을 입력해주세요..."></input></div>
+                <div class="rpboard-rpBtn-box">
+                    <button class="rpBtn" type="button"><p>등 록
+                        <p></button>
+                </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    </c:if>
 
 </section>
 <!-- end reply-box -->
