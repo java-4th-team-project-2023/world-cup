@@ -27,6 +27,10 @@ header {
     cursor: pointer;
     position: absolute;
     display: flex;
+    text-align: center;
+    font-size: 100px;
+    color: #fff;
+    text-shadow: 2px 0 #000, 0 2px #000, -2px 0 #000, 0 -2px #000;
 }
 
 #game section {
