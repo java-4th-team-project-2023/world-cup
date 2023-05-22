@@ -105,7 +105,7 @@
                                     <div class="bar-text">
                                         <p>${player.finalWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: '${player.finalWinRate}%'"></div>
+                                    <div class="bar" style="width: ${player.finalWinRate}%"></div>
                                 </div>
                             </li>
                             <!-- 승률 -->
@@ -114,7 +114,7 @@
                                     <div class="bar-text">
                                         <p>${player.matchWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: '${player.matchWinRate}%';"></div>
+                                    <div class="bar" style="width: ${player.matchWinRate}%"></div>
                                 </div>
                             </li>
                         </ul>

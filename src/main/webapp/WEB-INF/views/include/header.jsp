@@ -15,10 +15,6 @@
                     <li class="header-menu-list"><a href="/">HOME</a></li>
                     <li class="header-menu-list"><a href="/games/make">월드컵 만들기</a></li>
                     <!-- 로그인 검증 -->
-                    <c:if test="${login ne null}">
-                        <li class="header-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
-                        <li class="header-menu-list"><a href="/games/playing-world-cup">내가 하던 월드컵</a></li>
-                    </c:if>
 
                     <c:if test="${login eq null}">
                         <li class="login-box"><a href="/account/sign-in" id="Login">LOGIN</a></li>
@@ -33,11 +29,9 @@
                 </label>
                 <nav class="inr-menu">
                     <ul class="inr-menu-list-box">
-                        <li class="inr-menu-list"><a href="#">내 정보</a></li>
-                        <li class="inr-menu-list"><a href="#">menu2</a></li>
-                        <li class="inr-menu-list"><a href="#">menu3</a></li>
-                        <li class="inr-menu-list"><a href="#">menu4</a></li>
                         <c:if test="${login ne null}">
+                            <li class="inr-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
+                            <li class="inr-menu-list"><a href="/games/playing-world-cup">내가 하던 월드컵</a></li>
                             <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
                         </c:if>
                     </ul>
