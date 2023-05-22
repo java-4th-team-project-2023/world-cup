@@ -56,7 +56,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" id="send" class="btn btn-secondary" data-dismiss="modal">확인</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
 
         </div>
