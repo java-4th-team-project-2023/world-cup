@@ -15,7 +15,6 @@ import java.util.List;
 public class ReplyListResponseDTO {
 
     private int count;
-    private PageMaker pageMaker;
     private List<ReplyDetailResponseDTO> replyList;
 
 

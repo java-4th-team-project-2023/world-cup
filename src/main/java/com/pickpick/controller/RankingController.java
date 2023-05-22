@@ -8,10 +8,13 @@ import com.pickpick.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -40,6 +43,16 @@ public class RankingController {
         PlayerOneResponseDTO dto = playerService.findOne(playerId);
         model.addAttribute("dto",dto);
         return "rank/winner";
+    }
+
+    @GetMapping("/{gameId}/page/{pageNo}")
+    @ResponseBody
+    public ResponseEntity<?> list(
+            @PathVariable int gameId,
+            @PathVariable int pageNo){
+        log.info("/rank/{}/page/{} : GET!!", gameId, pageNo);
+
+        return ResponseEntity.ok().body("");
     }
 
 }

@@ -3,6 +3,8 @@ package com.pickpick.dto.player;
 import com.pickpick.entity.Player;
 import lombok.*;
 
+import java.text.DecimalFormat;
+
 @Setter @Getter @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,8 +12,8 @@ import lombok.*;
 public class PlayerListResponseDTO {
 
     private int playerId;
-    private int matchWinRate;
-    private int finalWinRate;
+    private double matchWinRate;
+    private double finalWinRate;
     private String playerImgPath;
     private String playerName;
 
@@ -19,9 +21,12 @@ public class PlayerListResponseDTO {
         playerId = player.getPlayerId();
 
         try {
-            matchWinRate = player.getSelectedWinCount() / player.getFightCount() * 100;
-            finalWinRate = player.getFinalWinCount() / player.getJoinGameCount() * 100;
+            DecimalFormat decimalFormat = new DecimalFormat("#.#");
+            matchWinRate = Double.parseDouble(decimalFormat.format((float) player.getSelectedWinCount() / player.getFightCount() * 100));
+            finalWinRate = Double.parseDouble(decimalFormat.format((float) player.getFinalWinCount() / player.getJoinGameCount() * 100));
+
         } catch (ArithmeticException e) {
+            e.printStackTrace();
             matchWinRate = 0;
             finalWinRate = 0;
         }

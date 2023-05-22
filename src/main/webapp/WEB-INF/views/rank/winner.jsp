@@ -49,12 +49,12 @@
 
         </section> <!-- end rank-box -->
 
-       <%@ include file="../include/reply.jsp"%>
+        <%@ include file="../include/reply.jsp"%>
+
 
     </div>
 </section>
 <!-- reply container 끝 -->
-
 
 <script>
     // 해당 게임 아이디 (진호형꺼에서 받아오기)
@@ -65,7 +65,6 @@
 
     // 로그인한 회원 계정명
     const currentAccount = '${login.accountId}';
-    // console.log("!!!" + currentAccount);
 
     // 비동기 처리(댓글번호)
     const $viewMain = document.querySelector('.rpboard-viewmain');
@@ -81,7 +80,6 @@
     // 댓글 목록 렌더링 함수
     function renderReplyList({
         count,
-        pageMaker,
         replyList
     }) {
 
@@ -97,7 +95,7 @@
 
         } else {
             for (let rep of replyList) {
-                console.log("###" + rep.accountId);
+                // console.log("###" + rep.accountId);
                 const {
                     gameId,
                     replyNo,
@@ -105,7 +103,6 @@
                     text,
                     date,
                     accountId,
-                    pageMaker,
                     likeCount
                 } = rep;
 
@@ -141,9 +138,6 @@
                                     
                                 </div>
                             <div class="report rpboard-report-replies-btn" id="Report">
-                                <div class="rpboard-btn">
-                                    <p>신고</p>
-                                </div>
                             </div>`;
                 }
                 tag += `</div>
@@ -318,8 +312,6 @@
                         if (res.status === 200) {
                             alert('신고 정상!');
 
-                            // 마지막페이지 번호
-                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
                             getReplyList();
                         } else {
                             alert('신고 실패함!');
@@ -363,13 +355,15 @@
         getReplyList();
 
         // 댓글 등록 이벤트 등록
+        if(currentAccount !== ""){
         makeReplyRegisterClickEvent();
-
+    }
         // 삭제 이벤트 등록
         replyRemoveClickEvent();
-
     })();
 </script>
+
+
 
 </body>
 </html>

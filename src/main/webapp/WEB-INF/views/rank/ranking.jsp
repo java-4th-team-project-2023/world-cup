@@ -81,44 +81,11 @@
 
                     <!-- 반복 -->
                     <!-- 랭킹 목록 box -->
-                    <c:forEach var="player" items="${playerList}">
                     <section class="rkboard-ranking-wrapper">
                         <ul class="rkboard-ranking-list-box">
-                            <!-- 순위 -->
-                            <li class="rkboard-ranking-list" id="Ranking">
-                                <p class="rkboard-list-text">1</p>
-                            </li>
-                            <!-- 이미지 -->
-                            <li class="rkboard-ranking-list" id="Image">
-                                <a href="/assets/img/cat.jpg">
-                                    <img src="${player.playerImgPath}" alt="${player.playerName}">
-                                </a>
-                            </li>
-                            <!-- 이름 -->
-                            <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">${player.playerName}</p>
-                            </li>
-                            <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="${player.finalWinRate}">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>${player.finalWinRate}</p>
-                                    </div>
-                                    <div class="bar" style="width: ${player.finalWinRate}%"></div>
-                                </div>
-                            </li>
-                            <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="${player.matchWinRate}">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>${player.matchWinRate}</p>
-                                    </div>
-                                    <div class="bar" style="width: ${player.matchWinRate}%"></div>
-                                </div>
-                            </li>
+                            
                         </ul>
                     </section>
-                </c:forEach>
 
                 </section>
 
@@ -141,8 +108,7 @@
 
         // 로그인한 회원 계정명
         const currentAccount = '${login.accountId}';
-        // console.log("!!!" + currentAccount);
-
+        
         // 비동기 처리(댓글번호)
         const $viewMain = document.querySelector('.rpboard-viewmain');
 
@@ -157,7 +123,6 @@
         // 댓글 목록 렌더링 함수
         function renderReplyList({
             count,
-            pageMaker,
             replyList
         }) {
 
@@ -173,7 +138,7 @@
 
             } else {
                 for (let rep of replyList) {
-                    console.log("###" + rep.accountId);
+                    // console.log("###" + rep.accountId);
                     const {
                         gameId,
                         replyNo,
@@ -181,7 +146,6 @@
                         text,
                         date,
                         accountId,
-                        pageMaker,
                         likeCount
                     } = rep;
 
@@ -217,9 +181,6 @@
                                         
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
-                                    <div class="rpboard-btn">
-                                        <p>신고</p>
-                                    </div>
                                 </div>`;
                     }
                     tag += `</div>
@@ -430,6 +391,14 @@
             }
         };
 
+        // function getRankingList(pageNo=1){
+        //     fetch(`\${URL}/\${bno}/page/\${page}`)
+        //         .then(res => res.json())
+        //         .then(responseResult => {
+        //             console.log(responseResult);
+        //             renderReplyList(responseResult);
+        //         });
+        // }
 
 
         //========= 메인 실행부 =========//
@@ -439,11 +408,14 @@
             getReplyList();
 
             // 댓글 등록 이벤트 등록
+            if(currentAccount !== ""){
             makeReplyRegisterClickEvent();
-
+        }
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
 
+            // 랭킹 목록 페이지 불러오기
+            // getRankingList();
         })();
     </script>
 
