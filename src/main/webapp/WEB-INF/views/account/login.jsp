@@ -72,14 +72,14 @@
                     <h1 id="Text">환영합니다!</h1>
                     <p>To keep connected with us please login with your personal info</p>
                     <button class="ghost" id="signIn">로그인 페이지로</button>
-                    <button class="ghost" id="Main"><a href="/views/include/header.html">메인 화면으로</a></button>
+                    <button class="ghost" id="Main"><a href="/games/list">메인 화면으로</a></button>
                 </div> <!-- end overlay-panel / overlay-left -->
                 <!-- 회원가입 화면 시 왼쪽 패널 -->
                 <div class="overlay-panel overlay-right">
                     <h1 id="Text">반갑습니다!</h1>
                     <p id="Text">Enter your personal details and start journey with us</p>
                     <button class="ghost" id="signUp">회원가입 페이지로</button>
-                    <button class="ghost" id="Main"><a href="/views/include/header.html">메인 화면으로</a></button>
+                    <button class="ghost" id="Main"><a href="/games/list">메인 화면으로</a></button>
                 </div> <!-- end overlay-panel / overlay-right -->
             </div> <!-- end overlay -->
         </div> <!-- end overlay-container -->

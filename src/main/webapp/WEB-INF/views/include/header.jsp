@@ -12,7 +12,7 @@
             <!--상단 BAR-MENU-->
             <nav class="gnb">
                 <ul class="header-menu-box">
-                    <li class="header-menu-list"><a href="/">HOME</a></li>
+                    <li class="header-menu-list"><a href="/games/list">HOME</a></li>
                     <li class="header-menu-list"><a href="/games/make">월드컵 만들기</a></li>
                     <!-- 로그인 검증 -->
 
@@ -20,23 +20,25 @@
                         <li class="login-box"><a href="/account/sign-in" id="Login">LOGIN</a></li>
                     </c:if>
                 </ul>
-                <input type="checkbox" id="icon">
-                <label for="icon" class="transition">
-                    <!--label은 인라인 스타일-->
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
                 <c:if test="${login ne null}">
+                    <input type="checkbox" id="icon">
+
+                    <label for="icon" class="transition">
+                        <!--label은 인라인 스타일-->
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+
                     <nav class="inr-menu" data-account-id="${login.accountId}">
                         <ul class="inr-menu-list-box">
 
                             <li class="inr-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
-                            <li class="inr-menu-list"><a href="/games/playing-world-cup">내가 하던 월드컵</a></li>
                             <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
 
                         </ul>
                     </nav>
+
                 </c:if>
             </nav>
         </div>
