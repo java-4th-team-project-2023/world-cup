@@ -82,8 +82,6 @@ public class GameController {
         }
         log.info("/games/make POST! gameName: {}", gameName);
 
-//        이미지 경로 저장
-
 
         GameInsertRequestDTO gameInsertRequestDTO = GameInsertRequestDTO.builder()
                 .gameName(gameName)
@@ -93,7 +91,7 @@ public class GameController {
         gameId = gameService.insertGame(gameInsertRequestDTO);
         log.info("gameId: {}", gameId);
 
-
+//        각 이미지 경로넣기 및 이름 저장
         String savePath = null;
         for (int i = 0; i < file.length; i++) {
             savePath = fileUtil.uploadFile(file[i],rootPath);
