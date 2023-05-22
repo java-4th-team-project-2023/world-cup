@@ -37,7 +37,7 @@ const checkResultList = [false,false,false];
                 checkResultList[0]= false;
             }else if(!accountPattern.test(idValue)) {
                 
-                $accChk.innerHTML = '<span style = "color: red">[아이디는 4~14 글자의 영문, 숫자로 입력하세요!]</span>';
+                $accChk.innerHTML = '<span style = "color: red">[4~14자의 영문, 숫자로 입력하세요!]</span>';
                 checkResultList[0]= false;
             }else {
                 fetch('/members/check?type=account&keyword='+idValue)
