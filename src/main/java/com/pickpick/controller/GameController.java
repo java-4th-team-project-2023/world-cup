@@ -61,109 +61,48 @@ public class GameController {
         return "games/upload";
     }
 
-    // 게임 만들기 요청 - 이미지 저장
+    // 게임 만들기 요청
     @PostMapping("/make")
-    public String makeGame(HttpSession session, String gameName, String[] playerName,
+    public String makeGame( HttpSession session, String gameName, String[] playerName,
                            @RequestParam("playerImgPath") MultipartFile[] file) {
+        String savePath = null;
+        for (MultipartFile multipartFile : file) {
+            log.info("이미지파일의 이름을 알려주세요 {}",multipartFile.getOriginalFilename());
+            savePath = fileUtil.uploadFile(multipartFile, rootPath);
+        }
+        for (String s : playerName) {
+            log.info("playerName은 무엇일까요 {}",s);
+        }
+        log.info("/games/make POST! gameName: {}", gameName);
 
-
-//로그인 안되어 있으면 sign-up 페이지로
         LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
 
         if (login == null) {
             return "redirect:/account/sign-in";
         }
 
-
-//        player 등록
-        for (MultipartFile multipartFile : file) {
-            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
-
-        }
-        for (String s : playerName) {
-            log.info("playerName은 무엇일까요 {}", s);
-        }
-        log.info("/games/make POST! gameName: {}", gameName);
-
-
         GameInsertRequestDTO gameInsertRequestDTO = GameInsertRequestDTO.builder()
                 .gameName(gameName)
                 .accountId(login.getAccountId())
                 .build();
+
         int gameId = 0;
-        gameId = gameService.insertGame(gameInsertRequestDTO);
-        log.info("gameId {}",gameId);
-
-        String savePath = null;
-        for (int i = 0; i < file.length; i++) {
-
-            savePath = fileUtil.uploadFile(file[i], rootPath);
+        for(int i = 0; i < file.length; i++) {
             PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
-                    .gameId(gameId)
                     .playerName(playerName[i])
-                    .playerImgPath(savePath)
+                    .playerImgPath(file[i].getOriginalFilename())
                     .build();
 
             playerService.registerPlayer(playerRegisterRequestDTO);
 
 //            log.info("이게 맞나? {}", playerRegisterRequestDTO);
 
+        gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
         }
+        log.info("gameId: {}", gameId);
 
         return "redirect:/games/modify?gameId=" + gameId;
     }
-
-//    // 게임 만들기 요청 - 이미지 주소로 저장
-//    @PostMapping("/make")
-//    public String makeGame(HttpSession session, String gameName, String[] playerName,
-//                           @RequestParam("playerImgPath") MultipartFile[] file) {
-
-//
-////로그인 안되어 있으면 sign-up 페이지로
-//        LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
-//
-//        if (login == null) {
-//            return "redirect:/account/sign-in";
-//        }
-//
-//
-////        player 등록
-//        for (MultipartFile multipartFile : file) {
-//            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
-//
-//        }
-//        for (String s : playerName) {
-//            log.info("playerName은 무엇일까요 {}", s);
-//        }
-//        log.info("/games/make POST! gameName: {}", gameName);
-//
-//
-//        GameInsertRequestDTO gameInsertRequestDTO = GameInsertRequestDTO.builder()
-//                .gameName(gameName)
-//                .accountId(login.getAccountId())
-//                .build();
-//        int gameId = 0;
-//        gameId = gameService.insertGame(gameInsertRequestDTO);
-//        log.info("gameId {}",gameId);
-//
-//        String savePath = null;
-//        for (int i = 0; i < file.length; i++) {
-//
-//            savePath = fileUtil.uploadFile(file[i], rootPath);
-//            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
-//                    .gameId(gameId)
-//                    .playerName(playerName[i])
-//                    .playerImgPath(savePath)
-//                    .build();
-//
-//            playerService.registerPlayer(playerRegisterRequestDTO);
-//
-////            log.info("이게 맞나? {}", playerRegisterRequestDTO);
-//
-//        }
-//
-//        return "redirect:/games/modify?gameId=" + gameId;
-//    }
 
     // 랭킹 페이지 이동
     @GetMapping("/reply")
