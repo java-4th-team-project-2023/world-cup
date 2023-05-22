@@ -91,7 +91,7 @@ public class GameController {
                     .playerName(playerName[i])
                     .playerImgPath(file[i].getOriginalFilename())
                     .build();
-
+            playerService.registerPlayer(playerRegisterRequestDTO);
       log.info("이게 맞나? {}",playerRegisterRequestDTO);
 
         gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
