@@ -81,44 +81,11 @@
 
                     <!-- 반복 -->
                     <!-- 랭킹 목록 box -->
-                    <c:forEach var="player" items="${playerList}">
                     <section class="rkboard-ranking-wrapper">
                         <ul class="rkboard-ranking-list-box">
-                            <!-- 순위 -->
-                            <li class="rkboard-ranking-list" id="Ranking">
-                                <p class="rkboard-list-text">1</p>
-                            </li>
-                            <!-- 이미지 -->
-                            <li class="rkboard-ranking-list" id="Image">
-                                <a href="/assets/img/cat.jpg">
-                                    <img src="${player.playerImgPath}" alt="${player.playerName}">
-                                </a>
-                            </li>
-                            <!-- 이름 -->
-                            <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">${player.playerName}</p>
-                            </li>
-                            <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="${player.finalWinRate}">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>${player.finalWinRate}</p>
-                                    </div>
-                                    <div class="bar" style="width: ${player.finalWinRate}%"></div>
-                                </div>
-                            </li>
-                            <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="${player.matchWinRate}">
-                                <div class="graph">
-                                    <div class="bar-text">
-                                        <p>${player.matchWinRate}</p>
-                                    </div>
-                                    <div class="bar" style="width: ${player.matchWinRate}%"></div>
-                                </div>
-                            </li>
+                            
                         </ul>
                     </section>
-                </c:forEach>
 
                 </section>
 
@@ -424,6 +391,14 @@
             }
         };
 
+        // function getRankingList(pageNo=1){
+        //     fetch(`\${URL}/\${bno}/page/\${page}`)
+        //         .then(res => res.json())
+        //         .then(responseResult => {
+        //             console.log(responseResult);
+        //             renderReplyList(responseResult);
+        //         });
+        // }
 
 
         //========= 메인 실행부 =========//
@@ -440,7 +415,7 @@
             replyRemoveClickEvent();
 
             // 랭킹 목록 페이지 불러오기
-            getRankingList();
+            // getRankingList();
         })();
     </script>
 

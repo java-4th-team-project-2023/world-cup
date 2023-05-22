@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,10 +45,12 @@ public class RankingController {
         return "rank/winner";
     }
 
-    @GetMapping("/ranking/list")
+    @GetMapping("/{gameId}/page/{pageNo}")
     @ResponseBody
-    public ResponseEntity<?> list(int gameId,Search page){
-
+    public ResponseEntity<?> list(
+            @PathVariable int gameId,
+            @PathVariable int pageNo){
+        log.info("/rank/{}/page/{} : GET!!", gameId, pageNo);
 
         return ResponseEntity.ok().body("");
     }
