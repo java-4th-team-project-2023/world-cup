@@ -49,6 +49,7 @@ public class GameController {
         return "games/list";
     }
 
+
     // 게임 만들기 페이지 이동
     @GetMapping("/make")
     public String makeGame(HttpServletRequest request) {
