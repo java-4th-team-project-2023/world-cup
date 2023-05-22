@@ -156,7 +156,6 @@
         // 댓글 목록 렌더링 함수
         function renderReplyList({
             count,
-            pageMaker,
             replyList
         }) {
 
@@ -180,7 +179,6 @@
                         text,
                         date,
                         accountId,
-                        pageMaker,
                         likeCount
                     } = rep;
 
@@ -440,6 +438,9 @@
         }
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
+
+            // 랭킹 목록 페이지 불러오기
+            getRankingList();
         })();
     </script>
 

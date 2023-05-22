@@ -88,7 +88,6 @@
     // 댓글 목록 렌더링 함수
     function renderReplyList({
         count,
-        pageMaker,
         replyList
     }) {
 
@@ -112,7 +111,6 @@
                     text,
                     date,
                     accountId,
-                    pageMaker,
                     likeCount
                 } = rep;
 
@@ -321,9 +319,7 @@
                     .then(res => {
                         if (res.status === 200) {
                             alert('신고 정상!');
-
-                            // 마지막페이지 번호
-                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                          
                             getReplyList();
                         } else {
                             alert('신고 실패함!');

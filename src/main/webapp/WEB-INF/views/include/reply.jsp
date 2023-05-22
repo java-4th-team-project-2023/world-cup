@@ -75,9 +75,9 @@
 
 
                     </div> <!-- end rpboard-viewmain -->
-                    <div class="rpboard-more-view-btn">
+                    <!-- <div class="rpboard-more-view-btn">
                         <p>더 보기</p>
-                    </div>
+                    </div> -->
                 </section> <!-- end rpboard-viewmain-box -->
 
 
