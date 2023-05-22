@@ -45,14 +45,22 @@ public class RankingController {
         return "rank/winner";
     }
 
-    @GetMapping("/{gameId}/page/{pageNo}")
+    @GetMapping("/{gameId}/page/{pageNo}/key/{keyword}")
     @ResponseBody
     public ResponseEntity<?> list(
             @PathVariable int gameId,
-            @PathVariable int pageNo){
+            @PathVariable int pageNo,
+            @PathVariable String keyword){
         log.info("/rank/{}/page/{} : GET!!", gameId, pageNo);
+        Search page = new Search();
+        page.setKeyword(keyword);
+        page.setPageNo(pageNo);
+        page.setAmount(6);
+        List<PlayerListResponseDTO> playerResponseList = playerService.findAll(gameId, page);
 
-        return ResponseEntity.ok().body("");
+        log.info("playerList: {}",playerResponseList);
+
+        return ResponseEntity.ok().body(playerResponseList);
     }
 
 }

@@ -84,7 +84,7 @@
                 <!-- 랭킹 목록 box -->
                 <section class="rkboard-ranking-wrapper">
                     <ul class="rkboard-ranking-list-box">
-
+                        <!-- 비동기 처리 랭킹 목록 그리기 -->
                     </ul>
                 </section>
 
@@ -117,8 +117,6 @@
     const final = '${player.finalWinRate}';
     // 총 경기 비율
     const match = '${player.matchWinRate}';
-
-    if (isNaN(final))
 
 
         // 댓글 목록 렌더링 함수
@@ -388,14 +386,110 @@
         }
     };
 
-    // function getRankingList(pageNo=1){
-    //     fetch(`\${URL}/\${bno}/page/\${page}`)
-    //         .then(res => res.json())
-    //         .then(responseResult => {
-    //             console.log(responseResult);
-    //             renderReplyList(responseResult);
-    //         });
-    // }
+    function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
+        fetch(`\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
+            .then(res => res.json())
+            .then(responseResult => {
+                console.log(responseResult);
+                renderRankingList(responseResult);
+            });
+    }
+
+    // 랭킹 목록 렌더링 함수
+    function renderRankingList(responseResult) {
+
+            // 총 랭킹 수 렌더링
+            // document.getElementById('replyCnt').textContent = count;
+
+            // 랭킹 내용 렌더링
+            let tag = ``;
+
+                for (let i=0; i < responseResult.length; i++) {
+                    console.log(responseResult[i]);
+
+                    tag += `<!-- 순위 -->
+                            <li class="rkboard-ranking-list" id="Ranking">
+                                <p class="rkboard-list-text">\${i}</p>
+                            </li>
+                            <!-- 이미지 -->
+                            <li class="rkboard-ranking-list" id="Image">
+                                <a href="/assets/img/cat.jpg">
+                                    <img src="\${i.playerImgPath}" alt="\${i.playerName}">
+                                </a>
+                            </li>
+                            <!-- 이름 -->
+                            <li class="rkboard-ranking-list" id="Name">
+                                <p class="rkboard-list-text">\${i.playerName}</p>
+                            </li>
+                            <!-- 우승 비율 -->
+                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="\${i.finalWinRate}">
+                                <div class="graph">
+                                    <div class="bar-text">
+                                        <p>\${i.finalWinRate}</p>
+                                    </div>
+                                    <div class="bar" style="width: '\${i.finalWinRate}%'"></div>
+                                </div>
+                            </li>
+                            <!-- 승률 -->
+                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="\${i.matchWinRate}">
+                                <div class="graph">
+                                    <div class="bar-text">
+                                        <p>\${i.matchWinRate}</p>
+                                    </div>
+                                    <div class="bar" style="width: '\${i.matchWinRate}%';"></div>
+                                </div>
+                            </li>`;
+
+                    
+                }
+            // 생성된 댓글 tag 렌더링
+            document.querySelector('.rkboard-ranking-list-box').innerHTML = tag;
+
+            // 페이지 렌더링
+            // renderPage(pageInfo);
+            }
+
+
+           
+
+         // 페이지 렌더링 함수
+        //  function renderPage({
+        //     begin, end, prev, next, page, finalPage
+        // }) {
+
+        //     let tag = "";
+
+        //     //이전 버튼 만들기
+        //     if (prev) {
+        //         tag += "<li class='page-item'><a class='page-link page-active' href='" + (begin - 1) +
+        //             "'>이전</a></li>";
+        //     }
+        //     //페이지 번호 리스트 만들기
+        //     for (let i = begin; i <= end; i++) {
+        //         let active = '';
+        //         if (page.pageNo === i) {
+        //             active = 'p-active';
+        //         }
+
+        //         tag += "<li class='page-item " + active + "'><a class='page-link page-custom' href='" + i +
+        //             "'>" + i + "</a></li>";
+        //     }
+        //     //다음 버튼 만들기
+        //     if (next) {
+        //         tag += "<li class='page-item'><a class='page-link page-active' href='" + (end + 1) +
+        //             "'>다음</a></li>";
+        //     }
+
+        //     // 페이지태그 렌더링
+        //     const $pageUl = document.querySelector('.pagination');
+        //     $pageUl.innerHTML = tag;
+
+        //     // ul에 마지막페이지 번호 저장.
+        //     $pageUl.dataset.fp = finalPage;
+
+        // }
+
+
 
 
     //========= 메인 실행부 =========//
@@ -412,7 +506,7 @@
         replyRemoveClickEvent();
 
         // 랭킹 목록 페이지 불러오기
-        // getRankingList();
+        getRankingList();
     })();
 </script>
 
