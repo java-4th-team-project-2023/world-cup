@@ -66,6 +66,10 @@ async function selectRound() {
 
     }
 
+    document.getElementById('close').onclick = e => {
+        history.back();
+    }
+
 }
 
 // PlayerController 로 데이터 전달
