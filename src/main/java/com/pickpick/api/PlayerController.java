@@ -1,5 +1,6 @@
 package com.pickpick.api;
 
+import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.dto.page.Page;
 import com.pickpick.dto.player.*;
 import com.pickpick.dto.playingGame.PlayingGameSaveRequestDTO;
@@ -61,7 +62,7 @@ public class PlayerController {
         String accountId = null;
 
         try {
-            accountId = ((Account) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId();
+            accountId = ((LoginUserResponseDTO) session.getAttribute(LoginUtil.LOGIN_KEY)).getAccountId();
         } catch (NullPointerException ignored) {
         }
 

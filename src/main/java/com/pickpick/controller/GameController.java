@@ -42,6 +42,7 @@ public class GameController {
                        Search page) {
 
         log.info("/games/list GET! page: {}", page);
+        page.setAmount(6);
         model.addAttribute("gameList", gameService.findAll(page));
         model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
 
@@ -56,8 +57,7 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-
-        return "games/make";
+        return "games/upload";
     }
 
     // 게임 만들기 요청
