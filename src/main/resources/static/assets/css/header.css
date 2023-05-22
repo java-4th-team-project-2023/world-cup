@@ -16,7 +16,8 @@
 
 body {
     width: 100%;
-    height: 100vh;
+    height: 1400px;
+    /*height: 100vh;*/
     position: relative;
 }
 
@@ -35,11 +36,9 @@ body::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    /* background: url('/assets/img/background.jpg') no-repeat; */
-    background: #D6E6F2;
-    background-repeat: repeat-x;
-    animation: gradient 100s linear infinite;
-    background-size: 132%;
+    background: url('/assets/img/background.jpg') no-repeat center / cover;
+    /* animation: gradient 100s linear infinite; */
+    background-size: 100%;
     /* opacity: 0.8; */
     pointer-events: none;
 }
@@ -121,10 +120,6 @@ h1.logo a i {
     transition: 0.1s;
 }
 
-.gnb ul li.header-menu-list:active {
-    transform: scale(0.95);
-}
-
 /* 상단 BAR-MENU 목록 */
 .gnb ul li.header-menu-list a {
     background: #D6E6F2;
@@ -177,7 +172,7 @@ h1.logo a i {
     z-index: 1;
     display: block;
     padding: 8px 0 0 0;
-    color: #fff200;
+    color: #303481;
     text-shadow: none;
     text-transform: none;
     font-size: 0.75em;
@@ -227,6 +222,7 @@ h1.logo a i {
     color: black;
     position: absolute;
     font-size: 35px;
+    text-decoration: none;
     line-height: 2.5em;
     top: 50%;
     left: 50%;
@@ -243,7 +239,7 @@ h1.logo a i {
 .gnb ul .login-box a#Login:hover {
     border-bottom: 93px solid #303481;
     color: #fff200;
-    transition: 0.1s;
+    transition: 0.3s;
     opacity: 0.9;
 }
 
@@ -377,10 +373,10 @@ input#icon:checked+label>span:nth-child(3) {
     right: 20px;
     bottom: 20px;
     outline: 0;
-    background: #F5F5F5;
+    background: #fff200;
     cursor: pointer;
     z-index: 9999;
-    color: #D6E6F2;
+    color: #000;
 }
 
 /* 위로가기 버튼 호버 */

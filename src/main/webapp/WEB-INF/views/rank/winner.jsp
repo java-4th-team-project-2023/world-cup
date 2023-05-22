@@ -29,14 +29,6 @@
             <!-- 전체 갯수 출력 + 검색창 box 묶음 -->
             <div class="select-search-box">
 
-                <!-- 전체 갯수 출력 창 -->
-                <select class="select-view-number" id="Select-View-Number">
-                    <!-- 전체 갯수 출력 리스트 -->
-                    <option value="10" class="select-number">10</option>
-                    <option value="10" class="select-number">20</option>
-                    <option value="10" class="select-number">30</option>
-                </select> <!-- end select-view-number -->
-
                 <!-- 검색창 box -->
                 <div class="search-box">
                     <!-- 검색창 text -->
@@ -73,7 +65,7 @@
 
     // 로그인한 회원 계정명
     const currentAccount = '${login.accountId}';
-    
+
     // 비동기 처리(댓글번호)
     const $viewMain = document.querySelector('.rpboard-viewmain');
 
@@ -319,7 +311,7 @@
                     .then(res => {
                         if (res.status === 200) {
                             alert('신고 정상!');
-                          
+
                             getReplyList();
                         } else {
                             alert('신고 실패함!');

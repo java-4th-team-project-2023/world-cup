@@ -39,7 +39,11 @@
                 </div>
                 <h3>${g.gameName}</h3>
                 <div class="button-wrapper">
-                    <button class="game-modify-btn">수정하기</button>
+                    <c:if test="${g.accountId eq login.accountId}">
+                        <button class="game-modify-btn"
+                                onclick="window.location.href='/games/modify?gameId=${g.gameId}'">수정하기
+                        </button>
+                    </c:if>
                     <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">
                         랭킹보기
                     </button>
@@ -110,7 +114,6 @@
         searchBtnEvent();
 
 
-
         // 게임 스타트 페이지 이동
         goGameStartPage();
     })();
@@ -137,7 +140,6 @@
                 + '&keyword=' + document.getElementById('search_keyword').value;
         };
     }
-
 
 
 </script>
