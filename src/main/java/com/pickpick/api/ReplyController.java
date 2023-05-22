@@ -33,11 +33,7 @@ public class ReplyController {
     ){
         log.info("/api/replies/{}/page/{} : GET!!",gameId,pageNo);
 
-        Page page = new Page();
-        page.setPageNo(pageNo);
-        page.setAmount(20);
-
-        ReplyListResponseDTO replyList = replyService.getList(gameId, page);
+        ReplyListResponseDTO replyList = replyService.getList(gameId);
         log.info("replyList : {}", replyList);
         return ResponseEntity.ok().body(replyList);
     }
@@ -104,5 +100,17 @@ public class ReplyController {
                     .body(e.getMessage());
         }
 
+    }
+
+    // 댓글 수정 기능
+    @PutMapping("/modify")
+    public ResponseEntity<?> modify(
+            @Validated @RequestBody ReplyModifyRequestDTO dto,
+            HttpSession session){
+
+            ReplyListResponseDTO responseDTO = replyService.modify(dto,session);
+
+
+        return ResponseEntity.ok().body(responseDTO);
     }
 }

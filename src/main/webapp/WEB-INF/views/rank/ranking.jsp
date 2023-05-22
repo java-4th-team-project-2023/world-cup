@@ -100,7 +100,7 @@
                                 <p class="rkboard-list-text">${player.playerName}</p>
                             </li>
                             <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage">
+                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="${player.finalWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
                                         <p>${player.finalWinRate}</p>
@@ -109,12 +109,12 @@
                                 </div>
                             </li>
                             <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate">
+                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="${player.matchWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
                                         <p>${player.matchWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: 90%;"></div>
+                                    <div class="bar" style="width: '${player.matchWinRate}%';"></div>
                                 </div>
                             </li>
                         </ul>
@@ -203,9 +203,9 @@
 
 
                                 </div> <!-- end rpboard-viewmain -->
-                                <div class="rpboard-more-view-btn">
+                                <!-- <div class="rpboard-more-view-btn">
                                     <p>더 보기</p>
-                                </div>
+                                </div> -->
                             </section> <!-- end rpboard-viewmain-box -->
 
 
@@ -216,14 +216,13 @@
                 <!-- 댓글 입력창 + 댓글 입력 버튼 -->
                 <c:if test="${not empty login}">
                 <section class="rpboard-user-nickname-reply-replyBtn-box">
-                        <input class="user-nickname" type="text" placeholder="닉네임" name="writer">
+                        <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="익명">
                     <div class="rpboard-input-btn-box">
                         <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                 placeholder="댓글을 입력해주세요..."></input></div>
                         <div class="rpboard-rpBtn-box">
                             <button class="rpBtn" type="button">
-                                <p>등 록
-                                    <p>
+                                <p>등 록<p>
                             </button>
                         </div>
                     </div>
@@ -248,11 +247,17 @@
 
         // 로그인한 회원 계정명
         const currentAccount = '${login.accountId}';
-        console.log("!!!" + currentAccount);
+        // console.log("!!!" + currentAccount);
 
         // 비동기 처리(댓글번호)
         const $viewMain = document.querySelector('.rpboard-viewmain');
 
+        // 우승 비율
+        const final = '${player.finalWinRate}';
+        // 총 경기 비율
+        const match = '${player.matchWinRate}';
+
+        if(isNaN(final))
 
 
         // 댓글 목록 렌더링 함수
@@ -282,7 +287,8 @@
                         text,
                         date,
                         accountId,
-                        pageMaker
+                        pageMaker,
+                        likeCount
                     } = rep;
 
                     tag += `
@@ -315,6 +321,7 @@
                         <div class="rpboard-like-report-box">
                             <div class="like" id="Like">
                             <button class="rpboard-like-replies-btn">좋아요</button>
+                            \${likeCount}
                             </div>
                             <div class="report" id="Report">
                             <button class="rpboard-report-replies-btn">신고</button>
@@ -337,7 +344,7 @@
             fetch(`\${URL}/\${gameId}/page/\${pageNo}`) // ${gameId}
                 .then(res => res.json())
                 .then(responseResult => {
-                    console.log(responseResult);
+                    // console.log(responseResult);
                     renderReplyList(responseResult);
                 });
 
@@ -394,7 +401,7 @@
                             alert('댓글이 정상 등록됨!');
                             // 입력창 비우기
                             $rt.value = '';
-                            $rw.value = '';
+                            // $rw.value = '익명';
 
                             getReplyList();
                         } else {
@@ -433,7 +440,7 @@
                 }
                 else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
-                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('좋아요 클릭!!');
 
                     // # 서버로 보낼 데이터
@@ -465,7 +472,7 @@
                 }
                 else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
 
-                    console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                    // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                     console.log('신고 클릭!!');
 
                     // # 서버로 보낼 데이터
@@ -496,29 +503,33 @@
                                 alert('신고 실패함!');
                             }
                         });
+                }else if (e.target.matches('.rpboard-modify-replies-btn')) { // 수정 기능
+
+                    const payload = {
+                        replyNo: $replyNo,
+                        gameId: +gameId,
+                        text: text
+                    };
+
+                    const requestInfo = {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    }
+
+
                 }
-                    else{
+                    else{ // 다른곳 클릭하면 보여줌
                         console.log("다른곳 클릭");
                         return;
                 }   
+
+               
+
+
             }
-
-
-            // else if (e.target.matches('#replyModBtn')) {
-            //     // console.log('수정 화면 진입!');
-
-            //     // 클릭한 수정 버튼 근처에 있는 텍스트 읽기
-            //     const replyText = e.target.parentElement.previousElementSibling.textContent;
-            //     // console.log(replyText);
-
-            //     // 모달에 모달바디에 textarea에 읽은 텍스트를 삽입
-            //     document.getElementById('modReplyText').value = replyText;
-
-            //     // 다음 수정완료 처리를 위해 미리 
-            //     // 수정창을 띄울 때 댓글번호를 모달에 붙여놓자
-            //     const $modal = document.querySelector('.modal');
-            //     $modal.dataset.rno = rno;
-            // }
         };
 
 

@@ -36,7 +36,7 @@
         select player_id
         from winner_players_tbl
         where playing_game_id=#{playingGameId}
-        order by date_time desc
+        order by datetime desc
         limit 1
     </select>
 

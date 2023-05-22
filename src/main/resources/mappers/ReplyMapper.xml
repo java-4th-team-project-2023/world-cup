@@ -18,18 +18,17 @@
 
     <select id="findOne" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id, account_id
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id, like_count
         FROM reply_tbl
         WHERE reply_no = #{replyNo}
     </select>
 
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id, account_id
+        reply_no, text, writer, date, like_count, account_id, game_id, account_id, like_count
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
-<!--        LIMIT #{page.getPageStart}, #{page.amount}-->
     </select>
 
     <select id="count" resultType="int">

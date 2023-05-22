@@ -23,7 +23,7 @@
     <div class="container" id="container">
         <!-- 회원가입 정보 화면 box -->
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form id="signUpForm" action="#">
                 <!-- 회원가입 정보 화면 -->
                 <h1 id="SignUp">회원가입</h1>
                 <div class="social-container">
@@ -32,9 +32,12 @@
                     <a href="#" class="social" id="Naver"></a>
                 </div> <!-- end social-container -->
                 <span>가입하실 정보를 입력하세요!</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" id="reg_accountid" name="accountId" placeholder="Name" />
+                    <div id="accChk"></div>
+                <input type="email" id="reg_email" name="email" placeholder="Email" />
+                    <div id="emailChk"></div>
+                <input type="password" id="reg_password" name="password" placeholder="Password" />
+                    <div id="pwChk"></div>
                 <button id="SignUpBtn">회원가입</button>
             </form> <!-- end form -->
         </div> <!-- end form-container / sign-up-container -->
@@ -44,7 +47,7 @@
             <!-- 뒤로가기 버튼 -->
             <!-- <div class="return-box"><a href="/views/include/header.html"></a></div> -->
 
-            <form action="#">
+            <form action="/account/sign-in" method="post">
                 <!-- 로그인 정보 화면 -->
                 <h1 id="SignIn">로그인</h1>
                 <div class="social-container">
@@ -53,8 +56,8 @@
                     <a href="#" class="social" id="Naver"></a>
                 </div> <!-- end social-container -->
                 <span>또는 계정을 입력하세요!</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="accountId" placeholder="Id" id="sign-in-account" />
+                <input type="password" name="password" placeholder="Password" />
                 <!-- 비밀번호 찾기 text -->
                 <a href="#" id="Text">비밀번호 찾기</a>
                 <button id="SignInBtn">로그인</button>

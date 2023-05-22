@@ -31,19 +31,19 @@
 
         <c:forEach items="${gameList}" var="g">
 
-            <a href="/games/start?gameId=${g.gameId}" class="card" data-game="${g.gameId}">
+            <span  class="card" data-game="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
+                        <img src="${t}" alt="thumbnails">
                         <img src="${t}" alt="thumbnails">
                     </c:forEach>
                 </div>
                 <h3>${g.gameName}</h3>
-            </a>
-            <div class="button-wrapper">
-                <button class="game-modify-btn">수정하기</button>
-                <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
-            </div>
-
+                <div class="button-wrapper">
+                    <button class="game-modify-btn">수정하기</button>
+                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
+                </div>
+            </span>
         </c:forEach>
     </div>
 
@@ -81,14 +81,14 @@
     </ul>
 
 
-    <div class="search-container">
+    <section class="search-container">
         <form class="search-form">
-            <label>
+            <div class="input-btn-box">
                 <input type="text" placeholder="Search..." name="keyword" id="search_keyword">
-            </label>
-            <button>Search</button>
+                <button><div class="search-btn-img-box"></div></button>
+            </div>
         </form>
-    </div>
+    </section>
 </div>
 
 <script>
@@ -100,9 +100,13 @@
     //     window.location.href = 'rank/ranking?gameId='+$gameId.value;
     // };
     // main function
+
+    
+
     (() => {
         // 검색 버튼 이벤트 등록
         searchBtnEvent();
+        
     })();
 
     function searchBtnEvent() {
@@ -115,6 +119,19 @@
                 +'&keyword=' + document.getElementById('search_keyword').value;
         };
     }
+
+        document.querySelector('.img-box').onclick = e =>{
+
+            const cardGameNum = document.querySelector('.card');
+
+            console.log(+cardGameNum.dataset.game);
+            
+            window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
+        }
+       
+       
+
+    
 
 </script>
 

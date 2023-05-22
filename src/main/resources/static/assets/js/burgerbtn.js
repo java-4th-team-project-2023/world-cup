@@ -1,8 +1,9 @@
-// 햄버거 버튼
-const transition = document.querySelector(".transition");
-transition.addEventListener("click", handleClick);
+// 클릭 이벤트 추가
+document.addEventListener('click', function (event) {
+  const icon = document.getElementById('icon');
+  const menu = document.querySelector('.inr-menu');
 
-function handleClick() {
-    transition.classList.toggle("close");
-}
-// 햄버거 버튼
+  if (!menu.contains(event.target) && event.target !== icon) {
+    icon.checked = false;
+  }
+});

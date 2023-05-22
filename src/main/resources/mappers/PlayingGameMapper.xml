@@ -5,7 +5,7 @@
 <mapper namespace="com.pickpick.repository.PlayingGameMapper">
 
     <insert id="save" parameterType="playingGame">
-        insert into playing_game_tbl (game_id, round_num, current_round, account_id)
+        insert into playing_game_tbl (game_id, total_round, current_round, account_id)
         values (#{gameId}, #{totalRound}, #{currentRound}, #{accountId})
 
         <selectKey resultType="int" keyProperty="playingGameId" order="AFTER">

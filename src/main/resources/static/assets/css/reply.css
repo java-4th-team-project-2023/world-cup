@@ -185,7 +185,7 @@
     position: fixed;
     width: 50%;
     height: 6.3%;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* 댓글게시판 header 리스트 묶음 box */
@@ -263,6 +263,7 @@
 
 /* 댓글게시판 main box */
 .rpboard-box .rpboard-list-box {
+    /* background: #D6E6F2; */
     width: 100%;
     height: 90%;
 }
@@ -276,25 +277,27 @@
 
 /* 댓글게시판 main header */
 .rplist-header {
-    border-bottom: 4px solid #000;
+    border-bottom: 4px solid #fff200;
+    border-radius: 50px;
     width: 100%;
     height: 6%;
     margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     justify-content: left;
     align-items: center;
     position: relative;
+    background: #303481;
+    color: #fff200;
 }
 
 /* 댓글 총 갯수 */
 .rplist-header .rpcount {
-    border-right: 2px solid #000;
-    margin-right: 20px;
-    margin-top: 9px;
-    width: 20%;
+    /* border-right: 2px solid #000; */
+    margin-top: 5px;
+    width: fit-content;
     height: 60%;
     text-align: center;
-    font-weight: bold;
 }
 
 
@@ -315,7 +318,7 @@
     width: 35px;
     height: 35px;
     vertical-align: middle;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 /* 댓글 정렬 기준 */
@@ -323,7 +326,7 @@
     width: 19%;
     height: 100%;
     margin-top: 9px;
-    font-weight: bold;
+    text-align: center;
     cursor: pointer;
     line-height: 1.8em;
     font-size: 29px;
@@ -360,7 +363,7 @@
     width: 25px;
     height: 25px;
     vertical-align: middle;
-    margin: 0 15px;
+    margin: 0 5px;
 }
 
 /* 댓글 정렬 기준 드롭 다운 메뉴 */
@@ -395,6 +398,7 @@
     height: 100%;
     cursor: pointer;
     display: block;
+    color: black;
 }
 
 /* 댓글 정렬 기준 드롭 다운 메뉴 인기 댓글 순*/
@@ -417,19 +421,18 @@
 
 /* 댓글쓰기 (내려가기) 버튼 */
 .bot-btns p {
-    border-radius: 5px;
-    background: #D6E6F2;
-    color: black;
+    border-radius: 50px;
+    background: #fff200;
+    color: #303481;
     box-shadow: 2px 2px 2px 1px black;
     width: 15%;
     height: 60%;
-    transition: .2s;
+    transition: 0.2s;
     line-height: 2em;
     font-size: 25px;
-    font-weight: bold;
     cursor: pointer;
     position: absolute;
-    right: 0.5%;
+    right: 2%;
     top: 25%;
     display: flex;
     justify-content: center;
@@ -438,7 +441,7 @@
 
 /* 댓글쓰기 (내려가기) 버튼 호버 */
 .bot-btns p:hover {
-    border: 1px solid #000;
+    border: 1px solid #fff200;
     background: #303481;
     color: #fff200;
     opacity: 0.9;
@@ -463,17 +466,23 @@
 
 /* 댓글 게시판 전체 */
 .rpboard-viewmain-box {
-    background: #D6E6F2;
     width: 100%;
-    height: 100%;
+    height: 85%;
     padding-top: 2%;
     position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: none;
+}
+
+/* 스크롤바 숨기기 */
+.rpboard-viewmain-box::-webkit-scrollbar {
+    display: none;
 }
 
 /* 댓글 main */
 .rpboard-viewmain-box .rpboard-viewmain {
     border-radius: 5px;
-    background: #D6E6F2;
     width: 95%;
     height: 100%;
     margin: 0 auto;
@@ -481,17 +490,40 @@
 
 /* 사용자 댓글 박스 */
 .rpboard-rpbox {
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    box-shadow: 2px 2px 3px 1px black;
-    border-radius: 5px;
-    background: #fff;
+    border-right: 2px solid #fff200;
+    border-bottom: 2px solid #fff200;
+    box-shadow: 0px 0px 3px 1px #fff200;
+    border-radius: 0px 5px 50px 5px;
     width: 100%;
     height: 15%;
     padding: 1%;
     font-size: 25px;
     margin-bottom: 10px;
     position: relative;
+}
+
+.rpboard-rpbox:hover {
+    transform: scale(1.05);
+    transition: 0.1s;
+    /* animation: hoverRotateX 0.1s linear 2; */
+}
+
+@keyframes hoverRotateX {
+    0% {
+        transform: rotateX(0);
+        opacity: 0;
+    }
+    
+    50% {
+        transform: rotateX(180deg);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: rotateX(360deg);
+        opacity: 1;
+    }
+
 }
 
 /* 사용자 댓글 박스 호버 */
@@ -509,12 +541,12 @@
 
 /* 사용자 닉네임 + 댓글 작성 일자 box */
 .rpboard-nickname-local-date-box {
-    border-top: 2px solid #D6E6F2;
-    border-bottom: 2px solid white;
+    /* border-top: 2px solid #D6E6F2; */
+    /* border-bottom: 1px solid #fff200; */
     border-radius: 5px 5px 0px 0px;
-    background: #D6E6F2;
+    /* background: #D6E6F2; */
     width: 100%;
-    height: 25%;
+    height: 30%;
     display: flex;
     position: relative;
 }
@@ -527,12 +559,13 @@
     font-size: 30px;
     line-height: 0.9em;
     position: relative;
+    cursor: pointer;
 }
 
 .rpboard-nickname::before {
     content: "";
     display: inline-block;
-    background-image: url("../img/Profile.png");
+    background-image: url("../img/ProfileSmile.gif");
     border-radius: 50%;
     background-size: 100%;
     width: 20px;
@@ -563,14 +596,18 @@
 
 /* 댓글창 box */
 .rpboard-replies-box {
-    background: #D6E6F2;
-    border: 1px solid #D6E6F2;
+    background: #303481;
+    border: 2px solid #fff200;
+    color: #fff200;
     border-radius: 0px 0px 5px 5px;
     width: 100%;
-    height: 50%;
+    height: 40%;
     padding: 0;
     display: flex;
     position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    /* opacity: 0.5; */
 }
 
 /* 댓글창 */
@@ -578,6 +615,7 @@
     width: 100%;
     height: 100%;
     padding: 0 1%;
+    line-height: 1.6em;
 }
 
 /* 댓글 수정 버튼 box */
@@ -588,13 +626,13 @@
     top: 0;
     right: 0;
     display: none;
-    z-index: 2;
+    z-index: 1;
 }
 
 /* 댓글 수정 버튼 */
 .rpboard-modify-replies-btn {
     border: none;
-    background: url('/assets/img/modify.png') no-repeat;
+    background: url('/assets/img/kakaoTalk.png') no-repeat;
     background-size: 90%;
     width: 100%;
     height: 100%;
@@ -608,21 +646,21 @@
 
 /* 댓글 삭제 버튼 box */
 .rpboard-delete-replies-box {
-    /* border: 2px solid rgb(255, 97, 116);
-    border-radius: 3px; */
+    border-radius: 0px 3px 0px 0px;
     width: 25px;
     height: 25px;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 2px;
+    z-index: 1;
     display: none;
-    z-index: 2;
 }
 
 /* 댓글 삭제 버튼 */
 .rpboard-delete-replies-btn {
+    border-radius: 0px 3px 0px 0px;
     border: none;
-    background: url('/assets/img/Delete.png') no-repeat;
+    background: url('/assets/img/kakaoTalk.png') no-repeat;
     background-size: 100%;
     width: 100%;
     height: 100%;
@@ -634,21 +672,119 @@
     transform: scale(1.2);
 }
 
+.rpboard-rpbox:hover .rpboard-delete-replies-box .rpboard-rpbox .rpboard-delete-replies-text {
+    display: block;
+}
+
+.rpboard-delete-check-replies-text {
+    border-radius: 5px;
+    width: 30%;
+    height: 110px;
+    position: absolute;
+    top: 0;
+    right: 4%;
+    z-index: 1;
+    display: none;
+}
+
+.rpboard-delete-check-text-box {
+    border-radius: 5px 5px 0px 0px;
+    background: #303481;
+    border-bottom: 2px solid #fff200;
+    text-align: center;
+}
+
+.rpboard-delete-check-text {
+    color: #fff200;
+}
+
+span.delete-text {
+    color: red;
+}
+
+.rpboard-delete-check-btn-box {
+    border-radius: 0px 0px 5px 5px;
+    background: #303481;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.rpboard-delete-check-btn {
+    background: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    width: 30%;
+    height: 70%;
+    cursor: pointer;
+}
+
+.rpboard-delete-check-btn:first-child {
+    background: red;
+}
+
+.rpboard-delete-check-btn:last-child {
+    background: yellowgreen;
+}
+
+.rpboard-delete-check-btn p {
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    line-height: 1.8em;
+}
+
+.rpboard-delete-check-btn:hover {
+    border: 2px solid #fff200;
+    opacity: 0.8;
+}
+
+.rpboard-delete-check-btn:active {
+    transform: scale(0.95);
+}
+
+
 /* 댓글 좋아요 + 댓글 신고 box */
 .rpboard-like-report-box {
+    width: 100%;
+    height: 35%;
     display: flex;
+    justify-content: left;
 }
 
 /* 댓글 좋아요 */
 #Like {
-    width: 10%;
+    width: 13%;
+    padding-top: 2px;
     text-align: left;
     cursor: pointer;
+    display: flex;
 }
 
-#Like:hover {
+#Like a.rpboard-btn {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+
+#Like a.rpboard-btn .like-count {
+    font-weight: bold;
+    color: red;
+}
+
+#Like a p {
+    color: #000;
+}
+
+#Like a p:hover {
     color: #303481;
     font-weight: bold;
+    transform: scale(1.1);
 }
 
 #Like::before {
@@ -656,34 +792,51 @@
     display: inline-block;
     background-image: url("../img/Like.png");
     background-size: 100%;
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-right: 10px;
+    width: 27px;
+    height: 27px;
+    vertical-align: bottom;
 }
 
 /* 댓글 신고 */
 #Report {
-    width: 8%;
-    text-align: center;
+    width: 15%;
+    text-align: left;
     cursor: pointer;
+    display: inline;
 }
 
+#Report a {
+    display: inline-block;
+}
 
-#Report:hover {
+#Report a p {
+    color: #000;
+}
+
+#Report a p:hover {
     color: red;
     font-weight: bold;
+    transform: scale(1.1);
 }
 
 #Report::before {
     content: "";
     display: inline-block;
-    background-image: url("../img/Report.png");
+    vertical-align: middle;
+    background-image: url("/assets/img/Report.png");
     background-size: 100%;
     width: 20px;
     height: 20px;
-    vertical-align: middle;
-    margin-right: 10px;
+}
+
+.rpboard-btn {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+    height: 100%;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 /* 대댓글 */
@@ -772,7 +925,7 @@
 .user-nickname::before {
     content: "";
     display: inline-block;
-    background-image: url("../img/Profile.png");
+    background-image: url("/assets/img/Reply.png");
     border-radius: 50%;
     background-size: 100%;
     width: 20px;
