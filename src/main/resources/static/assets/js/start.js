@@ -6,6 +6,9 @@
     selectOne();
 })();
 
+// 하던 게임이 있는지 확인하는 함수
+
+
 // 게임 라운드 정하기 함수
 function calRound() {
 
@@ -21,7 +24,7 @@ function calRound() {
         n++;
 
     }
-    selectRound();
+    selectRound().then();
 }
 
 // 모달 확인 버튼 클릭시 PlayerController에서 playingGameId를 받아온다.
@@ -113,11 +116,6 @@ function renderPlayers(randomTwoPlayers) {
         // console.log($section);
     }
 
-}
-
-// 게임 이름과 몇강인지 표시하는 함수
-function renderGameInfo() {
-    const $gameTitle = document.getElementById('game-title-wrapper');
 }
 
 // 리셋 버튼 등록 함수

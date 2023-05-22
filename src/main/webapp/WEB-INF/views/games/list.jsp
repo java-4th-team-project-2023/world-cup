@@ -17,21 +17,21 @@
 
 <div id="main-wrapper">
 
-<%--    <div class="page-amount-select">--%>
-<%--        <label for="page-size">Items per page:</label>--%>
-<%--        <select name="page-size" id="page-size">--%>
-<%--            <option value="9">9</option>--%>
-<%--            <option value="15">15</option>--%>
-<%--            <option value="21">21</option>--%>
-<%--            <option value="27">27</option>--%>
-<%--        </select>--%>
-<%--    </div>--%>
+    <%--    <div class="page-amount-select">--%>
+    <%--        <label for="page-size">Items per page:</label>--%>
+    <%--        <select name="page-size" id="page-size">--%>
+    <%--            <option value="9">9</option>--%>
+    <%--            <option value="15">15</option>--%>
+    <%--            <option value="21">21</option>--%>
+    <%--            <option value="27">27</option>--%>
+    <%--        </select>--%>
+    <%--    </div>--%>
 
     <div class="card-list">
 
         <c:forEach items="${gameList}" var="g">
 
-            <div  class="card" data-game="${g.gameId}">
+            <div class="card" data-game="${g.gameId}">
                 <div class="img-box">
                     <c:forEach items="${g.thumbnails}" var="t">
                         <img src="${t}" alt="thumbnails">
@@ -41,7 +41,9 @@
                 <h3>${g.gameName}</h3>
                 <div class="button-wrapper">
                     <button class="game-modify-btn">수정하기</button>
-                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">랭킹보기</button>
+                    <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">
+                        랭킹보기
+                    </button>
                 </div>
             </div>
         </c:forEach>
@@ -85,7 +87,9 @@
         <form class="search-form">
             <div class="input-btn-box">
                 <input type="text" placeholder="Search..." name="keyword" id="search_keyword">
-                <button><div class="search-btn-img-box"></div></button>
+                <button>
+                    <div class="search-btn-img-box"></div>
+                </button>
             </div>
         </form>
     </section>
@@ -101,9 +105,28 @@
     // };
     // main function
 
-    
-    const $img_boxes = document.querySelectorAll('.img-box');
-    
+
+    (() => {
+        // 검색 버튼 이벤트 등록
+        searchBtnEvent();
+
+
+
+        // 게임 스타트 페이지 이동
+        goGameStartPage();
+    })();
+
+    function goGameStartPage() {
+        const $img_boxes = document.querySelectorAll('.img-box');
+
+        $img_boxes.forEach($img_box => {
+            $img_box.addEventListener('click', e => {
+                const cardGameNum = e.target.closest('.card');
+                console.log(+cardGameNum.dataset.game);
+                window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
+            });
+        });
+    }
 
     function searchBtnEvent() {
         const $searchBtn = document.querySelector('.search-form button');
@@ -111,41 +134,12 @@
         $searchBtn.onclick = e => {
             e.preventDefault()
             window.location.href = '/games/list?pageNo=' + '${maker.page.pageNo}'
-                +'&amount=9'
-                +'&keyword=' + document.getElementById('search_keyword').value;
+                + '&amount=9'
+                + '&keyword=' + document.getElementById('search_keyword').value;
         };
     }
 
-    // function goGameStartPage(){
-    //     $img_box.onclick = e =>{
 
-    //         // console.log(e.tartget);
-    //         const cardGameNum = e.target.closest('.card');
-
-    //         console.log(+cardGameNum.dataset.game);
-            
-    //         window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
-    //     }
-    // }   
-
-    function goGameStartPage() {
-  $img_boxes.forEach($img_box => {
-    $img_box.addEventListener('click', e => {
-      const cardGameNum = e.target.closest('.card');
-      console.log(+cardGameNum.dataset.game);
-      window.location.href = "/games/start?gameId=" + cardGameNum.dataset.game;
-    });
-  });
-}
-       
-    (() => {
-        // 검색 버튼 이벤트 등록
-        searchBtnEvent();
-        
-        // 게임 스타트 페이지 이동
-        goGameStartPage();
-    })();
-    
 
 </script>
 
