@@ -3,21 +3,22 @@ package com.pickpick.controller;
 import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.page.PageMaker;
+import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
 import com.pickpick.service.PlayerService;
 import com.pickpick.util.LoginUtil;
+import com.pickpick.util.upload.fileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.juli.logging.Log;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,8 @@ import java.util.Objects;
 @Slf4j
 public class GameController {
 
+    @Value("${file.upload.rootPath}")
+    private String rootPath;
     private final GameService gameService;
     private final PlayerService playerService;
 
@@ -58,8 +61,16 @@ public class GameController {
 
     // 게임 만들기 요청
     @PostMapping("/make")
-    public String makeGame(String gameName, HttpSession session) {
-
+    public String makeGame( HttpSession session, String gameName, String[] playerName,
+                           @RequestParam("playerImgPath") MultipartFile[] file) {
+        String savePath = null;
+        for (MultipartFile multipartFile : file) {
+            log.info("이미지파일의 이름을 알려주세요 {}",multipartFile.getOriginalFilename());
+            savePath = fileUtil.uploadFile(multipartFile, rootPath);
+        }
+        for (String s : playerName) {
+            log.info("playerName은 무엇일까요 {}",s);
+        }
         log.info("/games/make POST! gameName: {}", gameName);
 
         LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
@@ -68,10 +79,23 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-        int gameId = gameService.insertGame(GameInsertRequestDTO.builder()
+        GameInsertRequestDTO gameInsertRequestDTO = GameInsertRequestDTO.builder()
                 .gameName(gameName)
                 .accountId(login.getAccountId())
-                .build());
+                .build();
+
+        int gameId = 0;
+        for(int i = 0; i < file.length; i++) {
+            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
+                    .playerName(playerName[i])
+                    .playerImgPath(file[i].getOriginalFilename())
+                    .build();
+
+      log.info("이게 맞나? {}",playerRegisterRequestDTO);
+
+        gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
+        }
+        log.info("gameId: {}", gameId);
 
         return "redirect:/games/modify?gameId=" + gameId;
     }

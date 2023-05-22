@@ -4,8 +4,10 @@ import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.game.GameListResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.game.PlayCountUpdateRequestDTO;
+import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
+import com.pickpick.entity.Player;
 import com.pickpick.repository.GameMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,12 +57,17 @@ public class GameService {
     }
 
     // 게임 등록
-    public int insertGame(GameInsertRequestDTO dto) {
+    public int insertGame(GameInsertRequestDTO dto
+                          ,PlayerRegisterRequestDTO playerRegisterRequestDTO
+    ) {
         Game newGame = Game.builder()
                 .gameName(dto.getGameName())
                 .accountId(dto.getAccountId())
                 .build();
-
+        Player.builder()
+                .playerName(playerRegisterRequestDTO.getPlayerName())
+                .playerImgPath(playerRegisterRequestDTO.getPlayerImgPath())
+                .build();
         if (!mapper.insertGame(newGame)) {
             return -1;
         }
