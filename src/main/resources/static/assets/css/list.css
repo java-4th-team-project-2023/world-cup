@@ -50,9 +50,8 @@
 }
 
 .card img {
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
-    background: url('/assets/img/cat.jpg') no-repeat;
     background-size: cover;
     width: 50%;
     height: 100%;
