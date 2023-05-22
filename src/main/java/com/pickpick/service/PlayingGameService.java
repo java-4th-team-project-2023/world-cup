@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
 
 @Service @Slf4j
 @RequiredArgsConstructor
-public class PlayingGameService {
+public class
+PlayingGameService {
 
     private final PlayingGameMapper playingGameMapper;
     private final PlayingGamePlayersMapper playingGamePlayersMapper;
