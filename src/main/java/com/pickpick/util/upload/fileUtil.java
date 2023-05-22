@@ -26,9 +26,9 @@ public class fileUtil {
             e.printStackTrace();
         }
 
-        String fullPath = newPath + "/" + newFileName;
+        String fullPath =  newPath + "/" + newFileName;
 
-        return fullPath.substring(rootPath.length());
+        return "/local"+fullPath.substring(rootPath.length());
     }
 
     private static String makeDateFormatDirectory(String rootPath) {

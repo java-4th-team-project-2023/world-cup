@@ -49,18 +49,6 @@ public class GameController {
         return "games/list";
     }
 
-    // 플레이 중인 월드컵
-    @GetMapping("/playing-world-cup")
-    public String playingPage(Model model, Search page, HttpSession session) {
-
-        if (session.getAttribute("login") == null) {
-            return "redirect:/account/sign-in";
-        }
-
-        log.info("/games/playing-world-cup GET!");
-
-        return "";
-    }
 
     // 게임 만들기 페이지 이동
     @GetMapping("/make")
@@ -104,8 +92,10 @@ public class GameController {
                     .playerName(playerName[i])
                     .playerImgPath(file[i].getOriginalFilename())
                     .build();
+
             playerService.registerPlayer(playerRegisterRequestDTO);
-      log.info("이게 맞나? {}",playerRegisterRequestDTO);
+
+//            log.info("이게 맞나? {}", playerRegisterRequestDTO);
 
         gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
         }
