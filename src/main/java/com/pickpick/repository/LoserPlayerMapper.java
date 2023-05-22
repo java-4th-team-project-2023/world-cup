@@ -1,15 +1,16 @@
 package com.pickpick.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface LoserPlayerMapper {
 
-    void save(int loserId, int playingGameId);
+    void save(@Param("loserId") int loserId,@Param("playingGameId") int playingGameId);
 
-    void delete(int loserId, int playingGameId);
+    void delete(@Param("loserId") int loserId,@Param("playingGameId") int playingGameId);
 
     List<Integer> findAll(int playingGameId);
 
