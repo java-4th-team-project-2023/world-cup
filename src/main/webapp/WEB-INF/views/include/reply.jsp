@@ -8,17 +8,14 @@
         <!-- 댓글 게시판 header 목록 box -->
         <ul class="rpheader-list-box">
             <!-- 댓글 게시판 header 목록 버튼 -->
-            <a href="#">
+            <a href="/games/start?gameId=${gameId}">
                 <li class="rpheader-list">다시하기</li>
             </a>
-            <a href="/views/include/header.html">
+            <a href="/games/list">
                 <li class="rpheader-list">목 록</li>
             </a>
             <a href="/rank/ranking?gameId=${gameId}">
                 <li class="rpheader-list">랭 킹</li>
-            </a>
-            <a href="#">
-                <li class="rpheader-list">공 유</li>
             </a>
         </ul> <!-- end rpheader-list-box -->
     </div> <!-- end rpheader -->

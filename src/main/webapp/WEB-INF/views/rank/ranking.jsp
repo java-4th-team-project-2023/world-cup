@@ -141,8 +141,7 @@
 
         // 로그인한 회원 계정명
         const currentAccount = '${login.accountId}';
-        // console.log("!!!" + currentAccount);
-
+        
         // 비동기 처리(댓글번호)
         const $viewMain = document.querySelector('.rpboard-viewmain');
 
@@ -173,7 +172,7 @@
 
             } else {
                 for (let rep of replyList) {
-                    console.log("###" + rep.accountId);
+                    // console.log("###" + rep.accountId);
                     const {
                         gameId,
                         replyNo,
@@ -217,9 +216,6 @@
                                         
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
-                                    <div class="rpboard-btn">
-                                        <p>신고</p>
-                                    </div>
                                 </div>`;
                     }
                     tag += `</div>
@@ -439,11 +435,11 @@
             getReplyList();
 
             // 댓글 등록 이벤트 등록
+            if(currentAccount !== ""){
             makeReplyRegisterClickEvent();
-
+        }
             // 삭제 이벤트 등록
             replyRemoveClickEvent();
-
         })();
     </script>
 
