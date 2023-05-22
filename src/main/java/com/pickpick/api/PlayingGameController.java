@@ -120,6 +120,8 @@ public class PlayingGameController {
 
         log.info("/api/v1/plays/{}/{} : GET!! {}", accountId, gameId, playingGameId);
 
+        if (playingGameId == null) return ResponseEntity.internalServerError().build();
+
         return ResponseEntity.ok().body(playingGameId);
     }
 

@@ -26,7 +26,7 @@ function checkExistGame() {
             }
             else return res.json();
         })
-        .then(({playingGameId}) => {
+        .then(playingGameId => {
             fetch(`/api/v1/plays/${playingGameId}`)
                 .then(res => res.json())
                 .then(({totalRound, currentRound, randomTwoPlayers}) => {
@@ -76,7 +76,7 @@ async function sendRoundToPlayerController(round) {
         })
         .then(res => res.json())
         .then(
-            ({playingGameId}) => {
+            playingGameId => {
                 fetch(`/api/v1/plays/${playingGameId}`)
                     .then(res => res.json())
                     .then(({totalRound, currentRound, randomTwoPlayers}) => {
