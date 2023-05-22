@@ -70,7 +70,7 @@
                     <a href="/views/include/header.html">
                         <li class="rpheader-list">목 록</li>
                     </a>
-                    <a href="/rank/ranking">
+                    <a href="/rank/ranking?gameId=${gameId}">
                         <li class="rpheader-list">랭 킹</li>
                     </a>
                     <a href="#">

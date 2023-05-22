@@ -7,9 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link href="/assets/css/include.css">
+
+    <%@ include file="../include/static-head.jsp"%>
+
+    <script src="/assets/js/include.js" defer></script>
+
 </head>
 <body>
-    <!-- <%@ include file = "../include/header.jsp" %>-->
+    <%@ include file = "../include/header.jsp" %>
     <div class="wrapper">
         <div class="upload-new-wrapper">
             <div class="uplaod-info-theme">

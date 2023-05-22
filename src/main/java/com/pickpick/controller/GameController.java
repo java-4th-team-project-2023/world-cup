@@ -53,7 +53,7 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-        return "games/make";
+        return "games/upload";
     }
 
     // 게임 만들기 요청
