@@ -58,16 +58,17 @@ public class GameService {
 
     // 게임 등록
     public int insertGame(GameInsertRequestDTO dto
-                          ,PlayerRegisterRequestDTO playerRegisterRequestDTO
+//                          ,PlayerRegisterRequestDTO playerRegisterRequestDTO
     ) {
         Game newGame = Game.builder()
                 .gameName(dto.getGameName())
                 .accountId(dto.getAccountId())
                 .build();
-        Player.builder()
-                .playerName(playerRegisterRequestDTO.getPlayerName())
-                .playerImgPath(playerRegisterRequestDTO.getPlayerImgPath())
-                .build();
+//        Player.builder()
+//                .gameId(playerRegisterRequestDTO.getGameId())
+//                .playerName(playerRegisterRequestDTO.getPlayerName())
+//                .playerImgPath(playerRegisterRequestDTO.getPlayerImgPath())
+//                .build();
         if (!mapper.insertGame(newGame)) {
             return -1;
         }

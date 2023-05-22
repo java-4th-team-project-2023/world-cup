@@ -1,5 +1,5 @@
 
-// 리스트 추가하는 버튼
+// 리스트 추가하는 버튼 
 const $plusBtn = document.querySelector('.plusBtn');
 
 $plusBtn.onclick = e => {
@@ -7,16 +7,12 @@ $plusBtn.onclick = e => {
 
 };
 
-
-
-
-
 function addList() {
-
-
-    // 리스트 추가
+ 
+   
+    // 리스트 추가 
     const $contentUl = document.querySelector('.content-ul');
-
+    
     let $addlist = document.createElement('li');
     $addlist.setAttribute('class', 'list-content');
     $contentUl.appendChild($addlist);
@@ -38,16 +34,16 @@ function addList() {
     $addButton.textContent = '사진등록';
     $addDiv1.appendChild($addButton);
 
-    // 버튼 클릭시 인풋창 띄우기
+    // 버튼 클릭시 인풋창 띄우기 
     $addButton.onclick = e => {
         $addinput.click();
     };
 
 
-    // 두번째 div 태그
+    // 두번째 div 태그 
     let $addDiv2 = document.createElement('div');
     $addlist.appendChild($addDiv2);
-    // 두번째 div 태그 인에 div 생성
+    // 두번째 div 태그 인에 div 생성 
     let $addDiv3 = document.createElement('div');
     $addDiv3.setAttribute('class', 'img-box');
     $addDiv2.appendChild($addDiv3);
@@ -75,7 +71,7 @@ function addList() {
     $addlist.appendChild($addDiv5);
     // 네번째 div 안에 삭제 button
     addDelBtn($addDiv5);
-
+ 
     // 이미지 주소가 없으면 이미지 상자 나타나지 않음
     if ($addImg.currentSrc === '') {
         // console.log(this.files.currentSrc);
@@ -87,23 +83,24 @@ function addList() {
       $addinput.onchange = e => {
         const fileData = $addinput.files[0];
         // console.log(fileData);
-
+    
         const reader = new FileReader();
         reader.readAsDataURL(fileData);
-
+    
         reader.onloadend = e => {
           $addImg.setAttribute('src', reader.result);
           $addDiv3.classList.remove('invisible');
-
-
+        
         };
 
 
       };
 
+
 }
 
 // addList() 끝
+
 
 
 // 삭제버튼 추가 및 삭제 기능
@@ -122,3 +119,13 @@ function addDelBtn($addDiv5){
 
 }
 
+
+
+ // save 버튼 누를 때 form 보내기  담아오기
+const $save = document.querySelector('.saveBtn');
+$save.onclick = e => {
+
+const $form = document.getElementById('form');
+$form.submit();
+
+}
