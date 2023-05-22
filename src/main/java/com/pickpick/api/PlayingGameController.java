@@ -113,4 +113,14 @@ public class PlayingGameController {
         return ResponseEntity.ok().build();
     }
 
+    // 하던 게임이 있으면 해당 게임을 리턴
+    @GetMapping("/{accountId}/{gameId}")
+    public ResponseEntity<?> findExistGame(@PathVariable String accountId, @PathVariable int gameId) {
+        Integer playingGameId = service.searchByAccountId(accountId, gameId);
+
+        log.info("/api/v1/plays/{}/{} : GET!! {}", accountId, gameId, playingGameId);
+
+        return ResponseEntity.ok().body(playingGameId);
+    }
+
 }

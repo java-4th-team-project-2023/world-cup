@@ -199,4 +199,8 @@ PlayingGameService {
         return playingGameMapper.getGameId(playingGameId);
     }
 
+    // 플레이하던 게임이 있으면 리턴
+    public Integer searchByAccountId(String accountId, int gameId) {
+        return playingGameMapper.searchByAccountId(accountId, gameId);
+    }
 }

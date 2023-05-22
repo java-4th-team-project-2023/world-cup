@@ -4,6 +4,7 @@ import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,6 +33,6 @@ public interface PlayerMapper {
     Player findOne(int playerId);
 
     // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
-    List<Player> findN(int gameId, int number);
+    List<Player> findN(@Param("gameId") int gameId, @Param("number") int number);
 
 }
