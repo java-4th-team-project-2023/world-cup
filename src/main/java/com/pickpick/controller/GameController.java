@@ -49,18 +49,6 @@ public class GameController {
         return "games/list";
     }
 
-    // 플레이 중인 월드컵
-    @GetMapping("/playing-world-cup")
-    public String playingPage(Model model, Search page, HttpSession session) {
-
-        if (session.getAttribute("login") == null) {
-            return "redirect:/account/sign-in";
-        }
-
-        log.info("/games/playing-world-cup GET!");
-
-        return "";
-    }
 
     // 게임 만들기 페이지 이동
     @GetMapping("/make")
@@ -75,15 +63,15 @@ public class GameController {
 
     // 게임 만들기 요청
     @PostMapping("/make")
-    public String makeGame( HttpSession session, String gameName, String[] playerName,
+    public String makeGame(HttpSession session, String gameName, String[] playerName,
                            @RequestParam("playerImgPath") MultipartFile[] file) {
         String savePath = null;
         for (MultipartFile multipartFile : file) {
-            log.info("이미지파일의 이름을 알려주세요 {}",multipartFile.getOriginalFilename());
+            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
             savePath = fileUtil.uploadFile(multipartFile, rootPath);
         }
         for (String s : playerName) {
-            log.info("playerName은 무엇일까요 {}",s);
+            log.info("playerName은 무엇일까요 {}", s);
         }
         log.info("/games/make POST! gameName: {}", gameName);
 
@@ -99,16 +87,18 @@ public class GameController {
                 .build();
 
         int gameId = 0;
-        for(int i = 0; i < file.length; i++) {
+        for (int i = 0; i < file.length; i++) {
             PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
                     .playerName(playerName[i])
                     .playerImgPath(file[i].getOriginalFilename())
                     .build();
 
-      log.info("이게 맞나? {}",playerRegisterRequestDTO);
+            playerService.registerPlayer(playerRegisterRequestDTO);
 
-        gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
+//            log.info("이게 맞나? {}", playerRegisterRequestDTO);
+
         }
+        gameId = gameService.insertGame(gameInsertRequestDTO);
         log.info("gameId: {}", gameId);
 
         return "redirect:/games/modify?gameId=" + gameId;

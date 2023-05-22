@@ -31,9 +31,9 @@ public class PlayerController {
     private final PlayerService playerService;
     private final PlayingGameService playingGameService;
 
-    // 선수 등록
+    // 선수 등록, 이미지 주소로 선수 등록
     @PostMapping
-    public ResponseEntity<?> registerPlayer(@Validated @RequestBody PlayerRegisterRequestDTO dto
+    public ResponseEntity<?> registerPlayer(@Validated @RequestBody List<PlayerRegisterRequestDTO> dto
     , BindingResult result) {
 
         log.info("/api/v1/players");
@@ -42,11 +42,13 @@ public class PlayerController {
             return ResponseEntity.badRequest().body(result.toString());
         }
 
-        boolean flag = playerService.registerPlayer(dto);
+        dto.forEach(d -> {
+            playerService.registerPlayer(d);
+        });
 
         log.info("/api/v1/players POST! dto: {}", dto);
 
-        return ResponseEntity.ok().body(flag);
+        return ResponseEntity.ok().build();
     }
 
     // 게임 생성 후 '강' 수에 맞는 선수 목록을 PlayingGameService 에 전달하여 PlayingGame 생성후 playingGameId 리턴

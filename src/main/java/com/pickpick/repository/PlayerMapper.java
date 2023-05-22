@@ -33,6 +33,6 @@ public interface PlayerMapper {
     Player findOne(int playerId);
 
     // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
-    List<Player> findN(@Param("gameId") int gameId,@Param("number") int number);
+    List<Player> findN(@Param("gameId") int gameId, @Param("number") int number);
 
 }
