@@ -43,4 +43,11 @@
         from playing_game_tbl
         where playing_game_id=#{playingGameId}
     </select>
+
+    <select id="searchByAccountId" resultType="Integer">
+        select playing_game_id
+        from playing_game_tbl
+        where account_id=#{accountId}
+        and game_id=#{gameId}
+    </select>
 </mapper>

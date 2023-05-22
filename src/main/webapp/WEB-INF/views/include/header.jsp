@@ -27,15 +27,17 @@
                     <span></span>
                     <span></span>
                 </label>
-                <nav class="inr-menu">
-                    <ul class="inr-menu-list-box">
-                        <c:if test="${login ne null}">
+                <c:if test="${login ne null}">
+                    <nav class="inr-menu" data-account-id="${login.accountId}">
+                        <ul class="inr-menu-list-box">
+
                             <li class="inr-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
                             <li class="inr-menu-list"><a href="/games/playing-world-cup">내가 하던 월드컵</a></li>
                             <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
-                        </c:if>
-                    </ul>
-                </nav>
+
+                        </ul>
+                    </nav>
+                </c:if>
             </nav>
         </div>
     </div>
