@@ -21,6 +21,7 @@
                     </c:if>
                 </ul>
                 <c:if test="${login ne null}">
+
                     <input type="checkbox" id="icon">
 
                     <label for="icon" class="transition">
@@ -31,6 +32,7 @@
                     </label>
 
                     <nav class="inr-menu" data-account-id="${login.accountId}">
+
                         <ul class="inr-menu-list-box">
 
                             <li class="inr-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
