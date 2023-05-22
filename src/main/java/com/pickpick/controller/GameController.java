@@ -63,15 +63,15 @@ public class GameController {
 
     // 게임 만들기 요청
     @PostMapping("/make")
-    public String makeGame( HttpSession session, String gameName, String[] playerName,
+    public String makeGame(HttpSession session, String gameName, String[] playerName,
                            @RequestParam("playerImgPath") MultipartFile[] file) {
         String savePath = null;
         for (MultipartFile multipartFile : file) {
-            log.info("이미지파일의 이름을 알려주세요 {}",multipartFile.getOriginalFilename());
+            log.info("이미지파일의 이름을 알려주세요 {}", multipartFile.getOriginalFilename());
             savePath = fileUtil.uploadFile(multipartFile, rootPath);
         }
         for (String s : playerName) {
-            log.info("playerName은 무엇일까요 {}",s);
+            log.info("playerName은 무엇일까요 {}", s);
         }
         log.info("/games/make POST! gameName: {}", gameName);
 
@@ -87,7 +87,7 @@ public class GameController {
                 .build();
 
         int gameId = 0;
-        for(int i = 0; i < file.length; i++) {
+        for (int i = 0; i < file.length; i++) {
             PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
                     .playerName(playerName[i])
                     .playerImgPath(file[i].getOriginalFilename())
@@ -97,8 +97,8 @@ public class GameController {
 
 //            log.info("이게 맞나? {}", playerRegisterRequestDTO);
 
-        gameId = gameService.insertGame(gameInsertRequestDTO,playerRegisterRequestDTO);
         }
+        gameId = gameService.insertGame(gameInsertRequestDTO);
         log.info("gameId: {}", gameId);
 
         return "redirect:/games/modify?gameId=" + gameId;
