@@ -34,14 +34,19 @@ header {
     overflow: hidden;
 }
 
-#game img {
+#game section {
     width: 50%;
     height: 83vh;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .left {
     /*background-color: orange;*/
     left: 0;
+    position: fixed;
 }
 
 .right {
@@ -157,7 +162,7 @@ header {
 
 
 /* 클릭시 이미지가 커지는 css */
-.bigger {
+#game .bigger {
 
     width: 100%;
     height: 100%;
