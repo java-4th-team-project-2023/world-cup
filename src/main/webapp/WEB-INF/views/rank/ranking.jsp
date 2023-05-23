@@ -387,10 +387,10 @@
     };
 
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
-        fetch(`\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
+        fetch(`\${gameId}/page/\${pageNo}/key/커`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
-                // console.log(responseResult);
+                console.log(responseResult);
                 renderRankingList(responseResult);
             });
     }
@@ -449,7 +449,7 @@
             document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
 
             // 페이지 렌더링
-            // renderPage(pageInfo);
+            renderPage(pageInfo);
             }
 
 
