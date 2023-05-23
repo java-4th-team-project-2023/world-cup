@@ -124,6 +124,10 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAllByGameId(int gameId) {
+        playerMapper.deleteAllByGameId(gameId);
+    }
+
     public PlayerRestListResponseDTO getList(int gameId, Search page){
 
         List<PlayerListResponseDTO> playerList = playerMapper.findAll(gameId, page)

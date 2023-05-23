@@ -44,12 +44,12 @@
 }
 
 /* 결과창 header::after */
-.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box::after {
-  content: "개씩 보기";
-  margin-left: 5px;
-  font-weight: bold;
-  font-size: 20px;
-}
+/*.rank-reply-wrapper .rank-reply-box .rank-box .select-search-box::after {*/
+/*  content: "개씩 보기";*/
+/*  margin-left: 5px;*/
+/*  font-weight: bold;*/
+/*  font-size: 20px;*/
+/*}*/
 
 /* 결과창 갯수 출력 box */
 .rank-reply-wrapper .rank-reply-box .rank-box .select-search-box .select-view-number {
