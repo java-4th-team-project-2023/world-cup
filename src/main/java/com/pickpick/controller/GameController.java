@@ -105,7 +105,7 @@ public class GameController {
             playerService.registerPlayer(playerRegisterRequestDTO);
         }
 
-        return "redirect:/games/modify?gameId=" + gameId;
+        return "redirect:/games/list";
     }
 
     // 랭킹 페이지 이동
