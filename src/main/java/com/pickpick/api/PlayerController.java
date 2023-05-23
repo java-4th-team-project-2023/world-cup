@@ -59,6 +59,8 @@ public class PlayerController {
 
         List<PlayerGameResponseDTO> playerList = playerService.findN(gameId, number);
 
+        log.info("playingGameMake playerList : {}", playerList);
+
         String accountId = null;
 
         try {

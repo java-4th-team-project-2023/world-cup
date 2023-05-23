@@ -60,7 +60,7 @@
         FROM player_tbl
         WHERE game_id=#{gameId}
         ORDER BY RAND()
-        LIMIT 1, #{number}
+        LIMIT 0, #{number}
     </select>
 
 </mapper>
