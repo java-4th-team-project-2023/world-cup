@@ -35,4 +35,6 @@ public interface PlayerMapper {
     // 특정 길이의 목록을 랜덤하게 뽑아서 리턴
     List<Player> findN(@Param("gameId") int gameId, @Param("number") int number);
 
+    void deleteAllByGameId(int gameId);
+
 }

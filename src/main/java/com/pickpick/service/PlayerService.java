@@ -123,4 +123,8 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAllByGameId(int gameId) {
+        playerMapper.deleteAllByGameId(gameId);
+    }
+
 }

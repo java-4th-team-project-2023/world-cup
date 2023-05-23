@@ -63,4 +63,10 @@
         LIMIT 0, #{number}
     </select>
 
+    <delete id="deleteAllByGameId">
+        delete
+        from player_tbl
+        where game_id = #{gameId}
+    </delete>
+
 </mapper>
