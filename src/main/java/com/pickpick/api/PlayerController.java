@@ -184,8 +184,8 @@ public class PlayerController {
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 
-        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
-
+//        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
+        PlayerRestListResponseDTO playerList = playerService.getList(gameId, page);
         if (playerList == null) return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok().body(playerList);

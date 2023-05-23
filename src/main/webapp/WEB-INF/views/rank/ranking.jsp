@@ -89,7 +89,9 @@
                 </section>
 
             </section>
-
+            <ul class="pagination">
+                
+            </ul>
 
         </section> <!-- end rank-box -->
 
@@ -423,13 +425,19 @@
 
         
     }
-    $searchInput.addEventListener('input', function(event) {
+
+    document.getElementById('Search-Btn').onclick = e => {
+        console.log();
+        $searchInput.addEventListener('input', function(event) {
         // console.log(event.target.value);
         getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
     });
+    }
 
     // 랭킹 목록 렌더링 함수
-    function renderRankingList(responseResult) {
+    function renderRankingList({
+        count, pageInfo, playerList
+    }) {
 
             // 총 랭킹 수 렌더링
             // document.getElementById('replyCnt').textContent = count;
@@ -437,7 +445,7 @@
             // 랭킹 내용 렌더링
             let tag = ``;
 
-                for (let i=0; i < responseResult.length; i++) {
+                for (let i=0; i < playerList.length; i++) {
                     // console.log(responseResult[i]);
 
                     tag += `
@@ -449,81 +457,81 @@
                             <!-- 이미지 -->
                                     <li class="rkboard-ranking-list" id="Image">
                                         <a href="/assets/img/cat.jpg">
-                                        <img src="\${responseResult[i].playerImgPath}" alt="\${responseResult[i].playerName}">
+                                        <img src="\${playerList[i].playerImgPath}" alt="\${playerList[i].playerName}">
                                         </a>
                                     </li>
                             <!-- 이름 -->
                             <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">\${responseResult[i].playerName}</p>
+                                <p class="rkboard-list-text">\${playerList[i].playerName}</p>
                             </li>
                             <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="\${responseResult[i].finalWinRate}">
+                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="\${playerList[i].finalWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
-                                        <p>\${responseResult[i].finalWinRate}</p>
+                                        <p>\${playerList[i].finalWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: \${responseResult[i].finalWinRate}%"></div>
+                                    <div class="bar" style="width: \${playerList[i].finalWinRate}%"></div>
                                 </div>
                             </li>
                             <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="\${responseResult[i].matchWinRate}">
+                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="\${playerList[i].matchWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
-                                        <p>\${responseResult[i].matchWinRate}</p>
+                                        <p>\${playerList[i].matchWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: \${responseResult[i].matchWinRate}%;"></div>
+                                    <div class="bar" style="width: \${playerList[i].matchWinRate}%;"></div>
                                 </div>
                             </li>
                          </ul>`;
 
                     
                 }
-            // 생성된 댓글 tag 렌더링
+            // 생성된 랭킹 tag 렌더링
             document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
 
             // 페이지 렌더링
-            // renderPage(pageInfo);
+            renderPage(pageInfo);
             }
 
 
            
 
          // 페이지 렌더링 함수
-        //  function renderPage({
-        //     begin, end, prev, next, page, finalPage
-        // }) {
+         function renderPage({
+            begin, end, prev, next, page, finalPage
+        }) {
 
-        //     let tag = "";
+            let tag = "";
 
-        //     //이전 버튼 만들기
-        //     if (prev) {
-        //         tag += "<li class='page-item'><a class='page-link page-active' href='" + (begin - 1) +
-        //             "'>이전</a></li>";
-        //     }
-        //     //페이지 번호 리스트 만들기
-        //     for (let i = begin; i <= end; i++) {
-        //         let active = '';
-        //         if (page.pageNo === i) {
-        //             active = 'p-active';
-        //         }
+            //이전 버튼 만들기
+            if (prev) {
+                tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
+                    "'>이전</button></li>";
+            }
+            //페이지 번호 리스트 만들기
+            for (let i = begin; i <= end; i++) {
+                let active = '';
+                if (page.pageNo === i) {
+                    active = 'p-active';
+                }
 
-        //         tag += "<li class='page-item " + active + "'><a class='page-link page-custom' href='" + i +
-        //             "'>" + i + "</a></li>";
-        //     }
-        //     //다음 버튼 만들기
-        //     if (next) {
-        //         tag += "<li class='page-item'><a class='page-link page-active' href='" + (end + 1) +
-        //             "'>다음</a></li>";
-        //     }
+                tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
+                    "'>" + i + "</button></li>";
+            }
+            //다음 버튼 만들기
+            if (next) {
+                tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
+                    "'>다음</button></li>";
+            }
 
-        //     // 페이지태그 렌더링
-        //     const $pageUl = document.querySelector('.pagination');
-        //     $pageUl.innerHTML = tag;
+            // 페이지태그 렌더링
+            const $pageUl = document.querySelector('.pagination');
+            $pageUl.innerHTML = tag;
 
-        //     // ul에 마지막페이지 번호 저장.
-        //     $pageUl.dataset.fp = finalPage;
+            // ul에 마지막페이지 번호 저장.
+            $pageUl.dataset.fp = finalPage;
 
-        // }
+        }
 
 
 
