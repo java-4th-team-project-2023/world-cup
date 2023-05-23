@@ -24,7 +24,7 @@ public interface PlayerMapper {
     boolean modifyPlayer(PlayerModifyRequestDTO dto);
 
     // 특정 게임의 선수 목록 조회
-    List<Player> findAll(int gameId, Search page);
+    List<Player> findAll(@Param("gameId")int gameId, @Param("page")Search page);
 
     // 특정 게임의 선수 목록 조회
     List<Player> findAllPlayer(int gameId);
