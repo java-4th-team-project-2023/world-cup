@@ -17,9 +17,6 @@
                             Home
                         </a>
                     </li>
-                    <li class="header-menu-list"><a href="/games/make">
-                        월드컵 만들기
-                    </a></li>
                     <!-- 로그인 검증 -->
 
                     <c:if test="${login eq null}">
@@ -42,6 +39,7 @@
                         <ul class="inr-menu-list-box">
 
                             <li class="inr-menu-list"><a href="/games/my-world-cup">내가 만든 월드컵</a></li>
+                            <li class="inr-menu-list"><a href="/games/make">월드컵 만들기</a></li>
                             <li class="inr-menu-list"><a href="/account/sign-out">로그아웃</a></li>
 
                         </ul>

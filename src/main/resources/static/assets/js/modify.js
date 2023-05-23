@@ -5,17 +5,17 @@ $changeimg.onclick = e => {
     $input.click();
 }
 
-$input.onchange = e => { 
+$input.onchange = e => {
     const file = $input.files[0];
     console.log(file);
 
     const reader = new FileReader();
-    
+
     reader.readAsDataURL(file);
     reader.onloadend = e => {
-     const $imgTag = document.querySelector('.img');
-     $imgTag.setAttribute('src', reader.result);
-        
+        const $imgTag = document.querySelector('.img');
+        $imgTag.setAttribute('src', reader.result);
+
     }
 };
 
