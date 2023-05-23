@@ -51,12 +51,13 @@ public class RankingController {
             @PathVariable int gameId,
             @PathVariable int pageNo,
             @PathVariable String keyword){
-        log.info("/rank/{}/page/{} : GET!!", gameId, pageNo);
-//        Search page = new Search();
-//        page.setKeyword(keyword);
-//        page.setPageNo(pageNo);
-//        page.setAmount(6);
-        List<PlayerListResponseDTO> playerResponseList = playerService.findAllPlayer(gameId);
+        log.info("/rank/{}/page/{}/key/{} : GET!!", gameId, pageNo, keyword);
+        Search page = new Search();
+        page.setKeyword(keyword);
+        page.setPageNo(pageNo);
+        page.setAmount(6);
+        log.info("page: {}",page);
+        List<PlayerListResponseDTO> playerResponseList = playerService.findAll(gameId,page);
 
         log.info("playerList: {}",playerResponseList);
 
