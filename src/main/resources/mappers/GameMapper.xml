@@ -10,6 +10,7 @@
         <if test="keyword != ''">
             WHERE game_name LIKE CONCAT('%', #{keyword}, '%')
         </if>
+        order by game_id desc
         LIMIT #{pageStart}, #{amount}
     </select>
 

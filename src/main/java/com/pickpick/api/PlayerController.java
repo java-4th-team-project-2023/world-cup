@@ -172,14 +172,13 @@ public class PlayerController {
     }
 
     // 특정 게임의 선수 목록 조회
-    @GetMapping("/{gameId}/pageNo/{pageNo}/amount/{amount}/keyword/{keyword}")
+    @GetMapping(value = {"/{gameId}/pageNo/{pageNo}/keyword/{keyword}", "/{gameId}/pageNo/{pageNo}"})
     public ResponseEntity<?> findAll(@PathVariable int gameId,
                                      @PathVariable int pageNo,
-                                     @PathVariable int amount,
                                      @PathVariable String keyword) {
 
         Search page = new Search();
-        page.setAmount(amount);
+        page.setAmount(9);
         page.setPageNo(pageNo);
         page.setKeyword(keyword);
 

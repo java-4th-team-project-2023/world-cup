@@ -379,7 +379,6 @@
 
             } else { // 다른곳 클릭하면 보여줌
                 console.log("다른곳 클릭");
-                return;
             }
 
 
@@ -387,7 +386,8 @@
     };
 
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
-        fetch(`\${gameId}/page/\${pageNo}/key/커`) // \${keyword}
+
+        fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}/keyword/\${''}`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
                 console.log(responseResult);

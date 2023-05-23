@@ -5,6 +5,7 @@ import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
+import com.pickpick.entity.Account;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
 import com.pickpick.service.PlayerService;
@@ -159,6 +160,20 @@ public class GameController {
         model.addAttribute("gameName", gameService.findGameById(gameId).getGameName());
 
         return "games/start";
+    }
+
+    // 게임 삭제 요청
+    @GetMapping("/delete")
+    public String delete(int gameId, HttpSession session) {
+
+        if (!LoginUtil.isMine(session, gameService.findGameById(gameId).getAccountId())
+                && !LoginUtil.isAdmin(session)) {
+            return "redirect:/games/list";
+        }
+
+        gameService.deleteGame(gameId);
+
+        return "redirect:/games/list";
     }
 
 }

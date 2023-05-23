@@ -78,11 +78,13 @@
     bottom: 0;
     left: 0;
 }
-.card .button-wrapper .game-modify-btn {
+.card .button-wrapper .game-modify-btn,
+.card .button-wrapper .game-delete-btn {
     margin-right: 10px;
 }
 .card .button-wrapper .game-modify-btn:hover,
-.card .button-wrapper .game-ranking-btn:hover {
+.card .button-wrapper .game-ranking-btn:hover,
+.card .button-wrapper .game-delete-btn:hover {
     border: 2px solid #fff200;
     background: #303481;
     color: #fff200;
@@ -92,7 +94,8 @@
 }
 
 .card .button-wrapper .game-modify-btn,
-.card .button-wrapper .game-ranking-btn {
+.card .button-wrapper .game-ranking-btn,
+.card .button-wrapper .game-delete-btn {
     background: #D6E6F2;
     width: 20%;
     height: 75%;
