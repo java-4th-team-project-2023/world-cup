@@ -12,8 +12,14 @@
             <!--상단 BAR-MENU-->
             <nav class="gnb">
                 <ul class="header-menu-box">
-                    <li class="header-menu-list"><a href="/games/list">HOME</a></li>
-                    <li class="header-menu-list"><a href="/games/make">월드컵 만들기</a></li>
+                    <li class="header-menu-list">
+                        <a href="/games/list">
+                            Home
+                        </a>
+                    </li>
+                    <li class="header-menu-list"><a href="/games/make">
+                        월드컵 만들기
+                    </a></li>
                     <!-- 로그인 검증 -->
 
                     <c:if test="${login eq null}">
