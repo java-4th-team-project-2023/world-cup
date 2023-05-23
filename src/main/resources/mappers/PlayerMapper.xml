@@ -38,15 +38,15 @@
         <if test="page.keyword != ''">
             AND player_name LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
+        order by (final_win_count / join_game_count) DESC
         LIMIT #{page.pageStart}, #{page.amount}
-        order by final_win_count / join_game_count desc
     </select>
 
     <select id="findAllPlayer" resultType="player">
         SELECT *
         FROM player_tbl
         WHERE game_id=#{gameId}
-        order by final_win_count / join_game_count desc
+        order by (final_win_count / join_game_count) desc
     </select>
 
     <select id="findOne" resultType="player">
