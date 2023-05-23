@@ -138,10 +138,12 @@ function renderPlayers(randomTwoPlayers) {
     for (let i = 0; i < 2; i++) {
         const {playerId, playerImgPath, playerName} = randomTwoPlayers[i];
 
+        console.log(playerImgPath);
+
         const $section = document.createElement('section');
         $section.setAttribute('class', arr[i]);
         $section.setAttribute('data-player-id', playerId);
-        $section.style.backgroundImage = `url(${playerImgPath})`;
+        $section.style.backgroundImage = `url('${playerImgPath}')`;
         $section.textContent = playerName;
         document.getElementById('game').appendChild($section);
         // console.log($section);
