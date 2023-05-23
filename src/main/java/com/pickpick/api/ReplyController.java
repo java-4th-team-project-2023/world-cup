@@ -34,7 +34,7 @@ public class ReplyController {
         log.info("/api/replies/{}/page/{} : GET!!",gameId,pageNo);
 
         ReplyListResponseDTO replyList = replyService.getList(gameId);
-        log.info("replyList : {}", replyList);
+//        log.info("replyList : {}", replyList);
         return ResponseEntity.ok().body(replyList);
     }
 

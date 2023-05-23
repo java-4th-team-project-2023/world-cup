@@ -35,13 +35,13 @@
             <!-- 전체 갯수 출력 + 검색창 box 묶음 -->
             <div class="select-search-box">
 
-<%--                <!-- 전체 갯수 출력 창 -->--%>
-<%--                <select class="select-view-number" id="Select-View-Number">--%>
-<%--                    <!-- 전체 갯수 출력 리스트 -->--%>
-<%--                    <option value="10" class="select-number">10</option>--%>
-<%--                    <option value="10" class="select-number">20</option>--%>
-<%--                    <option value="10" class="select-number">30</option>--%>
-<%--                </select> <!-- end select-view-number -->--%>
+                <!-- 전체 갯수 출력 창 -->
+                <select class="select-view-number" id="Select-View-Number">
+                    <!-- 전체 갯수 출력 리스트 -->
+                    <option value="10" class="select-number">10</option>
+                    <option value="10" class="select-number">20</option>
+                    <option value="10" class="select-number">30</option>
+                </select> <!-- end select-view-number -->
 
                 <!-- 검색창 box -->
                 <div class="search-box">
@@ -387,10 +387,10 @@
     };
 
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
-        fetch(`/rank\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
+        fetch(`\${gameId}/page/\${pageNo}/key/커`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
-                // console.log(responseResult);
+                console.log(responseResult);
                 renderRankingList(responseResult);
             });
     }
