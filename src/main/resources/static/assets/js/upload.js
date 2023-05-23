@@ -1,5 +1,4 @@
-
-// 리스트 추가하는 버튼 
+// 리스트 추가하는 버튼
 const $plusBtn = document.querySelector('.plusBtn');
 
 $plusBtn.onclick = e => {
@@ -8,11 +7,11 @@ $plusBtn.onclick = e => {
 };
 
 function addList() {
- 
-   
+
+
     // 리스트 추가 
     const $contentUl = document.querySelector('.content-ul');
-    
+
     let $addlist = document.createElement('li');
     $addlist.setAttribute('class', 'list-content');
     $contentUl.appendChild($addlist);
@@ -28,7 +27,7 @@ function addList() {
     $addinput.type = "file";
     $addDiv1.appendChild($addinput);
 // 등록하기 버튼
- let $addButton = document.createElement('button');
+    let $addButton = document.createElement('button');
     $addButton.setAttribute('class', 'changeimg');
     $addButton.setAttribute('type', 'button');
     $addButton.textContent = '사진등록';
@@ -55,7 +54,6 @@ function addList() {
     $addDiv3.appendChild($addImg);
 
 
-
     // 리스트 안에 세번째 div
     let $addDiv4 = document.createElement('div');
     $addlist.appendChild($addDiv4);
@@ -71,7 +69,7 @@ function addList() {
     $addlist.appendChild($addDiv5);
     // 네번째 div 안에 삭제 button
     addDelBtn($addDiv5);
- 
+
     // 이미지 주소가 없으면 이미지 상자 나타나지 않음
     if ($addImg.currentSrc === '') {
         // console.log(this.files.currentSrc);
@@ -80,21 +78,21 @@ function addList() {
 
     // console.log(document.querySelector('addImg').name);
 
-      $addinput.onchange = e => {
+    $addinput.onchange = e => {
         const fileData = $addinput.files[0];
         // console.log(fileData);
-    
+
         const reader = new FileReader();
         reader.readAsDataURL(fileData);
-    
+
         reader.onloadend = e => {
-          $addImg.setAttribute('src', reader.result);
-          $addDiv3.classList.remove('invisible');
-        
+            $addImg.setAttribute('src', reader.result);
+            $addDiv3.classList.remove('invisible');
+
         };
 
 
-      };
+    };
 
 
 }
@@ -102,10 +100,9 @@ function addList() {
 // addList() 끝
 
 
-
 // 삭제버튼 추가 및 삭제 기능
 
-function addDelBtn($addDiv5){
+function addDelBtn($addDiv5) {
     let $delButton = document.createElement('button');
     $delButton.setAttribute('id', 'delbtn');
     $delButton.setAttribute('type', 'button');
@@ -120,12 +117,11 @@ function addDelBtn($addDiv5){
 }
 
 
-
- // save 버튼 누를 때 form 보내기  담아오기
+// save 버튼 누를 때 form 보내기  담아오기
 const $save = document.querySelector('.saveBtn');
 $save.onclick = e => {
 
-const $form = document.getElementById('form');
-$form.submit();
+    const $form = document.getElementById('form');
+    $form.submit();
 
 }

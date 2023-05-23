@@ -39,9 +39,12 @@
                 </div>
                 <h3>${g.gameName}</h3>
                 <div class="button-wrapper">
-                    <c:if test="${g.accountId eq login.accountId}">
+                    <c:if test="${g.accountId eq login.accountId || login.auth eq 'ADMIN'}">
                         <button class="game-modify-btn"
                                 onclick="window.location.href='/games/modify?gameId=${g.gameId}'">수정하기
+                        </button>
+                        <button class="game-delete-btn"
+                                onclick="deleteGame(${g.gameId})">삭제하기
                         </button>
                     </c:if>
                     <button class="game-ranking-btn" onclick="window.location.href='/rank/ranking?gameId=${g.gameId}'">
@@ -141,6 +144,10 @@
         };
     }
 
+    function deleteGame(gameId) {
+        if (confirm('정말 삭제하시겠습니까?'))
+            window.location.href = '/games/delete?gameId=' + gameId;
+    }
 
 </script>
 

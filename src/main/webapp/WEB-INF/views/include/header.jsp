@@ -6,7 +6,7 @@
     <div class="header">
         <div class="header-container">
             <h1 class="logo">
-                <a href="/" id="Logo"><i class="far fa-hand-rock"></i></a>
+                <a href="/" id="Logo"></a>
             </h1>
 
             <!--상단 BAR-MENU-->

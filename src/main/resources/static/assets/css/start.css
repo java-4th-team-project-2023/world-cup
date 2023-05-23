@@ -9,17 +9,7 @@ body {
 
 header {
     position: relative;
-}
-
-#main-wrapper {
-    padding: 0;
-}
-
-.wrapper {
-
-    position: relative;
-    /* border: 1px solid red; */
-
+    height: 10%;
 }
 
 #game {
@@ -31,16 +21,18 @@ header {
     font-size: 100px;
     color: #fff;
     text-shadow: 2px 0 #000, 0 2px #000, -2px 0 #000, 0 -2px #000;
+    height: 81%;
 }
 
 #game section {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
+    height: 100%;
 }
 
 .left {
-    height: 80vh;
     width: 50%;
     /*background-color: orange;*/
     left: 0;
@@ -48,7 +40,6 @@ header {
 }
 
 .right {
-    height: 80vh;
     width: 50%;
     /*background-color: aqua;*/
     right: 0;
@@ -173,6 +164,7 @@ header {
 
 #game-wrapper {
     height: 90%;
+    overflow: hidden;
 }
 
 /* 게임 타이틀 래퍼 */
@@ -184,6 +176,8 @@ header {
     text-align: center;
 
     z-index: 9999;
+
+    height: 10%;
 }
 
 /* 리셋 버튼 css */

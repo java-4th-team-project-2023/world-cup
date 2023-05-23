@@ -35,5 +35,3 @@ Content-Type: application/json
   "playerName": "마티"
 }
 
-###
-GET localhost:8585/api/v1/players/8/pageNo/1/amount/6/keyword/커

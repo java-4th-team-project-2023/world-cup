@@ -63,9 +63,10 @@
 
                         <!-- 반복 -->
                         <!-- 댓글 박스 시작 -->
-                        <div class="rpboard-rpbox">
+                        <!-- <div class="rpboard-rpbox">
 
-                        </div> <!-- end rpboard-rpbox -->
+                        </div>  -->
+                        <!-- end rpboard-rpbox -->
                         <!-- 댓글 박스 종료 -->
 
 

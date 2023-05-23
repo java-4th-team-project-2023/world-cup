@@ -59,6 +59,8 @@ public class PlayerController {
 
         List<PlayerGameResponseDTO> playerList = playerService.findN(gameId, number);
 
+        log.info("playingGameMake playerList : {}", playerList);
+
         String accountId = null;
 
         try {
@@ -172,21 +174,20 @@ public class PlayerController {
     }
 
     // 특정 게임의 선수 목록 조회
-    @GetMapping("/{gameId}/pageNo/{pageNo}/amount/{amount}/keyword/{keyword}")
+    @GetMapping(value = {"/{gameId}/pageNo/{pageNo}/keyword/{keyword}", "/{gameId}/pageNo/{pageNo}"})
     public ResponseEntity<?> findAll(@PathVariable int gameId,
                                      @PathVariable int pageNo,
-                                     @PathVariable int amount,
-                                     @PathVariable String keyword) {
-
+                                     @PathVariable(required = false) String keyword) {
+        log.info("gameId: {}, pageNo: {}, keyword : {}",gameId,pageNo,keyword);
         Search page = new Search();
-        page.setAmount(amount);
+        page.setAmount(9);
         page.setPageNo(pageNo);
         page.setKeyword(keyword);
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 
-        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
-
+//        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
+        PlayerRestListResponseDTO playerList = playerService.getList(gameId, page);
         if (playerList == null) return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok().body(playerList);

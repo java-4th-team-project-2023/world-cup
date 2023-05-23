@@ -34,9 +34,12 @@
                     <!-- 검색창 text -->
                     <input type="text" class="search-text" id="Search-Text" placeholder="Search...">
                     <!-- 검색창 버튼 -->
-                    <span><button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
+                    <span>
+                        <button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
                                                                                   alt="search"
-                                                                                  id="Search"></button></span>
+                                                                                  id="Search">
+                        </button>
+                    </span>
                 </div> <!-- end search-box -->
             </div> <!-- end select-search-box -->
 
@@ -74,85 +77,83 @@
     // 총 경기 비율
     const match = '${player.matchWinRate}';
 
-    if(isNaN(final))
 
+        // 댓글 목록 렌더링 함수
+        function renderReplyList({
+                                     count,
+                                     replyList
+                                 }) {
 
-    // 댓글 목록 렌더링 함수
-    function renderReplyList({
-        count,
-        replyList
-    }) {
+                                    console.log("!!!"+replyList);
+            // 총 댓글 수 렌더링
+            document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
-        // 총 댓글 수 렌더링
-        document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
+            // 댓글 내용 렌더링
+            // 각 댓글 하나의 태그
+            let tag = '';
 
-        // 댓글 내용 렌더링
-        // 각 댓글 하나의 태그
-        let tag = '';
+            if (replyList === null || replyList.length === 0) {
+                tag += "댓글이 아직 없습니다!";
 
-        if (replyList === null || replyList.length === 0) {
-            document.querySelector('.rpboard-viewmain-box').textContent = "댓글이 아직 없습니다!";
+            } else {
+                for (let rep of replyList) {
+                    // console.log("###" + rep.accountId);
+                    const {
+                        gameId,
+                        replyNo,
+                        writer,
+                        text,
+                        date,
+                        accountId,
+                        likeCount
+                    } = rep;
 
-        } else {
-            for (let rep of replyList) {
-                // console.log("###" + rep.accountId);
-                const {
-                    gameId,
-                    replyNo,
-                    writer,
-                    text,
-                    date,
-                    accountId,
-                    likeCount
-                } = rep;
-
-                tag += `
-                <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
-                    <div class="rpboard-nickname-local-date-box">`;
-
-                if (currentAccount === rep.accountId) {
                     tag += `
-                        <div class="rpboard-delete-replies-box">
-                        <button class="rpboard-delete-replies-btn"></button>
-                        </div>`;
-                }
+                    <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
+                        <div class="rpboard-nickname-local-date-box">`;
 
-                tag += `
-                        <div class="rpboard-nickname">\${writer}</div>
-                        <span class="rpboard-local-date-box">\${date}</span>
-                    </div>
-                    <div class="rpboard-replies-box">
-                        <div class="rpboard-replies">\${text}</div>`;
+                    if (currentAccount === rep.accountId) {
+                        tag += `
+                            <div class="rpboard-delete-replies-box">
+                            <button class="rpboard-delete-replies-btn"></button>
+                            </div>`;
+                    }
 
-                if (currentAccount === rep.accountId) {
                     tag += `
-                        <div class="rpboard-modify-replies-box">
-                            <button class="rpboard-modify-replies-btn"></button>
-                        </div>                           
+                            <div class="rpboard-nickname">\${writer}</div>
+                            <span class="rpboard-local-date-box">\${date}</span>
                         </div>
-                            <div class="rpboard-like-report-box">
-                                <div class="like rpboard-like-replies-btn" id="Like">
-                                    <span>
-                                        <div class="like-count">\${likeCount}</div>
-                                    </span>
-                                    
-                                </div>
-                            <div class="report rpboard-report-replies-btn" id="Report">
-                            </div>`;
+                        <div class="rpboard-replies-box">
+                            <div class="rpboard-replies">\${text}</div>`;
+
+                    if (currentAccount === rep.accountId) {
+                        tag += `
+                            <div class="rpboard-modify-replies-box">
+                                <button class="rpboard-modify-replies-btn"></button>
+                            </div>                           
+                            </div>
+                                <div class="rpboard-like-report-box">
+                                    <div class="like rpboard-like-replies-btn" id="Like">
+                                        <span>
+                                            <div class="like-count">\${likeCount}</div>
+                                        </span>
+                                        
+                                    </div>
+                                <div class="report rpboard-report-replies-btn" id="Report">
+                                </div>`;
+                    }
+                    tag += `</div>
+                                </div>`;
+
+
                 }
-                tag += `</div>
-                            </div>`;
-
-                
-
             }
+
+
+            // 생성된 댓글 tag 렌더링
+            $viewMain.innerHTML = tag;
+
         }
-
-
-        // 생성된 댓글 tag 렌더링
-        document.querySelector('.rpboard-viewmain').innerHTML = tag;
-
-    }
 
 
     // 댓글 목록 불러오기 함수
@@ -244,17 +245,18 @@
                 fetch(URL + '/' + $replyNo, {
                     method: 'DELETE'
                 }).then(res => {
-                    if (res.status === 200) {
-                        alert('댓글이 정상 삭제됨!');
-                        return res.json();
-                    } else {
+                    if (res.status !== 200) {
                         alert('댓글 삭제 실패!');
+                        return;
                     }
+
+                    alert('댓글이 정상 삭제됨!');
+                    return res.json();
+
                 }).then(responseResult => {
                     renderReplyList(responseResult);
                 });
-            }
-            else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
+            } else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                 console.log('좋아요 클릭!!');
@@ -285,8 +287,7 @@
                             alert('좋아요 실패함!');
                         }
                     });
-            }
-            else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
+            } else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
 
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                 console.log('신고 클릭!!');
@@ -312,12 +313,14 @@
                         if (res.status === 200) {
                             alert('신고 정상!');
 
+                            // 마지막페이지 번호
+                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
                             getReplyList();
                         } else {
                             alert('신고 실패함!');
                         }
                     });
-            }else if (e.target.matches('.rpboard-modify-replies-btn')) { // 수정 기능
+            } else if (e.target.matches('.rpboard-modify-replies-btn')) { // 수정 기능
 
                 const payload = {
                     replyNo: $replyNo,
@@ -334,18 +337,14 @@
                 }
 
 
+            } else { // 다른곳 클릭하면 보여줌
+                console.log("다른곳 클릭");
+                return;
             }
-                else{ // 다른곳 클릭하면 보여줌
-                    console.log("다른곳 클릭");
-                    return;
-            }   
-
-           
 
 
         }
     };
-
 
 
     //========= 메인 실행부 =========//
@@ -355,9 +354,9 @@
         getReplyList();
 
         // 댓글 등록 이벤트 등록
-        if(currentAccount !== ""){
-        makeReplyRegisterClickEvent();
-    }
+        if (currentAccount !== "") {
+            makeReplyRegisterClickEvent();
+        }
         // 삭제 이벤트 등록
         replyRemoveClickEvent();
     })();

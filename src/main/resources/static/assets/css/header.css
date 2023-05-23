@@ -19,6 +19,7 @@ body {
     height: 100vh;
     /*height: 100vh;*/
     position: relative;
+    background: url('/assets/img/background.jpg') repeat-y center / cover;
 }
 
 @keyframes gradient {
@@ -36,7 +37,6 @@ body::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('/assets/img/background.jpg') repeat-y;
     /* animation: gradient 100s linear infinite; */
     background-size: 100%;
     /* opacity: 0.8; */
@@ -82,10 +82,17 @@ h1.logo a#Logo:hover {
 }
 
 /* logo */
-h1.logo a i {
+/*h1.logo a i {*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*    line-height: 2.5em;*/
+/*}*/
+#Logo {
+    display: inline-block;
+
     width: 100%;
-    text-align: center;
-    line-height: 2.5em;
+    height: 100%;
+    background: url("../img/logo.png") no-repeat center / cover;
 }
 
 /* 상단 BAR-MENU */

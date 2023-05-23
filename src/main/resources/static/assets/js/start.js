@@ -23,8 +23,7 @@ function checkExistGame() {
             if (res.status === 500) {
                 newGame();
                 console.log('새 게임!');
-            }
-            else return res.json();
+            } else return res.json();
         })
         .then(playingGameId => {
             fetch(`/api/v1/plays/${playingGameId}`)
@@ -139,10 +138,12 @@ function renderPlayers(randomTwoPlayers) {
     for (let i = 0; i < 2; i++) {
         const {playerId, playerImgPath, playerName} = randomTwoPlayers[i];
 
-        const $section = document.createElement('section')
+        console.log(playerImgPath);
+
+        const $section = document.createElement('section');
         $section.setAttribute('class', arr[i]);
         $section.setAttribute('data-player-id', playerId);
-        $section.style.backgroundImage = `url(${playerImgPath})`;
+        $section.style.backgroundImage = `url('${playerImgPath}')`;
         $section.textContent = playerName;
         document.getElementById('game').appendChild($section);
         // console.log($section);
