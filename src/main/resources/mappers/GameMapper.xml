@@ -17,24 +17,25 @@
     <update id="updatePlayCount">
         UPDATE game_tbl
         SET play_count=#{playCount}
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
     </update>
 
     <update id="updateGameName">
         UPDATE game_tbl
         SET game_name=#{gameName}
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
     </update>
 
     <delete id="deleteGame">
-        DELETE FROM game_tbl
-        WHERE game_id=#{gameId}
+        DELETE
+        FROM game_tbl
+        WHERE game_id = #{gameId}
     </delete>
 
     <select id="countPlayer" resultType="int">
         SELECT COUNT(*)
         FROM player_tbl
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
     </select>
 
     <insert id="insertGame" parameterType="game">
@@ -56,7 +57,7 @@
     <select id="randomPlayerImage" resultType="String">
         select player_img_path
         from player_tbl
-        where game_id=#{gameId}
+        where game_id = #{gameId}
         order by rand()
         limit 0, 2
     </select>
@@ -74,6 +75,12 @@
     <select id="findGameById" resultType="game">
         select *
         from game_tbl
-        where game_id=#{gameId}
+        where game_id = #{gameId}
     </select>
+
+    <update id="increasePlayCount">
+        update game_tbl
+        set play_count=play_count + 1
+        where game_id = #{gameId}
+    </update>
 </mapper>

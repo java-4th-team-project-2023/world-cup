@@ -5,7 +5,6 @@ import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
-import com.pickpick.entity.Account;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
 import com.pickpick.service.PlayerService;
@@ -13,9 +12,7 @@ import com.pickpick.util.LoginUtil;
 import com.pickpick.util.upload.fileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -126,9 +121,12 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-        if (!Objects.equals(LoginUtil.getCurrentLoginMemberAccount(session), gameService.findGameById(gameId).getAccountId())) {
+        Game game = gameService.findGameById(gameId);
+
+        if (!LoginUtil.isAdmin(session) && !LoginUtil.isMine(session, game.getAccountId())) {
             return "redirect:/games/list";
         }
+
 
         model.addAttribute("gameId", gameId);
 
@@ -165,6 +163,8 @@ public class GameController {
     @GetMapping("/start")
     public String gameStart(int gameId, Model model) {
         int playerCount = gameService.countPlayer(gameId);
+
+        gameService.increasePlayCount(gameId);
 
         model.addAttribute("gameId", gameId);
         model.addAttribute("playerCount", playerCount);

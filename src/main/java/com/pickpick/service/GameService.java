@@ -4,10 +4,8 @@ import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.game.GameListResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.game.PlayCountUpdateRequestDTO;
-import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
-import com.pickpick.entity.Player;
 import com.pickpick.repository.GameMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -93,4 +91,7 @@ public class GameService {
         return mapper.findGameById(gameId);
     }
 
+    public void increasePlayCount(int gameId) {
+        mapper.increasePlayCount(gameId);
+    }
 }
