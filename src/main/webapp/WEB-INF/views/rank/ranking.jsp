@@ -390,7 +390,7 @@
         fetch(`\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
-                console.log(responseResult);
+                // console.log(responseResult);
                 renderRankingList(responseResult);
             });
     }
@@ -405,45 +405,48 @@
             let tag = ``;
 
                 for (let i=0; i < responseResult.length; i++) {
-                    console.log(responseResult[i]);
+                    // console.log(responseResult[i]);
 
-                    tag += `<!-- 순위 -->
-                            <li class="rkboard-ranking-list" id="Ranking">
-                                <p class="rkboard-list-text">\${i}</p>
-                            </li>
+                    tag += `
+                                <ul class="rkboard-ranking-list-box">
+                            <!-- 순위 -->
+                                    <li class="rkboard-ranking-list" id="Ranking">
+                                        <p class="rkboard-list-text">\${i+1}</p>
+                                    </li>
                             <!-- 이미지 -->
-                            <li class="rkboard-ranking-list" id="Image">
-                                <a href="/assets/img/cat.jpg">
-                                    <img src="\${i.playerImgPath}" alt="\${i.playerName}">
-                                </a>
-                            </li>
+                                    <li class="rkboard-ranking-list" id="Image">
+                                        <a href="/assets/img/cat.jpg">
+                                        <img src="\${responseResult[i].playerImgPath}" alt="\${responseResult[i].playerName}">
+                                        </a>
+                                    </li>
                             <!-- 이름 -->
                             <li class="rkboard-ranking-list" id="Name">
-                                <p class="rkboard-list-text">\${i.playerName}</p>
+                                <p class="rkboard-list-text">\${responseResult[i].playerName}</p>
                             </li>
                             <!-- 우승 비율 -->
-                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="\${i.finalWinRate}">
+                            <li class="rkboard-ranking-list" id="Winning-Percentage" data-final="\${responseResult[i].finalWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
-                                        <p>\${i.finalWinRate}</p>
+                                        <p>\${responseResult[i].finalWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: '\${i.finalWinRate}%'"></div>
+                                    <div class="bar" style="width: \${responseResult[i].finalWinRate}%"></div>
                                 </div>
                             </li>
                             <!-- 승률 -->
-                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="\${i.matchWinRate}">
+                            <li class="rkboard-ranking-list" id="Winning-Rate" data-winning="\${responseResult[i].matchWinRate}">
                                 <div class="graph">
                                     <div class="bar-text">
-                                        <p>\${i.matchWinRate}</p>
+                                        <p>\${responseResult[i].matchWinRate}</p>
                                     </div>
-                                    <div class="bar" style="width: '\${i.matchWinRate}%';"></div>
+                                    <div class="bar" style="width: \${responseResult[i].matchWinRate}%;"></div>
                                 </div>
-                            </li>`;
+                            </li>
+                         </ul>`;
 
                     
                 }
             // 생성된 댓글 tag 렌더링
-            document.querySelector('.rkboard-ranking-list-box').innerHTML = tag;
+            document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
 
             // 페이지 렌더링
             // renderPage(pageInfo);
