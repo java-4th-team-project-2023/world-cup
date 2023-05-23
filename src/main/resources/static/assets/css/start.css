@@ -37,10 +37,10 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    height: 82vh;
 }
 
 .left {
-    height: 80vh;
     width: 50%;
     /*background-color: orange;*/
     left: 0;
@@ -48,7 +48,6 @@ header {
 }
 
 .right {
-    height: 80vh;
     width: 50%;
     /*background-color: aqua;*/
     right: 0;
