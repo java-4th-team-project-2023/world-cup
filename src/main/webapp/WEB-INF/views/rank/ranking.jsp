@@ -125,6 +125,7 @@
                                      replyList
                                  }) {
 
+                                    console.log("!!!"+replyList);
             // 총 댓글 수 렌더링
             document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
@@ -133,7 +134,7 @@
             let tag = '';
 
             if (replyList === null || replyList.length === 0) {
-                document.querySelector('.rpboard-viewmain-box').textContent = "댓글이 아직 없습니다!";
+                tag += "댓글이 아직 없습니다!";
 
             } else {
                 for (let rep of replyList) {
@@ -191,7 +192,7 @@
 
 
             // 생성된 댓글 tag 렌더링
-            document.querySelector('.rpboard-viewmain').innerHTML = tag;
+            $viewMain.innerHTML = tag;
 
         }
 
