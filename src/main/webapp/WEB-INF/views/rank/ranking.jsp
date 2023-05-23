@@ -387,7 +387,7 @@
     };
 
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
-        fetch(`\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
+        fetch(`/rank\${gameId}/page/\${pageNo}/key/''`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
                 // console.log(responseResult);
