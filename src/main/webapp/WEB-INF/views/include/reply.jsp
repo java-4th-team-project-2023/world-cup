@@ -30,9 +30,7 @@
 
                 <div class="rplist-header">
                     <!-- 댓글 게시판 목록 댓글쓰기 (아래로 내려가기) 버튼 -->
-                    <div class="bot-btns">
-                        <p class="moveBottomBtn">댓글 쓰러가기</p>
-                    </div>
+
 
                     <!-- 댓글 총 갯수 -->
                     <div class="rpcount">
@@ -71,7 +69,6 @@
                         <!-- 댓글 박스 종료 -->
 
 
-                        <!-- 댓글 더보기 버튼 -->
 
 
                     </div> <!-- end rpboard-viewmain -->
