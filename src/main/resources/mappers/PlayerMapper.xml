@@ -63,4 +63,10 @@
         LIMIT 0, #{number}
     </select>
 
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM player_tbl
+        WHERE game_id=#{gameId}
+    </select>
+
 </mapper>

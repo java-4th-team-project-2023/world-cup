@@ -307,6 +307,36 @@
   transition: width 0.5s;
 }
 
+.page-select {
+  width: fit-content;
+  margin: 20px auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+.page-select button {
+  border: 2px solid #D6E6F2;
+  margin-right: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;
+  opacity: 0.9;
+}
+
+.page-select button:hover {
+  border: 2px solid #fff200;
+  background: #303481;
+  color: #fff200
+}
+
 
 
 /* 결과창 종료 -------------------------------------------------------------------------- */
