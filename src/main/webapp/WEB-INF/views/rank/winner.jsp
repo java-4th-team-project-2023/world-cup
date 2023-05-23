@@ -34,9 +34,12 @@
                     <!-- 검색창 text -->
                     <input type="text" class="search-text" id="Search-Text" placeholder="Search...">
                     <!-- 검색창 버튼 -->
-                    <span><button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
+                    <span>
+                        <button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
                                                                                   alt="search"
-                                                                                  id="Search"></button></span>
+                                                                                  id="Search">
+                        </button>
+                    </span>
                 </div> <!-- end search-box -->
             </div> <!-- end select-search-box -->
 

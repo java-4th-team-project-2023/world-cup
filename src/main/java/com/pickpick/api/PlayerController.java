@@ -175,8 +175,8 @@ public class PlayerController {
     @GetMapping(value = {"/{gameId}/pageNo/{pageNo}/keyword/{keyword}", "/{gameId}/pageNo/{pageNo}"})
     public ResponseEntity<?> findAll(@PathVariable int gameId,
                                      @PathVariable int pageNo,
-                                     @PathVariable String keyword) {
-
+                                     @PathVariable(required = false) String keyword) {
+        log.info("gameId: {}, pageNo: {}, keyword : {}",gameId,pageNo,keyword);
         Search page = new Search();
         page.setAmount(9);
         page.setPageNo(pageNo);

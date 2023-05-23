@@ -118,6 +118,8 @@
     // 총 경기 비율
     const match = '${player.matchWinRate}';
 
+    const $searchInput = document.getElementById('Search-Text');
+
 
         // 댓글 목록 렌더링 함수
         function renderReplyList({
@@ -125,7 +127,7 @@
                                      replyList
                                  }) {
 
-                                    console.log("!!!"+replyList);
+                                    // console.log("!!!"+replyList);
             // 총 댓글 수 렌더링
             document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
@@ -172,8 +174,11 @@
                             <div class="rpboard-modify-replies-box">
                                 <button class="rpboard-modify-replies-btn"></button>
                             </div>                           
-                            </div>
-                                <div class="rpboard-like-report-box">
+                            `;
+                        }
+                        tag += `
+                    </div>
+                        <div class="rpboard-like-report-box">
                                     <div class="like rpboard-like-replies-btn" id="Like">
                                         <span>
                                             <div class="like-count">\${likeCount}</div>
@@ -181,10 +186,9 @@
                                         
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
-                                </div>`;
-                    }
-                    tag += `</div>
-                                </div>`;
+                                </div>
+                            </div>
+                        </div>`;
 
 
                 }
@@ -385,16 +389,44 @@
 
         }
     };
-
+    
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
+        const value = $searchInput.value;
+        console.log(value);
+        // $searchInput.addEventListener('input', function(event) {
+        //     const value = event.target.value;
+        //     console.log(value);
+        // });
+        // document.getElementById('Search-Btn').onclick = e => {
+        // console.log(e.target);
+       
+        // console.log($searchInput.value);
+        //     console.log("search클릭");
+        // }
 
-        fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}/keyword/\${''}`) // \${keyword}
+        
+        if($searchInput.value === ''){
+            fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}`) // \${keyword}
             .then(res => res.json())
             .then(responseResult => {
-                console.log(responseResult);
+                // console.log(responseResult);
                 renderRankingList(responseResult);
             });
+        }else{
+            fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}/keyword/\${value}`) // \${keyword}
+            .then(res => res.json())
+            .then(responseResult => {
+                // console.log(responseResult);
+                renderRankingList(responseResult);
+            });
+        }
+
+        
     }
+    $searchInput.addEventListener('input', function(event) {
+        // console.log(event.target.value);
+        getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
+    });
 
     // 랭킹 목록 렌더링 함수
     function renderRankingList(responseResult) {
