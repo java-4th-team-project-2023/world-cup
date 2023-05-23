@@ -40,9 +40,9 @@
                 <h3>${g.gameName}</h3>
                 <div class="button-wrapper">
                     <c:if test="${g.accountId eq login.accountId || login.auth eq 'ADMIN'}">
-                        <button class="game-modify-btn"
-                                onclick="window.location.href='/games/modify?gameId=${g.gameId}'">수정하기
-                        </button>
+<%--                        <button class="game-modify-btn"--%>
+<%--                                onclick="window.location.href='/games/modify?gameId=${g.gameId}'">수정하기--%>
+<%--                        </button>--%>
                         <button class="game-delete-btn"
                                 onclick="deleteGame(${g.gameId})">삭제하기
                         </button>
