@@ -1,5 +1,6 @@
 package com.pickpick.service;
 
+import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.player.*;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Player;
@@ -125,6 +126,23 @@ public class PlayerService {
 
     public void deleteAllByGameId(int gameId) {
         playerMapper.deleteAllByGameId(gameId);
+    }
+
+    public PlayerRestListResponseDTO getList(int gameId, Search page){
+
+        List<PlayerListResponseDTO> playerList = playerMapper.findAll(gameId, page)
+                .stream()
+                .map(PlayerListResponseDTO::new)
+                .collect(Collectors.toList());
+
+        int count = playerMapper.count(gameId);
+
+        return PlayerRestListResponseDTO.builder()
+                .count(count)
+                .pageInfo(new PageMaker(page,count))
+                .playerList(playerList)
+                .build();
+
     }
 
 }

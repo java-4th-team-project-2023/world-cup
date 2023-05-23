@@ -177,8 +177,8 @@ public class PlayerController {
     @GetMapping(value = {"/{gameId}/pageNo/{pageNo}/keyword/{keyword}", "/{gameId}/pageNo/{pageNo}"})
     public ResponseEntity<?> findAll(@PathVariable int gameId,
                                      @PathVariable int pageNo,
-                                     @PathVariable String keyword) {
-
+                                     @PathVariable(required = false) String keyword) {
+        log.info("gameId: {}, pageNo: {}, keyword : {}",gameId,pageNo,keyword);
         Search page = new Search();
         page.setAmount(9);
         page.setPageNo(pageNo);
@@ -186,8 +186,8 @@ public class PlayerController {
 
         log.info("/api/v1/players/{} : GET! ", gameId);
 
-        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
-
+//        List<PlayerListResponseDTO> playerList = playerService.findAll(gameId, page);
+        PlayerRestListResponseDTO playerList = playerService.getList(gameId, page);
         if (playerList == null) return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok().body(playerList);
