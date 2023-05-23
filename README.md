@@ -7,6 +7,14 @@
 | 5/8 | 주제 회의 및 ERD 작성     |    |
 | 5/9 | ERD 수정 및 Entity 생성 | 백  |
 
+## 데이터베이스 플레이중인 게임 지우기
+
+```
+delete from playing_game_tbl
+where account_id is null
+;
+```
+
 ### Member
 
 ---

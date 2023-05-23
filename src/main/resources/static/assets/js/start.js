@@ -138,12 +138,14 @@ function renderPlayers(randomTwoPlayers) {
     for (let i = 0; i < 2; i++) {
         const {playerId, playerImgPath, playerName} = randomTwoPlayers[i];
 
-        const $img = document.createElement('img');
-        $img.setAttribute('class', arr[i]);
-        $img.setAttribute('data-player-id', playerId);
-        $img.setAttribute('src', `${playerImgPath}`);
-        $img.textContent = playerName;
-        document.getElementById('game').appendChild($img);
+        console.log(playerImgPath);
+
+        const $section = document.createElement('section');
+        $section.setAttribute('class', arr[i]);
+        $section.setAttribute('data-player-id', playerId);
+        $section.style.backgroundImage = `url('${playerImgPath}')`;
+        $section.textContent = playerName;
+        document.getElementById('game').appendChild($section);
         // console.log($section);
     }
 

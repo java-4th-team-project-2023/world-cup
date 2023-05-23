@@ -135,6 +135,17 @@ public class GameController {
         return "games/modify";
     }
 
+    // 게임 수정 요청
+    @PostMapping("/modify")
+    public String modifyGame(HttpSession session, int gameId) {
+        if (!LoginUtil.isMine(session, gameService.findGameById(gameId).getAccountId())
+                && !LoginUtil.isAdmin(session)) {
+            return "redirect:/games/list";
+        }
+
+        return "redirect:/";
+    }
+
     // 내가 만든 월드컵 목록 이동
     @GetMapping("/my-world-cup")
     public String myWorldCup(Model model, Search page, HttpSession session) {
