@@ -116,6 +116,8 @@
 
     const $searchInput = document.getElementById('Search-Text');
 
+    const $searchBtn = document.getElementById('Search');
+
 
         // 댓글 목록 렌더링 함수
         function renderReplyList({
@@ -300,6 +302,9 @@
             } else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
 
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
+                if(currentAccount !== null){
+                    return;
+                }
                 console.log('좋아요 클릭!!');
 
                 // # 서버로 보낼 데이터
@@ -389,18 +394,6 @@
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
         const value = $searchInput.value;
         console.log(value);
-        // $searchInput.addEventListener('input', function(event) {
-        //     const value = event.target.value;
-        //     console.log(value);
-        // });
-        // document.getElementById('Search-Btn').onclick = e => {
-        // console.log(e.target);
-
-        // console.log($searchInput.value);
-        //     console.log("search클릭");
-        // }
-
-
         if($searchInput.value === ''){
             fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}`) // \${keyword}
             .then(res => res.json())
@@ -416,22 +409,18 @@
                 renderRankingList(responseResult);
             });
         }
-
-
     }
 
-    document.getElementById('Search-Btn').onclick = e => {
-        console.log();
-        $searchInput.addEventListener('input', function(event) {
-        console.log(event.target.value);
-        getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
-    });
+    $searchBtn.onclick = e => {
+        getRankingList();
     }
+   
+    // $searchInput.addEventListener('input', function(event) {
+    //     getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
+    // });
 
     // 랭킹 목록 렌더링 함수
-    function renderRankingList({
-        playerList
-    }) {
+    function renderRankingList(playerList) {
 
             // 총 랭킹 수 렌더링
             // document.getElementById('replyCnt').textContent = count;
