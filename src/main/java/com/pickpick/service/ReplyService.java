@@ -43,6 +43,19 @@ public class ReplyService {
                 .replyList(replyList)
                 .build();
     }
+    public ReplyListResponseDTO getList(int gameId,String sortedBy) {
+
+        List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId)
+                .stream()
+                .map(ReplyDetailResponseDTO::new)
+                .collect(toList());
+        int count = replyMapper.count(gameId);
+        log.info("!!!! count :{}",count);
+        return ReplyListResponseDTO.builder()
+                .count(count)
+                .replyList(replyList)
+                .build();
+    }
 
     // 댓글 저장 기능
     public ReplyListResponseDTO save(ReplySaveRequestDTO dto, HttpSession session) throws SQLException {

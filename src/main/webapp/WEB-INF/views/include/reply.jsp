@@ -44,10 +44,10 @@
                     <div class="rpsorting-wrapper">
                         <nav>
                             <ul class="rpsorting-list-box">
-                                <li class="rpsorting-list">
+                                <li class="rpsorting-list like-reply" data-sorted="like">
                                     <p>인기 댓글순</p>
                                 </li>
-                                <li class="rpsorting-list">
+                                <li class="rpsorting-list fast-reply" data-sorted="fast">
                                     <p>최신순</p>
                                 </li> <!-- end rpsorting-list -->
                             </ul> <!-- end rpsorting-list-box -->
@@ -95,6 +95,11 @@
                         <p></button>
                 </div>
             </div>
+        </section>
+    </c:if>
+    <c:if test="${empty login}">
+        <section class="rpboard-user-nickname-reply-replyBtn-box" style="background-color: #fff; font-size: 40px; display: flex; justify-content: center; align-content: center;">
+            댓글 입력은 로그인이 필요합니다.
         </section>
     </c:if>
 
