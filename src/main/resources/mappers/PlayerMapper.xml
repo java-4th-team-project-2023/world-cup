@@ -39,7 +39,7 @@
             AND player_name LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
         order by (final_win_count / join_game_count) desc
-        LIMIT #{page.pageStart}, #{page.amount}
+<!--        LIMIT #{page.pageStart}, #{page.amount}-->
     </select>
 
     <select id="findAllPlayer" resultType="player">
