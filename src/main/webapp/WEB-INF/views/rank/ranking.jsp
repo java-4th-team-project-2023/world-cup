@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/css/ranking.css">
 
     <!-- <script src="/assets/js/bottombtn.js" defer></script> -->
-    <script src="/assets/js/search.js" defer></script>
+    <!-- <script src="/assets/js/search.js" defer></script> -->
     <!-- <script src="/assets/js/localdate.js" defer></script> -->
 
 </head>
@@ -423,14 +423,14 @@
     document.getElementById('Search-Btn').onclick = e => {
         console.log();
         $searchInput.addEventListener('input', function(event) {
-        // console.log(event.target.value);
+        console.log(event.target.value);
         getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
     });
     }
 
     // 랭킹 목록 렌더링 함수
     function renderRankingList({
-        count, pageInfo, playerList
+        playerList
     }) {
 
             // 총 랭킹 수 렌더링
@@ -484,48 +484,48 @@
             document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
 
             // 페이지 렌더링
-            renderPage(pageInfo);
+            // renderPage(pageInfo);
             }
 
 
            
 
          // 페이지 렌더링 함수
-         function renderPage({
-            begin, end, prev, next, page, finalPage
-        }) {
+        //  function renderPage({
+        //     begin, end, prev, next, page, finalPage
+        // }) {
 
-            let tag = "";
+        //     let tag = "";
 
-            //이전 버튼 만들기
-            if (prev) {
-                tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
-                    "'>이전</button></li>";
-            }
-            //페이지 번호 리스트 만들기
-            for (let i = begin; i <= end; i++) {
-                let active = '';
-                if (page.pageNo === i) {
-                    active = 'p-active';
-                }
+        //     //이전 버튼 만들기
+        //     if (prev) {
+        //         tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
+        //             "'>이전</button></li>";
+        //     }
+        //     //페이지 번호 리스트 만들기
+        //     for (let i = begin; i <= end; i++) {
+        //         let active = '';
+        //         if (page.pageNo === i) {
+        //             active = 'p-active';
+        //         }
 
-                tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
-                    "'>" + i + "</button></li>";
-            }
-            //다음 버튼 만들기
-            if (next) {
-                tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
-                    "'>다음</button></li>";
-            }
+        //         tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
+        //             "'>" + i + "</button></li>";
+        //     }
+        //     //다음 버튼 만들기
+        //     if (next) {
+        //         tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
+        //             "'>다음</button></li>";
+        //     }
 
-            // 페이지태그 렌더링
-            const $pageUl = document.querySelector('.pagination');
-            $pageUl.innerHTML = tag;
+        //     // 페이지태그 렌더링
+        //     const $pageUl = document.querySelector('.pagination');
+        //     $pageUl.innerHTML = tag;
 
-            // ul에 마지막페이지 번호 저장.
-            $pageUl.dataset.fp = finalPage;
+        //     // ul에 마지막페이지 번호 저장.
+        //     $pageUl.dataset.fp = finalPage;
 
-        }
+        // }
 
 
 
