@@ -17,7 +17,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service @Slf4j
+@Service
+@Slf4j
 @RequiredArgsConstructor
 public class
 PlayingGameService {
@@ -139,24 +140,29 @@ PlayingGameService {
         PlayingGame game = playingGameMapper.findOne(playingGameId);
         int totalRound = game.getTotalRound();
         int currentRound = game.getCurrentRound();
-        if (playingGamePlayersMapper.count(playingGameId) == 0 && currentRound == 1) { // 게임 끝
-            log.info("total round : {}", totalRound);
-            int gameId = getGameId(playingGameId);
+        log.info("current round : {} ", currentRound);
 
-            playingGameMapper.delete(playingGameId);
-            playerService.playerWin(winnerId);
-
-            return PlayingGameAndPlayersResponseDTO.builder()
-                    .totalRound(totalRound)
-                    .gameId(gameId)
-                    .build();
-        } else if (playingGamePlayersMapper.count(playingGameId) == 0) { // 라운드 끝
+        if (playingGamePlayersMapper.count(playingGameId) == 0) { // 라운드 끝
 
             // currentRound를 2로 나눠주기
             game.setCurrentRound(game.getCurrentRound() >> 1);
 
+            // 게임 끝
+            if (game.getCurrentRound() == 1) {
+                log.info("total round : {}", totalRound);
+                int gameId = getGameId(playingGameId);
+
+                playingGameMapper.delete(playingGameId);
+                playerService.playerWin(winnerId);
+
+                return PlayingGameAndPlayersResponseDTO.builder()
+                        .totalRound(totalRound)
+                        .gameId(gameId)
+                        .build();
+            }
+
             // 위너 플레이어 테이블의 현재 라운드 수에 맞는 선수들만 플레잉 게임 플레이어 테이블로 이동
-            winnerPlayerMapper.findN(playingGameId,game.getCurrentRound()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+            winnerPlayerMapper.findN(playingGameId, game.getCurrentRound()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
                     .playingGameId(playingGameId)
                     .playerId(p)
                     .build()));
@@ -172,28 +178,35 @@ PlayingGameService {
         // 플레잉 게임 플레이어 테이블의 플레이어 수가 현재 카운트 수와 같으면 라운드 첫번째 매치임
         if (playingGamePlayersMapper.count(playingGameId) == playingGameMapper.findOne(playingGameId).getCurrentRound()) {
 
-            // 위너와 루저 테이블에서 가장 최신에 추가된 것 하나씩을 가져오고 제거함
+            log.info("라운드 처음에 리셋버튼 누름!");
+
+            // 위너와 루저 테이블에서 가장 최신에 추가된 것 하나씩을 가져옴
             int winner = 0;
             int loser = 0;
             try {
+
                 // BindingException 이 발생했다는 말은 게임의 최초임을 의미
                 winner = winnerPlayerMapper.findLatest(playingGameId);
                 loser = loserPlayerMapper.findLatest(playingGameId);
+
             } catch (BindingException e) {
+
                 log.info("게임 시작 전으로는 되돌아갈 수 없습니다");
                 return null;
+
             }
 
             // 플레잉 게임 플레이어 테이블을 전부 비워줌
             playingGamePlayersMapper.deleteAll(playingGameId);
 
+            // 가져온 값들을 제거함
             winnerPlayerMapper.delete(winner, playingGameId);
             loserPlayerMapper.delete(loser, playingGameId);
 
             // 그 둘을 플레잉 게임 플레이어 테이블에 추가해줌
             playingGamePlayersMapper.save(PlayingGamePlayers.builder()
-                            .playingGameId(playingGameId)
-                            .playerId(winner)
+                    .playingGameId(playingGameId)
+                    .playerId(winner)
                     .build());
             playingGamePlayersMapper.save(PlayingGamePlayers.builder()
                     .playingGameId(playingGameId)

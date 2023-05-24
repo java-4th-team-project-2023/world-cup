@@ -69,13 +69,12 @@
     line-height: 2em;
 }
 
-.winner-img img {
-    background-size: 100%;
-    width: 100%;
+.winner-img {
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+
     height: 100%;
-    position: absolute;
-    top: 17.2%;
-    left: 0;
 }
 
 @keyframes transformY {
