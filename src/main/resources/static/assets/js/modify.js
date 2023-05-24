@@ -155,7 +155,7 @@ function addImgBtnHandler() {
 function addDelBtnHandler() {
     [...document.querySelectorAll('#delbtn')].forEach(b => {
         b.onclick = e => {
-            e.target.parentElement.remove();
+            e.target.parentElement.parentElement.remove();
         }
     })
 }
