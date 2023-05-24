@@ -86,6 +86,11 @@ public class PlayingGameController {
 
         PlayingGameAndPlayersResponseDTO dto = service.reset(playingGameId);
 
+        // 게임의 맨 처음에 리셋을 눌렀을 때
+        if (dto == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         return ResponseEntity.ok().body(dto);
     }
 

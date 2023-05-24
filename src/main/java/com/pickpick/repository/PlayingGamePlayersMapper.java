@@ -16,4 +16,5 @@ public interface PlayingGamePlayersMapper {
 
     int count(int playingGameId);
 
+    void deleteAll(int playingGameId);
 }
