@@ -303,13 +303,12 @@
                     renderReplyList(responseResult);
                 });
             } else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
-
+                // console.log("!!!!!!!"+currentAccount);
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
-                if(currentAccount !== null){
+                if(currentAccount === ''){
                      alert('로그인 후 사용하세요!');
                     return;
                 }
-                
                 // console.log('좋아요 클릭!!');
 
                 // # 서버로 보낼 데이터
@@ -475,88 +474,7 @@
         }
         // 생성된 랭킹 tag 렌더링
         document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
-
-            // 페이지 렌더링
-            // renderPage(pageInfo);
-            }
-
-
-
-
-         // 페이지 렌더링 함수
-        //  function renderPage({
-        //     begin, end, prev, next, page, finalPage
-        // }) {
-
-        //     let tag = "";
-
-        //     //이전 버튼 만들기
-        //     if (prev) {
-        //         tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
-        //             "'>이전</button></li>";
-        //     }
-        //     //페이지 번호 리스트 만들기
-        //     for (let i = begin; i <= end; i++) {
-        //         let active = '';
-        //         if (page.pageNo === i) {
-        //             active = 'p-active';
-        //         }
-
-        //         tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
-        //             "'>" + i + "</button></li>";
-        //     }
-        //     //다음 버튼 만들기
-        //     if (next) {
-        //         tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
-        //             "'>다음</button></li>";
-        //     }
-
-        //     // 페이지태그 렌더링
-        //     const $pageUl = document.querySelector('.pagination');
-        //     $pageUl.innerHTML = tag;
-
-        //     // ul에 마지막페이지 번호 저장.
-        //     $pageUl.dataset.fp = finalPage;
-
-        // }
-
-    //  // 페이지 렌더링 함수
-    //  function renderPage({
-    //     begin, end, prev, next, page, finalPage
-    // }) {
-    //
-    //     let tag = "";
-    //
-    //     //이전 버튼 만들기
-    //     if (prev) {
-    //         tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
-    //             "'>이전</button></li>";
-    //     }
-    //     //페이지 번호 리스트 만들기
-    //     for (let i = begin; i <= end; i++) {
-    //         let active = '';
-    //         if (page.pageNo === i) {
-    //             active = 'p-active';
-    //         }
-    //
-    //         tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
-    //             "'>" + i + "</button></li>";
-    //     }
-    //     //다음 버튼 만들기
-    //     if (next) {
-    //         tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
-    //             "'>다음</button></li>";
-    //     }
-    //
-    //     // 페이지태그 렌더링
-    //     const $pageUl = document.querySelector('.pagination');
-    //     $pageUl.innerHTML = tag;
-    //
-    //     // ul에 마지막페이지 번호 저장.
-    //     $pageUl.dataset.fp = finalPage;
-    //
-    // }
-
+    }
 
     //========= 메인 실행부 =========//
     (function () {
