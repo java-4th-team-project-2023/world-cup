@@ -59,7 +59,7 @@
                             <li class="list-content">
                                 <div class="img-container">
                                     <input type="file" class="addImg" name="playerImgPath" accept="image/*">
-                                    <button class="changeimg">사진등록</button>
+                                    <button class="changeimg" type="button">사진등록</button>
                                 </div>
                                 <div>
                                     <div class="img-box">

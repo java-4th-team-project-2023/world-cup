@@ -2,12 +2,16 @@
     addImgBtnHandler();
     addDelBtnHandler();
 
+    addChangeImgHandler();
+
+    // 사진 등록하면 미리보기 보여주는 이벤트 추가
+    addThumbnailHandler();
+
     // 리스트 추가하는 버튼
     const $plusBtn = document.querySelector('.plusBtn');
 
     $plusBtn.onclick = e => {
         addList();
-
     };
 
     function addList() {
@@ -154,4 +158,27 @@ function addDelBtnHandler() {
             e.target.parentElement.remove();
         }
     })
+}
+
+function addChangeImgHandler() {
+    [...document.querySelectorAll('.changeimg')].forEach(btn => {
+            btn.onclick = e => {
+                e.target.closest('.img-container').firstElementChild.click();
+            }
+        }
+    );
+}
+
+function addThumbnailHandler() {
+    [...document.querySelectorAll('.addImg')].forEach(input => {
+        input.onchange = e => {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = e2 => {
+                e.target.closest('.img-container').nextElementSibling.firstElementChild.firstElementChild
+                    .setAttribute('src', reader.result);
+            };
+
+        };
+    });
 }
