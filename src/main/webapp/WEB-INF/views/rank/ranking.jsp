@@ -342,6 +342,7 @@
                     alert('로그인 후 사용하세요!');
                     return;
                 }
+                // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                 // console.log('신고 클릭!!');
 
                 // # 서버로 보낼 데이터

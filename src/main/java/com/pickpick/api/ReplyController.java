@@ -26,10 +26,11 @@ public class ReplyController {
     private final ReplyService replyService;
 
     // 댓글 20개씩 조회
-    @GetMapping("/{gameId}/page/{pageNo}")
+    @GetMapping(value = {"/{gameId}/page/{pageNo}","/{gameId}/page/{pageNo}/sort/{sortBy}"})
     public ResponseEntity<?> replyList(
             @PathVariable int gameId,
-            @PathVariable int pageNo
+            @PathVariable int pageNo,
+            @PathVariable(required = false) String sortedBy
     ){
         log.info("/api/replies/{}/page/{} : GET!!",gameId,pageNo);
 
