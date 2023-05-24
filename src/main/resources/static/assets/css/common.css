@@ -12,6 +12,7 @@
 /* body 선택자에 기본 폰트크기와 글꼴을 넣어주세요 */
 body{
     font-size: 18px;
+    overflow: hidden;
 }
 
 /* 추가 reset사항이 있으면 아래에 적어주세요. */
