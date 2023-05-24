@@ -4,8 +4,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>pickpick</title>
-
+    <title>PICKPICK</title>
+    <link rel="icon" href="/assets/img/favicon.png">
     <%@ include file="../include/static-head.jsp" %>
 
     <link rel="stylesheet" href="/assets/css/list.css">
