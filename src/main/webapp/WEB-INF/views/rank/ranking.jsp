@@ -273,12 +273,16 @@
 
     // 댓글 삭제,좋아요,신고 기능 함수
     function replyRemoveClickEvent() {
-
+        
         $viewMain.onclick = e => {
             const rp = e.target.closest('.rpboard-rpbox');
             // console.log(rp);
             const $replyNo = rp.dataset.replyNo;
             if (e.target.matches('.rpboard-delete-replies-btn')) { // 삭제 기능
+                if(currentAccount !== null){
+                    alert('로그인 후 사용하세요!');
+                    return;
+                }
                 console.log('삭제버튼 클릭!!');
                 if (!confirm('정말 삭제합니까?')) return;
 
@@ -302,9 +306,11 @@
 
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                 if(currentAccount !== null){
+                     alert('로그인 후 사용하세요!');
                     return;
                 }
-                console.log('좋아요 클릭!!');
+                
+                // console.log('좋아요 클릭!!');
 
                 // # 서버로 보낼 데이터
                 const payload = {
@@ -325,17 +331,18 @@
                 fetch(URL + "/like", requestInfo)
                     .then(res => {
                         if (res.status === 200) {
-                            alert('좋아요가 정상!');
-
+                            alert('좋아요!');
                             getReplyList();
                         } else {
-                            alert('좋아요 실패함!');
+                            alert('좋아요 실패!');
                         }
                     });
             } else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
-
-                // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
-                console.log('신고 클릭!!');
+                if(currentAccount !== null){
+                    alert('로그인 후 사용하세요!');
+                    return;
+                }
+                // console.log('신고 클릭!!');
 
                 // # 서버로 보낼 데이터
                 const payload = {
@@ -356,10 +363,7 @@
                 fetch(URL + "/report", requestInfo)
                     .then(res => {
                         if (res.status === 200) {
-                            alert('신고 정상!');
-
-                            // 마지막페이지 번호
-                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                            alert('신고!');
                             getReplyList();
                         } else {
                             alert('신고 실패함!');
