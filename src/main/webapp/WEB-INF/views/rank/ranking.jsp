@@ -10,7 +10,7 @@
     <title>pickpick</title>
 
     <%@ include file="../include/static-head.jsp" %>
-
+    <link rel="icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/reply.css">
     <link rel="stylesheet" href="/assets/css/ranking.css">
 
