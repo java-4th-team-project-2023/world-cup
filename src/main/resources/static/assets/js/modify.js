@@ -67,6 +67,13 @@
         $addinputName.setAttribute('name', 'playerName');
         $addinputName.setAttribute('type', 'text');
         $addDiv4.appendChild($addinputName);
+        // 세번째 div 안에 input tag 추가 hidden 하지만 새로 추가되는 선수는 playerId가 0
+        const $addInputPId = document.createElement('input');
+        $addInputPId.setAttribute('name', 'playerId');
+        $addInputPId.setAttribute('type', 'text');
+        $addInputPId.setAttribute('value', '0');
+        $addInputPId.style.display = 'none';
+        $addDiv4.appendChild($addInputPId);
 
         // 리스트 안에 네번째 div
         let $addDiv5 = document.createElement('div');

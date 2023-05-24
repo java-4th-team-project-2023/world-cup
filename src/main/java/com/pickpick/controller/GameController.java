@@ -6,6 +6,7 @@ import com.pickpick.dto.game.GameModifyResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.page.PageMaker;
 import com.pickpick.dto.player.PlayerListResponseDTO;
+import com.pickpick.dto.player.PlayerModifyRequestDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
 import com.pickpick.entity.Game;
@@ -24,7 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -95,7 +99,7 @@ public class GameController {
 //        각 이미지 경로넣기 및 이름 저장
         String savePath = null;
         for (int i = 0; i < file.length; i++) {
-            savePath = fileUtil.uploadFile(file[i],rootPath);
+            savePath = fileUtil.uploadFile(file[i], rootPath);
             PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
                     .gameId(gameId)
                     .playerName(playerName[i])
@@ -147,7 +151,10 @@ public class GameController {
     public String modifyGame(HttpSession session, String gameName,
                              int gameId,
                              String[] playerName,
+                             int[] playerId,
                              @RequestParam("playerImgPath") MultipartFile[] file) {
+
+        log.info("/games/modify POST!! ");
 
         if (!LoginUtil.isMine(session, gameService.findGameById(gameId).getAccountId())
                 && !LoginUtil.isAdmin(session)) {
@@ -155,21 +162,70 @@ public class GameController {
         }
 
         gameService.updateGameName(GameNameUpdateRequestDTO.builder()
-                        .gameId(gameId)
-                        .gameName(gameName)
+                .gameId(gameId)
+                .gameName(gameName)
                 .build());
 
-        playerService.deleteAllByGameId(gameId);
+        // 전달받은 플레이어 아이디 중에 없는 것들은 삭제 처리 해주어야 한다.
+        List<Integer> allPlayerIdByGameId = playerService.findAllPlayerIdByGameId(gameId);
 
+        List<Integer> deletePlayerIdList = new ArrayList<>();
+
+        allPlayerIdByGameId.forEach(id -> {
+
+            boolean flag = true;
+
+            for (int i : playerId) {
+                if (id == i) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                deletePlayerIdList.add(id);
+            }
+        });
+
+        deletePlayerIdList.forEach(playerService::deletePlayer);
+
+        // 플레이어들 추가
         for (int i = 0; i < file.length; i++) {
-            String savePath = fileUtil.uploadFile(file[i], rootPath);
-            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
-                    .gameId(gameId)
-                    .playerName(playerName[i])
-                    .playerImgPath(savePath)
-                    .build();
-//      log.info("이게 맞나? {}",playerRegisterRequestDTO);
-            playerService.registerPlayer(playerRegisterRequestDTO);
+
+            int eachPlayerId = playerId[i];
+            MultipartFile eachFile = file[i];
+            String eachPlayerName = playerName[i];
+
+            boolean playerIsExist = playerService.isExist(eachPlayerId);
+
+            if (playerIsExist && eachFile.isEmpty()) {
+
+                playerService.updatePlayer(PlayerModifyRequestDTO.builder()
+                        .playerId(eachPlayerId)
+                        .playerName(eachPlayerName)
+                        .build());
+
+            } else {
+                String savePath = fileUtil.uploadFile(eachFile, rootPath);
+
+                if (playerIsExist) {
+
+                    playerService.updatePlayer(PlayerModifyRequestDTO.builder()
+                            .playerId(eachPlayerId)
+                            .playerName(eachPlayerName)
+                            .playerImgPath(savePath)
+                            .build());
+
+                } else {
+                    PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
+                            .gameId(gameId)
+                            .playerName(eachPlayerName)
+                            .playerImgPath(savePath)
+                            .build();
+
+                    playerService.registerPlayer(playerRegisterRequestDTO);
+                }
+            }
         }
 
         return "redirect:/";

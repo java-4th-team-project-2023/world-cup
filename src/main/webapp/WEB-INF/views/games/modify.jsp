@@ -68,6 +68,7 @@
                                 </div>
                                 <div>
                                     <input type="text" class="playerName" name="playerName" value="${p.playerName}">
+                                    <input type="text" name="playerId" value="${p.playerId}" style="display: none">
                                 </div>
                                 <div>
                                     <button id="delbtn">삭제</button>

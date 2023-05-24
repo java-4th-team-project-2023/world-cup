@@ -40,4 +40,6 @@ public interface PlayerMapper {
 
     void deleteAllByGameId(int gameId);
 
+    int checkPlayerId(int playerId);
+
 }

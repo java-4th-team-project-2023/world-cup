@@ -104,6 +104,14 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
+    // 삭제되었는지 비교하기위한 선수들 목록 가져오기
+    public List<Integer> findAllPlayerIdByGameId(int gameId) {
+        return playerMapper.findAllPlayer(gameId)
+                .stream()
+                .map(Player::getPlayerId)
+                .collect(Collectors.toList());
+    }
+
     // 특정 선수 조회
     public PlayerOneResponseDTO findOne(int playerId) {
         return new PlayerOneResponseDTO(playerMapper.findOne(playerId));
@@ -143,6 +151,10 @@ public class PlayerService {
                 .playerList(playerList)
                 .build();
 
+    }
+
+    public boolean isExist(int playerId) {
+        return playerMapper.checkPlayerId(playerId) == 1;
     }
 
 }

@@ -15,20 +15,22 @@
             selected_win_count=#{selectedWinCount},
             join_game_count=#{joinGameCount},
             final_win_count=#{finalWinCount}
-        WHERE
-            player_id=#{playerId}
+        WHERE player_id = #{playerId}
     </update>
 
     <delete id="deletePlayer">
-        DELETE FROM player_tbl
-        WHERE player_id=#{playerId}
+        DELETE
+        FROM player_tbl
+        WHERE player_id = #{playerId}
     </delete>
 
     <update id="modifyPlayer">
         UPDATE player_tbl
-        SET player_name=#{playerName},
-            player_img_path=#{playerImgPath}
-        WHERE player_id=#{playerId}
+        SET player_name=#{playerName}
+        <if test="playerImgPath != null">
+            , player_img_path=#{playerImgPath}
+        </if>
+        WHERE player_id = #{playerId}
     </update>
 
     <select id="findAll" resultType="player">
@@ -39,26 +41,25 @@
             AND player_name LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
         order by (final_win_count / join_game_count) desc
-        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <select id="findAllPlayer" resultType="player">
         SELECT *
         FROM player_tbl
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
         order by (final_win_count / join_game_count) desc
     </select>
 
     <select id="findOne" resultType="player">
         SELECT *
         FROM player_tbl
-        WHERE player_id=#{playerId}
+        WHERE player_id = #{playerId}
     </select>
 
     <select id="findN" resultType="player">
         SELECT *
         FROM player_tbl
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
         ORDER BY RAND()
         LIMIT 0, #{number}
     </select>
@@ -72,7 +73,13 @@
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM player_tbl
-        WHERE game_id=#{gameId}
+        WHERE game_id = #{gameId}
+    </select>
+
+    <select id="checkPlayerId" resultType="int">
+        select count(*)
+        from player_tbl
+        where player_id = #{playerId}
     </select>
 
 </mapper>
