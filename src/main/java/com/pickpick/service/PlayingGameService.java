@@ -10,6 +10,7 @@ import com.pickpick.repository.PlayingGamePlayersMapper;
 import com.pickpick.repository.WinnerPlayerMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.binding.BindingException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -137,7 +138,8 @@ PlayingGameService {
         // 라운드가 끝났는지 중간인지 게임이 끝났는지 확인하는 로직
         PlayingGame game = playingGameMapper.findOne(playingGameId);
         int totalRound = game.getTotalRound();
-        if (playingGamePlayersMapper.count(playingGameId) == 0 && winnerPlayerMapper.count(playingGameId) == 1) { // 게임 끝
+        int currentRound = game.getCurrentRound();
+        if (playingGamePlayersMapper.count(playingGameId) == 0 && currentRound == 1) { // 게임 끝
             log.info("total round : {}", totalRound);
             int gameId = getGameId(playingGameId);
 
@@ -149,17 +151,15 @@ PlayingGameService {
                     .gameId(gameId)
                     .build();
         } else if (playingGamePlayersMapper.count(playingGameId) == 0) { // 라운드 끝
-            // 위너 플레이어 테이블의 모든 선수들을 플레잉 게임 플레이어 테이블로 이동
-
-            winnerPlayerMapper.findAll(playingGameId).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
-                    .playingGameId(playingGameId)
-                    .playerId(p)
-                    .build()));
-            // 위너 플레이어 테이블을 비워주기
-            winnerPlayerMapper.deleteAll(playingGameId);
 
             // currentRound를 2로 나눠주기
             game.setCurrentRound(game.getCurrentRound() >> 1);
+
+            // 위너 플레이어 테이블의 현재 라운드 수에 맞는 선수들만 플레잉 게임 플레이어 테이블로 이동
+            winnerPlayerMapper.findN(playingGameId,game.getCurrentRound()).forEach(p -> playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+                    .playingGameId(playingGameId)
+                    .playerId(p)
+                    .build()));
 
             // 업데이트
             playingGameMapper.update(game);
@@ -169,8 +169,42 @@ PlayingGameService {
 
     public PlayingGameAndPlayersResponseDTO reset(int playingGameId) {
 
-        // 위너 테이블에 아무것도 없으면 리셋할 수 없음
-        if (winnerPlayerMapper.count(playingGameId) == 0) {
+        // 플레잉 게임 플레이어 테이블의 플레이어 수가 현재 카운트 수와 같으면 라운드 첫번째 매치임
+        if (playingGamePlayersMapper.count(playingGameId) == playingGameMapper.findOne(playingGameId).getCurrentRound()) {
+
+            // 위너와 루저 테이블에서 가장 최신에 추가된 것 하나씩을 가져오고 제거함
+            int winner = 0;
+            int loser = 0;
+            try {
+                // BindingException 이 발생했다는 말은 게임의 최초임을 의미
+                winner = winnerPlayerMapper.findLatest(playingGameId);
+                loser = loserPlayerMapper.findLatest(playingGameId);
+            } catch (BindingException e) {
+                log.info("게임 시작 전으로는 되돌아갈 수 없습니다");
+                return null;
+            }
+
+            // 플레잉 게임 플레이어 테이블을 전부 비워줌
+            playingGamePlayersMapper.deleteAll(playingGameId);
+
+            winnerPlayerMapper.delete(winner, playingGameId);
+            loserPlayerMapper.delete(loser, playingGameId);
+
+            // 그 둘을 플레잉 게임 플레이어 테이블에 추가해줌
+            playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+                            .playingGameId(playingGameId)
+                            .playerId(winner)
+                    .build());
+            playingGamePlayersMapper.save(PlayingGamePlayers.builder()
+                    .playingGameId(playingGameId)
+                    .playerId(loser)
+                    .build());
+
+            // 현재 라운드를 다시 올려줌
+            PlayingGame playingGame = playingGameMapper.findOne(playingGameId);
+            playingGame.setCurrentRound(playingGame.getCurrentRound() << 1);
+            playingGameMapper.update(playingGame);
+
             return findOne(playingGameId);
         }
 

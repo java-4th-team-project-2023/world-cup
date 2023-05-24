@@ -155,16 +155,25 @@ function renderPlayers(randomTwoPlayers) {
 function addResetEvent() {
     document.getElementById("resetBtn").onclick = e => {
         const $game = document.getElementById('game');
-        fetch(`/api/v1/plays/${$game.dataset.playingGameId}`,
-            {
-                method: 'PUT'
-            })
+        fetch(`/api/v1/plays/${$game.dataset.playingGameId}`, {
+            method: 'PUT'
+        })
             .then(res => {
-
-                $game.textContent = '';
+                // 400 이면 잘못된 요청
+                if (res.status === 400) {
+                    return 'exit';
+                }
 
                 return res.json();
             })
-            .then(({randomTwoPlayers}) => renderPlayers(randomTwoPlayers));
+            .then(result => {
+                // Check if 'exit' was returned in the previous then()
+                if (result !== 'exit') {
+                    $game.textContent = '';
+                    renderPlayers(result.randomTwoPlayers);
+                } else {
+                    alert('게임 시작 전으로는 되돌아갈 수 없습니다!!');
+                }
+            });
     }
 }
