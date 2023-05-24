@@ -185,4 +185,20 @@ header {
     position: fixed;
     right: 10px;
     bottom: 10px;
+
+//cw 변경부분
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+    color: #F80000;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: transparent;
+}
+#resetBtn:hover {
+    transition: all ease 1s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+
 }
