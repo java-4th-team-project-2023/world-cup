@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>pickpick</title>
 
     <%@ include file="../include/static-head.jsp" %>
 
@@ -46,7 +46,6 @@
             <div class="winner-img-box">
                 <div class="winner-img-name">${dto.playerName} 월드컵 ${round}강 우승</div>
                 <div class="winner-img">
-                    <img src="${dto.playerImgPath}" alt="${dto.playerName}">
                 </div>
             </div>
 
@@ -60,6 +59,9 @@
 <!-- reply container 끝 -->
 
 <script>
+    // 우승자 사진 뿌려주기
+    document.querySelector('.winner-img').style.backgroundImage = 'url("${dto.playerImgPath}")';
+
     // 해당 게임 아이디 (진호형꺼에서 받아오기)
     const gameId = '${gameId}';
 
