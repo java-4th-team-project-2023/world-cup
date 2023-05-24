@@ -171,6 +171,7 @@ function addResetEvent() {
                 if (result !== 'exit') {
                     $game.textContent = '';
                     renderPlayers(result.randomTwoPlayers);
+                    renderRoundInfo(result.currentRound);
                 } else {
                     alert('게임 시작 전으로는 되돌아갈 수 없습니다!!');
                 }
