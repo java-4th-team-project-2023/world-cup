@@ -29,7 +29,7 @@
             <p>이미지 수정/삭제</p>
         </div>
         <div class="container-title"><span>기본정보 입력하기</span></div>
-        <form action="/games/make" method="post" id="form" enctype="multipart/form-data">
+        <form action="/games/modify" method="post" id="form" enctype="multipart/form-data">
             <div class="upload-info-theme-box">
                 <div class="upload-info-theme">
                     <div class="basic-info">
@@ -38,7 +38,9 @@
                             <button type="button" class="plusBtn">입력칸 추가</button>
                             <span class="title">제목</span>
                             <div class="input-wrapper ">
-                                <input type="text" class="info-title input" name="gameName" placeholder="월드컵의 제목을 입력하세요">
+                                <input type="text" class="info-title input" name="gameName" placeholder="월드컵의 제목을 입력하세요"
+                                value="${gameInfo.gameName}">
+                                <input type="text" value="${gameInfo.gameId}" name="gameId" style="display: none">
                             </div>
                         </div>
 
@@ -46,14 +48,32 @@
                     <!-- 리스트 추가 및 삭제 버튼 -->
                     <ul class="title-ul">
                         <li class="list-title">
-                            <div class="list-title-list" name="playerName">등록하기</div>
+                            <div class="list-title-list">등록하기</div>
                             <div class="list-title-list uploadMenu">사진</div>
                             <div class="list-title-list">이름</div>
                             <div class="list-title-list">삭제</div>
                         </li>
                     </ul>
                     <ul class="content-ul">
-
+                        <c:forEach var="p" items="${gameInfo.playerList}">
+                            <li class="list-content">
+                                <div class="img-container">
+                                    <input type="file" class="addImg" name="playerImgPath" accept="image/*">
+                                    <button class="changeimg">사진등록</button>
+                                </div>
+                                <div>
+                                    <div class="img-box">
+                                        <img src="${p.playerImgPath}" alt="" class="img">
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="text" class="playerName" name="playerName" value="${p.playerName}">
+                                </div>
+                                <div>
+                                    <button id="delbtn">삭제</button>
+                                </div>
+                            </li>
+                        </c:forEach>
                     </ul>
 
                     <div class="savebtnWrapper">

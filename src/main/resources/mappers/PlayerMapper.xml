@@ -63,6 +63,12 @@
         LIMIT 0, #{number}
     </select>
 
+    <delete id="deleteAllByGameId">
+        delete
+        from player_tbl
+        where game_id = #{gameId}
+    </delete>
+
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM player_tbl

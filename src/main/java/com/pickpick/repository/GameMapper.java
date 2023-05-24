@@ -36,4 +36,6 @@ public interface GameMapper {
     List<Game> findGameByAccountId(String accountId, Search page);
 
     Game findGameById(int gameId);
+
+    void increasePlayCount(int gameId);
 }

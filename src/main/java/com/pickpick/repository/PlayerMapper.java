@@ -38,4 +38,6 @@ public interface PlayerMapper {
     // 랭킹 목록 카운트
     int count(int gameId);
 
+    void deleteAllByGameId(int gameId);
+
 }

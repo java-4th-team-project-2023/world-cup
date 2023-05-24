@@ -2,10 +2,12 @@ package com.pickpick.controller;
 
 import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.dto.game.GameInsertRequestDTO;
+import com.pickpick.dto.game.GameModifyResponseDTO;
+import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.page.PageMaker;
+import com.pickpick.dto.player.PlayerListResponseDTO;
 import com.pickpick.dto.player.PlayerRegisterRequestDTO;
 import com.pickpick.dto.search.Search;
-import com.pickpick.entity.Account;
 import com.pickpick.entity.Game;
 import com.pickpick.service.GameService;
 import com.pickpick.service.PlayerService;
@@ -13,10 +15,9 @@ import com.pickpick.util.LoginUtil;
 import com.pickpick.util.upload.fileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -126,21 +126,50 @@ public class GameController {
             return "redirect:/account/sign-in";
         }
 
-        if (!Objects.equals(LoginUtil.getCurrentLoginMemberAccount(session), gameService.findGameById(gameId).getAccountId())) {
+        Game game = gameService.findGameById(gameId);
+
+        if (!LoginUtil.isAdmin(session) && !LoginUtil.isMine(session, game.getAccountId())) {
             return "redirect:/games/list";
         }
 
-        model.addAttribute("gameId", gameId);
+        List<PlayerListResponseDTO> playerList = playerService.findAllPlayer(gameId);
+
+        GameModifyResponseDTO dto = new GameModifyResponseDTO(game, playerList);
+
+        model.addAttribute("gameInfo", dto);
 
         return "games/modify";
     }
 
     // 게임 수정 요청
+    @Transactional
     @PostMapping("/modify")
-    public String modifyGame(HttpSession session, int gameId) {
+    public String modifyGame(HttpSession session, String gameName,
+                             int gameId,
+                             String[] playerName,
+                             @RequestParam("playerImgPath") MultipartFile[] file) {
+
         if (!LoginUtil.isMine(session, gameService.findGameById(gameId).getAccountId())
                 && !LoginUtil.isAdmin(session)) {
             return "redirect:/games/list";
+        }
+
+        gameService.updateGameName(GameNameUpdateRequestDTO.builder()
+                        .gameId(gameId)
+                        .gameName(gameName)
+                .build());
+
+        playerService.deleteAllByGameId(gameId);
+
+        for (int i = 0; i < file.length; i++) {
+            String savePath = fileUtil.uploadFile(file[i], rootPath);
+            PlayerRegisterRequestDTO playerRegisterRequestDTO = PlayerRegisterRequestDTO.builder()
+                    .gameId(gameId)
+                    .playerName(playerName[i])
+                    .playerImgPath(savePath)
+                    .build();
+//      log.info("이게 맞나? {}",playerRegisterRequestDTO);
+            playerService.registerPlayer(playerRegisterRequestDTO);
         }
 
         return "redirect:/";
@@ -165,6 +194,8 @@ public class GameController {
     @GetMapping("/start")
     public String gameStart(int gameId, Model model) {
         int playerCount = gameService.countPlayer(gameId);
+
+        gameService.increasePlayCount(gameId);
 
         model.addAttribute("gameId", gameId);
         model.addAttribute("playerCount", playerCount);

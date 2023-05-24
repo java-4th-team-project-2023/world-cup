@@ -84,7 +84,7 @@
 
             </section>
             <ul class="pagination">
-                
+
             </ul>
 
         </section> <!-- end rank-box -->
@@ -385,7 +385,7 @@
 
         }
     };
-    
+
     function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
         const value = $searchInput.value;
         console.log(value);
@@ -395,12 +395,12 @@
         // });
         // document.getElementById('Search-Btn').onclick = e => {
         // console.log(e.target);
-       
+
         // console.log($searchInput.value);
         //     console.log("search클릭");
         // }
 
-        
+
         if($searchInput.value === ''){
             fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}`) // \${keyword}
             .then(res => res.json())
@@ -417,7 +417,7 @@
             });
         }
 
-        
+
     }
 
     document.getElementById('Search-Btn').onclick = e => {
