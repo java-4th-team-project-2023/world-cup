@@ -2,12 +2,16 @@
     addImgBtnHandler();
     addDelBtnHandler();
 
+    addChangeImgHandler();
+
+    // 사진 등록하면 미리보기 보여주는 이벤트 추가
+    addThumbnailHandler();
+
     // 리스트 추가하는 버튼
     const $plusBtn = document.querySelector('.plusBtn');
 
     $plusBtn.onclick = e => {
         addList();
-
     };
 
     function addList() {
@@ -67,6 +71,13 @@
         $addinputName.setAttribute('name', 'playerName');
         $addinputName.setAttribute('type', 'text');
         $addDiv4.appendChild($addinputName);
+        // 세번째 div 안에 input tag 추가 hidden 하지만 새로 추가되는 선수는 playerId가 0
+        const $addInputPId = document.createElement('input');
+        $addInputPId.setAttribute('name', 'playerId');
+        $addInputPId.setAttribute('type', 'text');
+        $addInputPId.setAttribute('value', '0');
+        $addInputPId.style.display = 'none';
+        $addDiv4.appendChild($addInputPId);
 
         // 리스트 안에 네번째 div
         let $addDiv5 = document.createElement('div');
@@ -144,7 +155,30 @@ function addImgBtnHandler() {
 function addDelBtnHandler() {
     [...document.querySelectorAll('#delbtn')].forEach(b => {
         b.onclick = e => {
-            e.target.parentElement.remove();
+            e.target.parentElement.parentElement.remove();
         }
     })
+}
+
+function addChangeImgHandler() {
+    [...document.querySelectorAll('.changeimg')].forEach(btn => {
+            btn.onclick = e => {
+                e.target.closest('.img-container').firstElementChild.click();
+            }
+        }
+    );
+}
+
+function addThumbnailHandler() {
+    [...document.querySelectorAll('.addImg')].forEach(input => {
+        input.onchange = e => {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = e2 => {
+                e.target.closest('.img-container').nextElementSibling.firstElementChild.firstElementChild
+                    .setAttribute('src', reader.result);
+            };
+
+        };
+    });
 }

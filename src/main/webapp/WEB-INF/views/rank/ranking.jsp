@@ -36,7 +36,6 @@
             <div class="select-search-box">
 
 
-
                 <!-- 검색창 box -->
                 <div class="search-box">
                     <!-- 검색창 text -->
@@ -119,62 +118,62 @@
     const $searchBtn = document.getElementById('Search');
 
 
-        // 댓글 목록 렌더링 함수
-        function renderReplyList({
-                                     count,
-                                     replyList
-                                 }) {
+    // 댓글 목록 렌더링 함수
+    function renderReplyList({
+                                 count,
+                                 replyList
+                             }) {
 
-                                    // console.log("!!!"+replyList);
-            // 총 댓글 수 렌더링
-            document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
+        // console.log("!!!"+replyList);
+        // 총 댓글 수 렌더링
+        document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
-            // 댓글 내용 렌더링
-            // 각 댓글 하나의 태그
-            let tag = '';
+        // 댓글 내용 렌더링
+        // 각 댓글 하나의 태그
+        let tag = '';
 
-            if (replyList === null || replyList.length === 0) {
-                tag += "댓글이 아직 없습니다!";
+        if (replyList === null || replyList.length === 0) {
+            tag += "댓글이 아직 없습니다!";
 
-            } else {
-                for (let rep of replyList) {
-                    // console.log("###" + rep.accountId);
-                    const {
-                        gameId,
-                        replyNo,
-                        writer,
-                        text,
-                        date,
-                        accountId,
-                        likeCount
-                    } = rep;
+        } else {
+            for (let rep of replyList) {
+                // console.log("###" + rep.accountId);
+                const {
+                    gameId,
+                    replyNo,
+                    writer,
+                    text,
+                    date,
+                    accountId,
+                    likeCount
+                } = rep;
 
-                    tag += `
+                tag += `
                     <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
                         <div class="rpboard-nickname-local-date-box">`;
 
-                    if (currentAccount === rep.accountId) {
-                        tag += `
+                if (currentAccount === rep.accountId) {
+                    tag += `
                             <div class="rpboard-delete-replies-box">
                             <button class="rpboard-delete-replies-btn"></button>
                             </div>`;
-                    }
+                }
 
-                    tag += `
+                tag += `
                             <div class="rpboard-nickname">\${writer}</div>
                             <span class="rpboard-local-date-box">\${date}</span>
                         </div>
                         <div class="rpboard-replies-box">
                             <div class="rpboard-replies">\${text}</div>`;
 
-                    if (currentAccount === rep.accountId) {
-                        tag += `
+                if (currentAccount === rep.accountId) {
+                    tag += `
                             <div class="rpboard-modify-replies-box">
                                 <button class="rpboard-modify-replies-btn"></button>
                             </div>                           
                             `;
-                        }
-                        tag += `
+                }
+                tag += `
                     </div>
                         <div class="rpboard-like-report-box">
                                     <div class="like rpboard-like-replies-btn" id="Like">
@@ -189,14 +188,14 @@
                         </div>`;
 
 
-                }
             }
-
-
-            // 생성된 댓글 tag 렌더링
-            $viewMain.innerHTML = tag;
-
         }
+
+
+        // 생성된 댓글 tag 렌더링
+        $viewMain.innerHTML = tag;
+
+    }
 
 
     // 댓글 목록 불러오기 함수
@@ -391,30 +390,30 @@
         }
     };
 
-    function getRankingList(pageNo=1){ // 랭킹 목록 불러오기
+    function getRankingList(pageNo = 1) { // 랭킹 목록 불러오기
         const value = $searchInput.value;
         console.log(value);
         if($searchInput.value === ''){
             fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}`) // \${keyword}
-            .then(res => res.json())
-            .then(responseResult => {
-                // console.log(responseResult);
-                renderRankingList(responseResult);
-            });
-        }else{
+                .then(res => res.json())
+                .then(responseResult => {
+                    // console.log(responseResult);
+                    renderRankingList(responseResult);
+                });
+        } else {
             fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}/keyword/\${value}`) // \${keyword}
-            .then(res => res.json())
-            .then(responseResult => {
-                // console.log(responseResult);
-                renderRankingList(responseResult);
-            });
+                .then(res => res.json())
+                .then(responseResult => {
+                    // console.log(responseResult);
+                    renderRankingList(responseResult);
+                });
         }
     }
 
     $searchBtn.onclick = e => {
         getRankingList();
     }
-   
+
     // $searchInput.addEventListener('input', function(event) {
     //     getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
     // });
@@ -422,16 +421,16 @@
     // 랭킹 목록 렌더링 함수
     function renderRankingList(playerList) {
 
-            // 총 랭킹 수 렌더링
-            // document.getElementById('replyCnt').textContent = count;
+        // 총 랭킹 수 렌더링
+        // document.getElementById('replyCnt').textContent = count;
 
-            // 랭킹 내용 렌더링
-            let tag = ``;
+        // 랭킹 내용 렌더링
+        let tag = ``;
 
-                for (let i=0; i < playerList.length; i++) {
-                    // console.log(responseResult[i]);
+        for (let i = 0; i < playerList.length; i++) {
+            // console.log(responseResult[i]);
 
-                    tag += `
+            tag += `
                                 <ul class="rkboard-ranking-list-box">
                             <!-- 순위 -->
                                     <li class="rkboard-ranking-list" id="Ranking">
@@ -439,7 +438,7 @@
                                     </li>
                             <!-- 이미지 -->
                                     <li class="rkboard-ranking-list" id="Image">
-                                        <a href="/assets/img/cat.jpg">
+                                        <a href="\${playerList[i].playerImgPath}">
                                         <img src="\${playerList[i].playerImgPath}" alt="\${playerList[i].playerName}">
                                         </a>
                                     </li>
@@ -467,17 +466,17 @@
                             </li>
                          </ul>`;
 
-                    
-                }
-            // 생성된 랭킹 tag 렌더링
-            document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
+
+        }
+        // 생성된 랭킹 tag 렌더링
+        document.querySelector('.rkboard-ranking-wrapper').innerHTML = tag;
 
             // 페이지 렌더링
             // renderPage(pageInfo);
             }
 
 
-           
+
 
          // 페이지 렌더링 함수
         //  function renderPage({
@@ -516,7 +515,42 @@
 
         // }
 
-
+    //  // 페이지 렌더링 함수
+    //  function renderPage({
+    //     begin, end, prev, next, page, finalPage
+    // }) {
+    //
+    //     let tag = "";
+    //
+    //     //이전 버튼 만들기
+    //     if (prev) {
+    //         tag += "<li class='page-select'><button class='page-link page-active'" + (begin - 1) +
+    //             "'>이전</button></li>";
+    //     }
+    //     //페이지 번호 리스트 만들기
+    //     for (let i = begin; i <= end; i++) {
+    //         let active = '';
+    //         if (page.pageNo === i) {
+    //             active = 'p-active';
+    //         }
+    //
+    //         tag += "<li class='page-select " + active + "'><button class='page-link page-custom''" + i +
+    //             "'>" + i + "</button></li>";
+    //     }
+    //     //다음 버튼 만들기
+    //     if (next) {
+    //         tag += "<li class='page-select'><button class='page-link page-active' " + (end + 1) +
+    //             "'>다음</button></li>";
+    //     }
+    //
+    //     // 페이지태그 렌더링
+    //     const $pageUl = document.querySelector('.pagination');
+    //     $pageUl.innerHTML = tag;
+    //
+    //     // ul에 마지막페이지 번호 저장.
+    //     $pageUl.dataset.fp = finalPage;
+    //
+    // }
 
 
     //========= 메인 실행부 =========//
