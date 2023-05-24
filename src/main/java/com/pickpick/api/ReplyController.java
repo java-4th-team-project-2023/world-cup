@@ -26,6 +26,8 @@ public class ReplyController {
     private final ReplyService replyService;
 
     // 댓글 20개씩 조회
+
+    // 정렬을 받아온다고 해도 수정,삭제,좋아요,신고 할때도 정렬을 받아와야 그대로 정렬기준을 지켜질텐데,,
     @GetMapping(value = {"/{gameId}/page/{pageNo}","/{gameId}/page/{pageNo}/sort/{sortBy}"})
     public ResponseEntity<?> replyList(
             @PathVariable int gameId,
@@ -88,6 +90,7 @@ public class ReplyController {
     public ResponseEntity<?> delete(@PathVariable int replyNo) {
 
         log.info("/api/replies/{} DELETE!", replyNo);
+
 
         try {
             ReplyListResponseDTO responseDTO
