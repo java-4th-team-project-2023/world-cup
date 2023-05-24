@@ -71,9 +71,11 @@
 
     </div>
 
-    <button id="resetBtn">
-        되돌리기
-    </button>
+<!-- button에서 div로 변경-->
+     <div id="resetBtn" title="이전 게임으로 돌아가기">
+         <i class="fas fa-undo"></i>
+     </div>
+
 </div>
 
 

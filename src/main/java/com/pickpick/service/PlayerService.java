@@ -90,6 +90,7 @@ public class PlayerService {
 
     // 특정 게임의 선수 목록 조회
     public List<PlayerListResponseDTO> findAll(int gameId, Search page) {
+        log.info("service {}", page);
         return playerMapper.findAll(gameId, page)
                 .stream()
                 .map(PlayerListResponseDTO::new)
