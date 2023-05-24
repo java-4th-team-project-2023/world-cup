@@ -73,12 +73,19 @@ h1.logo {
     height: 100%;
     padding: 0;
 }
-
+h1.logo a#Logo {
+    border-radius: 50%;
+}
 /* logo 호버 */
 h1.logo a#Logo:hover {
-    opacity: 0.5;
-    transition: 0.1s;
-    color: red;
+    animation: vibration 0.1s linear infinite;
+}
+@keyframes vibration {
+    0% {
+        transform: rotate(-5deg);
+    } 100% {
+        transform: rotate(5deg);
+    }
 }
 
 /* logo */
