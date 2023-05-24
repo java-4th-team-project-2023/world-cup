@@ -150,41 +150,13 @@ $pwInput.onkeyup = e => {
 document.getElementById('SignUpBtn').onclick = e => {
 
 
-    const $signUpForm = document.getElementById('signUpForm');
+    const $form = document.getElementById('signUpForm');
 
     if (!checkResultList.includes(false)) {
-        $signUpForm.submit();
+        $form.submit();
     } else {
         const $box = document.getElementById('container');
         $box.classList.add('vibration');
-
-        if($box.classList.contains('vibration')) {
-        const removeVibration = () => {
-            $box.classList.remove('vibration');
-        };
-            setTimeout(removeVibration, 1000);
-        }
-    }
-    e.preventDefault();
-
-};
-document.getElementById('SignInBtn').onclick = e => {
-
-
-    const $signInForm = document.getElementById('signInForm');
-
-    if (!checkResultList.includes(false)) {
-        $signInForm.submit();
-    } else {
-        const $box = document.getElementById('container');
-        $box.classList.add('vibration');
-
-        if($box.classList.contains('vibration')) {
-            const removeVibration = () => {
-                $box.classList.remove('vibration');
-            };
-            setTimeout(removeVibration, 1000);
-        }
     }
     e.preventDefault();
 
