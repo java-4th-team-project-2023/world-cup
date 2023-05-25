@@ -2,6 +2,7 @@ package com.pickpick.controller;
 
 import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.dto.game.GameInsertRequestDTO;
+import com.pickpick.dto.game.GameListResponseDTO;
 import com.pickpick.dto.game.GameModifyResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.page.PageMaker;
@@ -48,8 +49,9 @@ public class GameController {
 
         log.info("/games/list GET! page: {}", page);
         page.setAmount(6);
-        model.addAttribute("gameList", gameService.findAll(page));
-        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
+        List<GameListResponseDTO> findAll = gameService.findAll(page);
+        model.addAttribute("gameList", findAll);
+        model.addAttribute("maker", new PageMaker(page, findAll.size()));
 
         return "games/list";
     }
