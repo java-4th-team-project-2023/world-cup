@@ -25,6 +25,9 @@ public interface ReplyMapper {
     // 댓글 목록 조회
     List<Reply> findAll(@Param("gId") int gameId);
 
+    // 댓글 정렬 목록 조회
+    List<Reply> findSortAll(@Param("gId") int gameId,@Param("sortBy") String sortBy);
+
     // 총 댓글 수 조회
     int count(int gameId);
 
