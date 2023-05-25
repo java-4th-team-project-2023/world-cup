@@ -44,7 +44,7 @@
             </div> <!-- end select-search-box -->
 
             <div class="winner-img-box">
-                <div class="winner-img-name">${dto.playerName} 월드컵 ${round}강 우승</div>
+                <div class="winner-img-name"> ${gameName} 월드컵 ${round}강 우승 : ${dto.playerName}</div>
                 <div class="winner-img">
                 </div>
             </div>

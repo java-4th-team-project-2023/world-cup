@@ -4,6 +4,7 @@ import com.pickpick.dto.page.Page;
 import com.pickpick.dto.player.PlayerListResponseDTO;
 import com.pickpick.dto.player.PlayerOneResponseDTO;
 import com.pickpick.dto.search.Search;
+import com.pickpick.service.GameService;
 import com.pickpick.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.List;
 public class RankingController {
 
     private final PlayerService playerService;
+    private final GameService gameService;
 
     @GetMapping("/ranking")
     public String replyPage(int gameId, Model model) {
@@ -36,12 +38,16 @@ public class RankingController {
     }
 
     @GetMapping("/winner")
-    public String winnersPage(Integer gameId, int playerId,int round, Model model) {
+    public String winnersPage(Integer gameId, int playerId, int round, Model model) {
         log.info("/rank/winner GET! ");
         model.addAttribute("gameId", gameId);
         model.addAttribute("round",round);
         PlayerOneResponseDTO dto = playerService.findOne(playerId);
         model.addAttribute("dto",dto);
+
+        // 게임이름 받아오기
+        model.addAttribute("gameName", gameService.findGameById(gameId).getGameName());
+
         return "rank/winner";
     }
 

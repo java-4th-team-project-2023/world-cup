@@ -3,6 +3,7 @@
 (() => {
     checkExistGame();
     selectOne();
+    addResetEvent();
 })();
 
 function newGame() {
@@ -60,8 +61,6 @@ async function selectRound() {
         const selectedValue = document.getElementById('round').value;
 
         await sendRoundToPlayerController(selectedValue);
-
-        addResetEvent();
 
     }
 
