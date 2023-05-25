@@ -209,10 +209,11 @@ input:active {
     border: none;
     width: 150px;
     height: 60%;
-    margin: auto 0;
     font-size: 30px;
     /* margin: 5px auto; */
     cursor: pointer;
+
+    margin: auto 20px auto 0;
 }
 
 .plusBtn:hover {
