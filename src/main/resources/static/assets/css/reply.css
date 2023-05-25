@@ -339,7 +339,7 @@
 /* 댓글 게시판 전체 */
 .rpboard-viewmain-box {
     width: 100%;
-    height: 62.8%;
+    height: 72%;
     padding-top: 2%;
     position: absolute;
     overflow-x: hidden;
@@ -738,7 +738,7 @@ span.delete-text {
 .rpboard-user-nickname-reply-replyBtn-box {
     border: 4px solid #303481;
     width: 100%;
-    height: 20%;
+    height: 10%;
     line-height: 5em;
     position: absolute;
     bottom: 0;
@@ -755,20 +755,20 @@ span.delete-text {
     left: 0;
     opacity:0.5;
 }
-.rpboard-user-nickname-reply-replyBtn-box p {
+.rpboard-user-nickname-reply-replyBtn-box #seokbin {
     width: fit-content;
     height: 50%;
     font-size: 45px;
     display: flex;
-    justify-center: center;
-    align-center: center;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.rpboard-user-nickname-reply-replyBtn-box p a{
-    height: 50%;
+.rpboard-user-nickname-reply-replyBtn-box #seokbin a{
+    /*height: 50%;*/
     border-bottom: 2px solid blue;
     color: blue;
     margin: auto 10px;
@@ -780,11 +780,15 @@ span.delete-text {
     background: #303481;
     color: #fff200;
     width: 100%;
-    height: 20%;
+    height: 40%;
     padding-left: 1%;
     text-align: left;
     font-size: 25px;
     line-height: 1.2em;
+
+    position: relative;
+
+    z-index: 9;
 }
 
 .user-nickname::before {
@@ -797,19 +801,21 @@ span.delete-text {
     height: 20px;
     vertical-align: middle;
     margin-right: 10px;
+
+    position: absolute;
 }
 
 .rpboard-input-btn-box {
     width: 100%;
 
-    height: 100%;
+    height: 60%;
     display: flex;
     position: relative;
 }
 
 .rpboard-input-box {
     width: 85%;
-    height: 80%;
+    height: 100%;
     background: #303481;
 }
 
@@ -828,26 +834,20 @@ span.delete-text {
 .rpBtn {
     width: 100%;
     height: 100%;
+
+    font-size: 3em;
+
+    vertical-align: center;
 }
 
-.rpBtn p {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-size: 30px;
-    line-height: 4em;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.rpBtn p:hover {
+.rpBtn #seokbin:hover {
     background: #303481;
     color: #fff200;
     transition: 0.1s;
     opacity: 0.9;
 }
 
-.rpBtn p:active {
+.rpBtn #seokbin:active {
     transform: scale(0.97);
 }
 
