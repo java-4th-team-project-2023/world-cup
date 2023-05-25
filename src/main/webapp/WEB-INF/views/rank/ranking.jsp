@@ -113,9 +113,13 @@
     // 총 경기 비율
     const match = '${player.matchWinRate}';
 
+    //  검색 input태그
     const $searchInput = document.getElementById('Search-Text');
-
     const $searchBtn = document.getElementById('Search');
+
+    // 정렬 태그
+    const $likeReply = document.querySelector('.like-reply');
+    const $fastReply = document.querySelector('.fast-reply');
 
 
     // 댓글 목록 렌더링 함수
@@ -137,7 +141,7 @@
 
         } else {
             for (let rep of replyList) {
-                console.log("###" + "${login.auth}");
+                // console.log("###" + "${login.auth}");
                 const {
                     gameId,
                     replyNo,
@@ -197,15 +201,24 @@
 
 
     // 댓글 목록 불러오기 함수
-    function getReplyList(pageNo = 1) {
-        fetch(`\${URL}/\${gameId}/page/\${pageNo}`) // ${gameId}
+    function getReplyList(sortBy='fast',pageNo = 1) {
+        console.log(sortBy+"!!!!!!!!!");
+        fetch(`\${URL}/\${gameId}/page/\${pageNo}/sort/\${sortBy}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
                 // console.log(responseResult);
                 renderReplyList(responseResult);
             });
+    }
 
+    $likeReply.onclick = e => {
+        console.log($likeReply.dataset.sorted);
+        getReplyList($likeReply.dataset.sorted);
+    }
 
+    $fastReply.onclick = e => {
+        console.log($fastReply.dataset.sorted); 
+        getReplyList($fastReply.dataset.sorted);
     }
 
     // 댓글 등록 처리 이벤트 함수
@@ -394,7 +407,8 @@
 
     function getRankingList(pageNo = 1) { // 랭킹 목록 불러오기
         const value = $searchInput.value;
-        console.log(value);
+        
+        // console.log(value);
         if($searchInput.value === ''){
             fetch(`/api/v1/players/\${gameId}/pageNo/\${pageNo}`) // \${keyword}
                 .then(res => res.json())
@@ -416,6 +430,7 @@
         getRankingList();
     }
 
+    
     // $searchInput.addEventListener('input', function(event) {
     //     getRankingList(); // 입력값 변경 시 랭킹 목록 다시 불러오기
     // });

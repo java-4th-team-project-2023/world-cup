@@ -25,10 +25,18 @@
 
     <select id="findAll" resultType="reply">
         SELECT
-        reply_no, text, writer, date, like_count, account_id, game_id, account_id, like_count
+        reply_no, text, writer, date, like_count, account_id, game_id, report_count
         FROM reply_tbl
         WHERE game_id = #{gId}
         ORDER BY reply_no
+    </select>
+
+    <select id="findSortAll" resultType="reply">
+        SELECT
+        reply_no, text, writer, date, like_count, account_id, game_id, report_count
+        FROM reply_tbl
+        WHERE game_id = #{gId}
+        ORDER BY like_count DESC
     </select>
 
     <select id="count" resultType="int">

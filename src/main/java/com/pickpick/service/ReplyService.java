@@ -43,14 +43,16 @@ public class ReplyService {
                 .replyList(replyList)
                 .build();
     }
-    public ReplyListResponseDTO getList(int gameId,String sortedBy) {
-
-        List<ReplyDetailResponseDTO> replyList = replyMapper.findAll(gameId)
+    public ReplyListResponseDTO getList(int gameId,String sortBy) {
+//        log.info("service sort : {}",sortBy);
+        List<Reply> sortAll = replyMapper.findSortAll(gameId, sortBy);
+//        log.info("sortALl service!!@@@ : {}",sortAll);
+        List<ReplyDetailResponseDTO> replyList = sortAll
                 .stream()
                 .map(ReplyDetailResponseDTO::new)
                 .collect(toList());
         int count = replyMapper.count(gameId);
-        log.info("!!!! count :{}",count);
+//        log.info("!!!! count :{}",count);
         return ReplyListResponseDTO.builder()
                 .count(count)
                 .replyList(replyList)
