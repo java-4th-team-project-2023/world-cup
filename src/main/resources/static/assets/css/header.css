@@ -20,6 +20,8 @@ body {
     /*height: 100vh;*/
     position: relative;
     background: url('/assets/img/background.jpg') repeat-y center / cover;
+
+    overflow: hidden;
 }
 body::before {
     content: '';
