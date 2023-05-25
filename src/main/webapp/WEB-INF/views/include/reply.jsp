@@ -89,17 +89,17 @@
             <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="${login.accountId}">
             <div class="rpboard-input-btn-box">
                 <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
-                                                    placeholder="댓글을 입력해주세요..."></input></div>
+                                                    placeholder="댓글을 입력해주세요..."></div>
                 <div class="rpboard-rpBtn-box">
-                    <button class="rpBtn" type="button"><p>등 록
-                        <p></button>
+                    <button class="rpBtn" type="button">등 록
+                        </button>
                 </div>
             </div>
         </section>
     </c:if>
     <c:if test="${empty login}">
         <section class="rpboard-user-nickname-reply-replyBtn-box">
-            <p>댓글 입력은<a href="/account/sign-in">로그인</a>이 필요합니다.</p>
+            <p id="seokbin">댓글 입력은<a href="/account/sign-in">로그인</a>이 필요합니다.</p>
         </section>
     </c:if>
 
