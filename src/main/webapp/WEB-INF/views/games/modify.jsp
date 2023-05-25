@@ -25,10 +25,6 @@
 <div id="main-wrapper" class="wrapper">
 
     <div class="upload-new-wrapper">
-        <div class="menu-wrapper">
-            <p>기본정보</p>
-            <p>이미지 수정/삭제</p>
-        </div>
         <div class="container-title"><span>기본정보 입력하기</span></div>
         <form action="/games/modify" method="post" id="form" enctype="multipart/form-data">
             <div class="upload-info-theme-box">
