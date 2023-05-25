@@ -137,7 +137,7 @@
 
         } else {
             for (let rep of replyList) {
-                // console.log("###" + rep.accountId);
+                console.log("###" + "${login.auth}");
                 const {
                     gameId,
                     replyNo,
@@ -152,7 +152,7 @@
                     <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
                         <div class="rpboard-nickname-local-date-box">`;
 
-                if (currentAccount === rep.accountId) {
+                if (currentAccount === rep.accountId || "${login.auth}" === 'ADMIN') {
                     tag += `
                             <div class="rpboard-delete-replies-box">
                             <button class="rpboard-delete-replies-btn"></button>
@@ -190,8 +190,6 @@
 
             }
         }
-
-
         // 생성된 댓글 tag 렌더링
         $viewMain.innerHTML = tag;
 
@@ -279,7 +277,7 @@
             // console.log(rp);
             const $replyNo = rp.dataset.replyNo;
             if (e.target.matches('.rpboard-delete-replies-btn')) { // 삭제 기능
-                if(currentAccount !== null){
+                if(currentAccount === ''){
                     alert('로그인 후 사용하세요!');
                     return;
                 }
@@ -337,7 +335,7 @@
                         }
                     });
             } else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
-                if(currentAccount !== null){
+                if(currentAccount === ''){
                     alert('로그인 후 사용하세요!');
                     return;
                 }

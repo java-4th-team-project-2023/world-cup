@@ -87,10 +87,11 @@ public class ReplyController {
 
     // 댓글 삭제 요청 처리
     @DeleteMapping("/{replyNo}")
-    public ResponseEntity<?> delete(@PathVariable int replyNo) {
+    public ResponseEntity<?> delete(
+            @PathVariable int replyNo,
+            HttpSession session) {
 
         log.info("/api/replies/{} DELETE!", replyNo);
-
 
         try {
             ReplyListResponseDTO responseDTO
