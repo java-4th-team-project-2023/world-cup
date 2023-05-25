@@ -86,7 +86,7 @@
     <!-- 댓글 입력창 + 댓글 입력 버튼 -->
     <c:if test="${not empty login}">
         <section class="rpboard-user-nickname-reply-replyBtn-box">
-            <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="익명">
+            <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="${login.accountId}">
             <div class="rpboard-input-btn-box">
                 <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
                                                     placeholder="댓글을 입력해주세요..."></input></div>
