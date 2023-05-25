@@ -28,7 +28,10 @@ public interface GameMapper {
     // 게임 등록
     boolean insertGame(Game game);
 
-    int countGame();
+    int countGame(String keyword);
+
+    // 사용자 계정으로 게임 수 조회
+    int countGameByAccountId(String accountId);
 
     // 랜덤으로 두 명의 선수 이미지 경로 리턴
     List<String> randomPlayerImage(int gameId);
