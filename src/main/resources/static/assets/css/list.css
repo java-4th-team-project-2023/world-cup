@@ -28,13 +28,20 @@
     margin: 0 auto;
     text-align: center;
     position: relative;
+    cursor: pointer;
 }
 
 .card:hover {
     border: 1px solid black;
-    transform: scale(0.95);
-    transition: 0.2s;
     opacity: 0.9;
+    animation: vibrations 0.1s linear 2;
+}
+@keyframes vibrations {
+    0% {
+        transform: rotate(1deg);
+    } 100% {
+        transform: rotate(-1deg);
+    }
 }
 
 .card .img-box {
@@ -59,11 +66,12 @@
     font-size: 30px;
     margin: 0;
     padding: 0;
-    line-height: 1.7em;
+    line-height: 1.2em;
     position: absolute;
     top: 70%;
     left: 0;
 }
+
 .card h3:hover {
     background: #303481;
     color: #fff200;
@@ -85,12 +93,10 @@
 .card .button-wrapper .game-modify-btn:hover,
 .card .button-wrapper .game-ranking-btn:hover,
 .card .button-wrapper .game-delete-btn:hover {
-    border: 2px solid #fff200;
+    border: 1px solid #fff200;
     background: #303481;
     color: #fff200;
-    transition: 0.1s;
-    transform: scale(0.9);
-    opacity: 0.9;
+    transform: scale(1.1);
 }
 
 .card .button-wrapper .game-modify-btn,
@@ -100,12 +106,12 @@
     width: 20%;
     height: 75%;
     margin-top: 6px;
-    border: 2px solid #000;
-    box-shadow: 1px 1px 2px 1px black;
     border-radius: 5px;
-    font-weight: bold;
     font-size: 25px;
     cursor: pointer;
+    line-height: 1.2em;
+    border: none;
+    box-shadow: 1px 1px 1px 0px black;
 }
 
 /*.page-amount-select {*/
@@ -143,7 +149,7 @@
     margin-right: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 5px 15px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     font-size: 1.5em;
@@ -181,9 +187,9 @@
     border-radius: 10px 0px 0px 10px;
     width: 80%;
     height: 100%;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
-    padding-left: 2%;
+    padding-left: 4%;
     position: absolute;
     top: 0;
     left: 0;

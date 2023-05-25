@@ -98,8 +98,8 @@
         </section>
     </c:if>
     <c:if test="${empty login}">
-        <section class="rpboard-user-nickname-reply-replyBtn-box" style="background-color: #fff; font-size: 40px; display: flex; justify-content: center; align-content: center;">
-            댓글 입력은 로그인이 필요합니다.
+        <section class="rpboard-user-nickname-reply-replyBtn-box">
+            <p>댓글 입력은<a href="/account/sign-in">로그인</a>이 필요합니다.</p>
         </section>
     </c:if>
 
