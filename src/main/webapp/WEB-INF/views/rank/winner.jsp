@@ -163,15 +163,24 @@
 
 
     // 댓글 목록 불러오기 함수
-    function getReplyList(pageNo = 1) {
-        fetch(`\${URL}/\${gameId}/page/\${pageNo}`) // ${gameId}
+    function getReplyList(sortBy='fast', pageNo = 1) {
+        fetch(`\${URL}/\${gameId}/page/\${pageNo}/sort/\${sortBy}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
                 // console.log(responseResult);
                 renderReplyList(responseResult);
             });
 
+    }
 
+    $likeReply.onclick = e => {
+        console.log($likeReply.dataset.sorted);
+        getReplyList($likeReply.dataset.sorted);
+    }
+
+    $fastReply.onclick = e => {
+        console.log($fastReply.dataset.sorted);
+        getReplyList($fastReply.dataset.sorted);
     }
 
     // 댓글 등록 처리 이벤트 함수

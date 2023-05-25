@@ -52,6 +52,9 @@
     <select id="countGame" resultType="int">
         select count(*)
         from game_tbl
+        <if test="keyword != ''">
+            WHERE game_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
     </select>
 
     <select id="randomPlayerImage" resultType="String">
@@ -83,4 +86,10 @@
         set play_count=play_count + 1
         where game_id = #{gameId}
     </update>
+
+    <select id="countGameByAccountId" resultType="int">
+        select count(*)
+        from game_tbl
+        where account_id = #{accountId}
+    </select>
 </mapper>
