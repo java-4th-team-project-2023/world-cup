@@ -44,5 +44,4 @@ where account_id is null
 
 
 ### DataBase Diagram
-
-![newERD.png](diagram%2FnewERD.png)
+<img src="../diagram/new ERD.PNG">
