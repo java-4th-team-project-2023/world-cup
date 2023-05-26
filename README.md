@@ -45,3 +45,7 @@ where account_id is null
 
 ### DataBase Diagram
 <img src="./diagram/new ERD.png">
+
+### 향후 수정사항
+- 게임 만들거나 수정할 때 빈칸으로 넘기면 빈 파일이 등록되지 않도록 수정
+- 마찬가지로 게임 제목이나 선수 이름을 빈 칸으로 넘기면 등록되지 않도록 수정
