@@ -20,7 +20,7 @@
     <select id="isDuplicate" resultType="int">
         SELECT COUNT(*)
         FROM account_tbl
-        <if test="type == 'accountId'">
+        <if test="type == 'account'">
             WHERE account_id = #{keyword}
         </if>
         <if test="type == 'email'">
