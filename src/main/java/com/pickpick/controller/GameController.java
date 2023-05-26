@@ -49,7 +49,7 @@ public class GameController {
         log.info("/games/list GET! page: {}", page);
         page.setAmount(6);
         model.addAttribute("gameList", gameService.findAll(page));
-        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
+        model.addAttribute("maker", new PageMaker(page, gameService.countGame(page.getKeyword())));
 
         return "games/list";
     }
@@ -241,7 +241,7 @@ public class GameController {
 
         log.info("/games/my-world-cup GET! page: {}", page);
         model.addAttribute("gameList", gameService.findGameByAccountId(LoginUtil.getCurrentLoginMemberAccount(session), page));
-        model.addAttribute("maker", new PageMaker(page, gameService.countGame()));
+        model.addAttribute("maker", new PageMaker(page, gameService.countGame(session)));
 
         return "games/list";
     }

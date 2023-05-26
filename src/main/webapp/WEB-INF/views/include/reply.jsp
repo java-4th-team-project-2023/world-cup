@@ -89,7 +89,7 @@
             <input class="user-nickname" type="text" placeholder="닉네임" name="writer" value="${login.accountId}">
             <div class="rpboard-input-btn-box">
                 <div class="rpboard-input-box"><input type="text" name="text" class="input-box"
-                                                    placeholder="댓글을 입력해주세요..."></input></div>
+                                                      placeholder="댓글을 입력해주세요..."></input></div>
                 <div class="rpboard-rpBtn-box">
                     <button class="rpBtn" type="button"><p>등 록
                         <p></button>
@@ -98,7 +98,7 @@
         </section>
     </c:if>
     <c:if test="${empty login}">
-        <section class="rpboard-user-nickname-reply-replyBtn-box" style="background-color: #fff; font-size: 40px; display: flex; justify-content: center; align-content: center;">
+        <section class="rpboard-user-nickname-reply-replyBtn-box" style="line-height: 4.5em; background-color: #fff; font-size: 40px; display: flex; justify-content: center; align-content: center;">
             댓글 입력은 로그인이 필요합니다.
         </section>
     </c:if>

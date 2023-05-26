@@ -157,6 +157,10 @@ document.getElementById('SignUpBtn').onclick = e => {
     } else {
         const $box = document.getElementById('container');
         $box.classList.add('vibration');
+
+        setTimeout(() => {
+            $box.classList.remove('vibration');
+        }, 1000);
     }
     e.preventDefault();
 

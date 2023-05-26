@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pickpick</title>
+    <title>PICKPICK</title>
 
     <%@ include file="../include/static-head.jsp" %>
     <link rel="icon" href="/assets/img/favicon.png">
@@ -44,7 +44,7 @@
             </div> <!-- end select-search-box -->
 
             <div class="winner-img-box">
-                <div class="winner-img-name">${dto.playerName} 월드컵 ${round}강 우승</div>
+                <div class="winner-img-name"> ${gameName} 월드컵 ${round}강 우승 : ${dto.playerName}</div>
                 <div class="winner-img">
                 </div>
             </div>
@@ -83,60 +83,64 @@
     const $likeReply = document.querySelector('.like-reply');
     const $fastReply = document.querySelector('.fast-reply');
 
+    const $searchInput = document.getElementById('Search-Text');
 
-        // 댓글 목록 렌더링 함수
-        function renderReplyList({
-                                     count,
-                                     replyList
-                                 }) {
+    const $searchBtn = document.getElementById('Search');
 
-                                    // console.log("!!!"+replyList);
-            // 총 댓글 수 렌더링
-            document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
-            // 댓글 내용 렌더링
-            // 각 댓글 하나의 태그
-            let tag = '';
+    // 댓글 목록 렌더링 함수
+    function renderReplyList({
+                                 count,
+                                 replyList
+                             }) {
 
-            if (replyList === null || replyList.length === 0) {
-                tag += "댓글이 아직 없습니다!";
+        // console.log("!!!"+replyList);
+        // 총 댓글 수 렌더링
+        document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
-            } else {
-                for (let rep of replyList) {
-                    // console.log("###" + rep.accountId);
-                    const {
-                        gameId,
-                        replyNo,
-                        writer,
-                        text,
-                        date,
-                        accountId,
-                        likeCount
-                    } = rep;
+        // 댓글 내용 렌더링
+        // 각 댓글 하나의 태그
+        let tag = '';
 
-                    tag += `
+        if (replyList === null || replyList.length === 0) {
+            tag += "댓글이 아직 없습니다!";
+
+        } else {
+            for (let rep of replyList) {
+                console.log("###" + "${login.auth}");
+                const {
+                    gameId,
+                    replyNo,
+                    writer,
+                    text,
+                    date,
+                    accountId,
+                    likeCount
+                } = rep;
+
+                tag += `
                     <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
                         <div class="rpboard-nickname-local-date-box">`;
 
-                    if (currentAccount === rep.accountId || "${login.auth}" === 'ADMIN') {
-                        tag += `
+                if (currentAccount === rep.accountId || "${login.auth}" === 'ADMIN') {
+                    tag += `
                             <div class="rpboard-delete-replies-box">
                             <button class="rpboard-delete-replies-btn"></button>
                             </div>`;
-                    }
+                }
 
-                    tag += `
+                tag += `
                             <div class="rpboard-nickname">\${writer}</div>
                             <span class="rpboard-local-date-box">\${date}</span>
                         </div>
                         <div class="rpboard-replies-box">
                             <div class="rpboard-replies">\${text}</div>`;
 
-                    if (currentAccount === rep.accountId) {
-                        tag += `
+                if (currentAccount === rep.accountId) {
+                    tag += `
                             <div class="rpboard-modify-replies-box">
                                 <button class="rpboard-modify-replies-btn"></button>
-                            </div>                           
+                            </div>
                             `;
                 }
                 tag += `
@@ -146,26 +150,24 @@
                                         <span>
                                             <div class="like-count">\${likeCount}</div>
                                         </span>
-                                        
+
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
                                 </div>
                             </div>
                         </div>`;
 
-                }
+
             }
-
-
-            // 생성된 댓글 tag 렌더링
-            $viewMain.innerHTML = tag;
-
         }
+        // 생성된 댓글 tag 렌더링
+        $viewMain.innerHTML = tag;
+
+    }
 
 
     // 댓글 목록 불러오기 함수
-    function getReplyList(sortBy='fast',pageNo = 1) {
-        console.log(sortBy+"!!!!!!!!!");
+    function getReplyList(sortBy='fast', pageNo = 1) {
         fetch(`\${URL}/\${gameId}/page/\${pageNo}/sort/\${sortBy}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
@@ -180,7 +182,7 @@
     }
 
     $fastReply.onclick = e => {
-        console.log($fastReply.dataset.sorted); 
+        console.log($fastReply.dataset.sorted);
         getReplyList($fastReply.dataset.sorted);
     }
 
@@ -247,7 +249,7 @@
 
     // 댓글 삭제,좋아요,신고 기능 함수
     function replyRemoveClickEvent() {
-        
+
         $viewMain.onclick = e => {
             const rp = e.target.closest('.rpboard-rpbox');
             // console.log(rp);

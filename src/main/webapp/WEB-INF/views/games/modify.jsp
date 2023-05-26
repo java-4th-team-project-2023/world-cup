@@ -25,10 +25,6 @@
 <div id="main-wrapper" class="wrapper">
 
     <div class="upload-new-wrapper">
-        <div class="menu-wrapper">
-            <p>기본정보</p>
-            <p>이미지 수정/삭제</p>
-        </div>
         <div class="container-title"><span>기본정보 입력하기</span></div>
         <form action="/games/modify" method="post" id="form" enctype="multipart/form-data">
             <div class="upload-info-theme-box">
@@ -36,7 +32,6 @@
                     <div class="basic-info">
                         <div class="info-title-wrapper flex">
                             <!-- 월드컵의 제목 적기 -->
-                            <button type="button" class="plusBtn">입력칸 추가</button>
                             <span class="title">제목</span>
                             <div class="input-wrapper ">
                                 <input type="text" class="info-title input" name="gameName" placeholder="월드컵의 제목을 입력하세요"
@@ -81,6 +76,7 @@
                     <div class="savebtnWrapper">
 
                         <div class="btnWrapper flex">
+                            <button type="button" class="plusBtn">입력칸 추가</button>
                             <button class="saveBtn" type="submit" name="saveBtn">저장하기</button>
                         </div>
 

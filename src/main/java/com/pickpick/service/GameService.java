@@ -1,16 +1,20 @@
 package com.pickpick.service;
 
+import com.pickpick.dto.account.response.LoginUserResponseDTO;
 import com.pickpick.dto.game.GameInsertRequestDTO;
 import com.pickpick.dto.game.GameListResponseDTO;
 import com.pickpick.dto.game.GameNameUpdateRequestDTO;
 import com.pickpick.dto.game.PlayCountUpdateRequestDTO;
 import com.pickpick.dto.search.Search;
+import com.pickpick.entity.Account;
 import com.pickpick.entity.Game;
 import com.pickpick.repository.GameMapper;
+import com.pickpick.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,8 +79,16 @@ public class GameService {
     }
 
     // 게임 숫자 조회
-    public int countGame() {
-        return mapper.countGame();
+    public int countGame(String keyword) {
+        return mapper.countGame(keyword);
+    }
+
+    // 게임 숫자 조회 by 계정
+    public int countGame(HttpSession session) {
+
+        LoginUserResponseDTO account = (LoginUserResponseDTO) session.getAttribute(LoginUtil.LOGIN_KEY);
+
+        return mapper.countGameByAccountId(account.getAccountId());
     }
 
     // 계정 id로 게임 조회
