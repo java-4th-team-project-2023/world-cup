@@ -75,9 +75,13 @@
     const $viewMain = document.querySelector('.rpboard-viewmain');
 
     // 우승 비율
-    const final = '${player.finalWinRate}';
+    // const final = '${player.finalWinRate}';
     // 총 경기 비율
-    const match = '${player.matchWinRate}';
+    // const match = '${player.matchWinRate}';
+
+    // 정렬 태그
+    const $likeReply = document.querySelector('.like-reply');
+    const $fastReply = document.querySelector('.fast-reply');
 
     const $searchInput = document.getElementById('Search-Text');
 
@@ -170,7 +174,6 @@
                 // console.log(responseResult);
                 renderReplyList(responseResult);
             });
-
     }
 
     $likeReply.onclick = e => {
@@ -279,7 +282,7 @@
                 // console.log("!!!!!!!"+currentAccount);
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
                 if(currentAccount === ''){
-                    alert('로그인 후 사용하세요!');
+                     alert('로그인 후 사용하세요!');
                     return;
                 }
                 // console.log('좋아요 클릭!!');
