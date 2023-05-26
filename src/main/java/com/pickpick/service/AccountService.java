@@ -45,7 +45,7 @@ public class AccountService {
     public boolean checkSignUpValue(String type, String keyword) {
 
         int flagNum = accountMapper.isDuplicate(type, keyword);
-
+        log.info("flagNum: {}", flagNum);
         return flagNum == 1;
     }
 
