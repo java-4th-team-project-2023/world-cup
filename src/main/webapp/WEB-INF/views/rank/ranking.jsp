@@ -403,7 +403,7 @@
 
 
         }
-    };
+    }
 
     function getRankingList(pageNo = 1) { // 랭킹 목록 불러오기
         const value = $searchInput.value;

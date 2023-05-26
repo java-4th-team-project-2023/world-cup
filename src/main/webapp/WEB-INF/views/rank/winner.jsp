@@ -75,9 +75,13 @@
     const $viewMain = document.querySelector('.rpboard-viewmain');
 
     // 우승 비율
-    const final = '${player.finalWinRate}';
+    // const final = '${player.finalWinRate}';
     // 총 경기 비율
-    const match = '${player.matchWinRate}';
+    // const match = '${player.matchWinRate}';
+
+    // 정렬 태그
+    const $likeReply = document.querySelector('.like-reply');
+    const $fastReply = document.querySelector('.fast-reply');
 
 
         // 댓글 목록 렌더링 함수
@@ -86,7 +90,7 @@
                                      replyList
                                  }) {
 
-                                    console.log("!!!"+replyList);
+                                    // console.log("!!!"+replyList);
             // 총 댓글 수 렌더링
             document.getElementById('replyCnt').textContent = "총 댓글 수 : " + count + " 개";
 
@@ -114,7 +118,7 @@
                     <div class="rpboard-rpbox" data-reply-no="\${replyNo}">
                         <div class="rpboard-nickname-local-date-box">`;
 
-                    if (currentAccount === rep.accountId) {
+                    if (currentAccount === rep.accountId || "${login.auth}" === 'ADMIN') {
                         tag += `
                             <div class="rpboard-delete-replies-box">
                             <button class="rpboard-delete-replies-btn"></button>
@@ -133,8 +137,11 @@
                             <div class="rpboard-modify-replies-box">
                                 <button class="rpboard-modify-replies-btn"></button>
                             </div>                           
-                            </div>
-                                <div class="rpboard-like-report-box">
+                            `;
+                }
+                tag += `
+                    </div>
+                        <div class="rpboard-like-report-box">
                                     <div class="like rpboard-like-replies-btn" id="Like">
                                         <span>
                                             <div class="like-count">\${likeCount}</div>
@@ -142,11 +149,9 @@
                                         
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
-                                </div>`;
-                    }
-                    tag += `</div>
-                                </div>`;
-
+                                </div>
+                            </div>
+                        </div>`;
 
                 }
             }
@@ -159,15 +164,24 @@
 
 
     // 댓글 목록 불러오기 함수
-    function getReplyList(pageNo = 1) {
-        fetch(`\${URL}/\${gameId}/page/\${pageNo}`) // ${gameId}
+    function getReplyList(sortBy='fast',pageNo = 1) {
+        console.log(sortBy+"!!!!!!!!!");
+        fetch(`\${URL}/\${gameId}/page/\${pageNo}/sort/\${sortBy}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
                 // console.log(responseResult);
                 renderReplyList(responseResult);
             });
+    }
 
+    $likeReply.onclick = e => {
+        console.log($likeReply.dataset.sorted);
+        getReplyList($likeReply.dataset.sorted);
+    }
 
+    $fastReply.onclick = e => {
+        console.log($fastReply.dataset.sorted); 
+        getReplyList($fastReply.dataset.sorted);
     }
 
     // 댓글 등록 처리 이벤트 함수
@@ -233,12 +247,16 @@
 
     // 댓글 삭제,좋아요,신고 기능 함수
     function replyRemoveClickEvent() {
-
+        
         $viewMain.onclick = e => {
             const rp = e.target.closest('.rpboard-rpbox');
             // console.log(rp);
             const $replyNo = rp.dataset.replyNo;
             if (e.target.matches('.rpboard-delete-replies-btn')) { // 삭제 기능
+                if(currentAccount === ''){
+                    alert('로그인 후 사용하세요!');
+                    return;
+                }
                 console.log('삭제버튼 클릭!!');
                 if (!confirm('정말 삭제합니까?')) return;
 
@@ -259,9 +277,13 @@
                     renderReplyList(responseResult);
                 });
             } else if (e.target.matches('.rpboard-like-replies-btn')) { // 좋아요 기능
-
+                // console.log("!!!!!!!"+currentAccount);
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
-                console.log('좋아요 클릭!!');
+                if(currentAccount === ''){
+                     alert('로그인 후 사용하세요!');
+                    return;
+                }
+                // console.log('좋아요 클릭!!');
 
                 // # 서버로 보낼 데이터
                 const payload = {
@@ -282,17 +304,19 @@
                 fetch(URL + "/like", requestInfo)
                     .then(res => {
                         if (res.status === 200) {
-                            alert('좋아요가 정상!');
-
+                            alert('좋아요!');
                             getReplyList();
                         } else {
-                            alert('좋아요 실패함!');
+                            alert('좋아요 실패!');
                         }
                     });
             } else if (e.target.matches('.rpboard-report-replies-btn')) { // 신고 기능
-
+                if(currentAccount === ''){
+                    alert('로그인 후 사용하세요!');
+                    return;
+                }
                 // console.log(document.querySelector('.rpboard-nickname-local-date-box'));
-                console.log('신고 클릭!!');
+                // console.log('신고 클릭!!');
 
                 // # 서버로 보낼 데이터
                 const payload = {
@@ -313,10 +337,7 @@
                 fetch(URL + "/report", requestInfo)
                     .then(res => {
                         if (res.status === 200) {
-                            alert('신고 정상!');
-
-                            // 마지막페이지 번호
-                            // const lastPageNo = document.querySelector('.pagination').dataset.fp;
+                            alert('신고!');
                             getReplyList();
                         } else {
                             alert('신고 실패함!');
@@ -341,12 +362,11 @@
 
             } else { // 다른곳 클릭하면 보여줌
                 console.log("다른곳 클릭");
-                return;
             }
 
 
         }
-    };
+    }
 
 
     //========= 메인 실행부 =========//
