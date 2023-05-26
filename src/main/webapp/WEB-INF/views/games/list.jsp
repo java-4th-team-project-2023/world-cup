@@ -72,7 +72,9 @@
 
         <c:forEach var="i" begin="${maker.begin}" end="${maker.end}" step="1">
             <li data-page-num="${i}" class="page-item">
-                <a class="page-link" href="/games/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+
+                <a class="page-link <c:if test="${maker.page.pageNo == i}">active</c:if>" href="/games/list?pageNo=${i}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+
             </li>
         </c:forEach>
 
@@ -119,6 +121,7 @@
 
         // 게임 스타트 페이지 이동
         goGameStartPage();
+
     })();
 
     function goGameStartPage() {
