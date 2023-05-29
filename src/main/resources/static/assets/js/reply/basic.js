@@ -1,69 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PICKPICK</title>
-
-    <%@ include file="../include/static-head.jsp" %>
-    <link rel="icon" href="/assets/img/favicon.png">
-    <link rel="stylesheet" href="/assets/css/reply.css">
-    <script src="/assets/js/reply/basic.js" async defer></script>
-
-</head>
-<body>
-
-<%@ include file="../include/header.jsp" %>
-
-<!--  -->
-
-
-<section class="rank-reply-wrapper">
-
-    <!-- 결과창 + 댓글게시판 box -->
-    <div class="rank-reply-box">
-        <!-- 결과창 box -->
-        <section class="rank-box">
-            <!-- 전체 갯수 출력 + 검색창 box 묶음 -->
-            <div class="select-search-box">
-
-                <!-- 검색창 box -->
-                <div class="search-box">
-                    <!-- 검색창 text -->
-                    <input type="text" class="search-text" id="Search-Text" placeholder="Search...">
-                    <!-- 검색창 버튼 -->
-                    <span>
-                        <button type="" class="search-btn" id="Search-Btn"><img src="/assets/img/Search.png"
-                                                                                  alt="search"
-                                                                                  id="Search">
-                        </button>
-                    </span>
-                </div> <!-- end search-box -->
-            </div> <!-- end select-search-box -->
-
-            <div class="winner-img-box">
-                <div class="winner-img-name"> ${gameName} 월드컵 ${round}강 우승 : ${dto.playerName}</div>
-                <div class="winner-img">
-                </div>
-            </div>
-
-        </section> <!-- end rank-box -->
-
-        <%@ include file="../include/reply.jsp"%>
-
-
-    </div>
-</section>
-<!-- reply container 끝 -->
-
-<!-- <script>
-    // 우승자 사진 뿌려주기
-    document.querySelector('.winner-img').style.backgroundImage = 'url("${dto.playerImgPath}")';
-
-    // 해당 게임 아이디 (진호형꺼에서 받아오기)
+ // 해당 게임 아이디 (진호형꺼에서 받아오기)
     const gameId = '${gameId}';
 
     // 댓글 요청 URI
@@ -76,17 +11,17 @@
     const $viewMain = document.querySelector('.rpboard-viewmain');
 
     // 우승 비율
-    // const final = '${player.finalWinRate}';
+    const final = '${player.finalWinRate}';
     // 총 경기 비율
-    // const match = '${player.matchWinRate}';
+    const match = '${player.matchWinRate}';
+
+    //  검색 input태그
+    const $searchInput = document.getElementById('Search-Text');
+    const $searchBtn = document.getElementById('Search');
 
     // 정렬 태그
     const $likeReply = document.querySelector('.like-reply');
     const $fastReply = document.querySelector('.fast-reply');
-
-    const $searchInput = document.getElementById('Search-Text');
-
-    const $searchBtn = document.getElementById('Search');
 
 
     // 댓글 목록 렌더링 함수
@@ -108,7 +43,7 @@
 
         } else {
             for (let rep of replyList) {
-                console.log("###" + "${login.auth}");
+                // console.log("###" + "${login.auth}");
                 const {
                     gameId,
                     replyNo,
@@ -141,7 +76,7 @@
                     tag += `
                             <div class="rpboard-modify-replies-box">
                                 <button class="rpboard-modify-replies-btn"></button>
-                            </div>
+                            </div>                           
                             `;
                 }
                 tag += `
@@ -151,7 +86,7 @@
                                         <span>
                                             <div class="like-count">\${likeCount}</div>
                                         </span>
-
+                                        
                                     </div>
                                 <div class="report rpboard-report-replies-btn" id="Report">
                                 </div>
@@ -168,7 +103,8 @@
 
 
     // 댓글 목록 불러오기 함수
-    function getReplyList(sortBy='fast', pageNo = 1) {
+    function getReplyList(sortBy='fast',pageNo = 1) {
+        console.log(sortBy+"!!!!!!!!!");
         fetch(`\${URL}/\${gameId}/page/\${pageNo}/sort/\${sortBy}`) // ${gameId}
             .then(res => res.json())
             .then(responseResult => {
@@ -183,11 +119,11 @@
     }
 
     $fastReply.onclick = e => {
-        console.log($fastReply.dataset.sorted);
+        console.log($fastReply.dataset.sorted); 
         getReplyList($fastReply.dataset.sorted);
     }
 
-    // 댓글 등록 처리 이벤트 함수
+// 댓글 등록 처리 이벤트 함수
     function makeReplyRegisterClickEvent() {
 
         const $regBtn = document.querySelector('.rpBtn');
@@ -250,7 +186,7 @@
 
     // 댓글 삭제,좋아요,신고 기능 함수
     function replyRemoveClickEvent() {
-
+        
         $viewMain.onclick = e => {
             const rp = e.target.closest('.rpboard-rpbox');
             // console.log(rp);
@@ -371,23 +307,16 @@
         }
     }
 
-
-    //========= 메인 실행부 =========//
     (function () {
-
+    
         // 첫 댓글 페이지 불러오기
         getReplyList();
-
+    
         // 댓글 등록 이벤트 등록
         if (currentAccount !== "") {
             makeReplyRegisterClickEvent();
         }
         // 삭제 이벤트 등록
         replyRemoveClickEvent();
+    
     })();
-</script> -->
-
-
-
-</body>
-</html>
