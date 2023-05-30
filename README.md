@@ -32,55 +32,76 @@
 사용자가 월드컵 게임을 직접 만들고 사용할 수 있도록 합니다. 온라인의 타 웹페이지들 보다 사용자 편의를 위해 계속 업데이트 중입니다.
 
 
-## 사용기술 
+## Stacks 
+
+### Environment
 
 <div>
 
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+<img src="https://img.shields.io/badge/visual studio code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> 
+<img src="https://img.shields.io/badge/intellij-000000?style=for-the-badge&logo=intellijidea&logoColor=white"> 
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> 
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> 
+
+</div>
+
+### Config
+
+<div>
+
+<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
+
+</div>
+
+### Development
+
+<div>
+
+<img src="https://img.shields.io/badge/java-FFFFFF?style=for-the-badge&logo=openjdk&logoColor=black"> 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
 <img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> 
-<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 
 </div>
 
-## 개발 기간
+## Pages
 
-* v1: 2023년 5월 8일 ~ 2023년 5월 25일 
+### Main Page 
+- Game List
+![메인 페이지.PNG](readmeSources%2F%EB%A9%94%EC%9D%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
+- Side Menu
+![사이드 메뉴.PNG](readmeSources%2F%EC%82%AC%EC%9D%B4%EB%93%9C%20%EB%A9%94%EB%89%B4.PNG)
+### Sign-in & Sign-up Page
 
-### Member
+- sign-in
+![로그인 페이지.PNG](readmeSources%2F%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
+- sign-up
+![회원가입 페이지.PNG](readmeSources%2F%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
 
-| 개발자 | 담당          |
-|-----|-------------|
-| 원석빈 | 전체 페이지 css 구현  |
-| 이채원 | 메인페이지, 게임로직구상, 게임전체구현, 파일CRUD, 검색기능, 형상관리    | 
-| 이진호 | 댓글(CRUD) 및 좋아요, 신고하기 구현, ranking구현, 로그인/회원가입 BACK, Paging구현 |
-| 조경훈 | 파일 업로드 FRONT, 파일업로드BACK 일부, 로그인/회원가입 JS구현     |
+### Game Page
 
+- Game Start
+![게임 시작.PNG](readmeSources%2F%EA%B2%8C%EC%9E%84%20%EC%8B%9C%EC%9E%91.PNG)
+- Playing Game
+![게임 진행.PNG](readmeSources%2F%EA%B2%8C%EC%9E%84%20%EC%A7%84%ED%96%89.PNG)
+- Winner Page
+![우승 페이지.PNG](readmeSources%2F%EC%9A%B0%EC%8A%B9%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
+- Ranking Page
+![랭킹 페이지.PNG](readmeSources%2F%EB%9E%AD%ED%82%B9%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
+- Game Make & Modify Page
+![수정 및 만들기 페이지.PNG](readmeSources%2F%EC%88%98%EC%A0%95%20%EB%B0%8F%20%EB%A7%8C%EB%93%A4%EA%B8%B0%20%ED%8E%98%EC%9D%B4%EC%A7%80.PNG)
 
+## Main Function
+- 원하는 월드컵을 만들 수 있습니다!
+- 최소 4강부터 게임을 시작할 수 있습니다!
+- 잘못 골랐을 경우를 대비하여 리셋할 수 있습니다!
+- 첫 경기 이전으로는 돌아갈 수 없습니다!
+- 우승 페이지와 랭킹 페이지에서 댓글을 작성할 수 있습니다!
+- 좋은 댓글은 좋아요 버튼을 누를 수 있고, 부적절한 댓글은 신고해주세요!
+- 자신이 만든 월드컵만 따로 볼 수 있습니다!
 
-## 업데이트 내역
+## Architecture
 
-| 날짜  | 내용                 | 기타 |
-|-----|:-------------------|:---|
-| 5/8 | 주제 회의 및 ERD 작성     |    |
-| 5/9 | ERD 수정 및 Entity 생성 |   |
-| 5/26 | world-cup.v1 시작  |   |
-
-## 데이터베이스 플레이중인 게임 지우기
-
-```
-delete from playing_game_tbl
-where account_id is null
-;
-```
-
-
-### DataBase Diagram
-<img src="./diagram/new ERD.png">
-
-### 향후 수정사항
-- 게임 만들거나 수정할 때 빈칸으로 넘기면 빈 파일이 등록되지 않도록 수정
-- 마찬가지로 게임 제목이나 선수 이름을 빈 칸으로 넘기면 등록되지 않도록 수정
+```추가예정```
