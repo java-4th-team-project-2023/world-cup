@@ -104,4 +104,186 @@
 
 ## Architecture
 
-```추가예정```
+### erd
+
+![erd.png](diagram%2Ferd.png)
+
+### directory
+
+```
+.
+├─.gradle
+│  ├─7.6.1
+│  │  ├─checksums
+│  │  ├─dependencies-accessors
+│  │  ├─executionHistory
+│  │  ├─fileChanges
+│  │  ├─fileHashes
+│  │  └─vcsMetadata
+│  ├─buildOutputCleanup
+│  └─vcs-1
+├─.idea
+│  ├─dataSources
+│  │  └─da6b8ef9-db03-4b11-a179-ee29ac2ca71d
+│  │      └─storage_v2
+│  │          └─_src_
+│  │              └─schema
+│  ├─httpRequests
+│  └─modules
+├─build
+│  ├─classes
+│  │  └─java
+│  │      ├─main
+│  │      │  └─com
+│  │      │      └─pickpick
+│  │      │          ├─api
+│  │      │          ├─config
+│  │      │          ├─controller
+│  │      │          ├─dto
+│  │      │          │  ├─account
+│  │      │          │  │  ├─request
+│  │      │          │  │  └─response
+│  │      │          │  ├─game
+│  │      │          │  ├─page
+│  │      │          │  ├─player
+│  │      │          │  ├─playingGame
+│  │      │          │  ├─reply
+│  │      │          │  │  ├─request
+│  │      │          │  │  └─response
+│  │      │          │  └─search
+│  │      │          ├─entity
+│  │      │          ├─interceptor
+│  │      │          ├─repository
+│  │      │          ├─service
+│  │      │          └─util
+│  │      │              └─upload
+│  │      └─test
+│  │          └─com
+│  │              ├─example
+│  │              │  └─worldcup
+│  │              └─pickpick
+│  │                  └─repository
+│  ├─generated
+│  │  └─sources
+│  │      ├─annotationProcessor
+│  │      │  └─java
+│  │      │      ├─main
+│  │      │      └─test
+│  │      └─headers
+│  │          └─java
+│  │              ├─main
+│  │              └─test
+│  ├─reports
+│  │  └─tests
+│  │      └─test
+│  │          ├─classes
+│  │          ├─css
+│  │          ├─js
+│  │          └─packages
+│  ├─resources
+│  │  └─main
+│  │      ├─mappers
+│  │      ├─static
+│  │      │  └─assets
+│  │      │      ├─css
+│  │      │      ├─img
+│  │      │      └─js
+│  │      └─templates
+│  ├─test-results
+│  │  └─test
+│  │      └─binary
+│  └─tmp
+│      ├─compileJava
+│      │  └─compileTransaction
+│      │      ├─annotation-output
+│      │      ├─compile-output
+│      │      │  └─com
+│      │      │      └─pickpick
+│      │      │          ├─api
+│      │      │          ├─config
+│      │      │          ├─controller
+│      │      │          ├─dto
+│      │      │          │  ├─account
+│      │      │          │  │  ├─request
+│      │      │          │  │  └─response
+│      │      │          │  ├─game
+│      │      │          │  ├─page
+│      │      │          │  ├─player
+│      │      │          │  ├─playingGame
+│      │      │          │  ├─reply
+│      │      │          │  │  ├─request
+│      │      │          │  │  └─response
+│      │      │          │  └─search
+│      │      │          ├─entity
+│      │      │          ├─interceptor
+│      │      │          ├─repository
+│      │      │          ├─service
+│      │      │          └─util
+│      │      │              └─upload
+│      │      ├─header-output
+│      │      └─stash-dir
+│      ├─compileTestJava
+│      │  └─compileTransaction
+│      │      ├─annotation-output
+│      │      ├─compile-output
+│      │      │  └─com
+│      │      │      └─pickpick
+│      │      │          └─repository
+│      │      ├─header-output
+│      │      └─stash-dir
+│      └─test
+├─diagram
+├─gradle
+│  └─wrapper
+├─readmeSources
+└─src
+    ├─main
+    │  ├─java
+    │  │  └─com
+    │  │      └─pickpick
+    │  │          ├─api
+    │  │          ├─config
+    │  │          ├─controller
+    │  │          ├─dto
+    │  │          │  ├─account
+    │  │          │  │  ├─request
+    │  │          │  │  └─response
+    │  │          │  ├─game
+    │  │          │  ├─page
+    │  │          │  ├─player
+    │  │          │  ├─playingGame
+    │  │          │  ├─reply
+    │  │          │  │  ├─request
+    │  │          │  │  └─response
+    │  │          │  └─search
+    │  │          ├─entity
+    │  │          ├─interceptor
+    │  │          ├─repository
+    │  │          ├─service
+    │  │          └─util
+    │  │              └─upload
+    │  ├─resources
+    │  │  ├─mappers
+    │  │  ├─static
+    │  │  │  └─assets
+    │  │  │      ├─css
+    │  │  │      ├─img
+    │  │  │      └─js
+    │  │  └─templates
+    │  └─webapp
+    │      └─WEB-INF
+    │          └─views
+    │              ├─account
+    │              ├─games
+    │              ├─include
+    │              └─rank
+    └─test
+        └─java
+            └─com
+                ├─example
+                │  └─worldcup
+                └─pickpick
+                    ├─http
+                    ├─repository
+                    └─service
+```
